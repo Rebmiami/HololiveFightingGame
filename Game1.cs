@@ -7,7 +7,7 @@ namespace HololiveFightingGame
 	public class Game1 : Game
 	{
 		private GraphicsDeviceManager _graphics;
-		private SpriteBatch _spriteBatch;
+		private SpriteBatch spriteBatch;
 
 		public Game1()
 		{
@@ -20,12 +20,16 @@ namespace HololiveFightingGame
 		{
 			// TODO: Add your initialization logic here
 
+			testFighter = Content.Load<Texture2D>("TestFighter");
+
 			base.Initialize();
 		}
 
+		public static Texture2D testFighter;
+
 		protected override void LoadContent()
 		{
-			_spriteBatch = new SpriteBatch(GraphicsDevice);
+			spriteBatch = new SpriteBatch(GraphicsDevice);
 
 			// TODO: use this.Content to load your game content here
 		}
@@ -42,9 +46,11 @@ namespace HololiveFightingGame
 
 		protected override void Draw(GameTime gameTime)
 		{
-			GraphicsDevice.Clear(Color.Orange);
+			GraphicsDevice.Clear(Color.DarkGray);
 
-			// TODO: Add your drawing code here
+			spriteBatch.Begin();
+			spriteBatch.Draw(testFighter, Vector2.Zero, Color.White);
+			spriteBatch.End();
 
 			base.Draw(gameTime);
 		}
