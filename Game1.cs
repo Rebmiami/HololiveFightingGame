@@ -42,7 +42,7 @@ namespace HololiveFightingGame
 
 		protected override void Draw(GameTime gameTime)
 		{
-			GraphicsDevice.Clear(Color.CornflowerBlue);
+			GraphicsDevice.Clear(Color.Orange);
 
 			// TODO: Add your drawing code here
 
