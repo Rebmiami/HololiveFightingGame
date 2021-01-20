@@ -16,6 +16,8 @@ namespace HololiveFightingGame
 			IsMouseVisible = true;
 		}
 
+		public static GameState gameState;
+
 		protected override void Initialize()
 		{
 			// TODO: Add your initialization logic here
