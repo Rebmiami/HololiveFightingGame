@@ -20,7 +20,7 @@ namespace HololiveFightingGame
 
 		protected override void Initialize()
 		{
-			// TODO: Add your initialization logic here
+			gameState = new GameState();
 
 			testFighter = Content.Load<Texture2D>("TestFighter");
 
@@ -41,6 +41,8 @@ namespace HololiveFightingGame
 			if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
 				Exit();
 
+			gameState.Update();
+
 			// TODO: Add your update logic here
 
 			base.Update(gameTime);
@@ -51,7 +53,7 @@ namespace HololiveFightingGame
 			GraphicsDevice.Clear(Color.DarkGray);
 
 			spriteBatch.Begin();
-			spriteBatch.Draw(testFighter, Vector2.Zero, Color.White);
+			spriteBatch.Draw(testFighter, gameState.fighters[0].position, Color.White);
 			spriteBatch.End();
 
 			base.Draw(gameTime);

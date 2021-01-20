@@ -1,2 +1,3 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"C:/Users/rebmi/Source/Repos/HololiveFightingGame/Content/TestFighter.png","C:/Users/rebmi/Source/Repos/HololiveFightingGame/Content/bin/DesktopGL/Content/TestFighter.xnb","TextureProcessor","Texture2DContent",363,9813,3.020243
+"C:/Users/rebmi/Source/Repos/HololiveFightingGame/Content/TestFighter.png","C:/Users/rebmi/Source/Repos/HololiveFightingGame/Content/bin/DesktopGL/Content/TestFighter.xnb","TextureProcessor","Texture2DContent",360,9813,3.5423996
+"C:/Users/rebmi/Source/Repos/HololiveFightingGame/Content/TestStage.png","C:/Users/rebmi/Source/Repos/HololiveFightingGame/Content/bin/DesktopGL/Content/TestStage.xnb","TextureProcessor","Texture2DContent",1209,51285,2.27659

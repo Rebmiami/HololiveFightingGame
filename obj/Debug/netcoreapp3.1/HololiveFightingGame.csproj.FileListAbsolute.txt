@@ -22,3 +22,4 @@ C:\Users\rebmi\Source\Repos\HololiveFightingGame\obj\Debug\netcoreapp3.1\Hololiv
 C:\Users\rebmi\Source\Repos\HololiveFightingGame\obj\Debug\netcoreapp3.1\HololiveFightingGame.pdb
 C:\Users\rebmi\Source\Repos\HololiveFightingGame\obj\Debug\netcoreapp3.1\HololiveFightingGame.genruntimeconfig.cache
 C:\Users\rebmi\Source\Repos\HololiveFightingGame\bin\Debug\netcoreapp3.1\Content\TestFighter.xnb
+C:\Users\rebmi\Source\Repos\HololiveFightingGame\bin\Debug\netcoreapp3.1\Content\TestStage.xnb

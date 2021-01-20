@@ -5,8 +5,10 @@
   <Config />
   <SourceFiles>
     <File>C:/Users/rebmi/Source/Repos/HololiveFightingGame/Content/TestFighter.png</File>
+    <File>C:/Users/rebmi/Source/Repos/HololiveFightingGame/Content/TestStage.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
   </DestFiles>
 </SourceFileCollection>
