@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "po0laA4r+Kuem18sKJPvJFoAOg55EANH8iITcLfT8fo4YDByFPQEC1Hd8QDjJZlJZT/bdfLRoD0A9g+B+RupqQ==",
+  "dgSpecHash": "lQykc+oeLhUU8D5q/OUEpF+S5FAhWsJo+t/BVxeJsfFM4bE137bWBv3kF2EGGv6UontV6YFbymldfWl6hifXkg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\rebmi\\source\\repos\\HololiveFightingGame\\HololiveFightingGame.csproj",
+  "projectFilePath": "C:\\Users\\rebmi\\Source\\Repos\\HololiveFightingGame\\HololiveFightingGame.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\rebmi\\.nuget\\packages\\monogame.content.builder.task\\3.8.0.1641\\monogame.content.builder.task.3.8.0.1641.nupkg.sha512",
     "C:\\Users\\rebmi\\.nuget\\packages\\monogame.framework.desktopgl\\3.8.0.1641\\monogame.framework.desktopgl.3.8.0.1641.nupkg.sha512"
