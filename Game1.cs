@@ -23,11 +23,13 @@ namespace HololiveFightingGame
 			gameState = new GameState();
 
 			testFighter = Content.Load<Texture2D>("TestFighter");
+			testStage = Content.Load<Texture2D>("TestStage");
 
 			base.Initialize();
 		}
 
 		public static Texture2D testFighter;
+		public static Texture2D testStage;
 
 		protected override void LoadContent()
 		{
@@ -54,6 +56,7 @@ namespace HololiveFightingGame
 
 			spriteBatch.Begin();
 			spriteBatch.Draw(testFighter, gameState.fighters[0].position, Color.White);
+			spriteBatch.Draw(testStage, gameState.stage.collider.Location.ToVector2(), Color.White);
 			spriteBatch.End();
 
 			base.Draw(gameTime);
