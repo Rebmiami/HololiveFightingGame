@@ -54,7 +54,7 @@ namespace HololiveFightingGame
 		{
 			GraphicsDevice.Clear(Color.DarkGray);
 
-			spriteBatch.Begin();
+			spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.PointClamp);
 			spriteBatch.Draw(testFighter, gameState.fighters[0].position, Color.White);
 			spriteBatch.Draw(testStage, gameState.stage.collider.Location.ToVector2(), Color.White);
 			spriteBatch.End();

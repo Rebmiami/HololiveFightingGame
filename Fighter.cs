@@ -17,15 +17,14 @@ namespace HololiveFightingGame
             velocity.Y += 0.5f;
             velocity.X += GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.X;
 
+            base.Update();
+
             if (Hitbox().Intersects(Game1.gameState.stage.collider))
             {
                 velocity.Y = 0;
                 position.Y = Game1.gameState.stage.collider.Top - dimensions.Y;
                 velocity.X *= 0.8f;
             }
-
-
-            base.Update();
         }
 
         public Fighter()
