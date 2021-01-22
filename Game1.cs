@@ -6,12 +6,12 @@ namespace HololiveFightingGame
 {
 	public class Game1 : Game
 	{
-		private GraphicsDeviceManager _graphics;
+		private GraphicsDeviceManager graphics;
 		private SpriteBatch spriteBatch;
 
 		public Game1()
 		{
-			_graphics = new GraphicsDeviceManager(this);
+			graphics = new GraphicsDeviceManager(this);
 			Content.RootDirectory = "Content";
 			IsMouseVisible = true;
 		}

@@ -11,7 +11,7 @@ namespace HololiveFightingGame
 		
 		public Stage()
 		{
-			collider = new Rectangle(100, 100, 200, 64);
+			collider = new Rectangle(150, 300, 500, 100);
 		}
 	}
 }
