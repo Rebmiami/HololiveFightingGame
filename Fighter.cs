@@ -16,10 +16,16 @@ namespace HololiveFightingGame
 
 		public override void Update()
 		{
-			velocity *= 0.99f;
-			velocity.X *= 0.8f;
+			if (!Game1.gameState.stage.stageBounds.Intersects(Hitbox()))
+			{
+				position = new Vector2(300, 0);
+				velocity = Vector2.Zero;
+				grounded = true;
+			}
+
 			velocity.Y += 0.5f;
 			velocity.X += GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.X;
+			velocity.X *= grounded ? 0.8f : 0.83f;
 
 			base.Update();
 
@@ -32,7 +38,7 @@ namespace HololiveFightingGame
 			if (grounded)
 			{
 				velocity.Y = 0;
-				position.Y = Game1.gameState.stage.collider.Top - dimensions.Y;
+				position.Y = Game1.gameState.stage.collider.Top - dimensions.Y + 1;
 				if (coyote > 0)
 				{
 					coyote--;
@@ -65,6 +71,7 @@ namespace HololiveFightingGame
 		{
 			dimensions = new Vector2(38, 64);
 			position = new Vector2(300, 0);
+			grounded = true;
 		}
 	}
 }

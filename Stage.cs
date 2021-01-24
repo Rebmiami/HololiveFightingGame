@@ -7,11 +7,14 @@ namespace HololiveFightingGame
 {
 	public class Stage
 	{
-		public Rectangle collider;
-		
+		public Rectangle collider; 
+		// TODO: Support multiple colliders per stage
+		public Rectangle stageBounds;
+
 		public Stage()
 		{
-			collider = new Rectangle(150, 300, 500, 100);
+			collider = new Rectangle((Program.WindowBounds().Width - 500) / 2, 300, 500, 100);
+			stageBounds = Program.WindowBounds();
 		}
 	}
 }
