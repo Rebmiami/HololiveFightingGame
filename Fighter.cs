@@ -31,10 +31,34 @@ namespace HololiveFightingGame
 
 			base.Update();
 
-			if (Hitbox().Intersects(Game1.gameState.stage.collider))
+			Rectangle stageCollider = Game1.gameState.stage.collider;
+
+			if (Hitbox().Intersects(stageCollider))
 			{
-				grounded = true;
-				coyote = 7;
+				Rectangle colliderTop = new Rectangle(stageCollider.Left, stageCollider.Top, stageCollider.Width, 12);
+				Rectangle colliderBottom = new Rectangle(stageCollider.Left + 12, stageCollider.Top + stageCollider.Height - 12, stageCollider.Width - 24, 12);
+				Rectangle colliderLeft = new Rectangle(stageCollider.Left, stageCollider.Top, 12, stageCollider.Height);
+				//Rectangle colliderRight = new Rectangle(stageCollider.Left + stageCollider.Width - 4, stageCollider.Top, 4, stageCollider.Height);
+				if (position.Y + dimensions.Y < stageCollider.Top + 24) //Hitbox().Intersects(colliderTop))
+				{
+					grounded = true;
+					coyote = 7;
+				}
+				else if (Hitbox().Intersects(colliderBottom))
+				{
+					position.Y = stageCollider.Bottom;
+				}
+				else
+				{
+					if (Hitbox().Intersects(colliderLeft))
+					{
+						position.X = stageCollider.Left - dimensions.X;
+					}
+					else
+					{
+						position.X = stageCollider.Right;
+					}
+				}
 			}
 
 			if (grounded)
