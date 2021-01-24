@@ -24,8 +24,10 @@ namespace HololiveFightingGame
 			}
 
 			velocity.Y += 0.5f;
+			velocity.X *= grounded ? 0.8f : 0.95f;
 			velocity.X += GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.X;
-			velocity.X *= grounded ? 0.8f : 0.83f;
+			Vector2 maxVelocity = new Vector2(6, 10);
+			velocity = Vector2.Clamp(velocity, -maxVelocity, maxVelocity);
 
 			base.Update();
 
