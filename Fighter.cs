@@ -91,6 +91,8 @@ namespace HololiveFightingGame
 				grounded = false;
 				jumps++;
 			}
+
+			drawObject.position = position;
 		}
 
 		public Fighter()
@@ -98,6 +100,8 @@ namespace HololiveFightingGame
 			dimensions = new Vector2(38, 64);
 			position = new Vector2(300, 0);
 			grounded = true;
+			drawObject = GraphicsHandler.main.children["game"].children["fighter"];
+			drawObject.texture = new SlicedSprite(Game1.testFighter);
 		}
 	}
 }

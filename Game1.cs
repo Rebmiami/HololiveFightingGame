@@ -20,10 +20,11 @@ namespace HololiveFightingGame
 
 		protected override void Initialize()
 		{
-			gameState = new GameState();
-
 			testFighter = Content.Load<Texture2D>("TestFighter");
 			testStage = Content.Load<Texture2D>("TestStage");
+
+			GraphicsHandler.main = new InGamePreset();
+			gameState = new GameState();
 
 			base.Initialize();
 		}
@@ -56,11 +57,10 @@ namespace HololiveFightingGame
 
 		protected override void Draw(GameTime gameTime)
 		{
-			GraphicsDevice.Clear(Color.DarkGray);
+			GraphicsDevice.Clear(Color.Gray * 0.5f);
 
 			spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.PointClamp);
-			spriteBatch.Draw(testFighter, gameState.fighters[0].position, Color.White);
-			spriteBatch.Draw(testStage, gameState.stage.collider.Location.ToVector2(), Color.White);
+			GraphicsHandler.main.Draw(spriteBatch, new Transformation());
 			spriteBatch.End();
 
 			base.Draw(gameTime);
