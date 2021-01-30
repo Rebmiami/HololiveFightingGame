@@ -18,6 +18,7 @@ namespace HololiveFightingGame
 		public SlicedSprite texture;
 		public string frame = "sprite";
 		public Vector2 position;
+		public SpriteEffects spriteEffects;
 
 		public DrawObject (DrawObjectType type)
 		{
@@ -34,8 +35,14 @@ namespace HololiveFightingGame
 				}
 			else
 			{
-				spriteBatch.Draw(texture.texture, position, texture.slices[frame], Color.White);
+				spriteBatch.Draw(texture.texture, position, texture.slices[frame], Color.White, 0, Vector2.Zero, 1, spriteEffects, 0);
 			}
+		}
+
+		public Vector2 Bottom
+		{
+			get { return position + new Vector2(texture.slices[frame].Width / 2, texture.slices[frame].Height); }
+			set { position = value - new Vector2(texture.slices[frame].Width / 2, texture.slices[frame].Height); }
 		}
 	}
 
@@ -67,15 +74,16 @@ namespace HololiveFightingGame
 	public enum DrawObjectType //Dictates how a draw object should behave and treat its children
 	{
 		Main, // Always the size of the window. Will be scaled accordingly. Origin is always top of window. Exclusively contains layers.
-		Layer, // Contains sprites, component sprites, flashes, and particle systems. Origin is always top of window.
+		Layer, // Contains sprites, component sprites, flashes, particle systems, and text. Origin is always top of window.
 		ComponentSprite, // Draws a single object consisting of multiple sprites. Exclusively contains sprites or component sprites
 		Sprite, // Contains a texture to draw. Cannot have children.
 		Flash, // Refers to graphical effects like puffs of smoke or sparks. Cannot have children.
 		Particle, // Refers to a particle system. Exclusively contains flashes.
+		Text, // Prints text. Cannot have children. Currently supports no languages. Should support English and Japanese.
 	}
-
+	
 	public class Transformation
 	{
-
+		Vector2 offset;
 	}
 }

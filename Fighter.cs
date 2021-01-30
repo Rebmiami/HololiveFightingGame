@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace HololiveFightingGame
 	{
 		public bool grounded;
 		public int coyote;
-		public int damage;
+		public int damage; // 1000.0 to 0.0 by default. Div by 10 to get damage shown on screen
 
 		public int jumps;
 
@@ -21,6 +22,7 @@ namespace HololiveFightingGame
 				position = new Vector2(300, 0);
 				velocity = Vector2.Zero;
 				grounded = true;
+				drawObject.frame = "stand";
 			}
 
 			velocity.Y += 0.5f;
@@ -35,7 +37,7 @@ namespace HololiveFightingGame
 
 			if (Hitbox().Intersects(stageCollider))
 			{
-				Rectangle colliderTop = new Rectangle(stageCollider.Left, stageCollider.Top, stageCollider.Width, 12);
+				//Rectangle colliderTop = new Rectangle(stageCollider.Left, stageCollider.Top, stageCollider.Width, 12);
 				Rectangle colliderBottom = new Rectangle(stageCollider.Left + 12, stageCollider.Top + stageCollider.Height - 12, stageCollider.Width - 24, 12);
 				Rectangle colliderLeft = new Rectangle(stageCollider.Left, stageCollider.Top, 12, stageCollider.Height);
 				//Rectangle colliderRight = new Rectangle(stageCollider.Left + stageCollider.Width - 4, stageCollider.Top, 4, stageCollider.Height);
@@ -92,7 +94,24 @@ namespace HololiveFightingGame
 				jumps++;
 			}
 
-			drawObject.position = position;
+			if (grounded)
+			{
+				if (Math.Abs(velocity.X) > 1f)
+				{
+					drawObject.spriteEffects = velocity.X < 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
+					drawObject.frame = "walk";
+				}
+				else
+				{
+					drawObject.frame = "stand";
+				}
+			}
+			else
+			{
+				drawObject.frame = "jump";
+			}
+
+			drawObject.Bottom = Bottom;
 		}
 
 		public Fighter()
@@ -102,6 +121,13 @@ namespace HololiveFightingGame
 			grounded = true;
 			drawObject = GraphicsHandler.main.children["game"].children["fighter"];
 			drawObject.texture = new SlicedSprite(Game1.testFighter);
+			drawObject.texture.slices = new Dictionary<string, Rectangle>()
+			{
+				{ "stand", new Rectangle(0, 0, 30, 80) },
+				{ "walk", new Rectangle(0, 80, 30, 80) },
+				{ "jump", new Rectangle(0, 160, 30, 80) },
+			};
+			drawObject.frame = "idle";
 		}
 	}
 }

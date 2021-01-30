@@ -24,5 +24,11 @@ namespace HololiveFightingGame
 			// TODO: Replace rectangle with capsule collision and cut down on collision checks
 			return new Rectangle(position.ToPoint(), dimensions.ToPoint());
 		}
+
+		public Vector2 Bottom
+		{
+			get { return position + new Vector2(dimensions.X / 2, dimensions.Y); }
+			set { position = value - new Vector2(dimensions.X / 2, dimensions.Y); }
+		}
 	}
 }
