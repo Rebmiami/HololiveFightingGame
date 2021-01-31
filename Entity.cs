@@ -30,5 +30,11 @@ namespace HololiveFightingGame
 			get { return position + new Vector2(dimensions.X / 2, dimensions.Y); }
 			set { position = value - new Vector2(dimensions.X / 2, dimensions.Y); }
 		}
+
+		public Vector2 Center
+		{
+			get { return position + new Vector2(dimensions.X / 2, dimensions.Y / 2); }
+			set { position = value - new Vector2(dimensions.X / 2, dimensions.Y / 2); }
+		}
 	}
 }

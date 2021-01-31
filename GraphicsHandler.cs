@@ -19,6 +19,7 @@ namespace HololiveFightingGame
 		public string frame = "sprite";
 		public Vector2 position;
 		public SpriteEffects spriteEffects;
+		public Vector2 dimensions;
 
 		public DrawObject (DrawObjectType type)
 		{
@@ -31,11 +32,17 @@ namespace HololiveFightingGame
 			if (type == DrawObjectType.Main || type == DrawObjectType.Layer || type == DrawObjectType.ComponentSprite || type == DrawObjectType.Particle)
 				foreach (KeyValuePair<string, DrawObject> toDraw in children)
 				{
-					toDraw.Value.Draw(spriteBatch, transformation);
+					Transformation pass = new Transformation(transformation.offset, transformation.zoom);
+					pass.offset += position;
+					toDraw.Value.Draw(spriteBatch, pass);
 				}
 			else
 			{
-				spriteBatch.Draw(texture.texture, position, texture.slices[frame], Color.White, 0, Vector2.Zero, 1, spriteEffects, 0);
+				Vector2 drawPosition = position + transformation.offset;
+				drawPosition -= Program.WindowBounds().Size.ToVector2() / 2;
+				drawPosition *= transformation.zoom;
+				drawPosition += Program.WindowBounds().Size.ToVector2() / 2;
+				spriteBatch.Draw(texture.texture, drawPosition, texture.slices[frame], Color.White, 0, Vector2.Zero, transformation.zoom, spriteEffects, 0);
 			}
 		}
 
@@ -43,6 +50,12 @@ namespace HololiveFightingGame
 		{
 			get { return position + new Vector2(texture.slices[frame].Width / 2, texture.slices[frame].Height); }
 			set { position = value - new Vector2(texture.slices[frame].Width / 2, texture.slices[frame].Height); }
+		}
+
+		public Vector2 Center
+		{
+			get { return position + new Vector2(texture.slices[frame].Width / 2, texture.slices[frame].Height / 2); }
+			set { position = value - new Vector2(texture.slices[frame].Width / 2, texture.slices[frame].Height / 2); }
 		}
 	}
 
@@ -74,7 +87,7 @@ namespace HololiveFightingGame
 	public enum DrawObjectType //Dictates how a draw object should behave and treat its children
 	{
 		Main, // Always the size of the window. Will be scaled accordingly. Origin is always top of window. Exclusively contains layers.
-		Layer, // Contains sprites, component sprites, flashes, particle systems, and text. Origin is always top of window.
+		Layer, // Contains sprites, component sprites, flashes, particle systems, and text. Origin can be moved.
 		ComponentSprite, // Draws a single object consisting of multiple sprites. Exclusively contains sprites or component sprites
 		Sprite, // Contains a texture to draw. Cannot have children.
 		Flash, // Refers to graphical effects like puffs of smoke or sparks. Cannot have children.
@@ -84,6 +97,13 @@ namespace HololiveFightingGame
 	
 	public class Transformation
 	{
-		Vector2 offset;
+		public Vector2 offset;
+		public float zoom;
+
+		public Transformation(Vector2 offset, float zoom)
+		{
+			this.offset = offset;
+			this.zoom = zoom;
+		}
 	}
 }

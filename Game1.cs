@@ -60,7 +60,7 @@ namespace HololiveFightingGame
 			GraphicsDevice.Clear(Color.Gray * 0.5f);
 
 			spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.PointClamp);
-			GraphicsHandler.main.Draw(spriteBatch, new Transformation());
+			GraphicsHandler.main.Draw(spriteBatch, new Transformation(Vector2.Zero, 1));
 			spriteBatch.End();
 
 			base.Draw(gameTime);
