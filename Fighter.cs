@@ -21,6 +21,10 @@ namespace HololiveFightingGame
 
 		public int ID;
 
+		public int launchTimer; //Launch frames where player has no control
+
+		public int direction = 1;
+
 		public override void Update()
 		{
 			if (!Game1.gameState.stage.stageBounds.Intersects(Hitbox()))
@@ -35,7 +39,10 @@ namespace HololiveFightingGame
 			velocity.X *= grounded ? 0.8f : 0.95f;
 			velocity.X += GamePad.GetState((PlayerIndex)ID).ThumbSticks.Left.X;
 			Vector2 maxVelocity = new Vector2(6, 10);
-			velocity = Vector2.Clamp(velocity, -maxVelocity, maxVelocity);
+			if (launchTimer == 0)
+			{
+				velocity = Vector2.Clamp(velocity, -maxVelocity, maxVelocity);
+			}
 
 			base.Update();
 
@@ -85,25 +92,36 @@ namespace HololiveFightingGame
 				}
 			}
 
-			if (Keybinds.TapJump(false, ID) && jumps < 2)
+			if (launchTimer == 0)
 			{
-				if (jumps == 0)
+				if (Keybinds.TapJump(false, ID) && jumps < 2)
 				{
-					velocity.Y = -10;
+					if (jumps == 0)
+					{
+						velocity.Y = -10;
+					}
+					else
+					{
+						velocity.Y = -8;
+					}
+					coyote = 0;
+					grounded = false;
+					jumps++;
 				}
-				else
-				{
-					velocity.Y = -8;
-				}
-				coyote = 0;
-				grounded = false;
-				jumps++;
-			}
 
-			if (Keybinds.TapAtkNormal(false, ID) && moveTimer == 0)
+				if (Keybinds.TapAtkNormal(false, ID) && moveTimer == 0)
+				{
+					moveTimer = 20;
+					currentMove = MoveType.NeutralA;
+
+					Game1.gameState.fighters[1].Damage(10, new Vector2(10 * direction, -10));
+					Game1.gameState.fighters[1].grounded = false;
+					Game1.gameState.fighters[1].coyote = 0;
+				}
+			}
+			else
 			{
-				moveTimer = 20;
-				currentMove = MoveType.NeutralA;
+				launchTimer--;
 			}
 
 			if (moveTimer > 0)
@@ -119,7 +137,8 @@ namespace HololiveFightingGame
 			{
 				if (Math.Abs(velocity.X) > 1f)
 				{
-					drawObject.spriteEffects = velocity.X < 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
+					direction = Math.Sign(velocity.X);
+					
 					drawObject.frame = "walk";
 				}
 				else
@@ -144,6 +163,12 @@ namespace HololiveFightingGame
 				}
 			}
 
+			if (launchTimer > 0)
+			{
+				drawObject.frame = "launch";
+				direction = -Math.Sign(velocity.X);
+			}
+			drawObject.spriteEffects = direction == -1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
 			drawObject.Bottom = Bottom;
 		}
 
@@ -163,8 +188,16 @@ namespace HololiveFightingGame
 				{ "jump", new Rectangle(0, 80 * 2, 50, 80) },
 				{ "punch1", new Rectangle(0, 80 * 3, 50, 80) },
 				{ "punch2", new Rectangle(0, 80 * 4, 50, 80) },
+				{ "launch", new Rectangle(0, 80 * 5, 50, 80) },
 			};
 			drawObject.frame = "idle";
+		}
+
+		public void Damage(int damage, Vector2 knockback)
+		{
+			launchTimer = 20;
+			velocity += knockback;
+			this.damage += damage;
 		}
 	}
 

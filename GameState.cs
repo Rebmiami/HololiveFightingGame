@@ -18,11 +18,14 @@ namespace HololiveFightingGame
 
 		public void Update()
 		{
+			Vector2 playerCenter = Vector2.Zero;
 			foreach (Fighter fighter in fighters)
 			{
 				fighter.Update();
+				playerCenter += fighter.Center + fighter.velocity * 10;
 			}
-			Vector2 cameraTarget = Vector2.Lerp(fighters[0].Center + fighters[0].velocity * 10, new Vector2(stage.collider.Center.X, stage.collider.Top), 0.5f);
+			playerCenter /= fighters.Length;
+			Vector2 cameraTarget = Vector2.Lerp(playerCenter, new Vector2(stage.collider.Center.X, stage.collider.Top), 0.5f);
 			GraphicsHandler.main.children["game"].position = -(Vector2.Lerp(cameraTarget, -GraphicsHandler.main.children["game"].position + Program.WindowBounds().Size.ToVector2() / 2, 0.9f) - Program.WindowBounds().Size.ToVector2() / 2);
 		}
 	}
