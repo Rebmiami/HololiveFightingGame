@@ -111,17 +111,27 @@ namespace HololiveFightingGame
 
 				if (Keybinds.TapAtkNormal(false, ID) && moveTimer == 0)
 				{
-					moveTimer = 20;
+					moveTimer = 16;
 					currentMove = MoveType.NeutralA;
-
-					Game1.gameState.fighters[1].Damage(10, new Vector2(10 * direction, -10));
-					Game1.gameState.fighters[1].grounded = false;
-					Game1.gameState.fighters[1].coyote = 0;
 				}
 			}
 			else
 			{
 				launchTimer--;
+			}
+
+			if (moveTimer == 10 )
+			{
+				Rectangle hitbox = new Rectangle(Center.ToPoint(), new Point(15, 10));
+				if (direction == -1)
+					hitbox.X -= hitbox.Width;
+
+				if (Game1.gameState.fighters[1].Hitbox().Intersects(hitbox))
+				{
+					Game1.gameState.fighters[1].Damage(10, new Vector2(10 * direction, -10));
+					Game1.gameState.fighters[1].grounded = false;
+					Game1.gameState.fighters[1].coyote = 0;
+				}
 			}
 
 			if (moveTimer > 0)
@@ -179,6 +189,7 @@ namespace HololiveFightingGame
 			dimensions = new Vector2(38, 64);
 			position = new Vector2(300, 0);
 			grounded = true;
+			GraphicsHandler.main.children["game"].children.Add("fighter" + ID, new DrawObject(DrawObjectType.Sprite));
 			drawObject = GraphicsHandler.main.children["game"].children["fighter" + ID];
 			drawObject.texture = new SlicedSprite(Game1.testFighter);
 			drawObject.texture.slices = new Dictionary<string, Rectangle>()
@@ -190,7 +201,7 @@ namespace HololiveFightingGame
 				{ "punch2", new Rectangle(0, 80 * 4, 50, 80) },
 				{ "launch", new Rectangle(0, 80 * 5, 50, 80) },
 			};
-			drawObject.frame = "idle";
+			drawObject.frame = "stand";
 		}
 
 		public void Damage(int damage, Vector2 knockback)
