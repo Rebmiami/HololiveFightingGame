@@ -78,7 +78,8 @@ namespace HololiveFightingGame
 			children = new Dictionary<string, DrawObject>() {
 			{ "game", new DrawObject(DrawObjectType.Layer) {
 				children = new Dictionary<string, DrawObject>() {
-				{ "fighter", new DrawObject(DrawObjectType.Sprite) },
+				{ "fighter0", new DrawObject(DrawObjectType.Sprite) },
+				{ "fighter1", new DrawObject(DrawObjectType.Sprite) },
 				{ "stage", new DrawObject(DrawObjectType.Sprite) }
 			} } } };
 

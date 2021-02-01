@@ -12,7 +12,7 @@ namespace HololiveFightingGame
 
 		public GameState()
 		{
-			fighters = new Fighter[1] { new Fighter() };
+			fighters = new Fighter[2] { new Fighter(0), new Fighter(1) };
 			stage = new Stage();
 		}
 

@@ -19,6 +19,8 @@ namespace HololiveFightingGame
 
 		public MoveType currentMove;
 
+		public int ID;
+
 		public override void Update()
 		{
 			if (!Game1.gameState.stage.stageBounds.Intersects(Hitbox()))
@@ -31,7 +33,7 @@ namespace HololiveFightingGame
 
 			velocity.Y += 0.5f;
 			velocity.X *= grounded ? 0.8f : 0.95f;
-			velocity.X += GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.X;
+			velocity.X += GamePad.GetState((PlayerIndex)ID).ThumbSticks.Left.X;
 			Vector2 maxVelocity = new Vector2(6, 10);
 			velocity = Vector2.Clamp(velocity, -maxVelocity, maxVelocity);
 
@@ -83,7 +85,7 @@ namespace HololiveFightingGame
 				}
 			}
 
-			if (Keybinds.TapJump(false, 0) && jumps < 2)
+			if (Keybinds.TapJump(false, ID) && jumps < 2)
 			{
 				if (jumps == 0)
 				{
@@ -98,7 +100,7 @@ namespace HololiveFightingGame
 				jumps++;
 			}
 
-			if (Keybinds.TapAtkNormal(false, 0) && moveTimer == 0)
+			if (Keybinds.TapAtkNormal(false, ID) && moveTimer == 0)
 			{
 				moveTimer = 20;
 				currentMove = MoveType.NeutralA;
@@ -145,12 +147,14 @@ namespace HololiveFightingGame
 			drawObject.Bottom = Bottom;
 		}
 
-		public Fighter()
+		public Fighter(int ID)
 		{
+			this.ID = ID;
+
 			dimensions = new Vector2(38, 64);
 			position = new Vector2(300, 0);
 			grounded = true;
-			drawObject = GraphicsHandler.main.children["game"].children["fighter"];
+			drawObject = GraphicsHandler.main.children["game"].children["fighter" + ID];
 			drawObject.texture = new SlicedSprite(Game1.testFighter);
 			drawObject.texture.slices = new Dictionary<string, Rectangle>()
 			{

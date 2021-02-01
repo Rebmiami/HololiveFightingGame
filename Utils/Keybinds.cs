@@ -38,5 +38,9 @@ namespace HololiveFightingGame
 				return GamePadHelper.Pressed(tapAtkNormalBind_Pad, gamepadNumber);
 			}
 		}
+
+
+
+
 	}
 }
