@@ -99,19 +99,22 @@ namespace HololiveFightingGame
 		public static void Update()
 		{
 			oldGamePad[0] = GamePad.GetState(0);
+			oldGamePad[1] = GamePad.GetState(1);
+			oldGamePad[2] = GamePad.GetState(2);
+			oldGamePad[3] = GamePad.GetState(3);
 		}
 
-		public static bool Pressed(Buttons button, PlayerIndex gamepad) //Returns true on the frame the key specified was pressed
+		public static bool Pressed(Buttons button, int gamepad) //Returns true on the frame the key specified was pressed
 		{
 			return Down(button, gamepad) && !Down(button, gamepad, true);
 		}
 
-		public static bool Released(Buttons button, PlayerIndex gamepad) //Returns true on the frame the button specified was released
+		public static bool Released(Buttons button, int gamepad) //Returns true on the frame the button specified was released
 		{
 			return !Down(button, gamepad) && Down(button, gamepad, true);
 		}
 
-		public static Vector2 ThumbSticks(PlayerIndex gamepad, bool right)
+		public static Vector2 ThumbSticks(int gamepad, bool right)
 		{
 			if (right)
 			{
@@ -120,22 +123,22 @@ namespace HololiveFightingGame
 			return GamePad.GetState(gamepad, GamePadDeadZone.Circular).ThumbSticks.Left;
 		}
 
-		public static bool TriggerHit(PlayerIndex gamepad, bool right, float value) //Returns true on the frame the trigger passes or hits the specified value at all.
+		public static bool TriggerHit(int gamepad, bool right, float value) //Returns true on the frame the trigger passes or hits the specified value at all.
 		{
 			return TriggerRise(gamepad, right, value) || TriggerFall(gamepad, right, value) || (Triggers(gamepad, right) == value && Triggers(gamepad, right, true) != value);
 		}
 
-		public static bool TriggerRise(PlayerIndex gamepad, bool right, float value) //Returns true on the frame the trigger rises above the specified value.
+		public static bool TriggerRise(int gamepad, bool right, float value) //Returns true on the frame the trigger rises above the specified value.
 		{
 			return Triggers(gamepad, right) > value && Triggers(gamepad, right, true) < value;
 		}
 
-		public static bool TriggerFall(PlayerIndex gamepad, bool right, float value) //Returns true on the frame the trigger falls below the specified value.
+		public static bool TriggerFall(int gamepad, bool right, float value) //Returns true on the frame the trigger falls below the specified value.
 		{
 			return Triggers(gamepad, right) < value && Triggers(gamepad, right, true) > value;
 		}
 
-		public static float Triggers(PlayerIndex gamepad, bool right, bool old = false)
+		public static float Triggers(int gamepad, bool right, bool old = false)
 		{
 			if (old)
 			{
@@ -155,7 +158,7 @@ namespace HololiveFightingGame
 			}
 		}
 
-		public static bool Down(Buttons button, PlayerIndex gamepad, bool old = false)
+		public static bool Down(Buttons button, int gamepad, bool old = false)
 		{
 			if (old)
 			{

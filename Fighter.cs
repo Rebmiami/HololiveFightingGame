@@ -83,7 +83,7 @@ namespace HololiveFightingGame
 				}
 			}
 
-			if (GamePadHelper.Pressed(Buttons.A, PlayerIndex.One) && jumps < 2)
+			if (Keybinds.TapJump(false, 0) && jumps < 2)
 			{
 				if (jumps == 0)
 				{
@@ -98,7 +98,7 @@ namespace HololiveFightingGame
 				jumps++;
 			}
 
-			if (GamePadHelper.Pressed(Buttons.B, PlayerIndex.One) && moveTimer == 0)
+			if (Keybinds.TapAtkNormal(false, 0) && moveTimer == 0)
 			{
 				moveTimer = 20;
 				currentMove = MoveType.NeutralA;
