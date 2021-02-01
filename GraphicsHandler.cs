@@ -81,6 +81,8 @@ namespace HololiveFightingGame
 				{ "fighter", new DrawObject(DrawObjectType.Sprite) },
 				{ "stage", new DrawObject(DrawObjectType.Sprite) }
 			} } } };
+
+			// UI? - "DAMAGE ダメージ"
 		}
 	}
 

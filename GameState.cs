@@ -22,7 +22,8 @@ namespace HololiveFightingGame
 			{
 				fighter.Update();
 			}
-			GraphicsHandler.main.children["game"].position = -(Vector2.Lerp(fighters[0].Center, -GraphicsHandler.main.children["game"].position + Program.WindowBounds().Size.ToVector2() / 2, 0.9f) - Program.WindowBounds().Size.ToVector2() / 2);
+			Vector2 cameraTarget = Vector2.Lerp(fighters[0].Center + fighters[0].velocity * 10, new Vector2(stage.collider.Center.X, stage.collider.Top), 0.5f);
+			GraphicsHandler.main.children["game"].position = -(Vector2.Lerp(cameraTarget, -GraphicsHandler.main.children["game"].position + Program.WindowBounds().Size.ToVector2() / 2, 0.9f) - Program.WindowBounds().Size.ToVector2() / 2);
 		}
 	}
 }

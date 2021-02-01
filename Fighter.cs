@@ -15,6 +15,10 @@ namespace HololiveFightingGame
 
 		public int jumps;
 
+		public int moveTimer;
+
+		public MoveType currentMove;
+
 		public override void Update()
 		{
 			if (!Game1.gameState.stage.stageBounds.Intersects(Hitbox()))
@@ -94,6 +98,21 @@ namespace HololiveFightingGame
 				jumps++;
 			}
 
+			if (GamePadHelper.Pressed(Buttons.B, PlayerIndex.One) && moveTimer == 0)
+			{
+				moveTimer = 20;
+				currentMove = MoveType.NeutralA;
+			}
+
+			if (moveTimer > 0)
+			{
+				moveTimer--;
+				if (moveTimer == 0)
+				{
+					currentMove = MoveType.None;
+				}
+			}
+
 			if (grounded)
 			{
 				if (Math.Abs(velocity.X) > 1f)
@@ -111,6 +130,18 @@ namespace HololiveFightingGame
 				drawObject.frame = "jump";
 			}
 
+			if (currentMove != MoveType.None)
+			{
+				if (moveTimer > 10)
+				{
+					drawObject.frame = "punch1";
+				}
+				else
+				{
+					drawObject.frame = "punch2";
+				}
+			}
+
 			drawObject.Bottom = Bottom;
 		}
 
@@ -123,11 +154,35 @@ namespace HololiveFightingGame
 			drawObject.texture = new SlicedSprite(Game1.testFighter);
 			drawObject.texture.slices = new Dictionary<string, Rectangle>()
 			{
-				{ "stand", new Rectangle(0, 0, 30, 80) },
-				{ "walk", new Rectangle(0, 80, 30, 80) },
-				{ "jump", new Rectangle(0, 160, 30, 80) },
+				{ "stand", new Rectangle(0, 80 * 0, 50, 80) },
+				{ "walk", new Rectangle(0, 80 * 1, 50, 80) },
+				{ "jump", new Rectangle(0, 80 * 2, 50, 80) },
+				{ "punch1", new Rectangle(0, 80 * 3, 50, 80) },
+				{ "punch2", new Rectangle(0, 80 * 4, 50, 80) },
 			};
 			drawObject.frame = "idle";
 		}
+	}
+
+	public enum MoveType
+	{
+		None,
+		NeutralA,
+		SideA,
+		UpA,
+		DownA,
+		Dash,
+		NeutralAir,
+		ForwardAir,
+		BackAir,
+		DownAir,
+		NeutralB,
+		SideB,
+		UpB,
+		DownB,
+		TDefend,
+		TSide,
+		TRecover,
+		TUltimate,
 	}
 }
