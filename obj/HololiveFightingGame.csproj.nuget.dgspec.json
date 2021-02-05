@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\rebmi\\Source\\Repos\\HololiveFightingGame\\HololiveFightingGame.csproj": {}
+    "C:\\Users\\rebmi\\source\\repos\\HololiveFightingGame\\HololiveFightingGame.csproj": {}
   },
   "projects": {
-    "C:\\Users\\rebmi\\Source\\Repos\\HololiveFightingGame\\HololiveFightingGame.csproj": {
+    "C:\\Users\\rebmi\\source\\repos\\HololiveFightingGame\\HololiveFightingGame.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\rebmi\\Source\\Repos\\HololiveFightingGame\\HololiveFightingGame.csproj",
+        "projectUniqueName": "C:\\Users\\rebmi\\source\\repos\\HololiveFightingGame\\HololiveFightingGame.csproj",
         "projectName": "HololiveFightingGame",
-        "projectPath": "C:\\Users\\rebmi\\Source\\Repos\\HololiveFightingGame\\HololiveFightingGame.csproj",
+        "projectPath": "C:\\Users\\rebmi\\source\\repos\\HololiveFightingGame\\HololiveFightingGame.csproj",
         "packagesPath": "C:\\Users\\rebmi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\rebmi\\Source\\Repos\\HololiveFightingGame\\obj\\",
+        "outputPath": "C:\\Users\\rebmi\\source\\repos\\HololiveFightingGame\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\"
