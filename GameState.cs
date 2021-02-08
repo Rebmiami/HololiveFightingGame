@@ -14,6 +14,7 @@ namespace HololiveFightingGame
 		{
 			fighters = new Fighter[2] { new Fighter(0), new Fighter(1) };
 			stage = new Stage();
+			fighters[0].keyboard = true;
 		}
 
 		public void Update()

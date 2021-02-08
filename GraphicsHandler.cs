@@ -109,4 +109,12 @@ namespace HololiveFightingGame
 			this.zoom = zoom;
 		}
 	}
+
+	public class AnimatedSprite : SlicedSprite
+	{
+		public AnimatedSprite(Texture2D texture) : base(texture)
+		{
+
+		}
+	}
 }

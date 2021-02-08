@@ -39,8 +39,44 @@ namespace HololiveFightingGame
 			}
 		}
 
+		public static Keys holdHorizMoveBindL_Key = Keys.A;
+		public static Keys holdHorizMoveBindR_Key = Keys.D;
+		public static Buttons holdHorizMoveBindL_Pad = 0;
+		public static Buttons holdHorizMoveBindR_Pad = 0;
+		public static bool? holdHorizMoveBindStick_IsRight_Pad = false;
 
-
-
+		public static float HoldHorizMove(bool keyboard, int gamepadNumber)
+		{
+			if (keyboard)
+			{
+				float val = 0;
+				if (KeyHelper.Down(holdHorizMoveBindL_Key))
+				{
+					val -= 1;
+				}
+				if (KeyHelper.Down(holdHorizMoveBindR_Key))
+				{
+					val += 1;
+				}
+				return val;
+			}
+			else
+			{
+				if (holdHorizMoveBindStick_IsRight_Pad == null)
+				{
+					float val = 0;
+					if (GamePadHelper.Down(holdHorizMoveBindL_Pad, gamepadNumber))
+					{
+						val -= 1;
+					}
+					if (GamePadHelper.Down(holdHorizMoveBindR_Pad, gamepadNumber))
+					{
+						val += 1;
+					}
+					return val;
+				}
+				return GamePadHelper.ThumbSticks(gamepadNumber, (bool)holdHorizMoveBindStick_IsRight_Pad).X;
+			}
+		}
 	}
 }

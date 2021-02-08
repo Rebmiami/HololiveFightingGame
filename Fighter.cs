@@ -20,6 +20,7 @@ namespace HololiveFightingGame
 		public MoveType currentMove;
 
 		public int ID;
+		public bool keyboard = false;
 
 		public int launchTimer; //Launch frames where player has no control
 
@@ -37,7 +38,7 @@ namespace HololiveFightingGame
 
 			velocity.Y += 0.5f;
 			velocity.X *= grounded ? 0.8f : 0.95f;
-			velocity.X += GamePad.GetState((PlayerIndex)ID).ThumbSticks.Left.X;
+			velocity.X += Keybinds.HoldHorizMove(keyboard, ID);
 			Vector2 maxVelocity = new Vector2(6, 10);
 			if (launchTimer == 0)
 			{
@@ -94,7 +95,7 @@ namespace HololiveFightingGame
 
 			if (launchTimer == 0)
 			{
-				if (Keybinds.TapJump(false, ID) && jumps < 2)
+				if (Keybinds.TapJump(keyboard, ID) && jumps < 2)
 				{
 					if (jumps == 0)
 					{
@@ -109,7 +110,7 @@ namespace HololiveFightingGame
 					jumps++;
 				}
 
-				if (Keybinds.TapAtkNormal(false, ID) && moveTimer == 0)
+				if (Keybinds.TapAtkNormal(keyboard, ID) && moveTimer == 0)
 				{
 					moveTimer = 16;
 					currentMove = MoveType.NeutralA;
