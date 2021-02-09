@@ -127,11 +127,14 @@ namespace HololiveFightingGame
 				if (direction == -1)
 					hitbox.X -= hitbox.Width;
 
-				if (Game1.gameState.fighters[1].Hitbox().Intersects(hitbox))
+				for (int i = 0; i < Game1.gameState.fighters.Length; i++)
 				{
-					Game1.gameState.fighters[1].Damage(10, new Vector2(10 * direction, -10));
-					Game1.gameState.fighters[1].grounded = false;
-					Game1.gameState.fighters[1].coyote = 0;
+					if (ID != i && Game1.gameState.fighters[i].Hitbox().Intersects(hitbox))
+					{
+						Game1.gameState.fighters[i].Damage(10, new Vector2(10 * direction, -10));
+						Game1.gameState.fighters[i].grounded = false;
+						Game1.gameState.fighters[i].coyote = 0;
+					}
 				}
 			}
 
