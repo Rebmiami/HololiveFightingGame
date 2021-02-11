@@ -112,7 +112,25 @@ namespace HololiveFightingGame
 
 	public class AnimatedSprite : SlicedSprite
 	{
-		public AnimatedSprite(Texture2D texture) : base(texture)
+		public Animation[] animations;
+		public string currentAnim;
+		public Vector2 dimensions;
+
+
+		public AnimatedSprite(Texture2D texture, Vector2 dimensions) : base(texture)
+		{
+
+		}
+
+		public class Animation
+		{
+			public string nextAnim; // If null, will halt on the last frame of the animation until a new animation is started.
+
+			public int animID;
+			public int frames;
+		}
+
+		public void SetAnimation()
 		{
 
 		}

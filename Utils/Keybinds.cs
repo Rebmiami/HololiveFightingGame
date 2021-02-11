@@ -8,7 +8,7 @@ namespace HololiveFightingGame
 {
 	class Keybinds
 	{
-		public static Keys tapJumpBind_Key = Keys.Space;
+		public static Keys tapJumpBind_Key = Keys.W;
 		public static Buttons tapJumpBind_Pad = Buttons.A;
 
 		public static bool TapJump(bool keyboard, int gamepadNumber)
@@ -24,7 +24,7 @@ namespace HololiveFightingGame
 		}
 
 
-		public static Keys tapAtkNormalBind_Key = Keys.Z;
+		public static Keys tapAtkNormalBind_Key = Keys.P;
 		public static Buttons tapAtkNormalBind_Pad = Buttons.B;
 
 		public static bool TapAtkNormal(bool keyboard, int gamepadNumber)
