@@ -153,33 +153,33 @@ namespace HololiveFightingGame
 				{
 					direction = Math.Sign(velocity.X);
 					
-					drawObject.frame = "walk";
+					drawObject.frame = "walk0";
 				}
 				else
 				{
-					drawObject.frame = "stand";
+					drawObject.frame = "neutral0";
 				}
 			}
 			else
 			{
-				drawObject.frame = "jump";
+				drawObject.frame = "jump0";
 			}
 
 			if (currentMove != MoveType.None)
 			{
 				if (moveTimer > 10)
 				{
-					drawObject.frame = "punch1";
+					drawObject.frame = "punch0";
 				}
 				else
 				{
-					drawObject.frame = "punch2";
+					drawObject.frame = "punch1";
 				}
 			}
 
 			if (launchTimer > 0)
 			{
-				drawObject.frame = "launch";
+				drawObject.frame = "launch0";
 				direction = -Math.Sign(velocity.X);
 			}
 			drawObject.spriteEffects = direction == -1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
@@ -195,17 +195,17 @@ namespace HololiveFightingGame
 			grounded = true;
 			GraphicsHandler.main.children["game"].children.Add("fighter" + ID, new DrawObject(DrawObjectType.Sprite));
 			drawObject = GraphicsHandler.main.children["game"].children["fighter" + ID];
-			drawObject.texture = new SlicedSprite(Game1.testFighter);
-			drawObject.texture.slices = new Dictionary<string, Rectangle>()
+			drawObject.texture = new AnimatedSprite(Game1.testFighter, new Vector2(50, 80));
+			((AnimatedSprite)drawObject.texture).animations = new Dictionary<string, AnimatedSprite.Animation>()
 			{
-				{ "stand", new Rectangle(0, 80 * 0, 50, 80) },
-				{ "walk", new Rectangle(0, 80 * 1, 50, 80) },
-				{ "jump", new Rectangle(0, 80 * 2, 50, 80) },
-				{ "punch1", new Rectangle(0, 80 * 3, 50, 80) },
-				{ "punch2", new Rectangle(0, 80 * 4, 50, 80) },
-				{ "launch", new Rectangle(0, 80 * 5, 50, 80) },
+				{ "neutral",	new AnimatedSprite.Animation(0, 1, false) },
+				{ "walk",		new AnimatedSprite.Animation(1, 1, false) },
+				{ "jump",		new AnimatedSprite.Animation(2, 1, false) },
+				{ "punch",		new AnimatedSprite.Animation(3, 2, false) },
+				{ "launch",		new AnimatedSprite.Animation(4, 1, false) },
 			};
-			drawObject.frame = "stand";
+			((AnimatedSprite)drawObject.texture).SetAnimFrames();
+			drawObject.frame = "neutral";
 		}
 
 		public void Damage(int damage, Vector2 knockback)

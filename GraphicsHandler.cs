@@ -112,14 +112,24 @@ namespace HololiveFightingGame
 
 	public class AnimatedSprite : SlicedSprite
 	{
-		public Animation[] animations;
-		public string currentAnim;
-		public Vector2 dimensions;
+		public static readonly int animFrameLength = 5; // "Frames per frame" rather than FPS - calculate 60 divided by this to get FPS
 
+		public Dictionary<string, Animation> animations;
+		public string currentAnim;
+
+		public Animation Playing
+		{
+			get
+			{
+				return animations[currentAnim];
+			}
+		}
+
+		public Vector2 dimensions;
 
 		public AnimatedSprite(Texture2D texture, Vector2 dimensions) : base(texture)
 		{
-
+			this.dimensions = dimensions;
 		}
 
 		public class Animation
@@ -127,12 +137,64 @@ namespace HololiveFightingGame
 			public string nextAnim; // If null, will halt on the last frame of the animation until a new animation is started.
 
 			public int animID;
-			public int frames;
+			public int frames; // Length of animation in frames.
+
+			public bool autoAnimate;
+			// If true, the animation will automatically progress through frames at a set framerate.
+			// If false, the frame must be set by any other arbitrary class.
+
+			public int progress;
+
+			public int Frame
+            {
+				get
+                {
+					return progress / (autoAnimate ? animFrameLength : 1);
+                }
+				set
+                {
+					progress = value * (autoAnimate ? animFrameLength : 1);
+				}
+            }
+
+			public Animation(int id, int length, bool auto)
+			{
+				animID = id;
+				frames = length;
+				autoAnimate = auto;
+			}
+
+			public void Update()
+			{
+				if (autoAnimate)
+                {
+
+                }
+			}
 		}
 
-		public void SetAnimation()
+		public void SetAnimFrames() // Called once after animations are set up to set all the frames. In the case of flashes, pre-set animations are used to save resources.
 		{
+			slices = new Dictionary<string, Rectangle>();
+			foreach (string key in animations.Keys)
+			{
+				Animation animation = animations[key];
+                for (int i = 0; i < animation.frames; i++)
+                {
+					slices.Add(key + i, new Rectangle((int)dimensions.X * animation.animID, (int)dimensions.Y * i, (int)dimensions.X, (int)dimensions.Y));
+				}
+			}
+		}
 
+		public string GetFrame()
+		{
+			return currentAnim + Playing.progress;
+		}
+
+		public void SetAnimation(string animation, int startFrame)
+		{
+			currentAnim = animation;
+			Playing.progress = startFrame * (Playing.autoAnimate ? animFrameLength : 1);
 		}
 	}
 }
