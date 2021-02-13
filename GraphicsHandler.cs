@@ -112,10 +112,10 @@ namespace HololiveFightingGame
 
 	public class AnimatedSprite : SlicedSprite
 	{
-		public static readonly int animFrameLength = 5; // "Frames per frame" rather than FPS - calculate 60 divided by this to get FPS
+		public static readonly int animFrameLength = 10; // "Frames per frame" rather than FPS - calculate 60 divided by this to get FPS
 
 		public Dictionary<string, Animation> animations;
-		public string currentAnim;
+		public string currentAnim = "neutral";
 
 		public Animation Playing
 		{
@@ -125,9 +125,9 @@ namespace HololiveFightingGame
 			}
 		}
 
-		public Vector2 dimensions;
+		public Point dimensions;
 
-		public AnimatedSprite(Texture2D texture, Vector2 dimensions) : base(texture)
+		public AnimatedSprite(Texture2D texture, Point dimensions) : base(texture)
 		{
 			this.dimensions = dimensions;
 		}
@@ -142,34 +142,44 @@ namespace HololiveFightingGame
 			public bool autoAnimate;
 			// If true, the animation will automatically progress through frames at a set framerate.
 			// If false, the frame must be set by any other arbitrary class.
-
+			
 			public int progress;
 
 			public int Frame
-            {
+			{
 				get
-                {
+				{
 					return progress / (autoAnimate ? animFrameLength : 1);
-                }
+				}
 				set
-                {
+				{
 					progress = value * (autoAnimate ? animFrameLength : 1);
 				}
-            }
+			}
 
-			public Animation(int id, int length, bool auto)
+			public Animation(int id, int length, bool auto, string next = null)
 			{
 				animID = id;
 				frames = length;
 				autoAnimate = auto;
+				nextAnim = next;
 			}
+		}
 
-			public void Update()
+		public void Update()
+		{
+			Animation animation = Playing;
+			if (animation.autoAnimate)
 			{
-				if (autoAnimate)
-                {
+				animation.progress++;
 
-                }
+				if (animation.Frame > animation.frames)
+				{
+					if (animation.nextAnim == null)
+						animation.progress--;
+					else
+						SetAnimation(animation.nextAnim, 0);
+				}
 			}
 		}
 
@@ -179,9 +189,9 @@ namespace HololiveFightingGame
 			foreach (string key in animations.Keys)
 			{
 				Animation animation = animations[key];
-                for (int i = 0; i < animation.frames; i++)
-                {
-					slices.Add(key + i, new Rectangle((int)dimensions.X * animation.animID, (int)dimensions.Y * i, (int)dimensions.X, (int)dimensions.Y));
+				for (int i = 0; i < animation.frames; i++)
+				{
+					slices.Add(key + i, new Rectangle(dimensions.X * animation.animID, dimensions.Y * i, dimensions.X, dimensions.Y));
 				}
 			}
 		}
@@ -195,6 +205,15 @@ namespace HololiveFightingGame
 		{
 			currentAnim = animation;
 			Playing.progress = startFrame * (Playing.autoAnimate ? animFrameLength : 1);
+		}
+
+		public void SwitchAnimation(string animation, int startFrame)
+		{
+			if (currentAnim != animation)
+			{
+				currentAnim = animation;
+				Playing.progress = startFrame * (Playing.autoAnimate ? animFrameLength : 1);
+			}
 		}
 	}
 }

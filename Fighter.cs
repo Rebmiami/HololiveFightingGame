@@ -152,38 +152,43 @@ namespace HololiveFightingGame
 				if (Math.Abs(velocity.X) > 1f)
 				{
 					direction = Math.Sign(velocity.X);
+
+					((AnimatedSprite)drawObject.texture).SwitchAnimation("walk", 0);
 					
-					drawObject.frame = "walk0";
 				}
 				else
 				{
-					drawObject.frame = "neutral0";
+					((AnimatedSprite)drawObject.texture).SwitchAnimation("neutral", 0);
 				}
 			}
 			else
 			{
-				drawObject.frame = "jump0";
+				((AnimatedSprite)drawObject.texture).SwitchAnimation("jump", 0);
 			}
 
 			if (currentMove != MoveType.None)
 			{
+				((AnimatedSprite)drawObject.texture).SwitchAnimation("punch", 0);
+				
 				if (moveTimer > 10)
 				{
-					drawObject.frame = "punch0";
+					((AnimatedSprite)drawObject.texture).Playing.Frame = 0;
 				}
 				else
 				{
-					drawObject.frame = "punch1";
+					((AnimatedSprite)drawObject.texture).Playing.Frame = 1;
 				}
 			}
 
 			if (launchTimer > 0)
 			{
-				drawObject.frame = "launch0";
+				((AnimatedSprite)drawObject.texture).SwitchAnimation("launch", 0);
 				direction = -Math.Sign(velocity.X);
 			}
 			drawObject.spriteEffects = direction == -1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
+			drawObject.frame = ((AnimatedSprite)drawObject.texture).GetFrame();
 			drawObject.Bottom = Bottom;
+			((AnimatedSprite)drawObject.texture).Update();
 		}
 
 		public Fighter(int ID)
@@ -195,13 +200,13 @@ namespace HololiveFightingGame
 			grounded = true;
 			GraphicsHandler.main.children["game"].children.Add("fighter" + ID, new DrawObject(DrawObjectType.Sprite));
 			drawObject = GraphicsHandler.main.children["game"].children["fighter" + ID];
-			drawObject.texture = new AnimatedSprite(Game1.testFighter, new Vector2(50, 80));
+			drawObject.texture = new AnimatedSprite(Game1.testFighter, new Point(50, 80));
 			((AnimatedSprite)drawObject.texture).animations = new Dictionary<string, AnimatedSprite.Animation>()
 			{
 				{ "neutral",	new AnimatedSprite.Animation(0, 1, false) },
-				{ "walk",		new AnimatedSprite.Animation(1, 1, false) },
+				{ "walk",		new AnimatedSprite.Animation(1, 1, false, "walk") },
 				{ "jump",		new AnimatedSprite.Animation(2, 1, false) },
-				{ "punch",		new AnimatedSprite.Animation(3, 2, false) },
+				{ "punch",		new AnimatedSprite.Animation(3, 2, false, "neutral") },
 				{ "launch",		new AnimatedSprite.Animation(4, 1, false) },
 			};
 			((AnimatedSprite)drawObject.texture).SetAnimFrames();
