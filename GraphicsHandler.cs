@@ -173,7 +173,7 @@ namespace HololiveFightingGame
 			{
 				animation.progress++;
 
-				if (animation.Frame > animation.frames)
+				if (animation.Frame >= animation.frames)
 				{
 					if (animation.nextAnim == null)
 						animation.progress--;
@@ -198,7 +198,7 @@ namespace HololiveFightingGame
 
 		public string GetFrame()
 		{
-			return currentAnim + Playing.progress;
+			return currentAnim + Playing.Frame;
 		}
 
 		public void SetAnimation(string animation, int startFrame)

@@ -154,7 +154,6 @@ namespace HololiveFightingGame
 					direction = Math.Sign(velocity.X);
 
 					((AnimatedSprite)drawObject.texture).SwitchAnimation("walk", 0);
-					
 				}
 				else
 				{
@@ -169,15 +168,7 @@ namespace HololiveFightingGame
 			if (currentMove != MoveType.None)
 			{
 				((AnimatedSprite)drawObject.texture).SwitchAnimation("punch", 0);
-				
-				if (moveTimer > 10)
-				{
-					((AnimatedSprite)drawObject.texture).Playing.Frame = 0;
-				}
-				else
-				{
-					((AnimatedSprite)drawObject.texture).Playing.Frame = 1;
-				}
+				((AnimatedSprite)drawObject.texture).Playing.Frame = (20 - moveTimer) / 10;
 			}
 
 			if (launchTimer > 0)
@@ -186,9 +177,9 @@ namespace HololiveFightingGame
 				direction = -Math.Sign(velocity.X);
 			}
 			drawObject.spriteEffects = direction == -1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
+			((AnimatedSprite)drawObject.texture).Update();
 			drawObject.frame = ((AnimatedSprite)drawObject.texture).GetFrame();
 			drawObject.Bottom = Bottom;
-			((AnimatedSprite)drawObject.texture).Update();
 		}
 
 		public Fighter(int ID)
@@ -204,7 +195,7 @@ namespace HololiveFightingGame
 			((AnimatedSprite)drawObject.texture).animations = new Dictionary<string, AnimatedSprite.Animation>()
 			{
 				{ "neutral",	new AnimatedSprite.Animation(0, 1, false) },
-				{ "walk",		new AnimatedSprite.Animation(1, 1, false, "walk") },
+				{ "walk",		new AnimatedSprite.Animation(1, 2, true, "walk") },
 				{ "jump",		new AnimatedSprite.Animation(2, 1, false) },
 				{ "punch",		new AnimatedSprite.Animation(3, 2, false, "neutral") },
 				{ "launch",		new AnimatedSprite.Animation(4, 1, false) },
