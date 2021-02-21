@@ -23,7 +23,21 @@ namespace HololiveFightingGame
 			foreach (Fighter fighter in fighters)
 			{
 				fighter.Update();
+
+
 				playerCenter += fighter.Center + fighter.velocity * 10;
+			}
+			foreach (Fighter fighter in fighters)
+			{
+				;
+			}
+			foreach (Fighter fighter in fighters)
+			{
+				fighter.Update_PostHit(fighter.Update_Hits());
+			}
+			foreach (Fighter fighter in fighters)
+			{
+				fighter.Update_Animation();
 			}
 			playerCenter /= fighters.Length;
 			Vector2 cameraTarget = Vector2.Lerp(playerCenter, new Vector2(stage.collider.Center.X, stage.collider.Top), 0.5f);

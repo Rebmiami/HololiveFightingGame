@@ -26,6 +26,11 @@ namespace HololiveFightingGame
 
 		public int direction = 1;
 
+		// TODO: Update fighters in steps to resolve conflicts in fighter interaction
+		// Queue up all changes that one fighter makes to another's state, resolve any conflicts with absolutely no bias
+
+		public List<Attack> attacks;
+
 		public override void Update()
 		{
 			if (!Game1.gameState.stage.stageBounds.Intersects(Hitbox()))
@@ -121,7 +126,7 @@ namespace HololiveFightingGame
 				launchTimer--;
 			}
 
-			if (moveTimer == 10 )
+			if (moveTimer == 10)
 			{
 				Rectangle hitbox = new Rectangle(Center.ToPoint(), new Point(15, 10));
 				if (direction == -1)
@@ -131,9 +136,7 @@ namespace HololiveFightingGame
 				{
 					if (ID != i && Game1.gameState.fighters[i].Hitbox().Intersects(hitbox))
 					{
-						Game1.gameState.fighters[i].Damage(10, new Vector2(10 * direction, -10));
-						Game1.gameState.fighters[i].grounded = false;
-						Game1.gameState.fighters[i].coyote = 0;
+						Game1.gameState.fighters[i].attacks.Add(new Attack(10, new Vector2(10 * direction, -10)));
 					}
 				}
 			}
@@ -146,7 +149,34 @@ namespace HololiveFightingGame
 					currentMove = MoveType.None;
 				}
 			}
+		}
 
+		public Attack Update_Hits() // Process damage dealt to the player and resolve conflicts.
+		{
+			if (attacks.Count == 0)
+			{
+				return null;
+			}
+
+			attacks.Sort();
+			return attacks[0];
+			// TODO: Loop through all incoming attacks and create a list of attackers to find potential conflicts
+			// Sort incoming attacks by priority
+			// Disregard all attacks with priority less than the highest priority attack
+		}
+
+		public void Update_PostHit(Attack attack) // After conflicts are resolved and a winning attack is selected, apply the effects of the attack (damage, knockback, etc.)
+		{
+			if (attack == null)
+			{
+				return;
+			}
+			Damage(attack);
+			attacks.Clear();
+		}
+
+		public void Update_Animation()
+		{
 			if (grounded)
 			{
 				if (Math.Abs(velocity.X) > 1f)
@@ -202,6 +232,12 @@ namespace HololiveFightingGame
 			};
 			((AnimatedSprite)drawObject.texture).SetAnimFrames();
 			drawObject.frame = "neutral";
+			attacks = new List<Attack>();
+		}
+
+		public void Damage(Attack attack)
+		{
+			Damage(attack.damage, attack.knockback);
 		}
 
 		public void Damage(int damage, Vector2 knockback)
@@ -209,6 +245,39 @@ namespace HololiveFightingGame
 			launchTimer = 20;
 			velocity += knockback;
 			this.damage += damage;
+
+			if (knockback.Y < 0)
+			{
+				grounded = false;
+				coyote = 0;
+			}
+		}
+
+		public class Attack : IComparable
+		{
+			public Attack(int damage, Vector2 knockback, int priority = 1, Fighter attacker = null)
+			{
+				this.damage = damage;
+				this.knockback = knockback;
+				this.priority = priority;
+				this.attacker = attacker;
+			}
+
+			public int damage;
+			public Vector2 knockback;
+
+			public int priority; // Used to resolve conflicts. If two attacks with the same priority conflict, they will cancel out.
+
+			public Fighter attacker; // Set attacker to null if the damage was not caused by a player (directly or indirectly)
+
+			public int CompareTo(object obj)
+			{
+				if (obj is Attack attack)
+				{
+					return attack.priority - priority;
+				}
+				throw new ArgumentException("An attempt was made to compare an Attack object with an object that is not an Attack.");
+			}
 		}
 	}
 
