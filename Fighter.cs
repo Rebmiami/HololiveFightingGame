@@ -43,7 +43,10 @@ namespace HololiveFightingGame
 
 			velocity.Y += 0.5f;
 			velocity.X *= grounded ? 0.8f : 0.95f;
-			velocity.X += Keybinds.HoldHorizMove(keyboard, ID);
+			if (launchTimer == 0)
+			{
+				velocity.X += Keybinds.HoldHorizMove(keyboard, ID);
+			}
 			Vector2 maxVelocity = new Vector2(6, 10);
 			if (launchTimer == 0)
 			{
@@ -243,7 +246,15 @@ namespace HololiveFightingGame
 		public void Damage(int damage, Vector2 knockback)
 		{
 			launchTimer = 20;
-			velocity += knockback;
+			if (grounded)
+			{
+				velocity = knockback; // TODO: Work on how attack impacts affect velocity - this is not sufficient
+			}
+			else
+			{
+				velocity += knockback;
+			}
+			
 			this.damage += damage;
 
 			if (knockback.Y < 0)
