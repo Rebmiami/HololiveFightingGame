@@ -12,6 +12,13 @@ namespace HololiveFightingGame
 
 		public float radius;
 
+		public Capsule(Vector2 origin, Vector2 length, float radius)
+        {
+			this.origin = origin;
+			this.length = length;
+			this.radius = radius;
+        }
+
 		public float Distance(Vector2 vector)
 		{
 			Vector2 normal = Vector2.Normalize(length);

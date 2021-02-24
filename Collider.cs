@@ -10,6 +10,24 @@ namespace HololiveFightingGame
 		public ColliderType colliderType;
 		public object collider;
 
+		public Collider(Vector2 vector)
+        {
+			collider = vector;
+			colliderType = ColliderType.Point;
+        }
+
+		public Collider(Rectangle rectangle)
+		{
+			collider = rectangle;
+			colliderType = ColliderType.Rectangle;
+		}
+
+		public Collider(Capsule capsule)
+		{
+			collider = capsule;
+			colliderType = ColliderType.Capsule;
+		}
+
 		public Vector2 Point
 		{
 			get
