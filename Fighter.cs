@@ -55,15 +55,17 @@ namespace HololiveFightingGame
 
 			base.Update();
 
+			collider.SetPosition(position);
+
 			Rectangle stageCollider = Game1.gameState.stage.collider;
 
-			if (Hitbox().Intersects(stageCollider))
+			if (collider.Intersects(stageCollider))
 			{
 				//Rectangle colliderTop = new Rectangle(stageCollider.Left, stageCollider.Top, stageCollider.Width, 12);
 				Rectangle colliderBottom = new Rectangle(stageCollider.Left + 12, stageCollider.Top + stageCollider.Height - 12, stageCollider.Width - 24, 12);
 				Rectangle colliderLeft = new Rectangle(stageCollider.Left, stageCollider.Top, 12, stageCollider.Height);
 				//Rectangle colliderRight = new Rectangle(stageCollider.Left + stageCollider.Width - 4, stageCollider.Top, 4, stageCollider.Height);
-				if (position.Y + dimensions.Y < stageCollider.Top + 24) //Hitbox().Intersects(colliderTop))
+				if (position.Y + Dimensions.Y < stageCollider.Top + 24) //Hitbox().Intersects(colliderTop))
 				{
 					grounded = true;
 					coyote = 7;
@@ -76,7 +78,7 @@ namespace HololiveFightingGame
 				{
 					if (Hitbox().Intersects(colliderLeft))
 					{
-						position.X = stageCollider.Left - dimensions.X;
+						position.X = stageCollider.Left - Dimensions.X;
 					}
 					else
 					{
@@ -88,7 +90,7 @@ namespace HololiveFightingGame
 			if (grounded)
 			{
 				velocity.Y = 0;
-				position.Y = Game1.gameState.stage.collider.Top - dimensions.Y + 1;
+				position.Y = Game1.gameState.stage.collider.Top - Dimensions.Y + 1;
 				if (coyote > 0)
 				{
 					coyote--;
@@ -218,8 +220,8 @@ namespace HololiveFightingGame
 		public Fighter(int ID)
 		{
 			this.ID = ID;
-
-			dimensions = new Vector2(38, 64);
+			collider = new Collider(new Rectangle());
+			Dimensions = new Vector2(38, 64);
 			position = new Vector2(300, 0);
 			grounded = true;
 			GraphicsHandler.main.children["game"].children.Add("fighter" + ID, new DrawObject(DrawObjectType.Sprite));
