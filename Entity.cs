@@ -14,14 +14,14 @@ namespace HololiveFightingGame
 		{
 			get
 			{
-                return collider.type switch
-                {
-                    ColliderType.Point => throw new InvalidOperationException("Colliders of type point do not have dimensions"),
-                    ColliderType.Rectangle => collider.Rectangle.Size.ToVector2(),
-                    ColliderType.Capsule => collider.Capsule.GetBoundingBox().Size.ToVector2(),
-                    _ => throw new InvalidOperationException("Dimensions could not be retrieved because the collider does not have a valid type."),
-                };
-            }
+				return collider.type switch
+				{
+					ColliderType.Point => throw new InvalidOperationException("Colliders of type point do not have dimensions"),
+					ColliderType.Rectangle => collider.Rectangle.Size.ToVector2(),
+					ColliderType.Capsule => collider.Capsule.GetBoundingBox().Size.ToVector2(),
+					_ => throw new InvalidOperationException("Dimensions could not be retrieved because the collider does not have a valid type."),
+				};
+			}
 			set
 			{
 				if (collider.type == ColliderType.Rectangle)
@@ -36,12 +36,20 @@ namespace HololiveFightingGame
 		}
 
 		public Collider collider;
+		public Vector2 colliderOrigin;
+		// .
+		// Both components should be between 1 and -1 but this is not strictly required.
+		public Vector2 colliderOffset;
 
 		public DrawObject drawObject;
 
 		public virtual void Update()
 		{
 			position += velocity;
+			Vector2 dimensions = Hitbox().Size.ToVector2();
+			Vector2 center = dimensions / 2 * colliderOrigin + dimensions / 2;
+			center += colliderOffset;
+			collider.SetPosition(position, center);
 		}
 
 		public Rectangle Hitbox()

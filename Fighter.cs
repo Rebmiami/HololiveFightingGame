@@ -55,8 +55,6 @@ namespace HololiveFightingGame
 
 			base.Update();
 
-			collider.SetPosition(position);
-
 			Rectangle stageCollider = Game1.gameState.stage.collider;
 
 			if (collider.Intersects(stageCollider))
@@ -221,6 +219,8 @@ namespace HololiveFightingGame
 		{
 			this.ID = ID;
 			collider = new Collider(new Rectangle());
+			colliderOrigin = new Vector2(-1, -1);
+			colliderOffset = Vector2.Zero;
 			Dimensions = new Vector2(38, 64);
 			position = new Vector2(300, 0);
 			grounded = true;
