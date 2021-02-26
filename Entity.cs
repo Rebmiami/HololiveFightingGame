@@ -37,9 +37,14 @@ namespace HololiveFightingGame
 
 		public Collider collider;
 		public Vector2 colliderOrigin;
-		// .
-		// Both components should be between 1 and -1 but this is not strictly required.
+		// The origin of the collider relative to the point position of the entity.
+		// (-1, -1) will anchor the collider's top left point to position. (0, 0) will center it.
+		// Both components should be between 1 and -1 in most cases but this is not strictly required.
+		// In the case of capsules, the bounding box of the capsule will be used to find the origin.
+		// The capsule origin (base) will be anchored to the collider origin point.
+		// Collider offset of the capsule's radius can be used to align the bottom of the capsule
 		public Vector2 colliderOffset;
+		// Linear offset for the collider. Applied after collider origin, shifting the collider position by the value specified.
 
 		public DrawObject drawObject;
 

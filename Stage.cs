@@ -7,20 +7,21 @@ namespace HololiveFightingGame
 {
 	public class Stage
 	{
-		public Rectangle collider; 
+		public Collider collider; 
 		// TODO: Support multiple colliders per stage
+		// TODO: Move stages from rectangle to new collider system
 		public Rectangle stageBounds;
 
 		public DrawObject drawObject;
 
 		public Stage()
 		{
-			collider = new Rectangle((Program.WindowBounds().Width - 500) / 2, 300, 500, 100);
+			collider = new Collider(new Rectangle((Program.WindowBounds().Width - 500) / 2, 300, 500, 100));
 			stageBounds = Program.WindowBounds();
 
 			drawObject = GraphicsHandler.main.children["game"].children["stage"];
 			drawObject.texture = new SlicedSprite(Game1.testStage);
-			drawObject.position = collider.Location.ToVector2();
+			drawObject.position = collider.Rectangle.Location.ToVector2();
 		}
 	}
 }

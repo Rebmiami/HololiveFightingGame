@@ -40,7 +40,7 @@ namespace HololiveFightingGame
 				fighter.Update_Animation();
 			}
 			playerCenter /= fighters.Length;
-			Vector2 cameraTarget = Vector2.Lerp(playerCenter, new Vector2(stage.collider.Center.X, stage.collider.Top), 0.5f);
+			Vector2 cameraTarget = Vector2.Lerp(playerCenter, new Vector2(stage.collider.Rectangle.Center.X, stage.collider.Rectangle.Top), 0.5f);
 			GraphicsHandler.main.children["game"].position = -(Vector2.Lerp(cameraTarget, -GraphicsHandler.main.children["game"].position + Program.WindowBounds().Size.ToVector2() / 2, 0.9f) - Program.WindowBounds().Size.ToVector2() / 2);
 		}
 	}

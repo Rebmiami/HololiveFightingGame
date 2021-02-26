@@ -161,7 +161,7 @@ namespace HololiveFightingGame
 					break;
 				case ColliderType.Capsule:
 					Capsule capsule = Capsule;
-					capsule.origin = vector;
+					capsule.origin = vector + offset;
 					Capsule = capsule;
 					break;
 			}

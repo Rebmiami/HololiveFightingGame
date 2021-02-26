@@ -55,7 +55,7 @@ namespace HololiveFightingGame
 
 			base.Update();
 
-			Rectangle stageCollider = Game1.gameState.stage.collider;
+			Rectangle stageCollider = Game1.gameState.stage.collider.Rectangle;
 
 			if (collider.Intersects(stageCollider))
 			{
@@ -88,7 +88,7 @@ namespace HololiveFightingGame
 			if (grounded)
 			{
 				velocity.Y = 0;
-				position.Y = Game1.gameState.stage.collider.Top - Dimensions.Y + 1;
+				position.Y = Game1.gameState.stage.collider.Rectangle.Top - Dimensions.Y + 1;
 				if (coyote > 0)
 				{
 					coyote--;

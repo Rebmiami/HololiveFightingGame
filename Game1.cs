@@ -52,8 +52,6 @@ namespace HololiveFightingGame
 			MouseHelper.Update();
 			KeyHelper.Update();
 
-			// TODO: Add your update logic here
-
 			base.Update(gameTime);
 		}
 
