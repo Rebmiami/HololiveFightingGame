@@ -1,5 +1,5 @@
-# HololiveFightingGame
-Hololive fan game with gameplay similar to Smash Bros.
+# Another Hololive Fighting Game
+Another Hololive Fighting Game (AHFG/AHFGame) is a Hololive fan game with gameplay similar to Smash Bros.
 
 Discord invite link: https://discord.gg/Cdz8at27aZ
 
