@@ -218,10 +218,11 @@ namespace HololiveFightingGame
 		public Fighter(int ID)
 		{
 			this.ID = ID;
-			collider = new Collider(new Rectangle());
+			//collider = new Collider(new Rectangle());
+			collider = new Collider(new Capsule(position, new Vector2(0, -26), 19));
 			colliderOrigin = new Vector2(-1, -1);
 			colliderOffset = Vector2.Zero;
-			Dimensions = new Vector2(38, 64);
+			//Dimensions = new Vector2(38, 64);
 			position = new Vector2(300, 0);
 			grounded = true;
 			GraphicsHandler.main.children["game"].children.Add("fighter" + ID, new DrawObject(DrawObjectType.Sprite));

@@ -24,12 +24,11 @@ namespace HololiveFightingGame
 			{
 				fighter.Update();
 
-
 				playerCenter += fighter.Center + fighter.velocity * 10;
 			}
 			foreach (Fighter fighter in fighters)
 			{
-				;
+				; // This doesn't cause an error?
 			}
 			foreach (Fighter fighter in fighters)
 			{

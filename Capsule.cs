@@ -62,18 +62,19 @@ namespace HololiveFightingGame
 
 		public bool Intersects(Rectangle rectangle)
 		{
-			throw new NotImplementedException();
-			//if (GetBoundingBox().Intersects(rectangle))
-			//{
-			//	return true;
-			//}
-			//return false;
+			// This implementation is NOT complete!
+			if (GetBoundingBox().Intersects(rectangle))
+			{
+				return true;
+			}
+			return false;
+			//throw new NotImplementedException();
 		}
 
 		public Rectangle GetBoundingBox()
 		{
-			Rectangle A = new Rectangle(origin.ToPoint() - new Point((int)radius), origin.ToPoint() + new Point((int)radius));
-			Rectangle B = new Rectangle(Tip.ToPoint() - new Point((int)radius), Tip.ToPoint() + new Point((int)radius));
+			Rectangle A = new Rectangle(origin.ToPoint() - new Point((int)radius), new Point((int)radius));
+			Rectangle B = new Rectangle(Tip.ToPoint() - new Point((int)radius), new Point((int)radius));
 			return Rectangle.Union(A, B);
 		}
 
