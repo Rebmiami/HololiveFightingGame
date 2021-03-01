@@ -191,7 +191,7 @@ namespace HololiveFightingGame
 			attacks.Clear();
 		}
 
-		public void Update_Animation()
+		public void Update_Animation() // Sets animation frames and the direction the fighter's sprite should face
 		{
 			if (grounded)
 			{
@@ -261,9 +261,9 @@ namespace HololiveFightingGame
 
 		public void Damage(int damage, Vector2 knockback)
 		{
+			knockback += knockback * (this.damage / 200f);
 			this.damage += damage;
-
-			launchTimer = 20;
+			launchTimer = (int)(Math.Abs(knockback.Y) * 2.5f);
 			if (grounded)
 			{
 				velocity = knockback; // TODO: Work on how attack impacts affect velocity - this is not sufficient
