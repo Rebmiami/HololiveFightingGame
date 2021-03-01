@@ -39,6 +39,8 @@ namespace HololiveFightingGame
 				velocity = Vector2.Zero;
 				grounded = true;
 				drawObject.frame = "stand";
+				damage = 0;
+				launchTimer = 0;
 			}
 
 			velocity.Y += 0.5f;
@@ -152,6 +154,17 @@ namespace HololiveFightingGame
 					currentMove = MoveType.None;
 				}
 			}
+
+			for (int i = 0; i < Game1.gameState.fighters.Length; i++)
+			{
+				Fighter fighter = Game1.gameState.fighters[i];
+				if (ID != i && fighter.Hitbox().Intersects(Hitbox()))
+				{
+					float direction = Math.Sign(position.X - fighter.position.X) * 0.4f;
+					velocity.X += direction;
+					fighter.velocity.X -= direction;
+				}
+			}
 		}
 
 		public Attack Update_Hits() // Process damage dealt to the player and resolve conflicts.
@@ -248,6 +261,8 @@ namespace HololiveFightingGame
 
 		public void Damage(int damage, Vector2 knockback)
 		{
+			this.damage += damage;
+
 			launchTimer = 20;
 			if (grounded)
 			{
@@ -255,10 +270,16 @@ namespace HololiveFightingGame
 			}
 			else
 			{
-				velocity += knockback;
+				if (velocity.Y > 0)
+				{
+					velocity.Y += knockback.Y;
+				}
+				else
+				{
+					velocity.Y = knockback.Y;
+				}
+				velocity.X += knockback.X;
 			}
-			
-			this.damage += damage;
 
 			if (knockback.Y < 0)
 			{
