@@ -133,7 +133,7 @@ namespace HololiveFightingGame
 
 			if (moveTimer == 10)
 			{
-				Rectangle hitbox = new Rectangle(Center.ToPoint(), new Point(15, 10));
+				Rectangle hitbox = new Rectangle(Center.ToPoint(), new Point(20, 10));
 				if (direction == -1)
 					hitbox.X -= hitbox.Width;
 
