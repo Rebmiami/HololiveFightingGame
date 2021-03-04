@@ -20,6 +20,8 @@ namespace HololiveFightingGame
 		public Vector2 position;
 		public SpriteEffects spriteEffects;
 		public Vector2 dimensions;
+		public DrawObjectData data;
+		// Used for text of text objects and some information regarding flashes
 
 		public DrawObject (DrawObjectType type)
 		{
@@ -42,7 +44,16 @@ namespace HololiveFightingGame
 				drawPosition -= Program.WindowBounds().Size.ToVector2() / 2;
 				drawPosition *= transformation.zoom;
 				drawPosition += Program.WindowBounds().Size.ToVector2() / 2;
-				spriteBatch.Draw(texture.texture, drawPosition, texture.slices[frame], Color.White, 0, Vector2.Zero, transformation.zoom, spriteEffects, 0);
+				if (type == DrawObjectType.Text)
+				{
+					//var a = Game1.font.Characters;
+
+					spriteBatch.DrawString(Game1.font, ((TextData)data).text, Vector2.Zero, ((TextData)data).color);
+				}
+				else
+				{
+					spriteBatch.Draw(texture.texture, drawPosition, texture.slices[frame], Color.White, 0, Vector2.Zero, transformation.zoom, spriteEffects, 0);
+				}
 			}
 		}
 
@@ -78,13 +89,47 @@ namespace HololiveFightingGame
 			children = new Dictionary<string, DrawObject>() {
 			{ "game", new DrawObject(DrawObjectType.Layer) {
 				children = new Dictionary<string, DrawObject>() {
-				//{ "fighter0", new DrawObject(DrawObjectType.Sprite) },
-				//{ "fighter1", new DrawObject(DrawObjectType.Sprite) },
-				{ "stage", new DrawObject(DrawObjectType.Sprite) }
-			} } } };
+					//{ "fighter0", new DrawObject(DrawObjectType.Sprite) },
+					//{ "fighter1", new DrawObject(DrawObjectType.Sprite) },
+					{ "stage", new DrawObject(DrawObjectType.Sprite) }
+				} }
+			},
+
+			{ "ui", new DrawObject(DrawObjectType.Layer) {
+				children = new Dictionary<string, DrawObject>() {
+					{ "test", new DrawObject(DrawObjectType.Text) {
+						data = new TextData("This is some test text. It's beautiful and text-y", Color.White) }
+					//This is some test text. It's beautiful and text-y.
+					//日本語の話し方がわかりません。このテキストはGoogle翻訳からのものです。
+					//I don't know how to speak Japanese and this text is from Google Translate
+					}
+				} }
+			} };
 
 			// UI? - "DAMAGE ダメージ"
 		}
+	}
+
+	public abstract class DrawObjectData
+	{
+
+	}
+
+	public class TextData : DrawObjectData
+	{
+		public string text;
+		public Color color;
+
+		public TextData(string text, Color color)
+		{
+			this.text = text;
+			this.color = color;
+		}
+	}
+
+	public class FlashData : DrawObjectData
+	{
+
 	}
 
 	public enum DrawObjectType //Dictates how a draw object should behave and treat its children
