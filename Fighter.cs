@@ -228,6 +228,7 @@ namespace HololiveFightingGame
 			drawObject.Bottom = Bottom;
 
 			((TextData)GraphicsHandler.main.children["ui"].children["damage_" + ID].data).text = (damage / 10d).ToString("f1") + "%";
+			GraphicsHandler.main.children["game"].children["indicator_" + ID].position = position - new Vector2(0, 40);
 		}
 
 		public Fighter(int ID)
@@ -242,6 +243,7 @@ namespace HololiveFightingGame
 			grounded = true;
 			GraphicsHandler.main.children["game"].children.Add("fighter_" + ID, new DrawObject(DrawObjectType.Sprite));
 			GraphicsHandler.main.children["ui"].children.Add("damage_" + ID, new DrawObject(DrawObjectType.Text) { data = new TextData("dmg%"), position = new Vector2(100 + ID * 100, 300) } );
+			GraphicsHandler.main.children["game"].children.Add("indicator_" + ID, new DrawObject(DrawObjectType.Text) { data = new TextData("P" + (ID + 1)) });
 			drawObject = GraphicsHandler.main.children["game"].children["fighter_" + ID];
 			drawObject.texture = new AnimatedSprite(Game1.testFighter, new Point(50, 80));
 			((AnimatedSprite)drawObject.texture).animations = new Dictionary<string, AnimatedSprite.Animation>()
