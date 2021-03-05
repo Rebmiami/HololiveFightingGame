@@ -141,7 +141,7 @@ namespace HololiveFightingGame
 				{
 					if (ID != i && Game1.gameState.fighters[i].Hitbox().Intersects(hitbox))
 					{
-						Game1.gameState.fighters[i].attacks.Add(new Attack(10, new Vector2(10 * direction, -10)));
+						Game1.gameState.fighters[i].attacks.Add(new Attack(100, new Vector2(10 * direction, -10)));
 					}
 				}
 			}
@@ -226,6 +226,8 @@ namespace HololiveFightingGame
 			((AnimatedSprite)drawObject.texture).Update();
 			drawObject.frame = ((AnimatedSprite)drawObject.texture).GetFrame();
 			drawObject.Bottom = Bottom;
+
+			((TextData)GraphicsHandler.main.children["ui"].children["damage_" + ID].data).text = (damage / 10d).ToString("f1") + "%";
 		}
 
 		public Fighter(int ID)
@@ -238,8 +240,9 @@ namespace HololiveFightingGame
 			//Dimensions = new Vector2(38, 64);
 			position = new Vector2(300, 0);
 			grounded = true;
-			GraphicsHandler.main.children["game"].children.Add("fighter" + ID, new DrawObject(DrawObjectType.Sprite));
-			drawObject = GraphicsHandler.main.children["game"].children["fighter" + ID];
+			GraphicsHandler.main.children["game"].children.Add("fighter_" + ID, new DrawObject(DrawObjectType.Sprite));
+			GraphicsHandler.main.children["ui"].children.Add("damage_" + ID, new DrawObject(DrawObjectType.Text) { data = new TextData("dmg%"), position = new Vector2(100 + ID * 100, 300) } );
+			drawObject = GraphicsHandler.main.children["game"].children["fighter_" + ID];
 			drawObject.texture = new AnimatedSprite(Game1.testFighter, new Point(50, 80));
 			((AnimatedSprite)drawObject.texture).animations = new Dictionary<string, AnimatedSprite.Animation>()
 			{
@@ -261,7 +264,7 @@ namespace HololiveFightingGame
 
 		public void Damage(int damage, Vector2 knockback)
 		{
-			knockback += knockback * (this.damage / 200f);
+			knockback += knockback * (this.damage / 2000f);
 			this.damage += damage;
 			launchTimer = (int)(Math.Abs(knockback.Y) * 2.5f);
 			if (grounded)

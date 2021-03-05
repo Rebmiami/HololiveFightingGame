@@ -21,6 +21,7 @@ namespace HololiveFightingGame
 		public SpriteEffects spriteEffects;
 		public Vector2 dimensions;
 		public DrawObjectData data;
+		public bool noZoom = false;
 		// Used for text of text objects and some information regarding flashes
 
 		public DrawObject (DrawObjectType type)
@@ -36,6 +37,10 @@ namespace HololiveFightingGame
 				{
 					Transformation pass = new Transformation(transformation.offset, transformation.zoom);
 					pass.offset += position;
+					if (noZoom)
+                    {
+						pass.zoom = 1;
+                    }						
 					toDraw.Value.Draw(spriteBatch, pass);
 				}
 			else
@@ -48,7 +53,7 @@ namespace HololiveFightingGame
 				{
 					//var a = Game1.font.Characters;
 
-					spriteBatch.DrawString(Game1.font, ((TextData)data).text, Vector2.Zero, ((TextData)data).color);
+					spriteBatch.DrawString(Game1.font, ((TextData)data).text, drawPosition, ((TextData)data).color);
 				}
 				else
 				{
@@ -96,6 +101,7 @@ namespace HololiveFightingGame
 			},
 
 			{ "ui", new DrawObject(DrawObjectType.Layer) {
+				noZoom = true,
 				children = new Dictionary<string, DrawObject>() {
 					{ "test", new DrawObject(DrawObjectType.Text) {
 						data = new TextData("This is some test text. It's beautiful and text-y", Color.White) }
@@ -124,6 +130,12 @@ namespace HololiveFightingGame
 		{
 			this.text = text;
 			this.color = color;
+		}
+
+		public TextData(string text)
+		{
+			this.text = text;
+			this.color = Color.White;
 		}
 	}
 
