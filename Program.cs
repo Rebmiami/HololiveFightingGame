@@ -18,8 +18,8 @@ namespace HololiveFightingGame
 		public static Game1 game;
 
 		public static Rectangle WindowBounds()
-        {
+		{
 			return game.GraphicsDevice.Viewport.Bounds;
-        }
+		}
 	}
 }
