@@ -30,6 +30,8 @@ namespace HololiveFightingGame.Graphics.Presets
 				} }
 			} };
 
+			// TODO: Load presets from JSON instead of classes like these
+
 			// UI? - "DAMAGE ダメージ"
 		}
 	}

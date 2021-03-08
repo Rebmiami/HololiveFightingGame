@@ -6,9 +6,13 @@ using Microsoft.Xna.Framework;
 
 namespace HololiveFightingGame.Graphics
 {
+	/// <summary>
+	///		<see cref="SlicedSprite"/> with additional functionality for animation.
+	/// </summary>
 	public class AnimatedSprite : SlicedSprite
 	{
-		public static readonly int animFrameLength = 10; // "Frames per frame" rather than FPS - calculate 60 divided by this to get FPS
+		public static readonly int animFrameLength = 10;
+		// "Frames per frame" rather than FPS - calculate 60 divided by this to get FPS
 
 		public Dictionary<string, Animation> animations;
 		public string currentAnim = "neutral";
@@ -28,6 +32,9 @@ namespace HololiveFightingGame.Graphics
 			this.dimensions = dimensions;
 		}
 
+		/// <summary>
+		///		Specifies animations to be played by the <see cref="AnimatedSprite"/>.
+		/// </summary>
 		public class Animation
 		{
 			public string nextAnim; // If null, will halt on the last frame of the animation until a new animation is started.
@@ -97,12 +104,22 @@ namespace HololiveFightingGame.Graphics
 			return currentAnim + Playing.Frame;
 		}
 
+		/// <summary>
+		/// Sets the <see cref="AnimatedSprite"/> to the specified animation and frame.
+		/// </summary>
+		/// <param name="animation"></param>
+		/// <param name="startFrame"></param>
 		public void SetAnimation(string animation, int startFrame)
 		{
 			currentAnim = animation;
 			Playing.progress = startFrame * (Playing.autoAnimate ? animFrameLength : 1);
 		}
 
+		/// <summary>
+		/// Sets the <see cref="AnimatedSprite"/> to the specified animation and frame if the animation specified is not currently running.
+		/// </summary>
+		/// <param name="animation"></param>
+		/// <param name="startFrame"></param>
 		public void SwitchAnimation(string animation, int startFrame)
 		{
 			if (currentAnim != animation)
@@ -111,5 +128,7 @@ namespace HololiveFightingGame.Graphics
 				Playing.progress = startFrame * (Playing.autoAnimate ? animFrameLength : 1);
 			}
 		}
+
+		// TODO: Combine SetAnimation and SwitchAnimation to a single method.
 	}
 }

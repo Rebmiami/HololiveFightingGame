@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 namespace HololiveFightingGame.Graphics
 {
 	/// <summary>
-	///		Components drawn to the screen every frame. DrawObjects can contain textures, text, or other DrawObjects depending on their DrawObjectType.
+	///		Components drawn to the screen every frame. A <see cref="DrawObject"/> can contain textures, text, or more DrawObjects depending on its <see cref="DrawObjectType"/>.
 	/// </summary>
 	public class DrawObject
 	{
@@ -22,9 +22,9 @@ namespace HololiveFightingGame.Graphics
 		public bool noZoom = false;
 
 		/// <summary>
-		///		Initializes a DrawObject.
+		///		Initializes a <see cref="DrawObject"/>.
 		/// </summary>
-		/// <param name="type">The DrawObjectType to initialize the DrawObject with.</param>
+		/// <param name="type">The <see cref="DrawObjectType"/> to initialize the <see cref="DrawObject"/> with.</param>
 		public DrawObject(DrawObjectType type)
 		{
 			children = new Dictionary<string, DrawObject>();
@@ -32,9 +32,9 @@ namespace HololiveFightingGame.Graphics
 		}
 
 		/// <summary>
-		///		Draws a DrawObject and its children recursively.
+		///		Draws a <see cref="DrawObject"/> and its children recursively.
 		/// </summary>
-		/// <param name="spriteBatch">The spritebatch to draw to.</param>
+		/// <param name="spriteBatch">The <see cref="SpriteBatch"/> to draw to.</param>
 		/// <param name="transformation">Position and scale transformations applied to draw objects.</param>
 		public void Draw(SpriteBatch spriteBatch, Transformation transformation)
 		{
@@ -67,7 +67,7 @@ namespace HololiveFightingGame.Graphics
 		}
 
 		/// <summary>
-		///		Gets or sets the bottom center of the draw object.
+		///		Gets or sets the bottom center of the <see cref="DrawObject"/>.
 		/// </summary>
 		public Vector2 Bottom
 		{
@@ -76,7 +76,7 @@ namespace HololiveFightingGame.Graphics
 		}
 
 		/// <summary>
-		///		Gets or sets the center of the draw object.
+		///		Gets or sets the center of the <see cref="DrawObject"/>.
 		/// </summary>
 		public Vector2 Center
 		{
@@ -86,9 +86,9 @@ namespace HololiveFightingGame.Graphics
 	}
 
 	/// <summary>
-	///		Enum responsible for the properties of draw objects.
+	///		Enum responsible for the behavior of draw objects and how their children are treated.
 	/// </summary>
-	public enum DrawObjectType //Dictates how a draw object should behave and treat its children
+	public enum DrawObjectType
 	{
 		Main, // Always the size of the window. Will be scaled accordingly. Origin is always top of window. Exclusively contains layers.
 		Layer, // Contains sprites, component sprites, flashes, particle systems, and text. Origin can be moved.

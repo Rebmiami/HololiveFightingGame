@@ -6,6 +6,9 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace HololiveFightingGame.Graphics
 {
+	/// <summary>
+	///		Class containing a <see cref="Texture2D"/> and a dictionary of frames.
+	/// </summary>
 	public class SlicedSprite
 	{
 		public Texture2D texture;
