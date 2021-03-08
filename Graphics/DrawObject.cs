@@ -6,6 +6,9 @@ using Microsoft.Xna.Framework;
 
 namespace HololiveFightingGame.Graphics
 {
+	/// <summary>
+	///		Components drawn to the screen every frame. DrawObjects can contain textures, text, or other DrawObjects depending on their DrawObjectType.
+	/// </summary>
 	public class DrawObject
 	{
 		public Dictionary<string, DrawObject> children;
@@ -17,14 +20,22 @@ namespace HololiveFightingGame.Graphics
 		public Vector2 dimensions;
 		public DrawObjectData data;
 		public bool noZoom = false;
-		// Used for text of text objects and some information regarding flashes
 
+		/// <summary>
+		///		Initializes a DrawObject.
+		/// </summary>
+		/// <param name="type">The DrawObjectType to initialize the DrawObject with.</param>
 		public DrawObject(DrawObjectType type)
 		{
 			children = new Dictionary<string, DrawObject>();
 			this.type = type;
 		}
 
+		/// <summary>
+		///		Draws a DrawObject and its children recursively.
+		/// </summary>
+		/// <param name="spriteBatch">The spritebatch to draw to.</param>
+		/// <param name="transformation">Position and scale transformations applied to draw objects.</param>
 		public void Draw(SpriteBatch spriteBatch, Transformation transformation)
 		{
 			if (type == DrawObjectType.Main || type == DrawObjectType.Layer || type == DrawObjectType.ComponentSprite || type == DrawObjectType.Particle)
@@ -46,8 +57,6 @@ namespace HololiveFightingGame.Graphics
 				drawPosition += Program.WindowBounds().Size.ToVector2() / 2;
 				if (type == DrawObjectType.Text)
 				{
-					//var a = Game1.font.Characters;
-
 					spriteBatch.DrawString(Game1.font, ((TextData)data).text, drawPosition, ((TextData)data).color);
 				}
 				else
@@ -57,12 +66,18 @@ namespace HololiveFightingGame.Graphics
 			}
 		}
 
+		/// <summary>
+		///		Gets or sets the bottom center of the draw object.
+		/// </summary>
 		public Vector2 Bottom
 		{
 			get { return position + new Vector2(texture.slices[frame].Width / 2, texture.slices[frame].Height); }
 			set { position = value - new Vector2(texture.slices[frame].Width / 2, texture.slices[frame].Height); }
 		}
 
+		/// <summary>
+		///		Gets or sets the center of the draw object.
+		/// </summary>
 		public Vector2 Center
 		{
 			get { return position + new Vector2(texture.slices[frame].Width / 2, texture.slices[frame].Height / 2); }
@@ -70,6 +85,9 @@ namespace HololiveFightingGame.Graphics
 		}
 	}
 
+	/// <summary>
+	///		Enum responsible for the properties of draw objects.
+	/// </summary>
 	public enum DrawObjectType //Dictates how a draw object should behave and treat its children
 	{
 		Main, // Always the size of the window. Will be scaled accordingly. Origin is always top of window. Exclusively contains layers.
