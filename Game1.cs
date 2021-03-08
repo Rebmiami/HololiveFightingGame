@@ -25,6 +25,7 @@ namespace HololiveFightingGame
 		}
 
 		public static GameState gameState;
+		public static UIHandler uiHandler;
 
 		protected override void Initialize()
 		{
@@ -51,8 +52,8 @@ namespace HololiveFightingGame
 			language = new Language(new Dictionary<string, string>());
 			GraphicsHandler.main = new InGamePreset();
 			gameState = new GameState();
-
-			// TODO: use this.Content to load your game content here
+			uiHandler = new UIHandler();
+			uiHandler.uiDrawObject.texture = new SlicedSprite(Content.Load<Texture2D>("GameUI"));
 		}
 
 		protected override void Update(GameTime gameTime)
@@ -63,7 +64,6 @@ namespace HololiveFightingGame
 			if (KeyHelper.Released(Keys.LeftControl))
 			{
 				displayLanguage = (DisplayLanguage)(((int)displayLanguage + 1) % 2);
-				((TextData)GraphicsHandler.main.children["ui"].children["test"].data).text = language.lang["Test_" + Enum.GetNames(typeof(DisplayLanguage))[(int)displayLanguage]];
 			}
 			gameState.Update();
 

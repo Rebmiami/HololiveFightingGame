@@ -19,20 +19,13 @@ namespace HololiveFightingGame.Graphics.Presets
 			},
 
 			{ "ui", new DrawObject(DrawObjectType.Layer) {
-				noZoom = true,
-				children = new Dictionary<string, DrawObject>() {
-					{ "test", new DrawObject(DrawObjectType.Text) {
-						data = new TextData("This is some test text. It's beautiful and text-y", Color.White) }
-					//This is some test text. It's beautiful and text-y.
-					//日本語の話し方がわかりません。このテキストはGoogle翻訳からのものです。
-					//I don't know how to speak Japanese and this text is from Google Translate
-					}
-				} }
+				//noZoom = true,
+				children = new Dictionary<string, DrawObject>() }
 			} };
 
-			// TODO: Load presets from JSON instead of classes like these
-
-			// UI? - "DAMAGE ダメージ"
+			// TODO: Load presets from JSON instead of classes
+			// or offload construction of the graphics tree to all the classes using it
+			// or implement presets into the GraphicsHandler class somehow.
 		}
 	}
 }

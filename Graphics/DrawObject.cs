@@ -51,11 +51,13 @@ namespace HololiveFightingGame.Graphics
 				}
 			else
 			{
-				Vector2 drawPosition = position + transformation.offset;
-				drawPosition -= Program.WindowBounds().Size.ToVector2() / 2;
-				drawPosition *= transformation.zoom;
-				drawPosition += Program.WindowBounds().Size.ToVector2() / 2;
-				if (type == DrawObjectType.Text)
+				Vector2 drawPosition = position;
+				TransformVector(ref drawPosition, transformation);
+				if (type == DrawObjectType.Custom)
+                {
+					CustomDraw(spriteBatch, transformation);
+				}
+				else if (type == DrawObjectType.Text)
 				{
 					spriteBatch.DrawString(Game1.font, ((TextData)data).text, drawPosition, ((TextData)data).color);
 				}
@@ -83,6 +85,28 @@ namespace HololiveFightingGame.Graphics
 			get { return position + new Vector2(texture.slices[frame].Width / 2, texture.slices[frame].Height / 2); }
 			set { position = value - new Vector2(texture.slices[frame].Width / 2, texture.slices[frame].Height / 2); }
 		}
+
+		public static Vector2 TransformVector(Vector2 vector, Transformation transformation)
+        {
+			vector += transformation.offset;
+			vector -= Program.WindowBounds().Size.ToVector2() / 2;
+			vector *= transformation.zoom;
+			vector += Program.WindowBounds().Size.ToVector2() / 2;
+			return vector;
+		}
+
+		public static void TransformVector(ref Vector2 vector, Transformation transformation)
+		{
+			vector += transformation.offset;
+			vector -= Program.WindowBounds().Size.ToVector2() / 2;
+			vector *= transformation.zoom;
+			vector += Program.WindowBounds().Size.ToVector2() / 2;
+		}
+
+		public virtual void CustomDraw(SpriteBatch spriteBatch, Transformation transformation)
+		{
+
+		}
 	}
 
 	/// <summary>
@@ -97,7 +121,7 @@ namespace HololiveFightingGame.Graphics
 		Flash, // Refers to graphical effects like puffs of smoke or sparks. Cannot have children.
 		Particle, // Refers to a particle system. Exclusively contains flashes.
 		Text, // Prints text. Cannot have children. Currently supports no languages. Should support English and Japanese.
-		Custom, // Runs code for drawing to avoid overhead when necessary
+		Custom, // Runs code for drawing to avoid overhead when necessary. Requires inheritance.
 	}
 
 	public class Transformation

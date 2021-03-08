@@ -5,10 +5,12 @@
   <Config />
   <SourceFiles>
     <File>C:/Users/rebmi/source/repos/HololiveFightingGame/Content/File.spritefont</File>
+    <File>C:/Users/rebmi/source/repos/HololiveFightingGame/Content/GameUI.png</File>
     <File>C:/Users/rebmi/source/repos/HololiveFightingGame/Content/TestFighter.png</File>
     <File>C:/Users/rebmi/source/repos/HololiveFightingGame/Content/TestStage.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

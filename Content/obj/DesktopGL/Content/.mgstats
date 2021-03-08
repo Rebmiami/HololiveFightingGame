@@ -1,4 +1,5 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
 "C:/Users/rebmi/source/repos/HololiveFightingGame/Content/File.spritefont","C:/Users/rebmi/source/repos/HololiveFightingGame/Content/bin/DesktopGL/Content/File.xnb","LocalizedFontProcessor","SpriteFontContent",2858,301938,4.2884994
+"C:/Users/rebmi/source/repos/HololiveFightingGame/Content/GameUI.png","C:/Users/rebmi/source/repos/HololiveFightingGame/Content/bin/DesktopGL/Content/GameUI.xnb","TextureProcessor","Texture2DContent",1161,11957,0.919812
 "C:/Users/rebmi/source/repos/HololiveFightingGame/Content/TestFighter.png","C:/Users/rebmi/source/repos/HololiveFightingGame/Content/bin/DesktopGL/Content/TestFighter.xnb","TextureProcessor","Texture2DContent",9945,560085,1.6757661
 "C:/Users/rebmi/source/repos/HololiveFightingGame/Content/TestStage.png","C:/Users/rebmi/source/repos/HololiveFightingGame/Content/bin/DesktopGL/Content/TestStage.xnb","TextureProcessor","Texture2DContent",2037,200085,0.0833319

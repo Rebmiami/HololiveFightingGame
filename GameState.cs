@@ -8,6 +8,7 @@ namespace HololiveFightingGame
 {
 	public class GameState
 	{
+		public int maxFighters = 4;
 		public Fighter[] fighters;
 		public Stage stage;
 
