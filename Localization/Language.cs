@@ -6,7 +6,7 @@ using System.Text;
 using System.Text.Json;
 using System.Web;
 
-namespace HololiveFightingGame
+namespace HololiveFightingGame.Localization
 {
 	public class Language
 	{

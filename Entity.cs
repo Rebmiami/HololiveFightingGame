@@ -1,5 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
+using HololiveFightingGame.Collision;
+using HololiveFightingGame.Graphics;
 using System.Collections.Generic;
 using System.Text;
 

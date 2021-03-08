@@ -4,7 +4,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
-namespace HololiveFightingGame
+namespace HololiveFightingGame.Input
 {
 	public static class KeyHelper
 	{

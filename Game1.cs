@@ -5,6 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using HololiveFightingGame.Localization;
+using HololiveFightingGame.Graphics;
+using HololiveFightingGame.Input;
 
 namespace HololiveFightingGame
 {

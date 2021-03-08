@@ -4,6 +4,9 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using HololiveFightingGame.Input;
+using HololiveFightingGame.Collision;
+using HololiveFightingGame.Graphics;
 
 namespace HololiveFightingGame
 {

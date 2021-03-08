@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using HololiveFightingGame.Collision;
+using HololiveFightingGame.Graphics;
 
 namespace HololiveFightingGame
 {
