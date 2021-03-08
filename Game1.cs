@@ -37,6 +37,7 @@ namespace HololiveFightingGame
 
 		public static Texture2D testFighter;
 		public static Texture2D testStage;
+		public static Texture2D inGameUI;
 		public static SpriteFont font;
 		public static Language language;
 		public static DisplayLanguage displayLanguage;
@@ -52,8 +53,8 @@ namespace HololiveFightingGame
 			language = new Language(new Dictionary<string, string>());
 			GraphicsHandler.main = new InGamePreset();
 			gameState = new GameState();
+			inGameUI = Content.Load<Texture2D>("GameUI");
 			uiHandler = new UIHandler();
-			uiHandler.uiDrawObject.texture = new SlicedSprite(Content.Load<Texture2D>("GameUI"));
 		}
 
 		protected override void Update(GameTime gameTime)
