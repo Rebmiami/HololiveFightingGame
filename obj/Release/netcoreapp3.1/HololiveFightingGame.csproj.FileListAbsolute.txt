@@ -23,3 +23,5 @@ C:\Users\rebmi\source\repos\HololiveFightingGame\obj\Release\netcoreapp3.1\Holol
 C:\Users\rebmi\source\repos\HololiveFightingGame\obj\Release\netcoreapp3.1\HololiveFightingGame.pdb
 C:\Users\rebmi\source\repos\HololiveFightingGame\obj\Release\netcoreapp3.1\HololiveFightingGame.genruntimeconfig.cache
 C:\Users\rebmi\source\repos\HololiveFightingGame\obj\Release\netcoreapp3.1\HololiveFightingGame.csprojAssemblyReference.cache
+C:\Users\rebmi\source\repos\HololiveFightingGame\bin\Release\netcoreapp3.1\Content\File.xnb
+C:\Users\rebmi\source\repos\HololiveFightingGame\bin\Release\netcoreapp3.1\Content\GameUI.xnb
