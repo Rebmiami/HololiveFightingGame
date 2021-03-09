@@ -59,20 +59,20 @@ namespace HololiveFightingGame.Graphics
 				string damage = ((float)parent.damages[i] / 10).ToString("f1");
 				Vector2 origin = new Vector2(200 + i * 200, 300);
 				if (damage.Length == 2)
-				{
+                {
 					damage = "0.0";
-				}
+                }
 				for (int j = 0; j < damage.Length; j++)
-				{
+                {
 					if (damage[j] == '.')
 						continue;
 					float offset = origin.X - damage.Length * 16 + j * 16;
 					if (j == damage.Length - 1)
-					{
+                    {
 						spriteBatch.Draw(texture.texture, new Vector2(offset - 8, 308), texture.slices["numsmall_" + damage[j]], Color.White, 0, Vector2.Zero, 2, SpriteEffects.None, 0);
 					}
 					else
-					{
+                    {
 						spriteBatch.Draw(texture.texture, new Vector2(offset, 300), texture.slices["num_" + damage[j]], Color.White, 0, Vector2.Zero, 2, SpriteEffects.None, 0);
 					}
 					spriteBatch.Draw(texture.texture, origin + new Vector2(-30, 14), texture.slices["point"], Color.White, 0, Vector2.Zero, 2, SpriteEffects.None, 0);
