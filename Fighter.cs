@@ -144,7 +144,7 @@ namespace HololiveFightingGame
 				{
 					if (ID != i && Game1.gameState.fighters[i].Hitbox().Intersects(hitbox))
 					{
-						Game1.gameState.fighters[i].attacks.Add(new Attack(100, new Vector2(10 * direction, -10)));
+						Game1.gameState.fighters[i].attacks.Add(new Attack(103, new Vector2(10 * direction, -10)));
 					}
 				}
 			}
