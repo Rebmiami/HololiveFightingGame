@@ -4,9 +4,9 @@ using System.Text;
 
 namespace HololiveFightingGame
 {
-    public class Projectile : Entity
-    {
-        int owner;
-        int timeLeft;
-    }
+	public class Projectile : Entity
+	{
+		int owner;
+		int timeLeft;
+	}
 }

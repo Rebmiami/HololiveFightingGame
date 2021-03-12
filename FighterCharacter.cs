@@ -4,8 +4,11 @@ using System.Text;
 
 namespace HololiveFightingGame
 {
-    public enum FighterCharacter
-    {
-        UsadaPekora
-    }
+	public enum FighterCharacter
+	{
+		UsadaPekora,
+		UruhaRushia,
+		TakanashiKiara,
+		AnyaMelfissa
+	}
 }
