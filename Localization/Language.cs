@@ -10,11 +10,11 @@ namespace HololiveFightingGame.Localization
 {
 	public class Language
 	{
-		private Dictionary<string, string> lang { get; set; }
+		private Dictionary<string, string> Lang { get; set; }
 
 		public Language(Dictionary<string, string> pairs)
 		{
-			lang = pairs;
+			Lang = pairs;
 			pairs.Add("Test_EN", "This is some test text. It's beautiful and text-y.");
 			pairs.Add("Test_JP", "日本語の話し方がわかりません。このテキストはGoogle翻訳からのものです。");
 			// I don't know how to speak Japanese and this text is from Google Translate
@@ -22,26 +22,26 @@ namespace HololiveFightingGame.Localization
 		}
 
 		public string GetLocalizedString(string name, DisplayLanguage? language = null)
-        {
+		{
 			if (language == null)
-            {
+			{
 				language = Game1.displayLanguage;
-            }
+			}
 
-			return lang[name + "_" + Enum.GetNames(typeof(DisplayLanguage))[(int)language]];
-        }
+			return Lang[name + "_" + Enum.GetNames(typeof(DisplayLanguage))[(int)language]];
+		}
 	}
 
 	//[ContentImporter]
 	//public class LangImporter : ContentImporter<Language>
 
 	public class LangReader : ContentTypeReader<Language>
-    {
+	{
 		protected override Language Read(ContentReader input, Language existingInstance)
 		{
 			string json = input.ReadString();
 			var lang = (Dictionary<string, string>)JsonSerializer.Deserialize(json, typeof(Dictionary<string, string>));
 			return new Language(lang);
 		}
-    }
+	}
 }

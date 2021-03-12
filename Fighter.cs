@@ -198,9 +198,9 @@ namespace HololiveFightingGame
 		{
 			if (grounded)
 			{
-				if (Math.Abs(velocity.X) > 1f)
+				if (Math.Abs(Keybinds.HoldHorizMove(keyboard, ID)) > 0.1f)
 				{
-					direction = Math.Sign(velocity.X);
+					direction = Math.Sign(Keybinds.HoldHorizMove(keyboard, ID));
 
 					((AnimatedSprite)drawObject.texture).SwitchAnimation("walk", 0);
 				}
@@ -271,7 +271,7 @@ namespace HololiveFightingGame
 		public void Damage(int damage, Vector2 knockback)
 		{
 			knockback += knockback * (this.damage / 2000f);
-			this.damage += damage;
+			this.damage = Math.Min(this.damage + damage, 1000);
 			launchTimer = (int)(Math.Abs(knockback.Y) * 2.5f);
 			if (grounded)
 			{
