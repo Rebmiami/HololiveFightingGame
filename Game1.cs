@@ -55,6 +55,7 @@ namespace HololiveFightingGame
 			gameState = new GameState();
 			inGameUI = Content.Load<Texture2D>("GameUI");
 			uiHandler = new UIHandler();
+			MoveLoader.LoadMoves(gameState.fighters);
 		}
 
 		protected override void Update(GameTime gameTime)

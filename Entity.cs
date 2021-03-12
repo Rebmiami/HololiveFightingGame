@@ -55,7 +55,7 @@ namespace HololiveFightingGame
 			position += velocity;
 
 			switch (collider.type)
-            {
+			{
 				case ColliderType.Point:
 					break;
 				case ColliderType.Rectangle:
@@ -67,7 +67,7 @@ namespace HololiveFightingGame
 				case ColliderType.Capsule:
 					collider.SetPosition(position, new Vector2(19, 45)); // TODO: Do this automatically
 					break;
-            }
+			}
 		}
 
 		public Rectangle Hitbox()

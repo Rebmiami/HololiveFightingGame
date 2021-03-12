@@ -9,6 +9,8 @@ namespace HololiveFightingGame
 	public class AttackHitbox
 	{
 		public Collider collider;
+		public bool enabled;
+
 		public int damage;
 		public Vector2 launchAngle;
 		public AttackHitboxType type;
@@ -19,5 +21,6 @@ namespace HololiveFightingGame
 		Attack,
 		Shield,
 		Counter,
+		Grab,
     }
 }

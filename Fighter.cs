@@ -14,7 +14,7 @@ namespace HololiveFightingGame
 	{
 		public bool grounded;
 		public int coyote;
-		public int damage; // 1000.0 to 0.0 by default. Div by 10 to get damage shown on screen
+		public int damage; // 999.9 to 0.0 by default. Div by 10 to get damage shown on screen
 
 		public int jumps;
 
@@ -25,12 +25,11 @@ namespace HololiveFightingGame
 		public int ID;
 		public bool keyboard = false;
 
-		public int launchTimer; //Launch frames where player has no control
+		public int launchTimer; // Launch frames where player has no control
 
 		public int direction = 1;
 
-		// TODO: Update fighters in steps to resolve conflicts in fighter interaction
-		// Queue up all changes that one fighter makes to another's state, resolve any conflicts with absolutely no bias
+		public FighterCharacter character = FighterCharacter.UsadaPekora;
 
 		public List<Attack> attacks;
 
@@ -271,7 +270,7 @@ namespace HololiveFightingGame
 		public void Damage(int damage, Vector2 knockback)
 		{
 			knockback += knockback * (this.damage / 2000f);
-			this.damage = Math.Min(this.damage + damage, 1000);
+			this.damage = Math.Min(this.damage + damage, 9999);
 			launchTimer = (int)(Math.Abs(knockback.Y) * 2.5f);
 			if (grounded)
 			{
