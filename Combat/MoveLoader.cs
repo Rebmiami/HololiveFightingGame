@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace HololiveFightingGame
+namespace HololiveFightingGame.Combat
 {
 	public static class MoveLoader
 	{
