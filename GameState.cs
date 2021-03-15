@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using HololiveFightingGame.Graphics;
+using HololiveFightingGame.Utils;
 
 namespace HololiveFightingGame
 {
@@ -11,17 +12,24 @@ namespace HololiveFightingGame
 		public int maxFighters = 4;
 		public Fighter[] fighters;
 		public Stage stage;
+		public List<Projectile> projectiles;
 
 		public GameState()
 		{
 			fighters = new Fighter[2] { new Fighter(0), new Fighter(1) };
 			stage = new Stage();
+			projectiles = new List<Projectile>();
 			fighters[1].keyboard = true;
 		}
 
 		public void Update()
 		{
 			Vector2 playerCenter = Vector2.Zero;
+			ListCleaner.CleanList(projectiles, delegate(Projectile projectile)
+			{
+				projectile.Update();
+				return projectile.timeLeft <= 0;
+			} );
 			foreach (Fighter fighter in fighters)
 			{
 				fighter.Update();
