@@ -7,6 +7,7 @@ using System.Text;
 using HololiveFightingGame.Input;
 using HololiveFightingGame.Collision;
 using HololiveFightingGame.Graphics;
+using HololiveFightingGame.Combat;
 
 namespace HololiveFightingGame
 {
@@ -133,13 +134,20 @@ namespace HololiveFightingGame
 
 			if (moveTimer == 10)
 			{
-				Rectangle hitbox = new Rectangle(Center.ToPoint(), new Point(20, 10));
+				// Rectangle hitbox = new Rectangle(Center.ToPoint(), new Point(20, 10));
+				AttackHitbox attackHitbox = MoveLoader.TestMove().hitboxes[0];
+				Collider collider = attackHitbox.collider;
+				Capsule capsule = collider.Capsule;
 				if (direction == -1)
-					hitbox.X -= hitbox.Width;
+				{
+					capsule.origin.X *= -1;
+					capsule.length.X *= -1;
+				}
+				capsule.origin = Center + capsule.origin;
 
 				for (int i = 0; i < Game1.gameState.fighters.Length; i++)
 				{
-					if (ID != i && Game1.gameState.fighters[i].Hitbox().Intersects(hitbox))
+					if (ID != i && Game1.gameState.fighters[i].collider.Capsule.Intersects(capsule.GetBoundingBox()))
 					{
 						Game1.gameState.fighters[i].attacks.Add(new Attack(103, new Vector2(10 * direction, -10)));
 					}

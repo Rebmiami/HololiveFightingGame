@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using HololiveFightingGame.Collision;
+using Microsoft.Xna.Framework;
 
 namespace HololiveFightingGame.Combat
 {
@@ -32,7 +34,7 @@ namespace HololiveFightingGame.Combat
 			{
 				damage = 103,
 				type = AttackHitboxType.Attack,
-				collider = new Collision.Collider()
+				collider = new Collider(new Capsule(Vector2.Zero, new Vector2(25, 0), 5))
 			};
 			return move;
 		}
