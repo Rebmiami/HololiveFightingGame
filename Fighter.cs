@@ -147,7 +147,7 @@ namespace HololiveFightingGame
 
 				for (int i = 0; i < Game1.gameState.fighters.Length; i++)
 				{
-					if (ID != i && Game1.gameState.fighters[i].collider.Capsule.Intersects(capsule.GetBoundingBox()))
+					if (ID != i && Game1.gameState.fighters[i].collider.Capsule.Intersects(capsule))
 					{
 						Game1.gameState.fighters[i].attacks.Add(new Attack(103, new Vector2(10 * direction, -10)));
 					}
