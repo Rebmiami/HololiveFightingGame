@@ -149,7 +149,11 @@ namespace HololiveFightingGame
 				{
 					if (ID != i && Game1.gameState.fighters[i].collider.Capsule.Intersects(capsule))
 					{
-						Game1.gameState.fighters[i].attacks.Add(new Attack(103, new Vector2(10 * direction, -10)));
+						Attack attack = new Attack();
+						attack.damage = attackHitbox.damage;
+						attack.knockback = attackHitbox.launchAngle;
+						attack.knockback.X *= direction;
+						Game1.gameState.fighters[i].attacks.Add(attack);
 					}
 				}
 			}
@@ -176,7 +180,7 @@ namespace HololiveFightingGame
 			}
 		}
 
-		public Attack Update_Hits() // Process damage dealt to the player and resolve conflicts.
+		public Attack? Update_Hits() // Process damage dealt to the player and resolve conflicts.
 		{
 			if (attacks.Count == 0)
 			{
@@ -190,14 +194,13 @@ namespace HololiveFightingGame
 			// Disregard all attacks with priority less than the highest priority attack
 		}
 
-		public void Update_PostHit(Attack attack) // After conflicts are resolved and a winning attack is selected, apply the effects of the attack (damage, knockback, etc.)
+		public void Update_PostHit(Attack? attack) // After conflicts are resolved and a winning attack is selected, apply the effects of the attack (damage, knockback, etc.)
 		{
-			if (attack == null)
+			if (attack != null)
 			{
-				return;
+				Damage((Attack)attack);
+				attacks.Clear();
 			}
-			Damage(attack);
-			attacks.Clear();
 		}
 
 		public void Update_Animation() // Sets animation frames and the direction the fighter's sprite should face
@@ -303,7 +306,7 @@ namespace HololiveFightingGame
 			}
 		}
 
-		public class Attack : IComparable
+		public struct Attack : IComparable
 		{
 			public Attack(int damage, Vector2 knockback, int priority = 1, Fighter attacker = null)
 			{
