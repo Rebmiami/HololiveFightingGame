@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 using System.Text;
 using HololiveFightingGame.Collision;
 
-namespace HololiveFightingGame
+namespace HololiveFightingGame.Combat
 {
 	public class AttackHitbox
 	{

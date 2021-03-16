@@ -63,11 +63,9 @@ namespace HololiveFightingGame
 
 			if (collider.Intersects(stageCollider))
 			{
-				//Rectangle colliderTop = new Rectangle(stageCollider.Left, stageCollider.Top, stageCollider.Width, 12);
 				Rectangle colliderBottom = new Rectangle(stageCollider.Left + 12, stageCollider.Top + stageCollider.Height - 12, stageCollider.Width - 24, 12);
 				Rectangle colliderLeft = new Rectangle(stageCollider.Left, stageCollider.Top, 12, stageCollider.Height);
-				//Rectangle colliderRight = new Rectangle(stageCollider.Left + stageCollider.Width - 4, stageCollider.Top, 4, stageCollider.Height);
-				if (position.Y + Dimensions.Y < stageCollider.Top + 24) //Hitbox().Intersects(colliderTop))
+				if (position.Y + Dimensions.Y < stageCollider.Top + 24)
 				{
 					grounded = true;
 					coyote = 7;
@@ -157,6 +155,7 @@ namespace HololiveFightingGame
 				}
 			}
 
+			// Pushes fighters apart to prevent overlapping
 			for (int i = 0; i < Game1.gameState.fighters.Length; i++)
 			{
 				Fighter fighter = Game1.gameState.fighters[i];
