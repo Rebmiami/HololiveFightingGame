@@ -23,7 +23,7 @@ namespace HololiveFightingGame.Combat
 		{
 			get
 			{
-				return MathTools.RotateVector(new Vector2(launch, 0), MathHelper.ToRadians(angle));
+				return MathTools.RotateVector(new Vector2(launch, 0), MathHelper.ToRadians(-angle));
 			}
 			set
 			{

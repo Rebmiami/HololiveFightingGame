@@ -134,8 +134,7 @@ namespace HololiveFightingGame
 
 			if (moveTimer == 10)
 			{
-				// Rectangle hitbox = new Rectangle(Center.ToPoint(), new Point(20, 10));
-				AttackHitbox attackHitbox = MoveLoader.TestMove().hitboxes[0];
+				AttackHitbox attackHitbox = MoveLoader.moves[ID][0].hitboxes[0];
 				Collider collider = attackHitbox.collider;
 				Capsule capsule = collider.Capsule;
 				if (direction == -1)
@@ -156,6 +155,7 @@ namespace HololiveFightingGame
 						Game1.gameState.fighters[i].attacks.Add(attack);
 					}
 				}
+				;
 			}
 
 			if (moveTimer > 0)

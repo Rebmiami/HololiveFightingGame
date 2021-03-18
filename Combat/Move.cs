@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using HololiveFightingGame.Collision;
 
 namespace HololiveFightingGame.Combat
 {
@@ -16,7 +17,13 @@ namespace HololiveFightingGame.Combat
 		public void SetupMove()
 		{
 			hitboxes = new AttackHitbox[1];
-			
+			AttackHitbox hitbox = new AttackHitbox();
+			moveData.CreateHitboxData();
+			hitbox.damage = moveData.hitboxData.damage;
+			hitbox.angle = moveData.hitboxData.angle;
+			hitbox.launch = moveData.hitboxData.launch;
+			hitbox.collider = new Collider(new Capsule(moveData.hitboxData.origin, moveData.hitboxData.length, moveData.hitboxData.radius));
+			hitboxes[0] = hitbox;
 		}
 
 		public Move()

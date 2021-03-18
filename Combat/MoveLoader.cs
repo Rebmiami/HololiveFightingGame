@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using HololiveFightingGame.Collision;
 using Microsoft.Xna.Framework;
+using HololiveFightingGame.Combat.Moves;
 
 namespace HololiveFightingGame.Combat
 {
@@ -23,7 +24,20 @@ namespace HololiveFightingGame.Combat
 		public static void LoadMoves(FighterCharacter[] fighters)
 		{
 			moves = new List<Move>[fighters.Length];
-			// TODO: Load a list of moves from JSON and add it to this list
+            for (int i = 0; i < moves.Length; i++)
+            {
+				moves[i] = new List<Move>();
+            }
+			moves[0].Add(new Move(new PekoraMoves()));
+			moves[1].Add(new Move(new PekoraMoves()));
+
+			foreach (List<Move> movelist in moves)
+            {
+				foreach (Move move in movelist)
+                {
+					move.SetupMove();
+                }
+            }
 		}
 
 		public static Move TestMove()

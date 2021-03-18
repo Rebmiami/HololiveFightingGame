@@ -7,6 +7,8 @@ using System.Text.Json.Serialization;
 
 namespace HololiveFightingGame.Combat
 {
+	// TODO: Merge this and MoveLoadTemplate into one class - this is unnecessary overhead
+
 	public class MoveData
 	{
 		// This is some stupid fake JSON that I'm going to use until I figure out how to use real JSON
