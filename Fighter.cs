@@ -151,7 +151,7 @@ namespace HololiveFightingGame
 					{
 						Attack attack = new Attack();
 						attack.damage = attackHitbox.damage;
-						attack.knockback = attackHitbox.launchAngle;
+						attack.knockback = attackHitbox.LaunchAngle;
 						attack.knockback.X *= direction;
 						Game1.gameState.fighters[i].attacks.Add(attack);
 					}

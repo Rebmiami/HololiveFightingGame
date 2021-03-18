@@ -35,7 +35,8 @@ namespace HololiveFightingGame.Combat
 				damage = 103,
 				type = AttackHitboxType.Attack,
 				collider = new Collider(new Capsule(Vector2.Zero, new Vector2(25, 0), 5)),
-				launchAngle = new Vector2(10, -10)
+				angle = 45,
+				launch = 14,
 			};
 			return move;
 		}
