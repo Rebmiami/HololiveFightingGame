@@ -28,8 +28,8 @@ namespace HololiveFightingGame.Combat
             {
 				moves[i] = new List<Move>();
             }
-			moves[0].Add(new Move(new PekoraMoves()));
-			moves[1].Add(new Move(new PekoraMoves()));
+			moves[0].Add(new Move());
+			moves[1].Add(new Move());
 
 			foreach (List<Move> movelist in moves)
             {

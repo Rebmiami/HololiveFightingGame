@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.Xna.Framework;
 using HololiveFightingGame.Collision;
+using System.Text.Json;
+using HololiveFightingGame.Combat.Moves;
 
 namespace HololiveFightingGame.Combat
 {
@@ -18,22 +21,21 @@ namespace HololiveFightingGame.Combat
 		{
 			hitboxes = new AttackHitbox[1];
 			AttackHitbox hitbox = new AttackHitbox();
-			moveData.CreateHitboxData();
-			hitbox.damage = moveData.hitboxData.damage;
-			hitbox.angle = moveData.hitboxData.angle;
-			hitbox.launch = moveData.hitboxData.launch;
-			hitbox.collider = new Collider(new Capsule(moveData.hitboxData.origin, moveData.hitboxData.length, moveData.hitboxData.radius));
+			string json = PekoraMoves.JSON();
+			moveData = (MoveData)JsonSerializer.Deserialize(json, typeof(MoveData));
+			hitbox.damage = moveData.Damage;
+			hitbox.angle = moveData.Angle;
+			hitbox.launch = moveData.Launch;
+			hitbox.collider = new Collider(new Capsule(
+				new Vector2(moveData.Dims[0], moveData.Dims[1]),
+				new Vector2(moveData.Dims[2], moveData.Dims[3]),
+				moveData.Dims[4]));
 			hitboxes[0] = hitbox;
 		}
 
 		public Move()
 		{
-
-		}
-
-		public Move(MoveData data)
-		{
-			moveData = data;
+			
 		}
 
 		// TODO: Add an array containing a series of attack hitboxes

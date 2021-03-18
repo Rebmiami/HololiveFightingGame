@@ -4,10 +4,10 @@ using System.Text;
 
 namespace HololiveFightingGame.Combat.Moves
 {
-	public class PekoraMoves : MoveData
+	public class PekoraMoves
 	{
 		// TODO: LOAD THIS FROM FILE!!!
-		public override string JSON()
+		public static string JSON()
 		{
 			return 
 				"{ \"Damage\": 103," +
