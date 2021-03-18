@@ -14,13 +14,13 @@ namespace HololiveFightingGame.Combat
 		public int damage;
 		public Vector2 launchAngle;
 		public AttackHitboxType type;
-    }
+	}
 
 	public enum AttackHitboxType
-    {
+	{
 		Attack,
 		Shield,
 		Counter,
 		Grab,
-    }
+	}
 }

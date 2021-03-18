@@ -13,6 +13,21 @@ namespace HololiveFightingGame.Combat
 		/// </summary>
 		public MoveData moveData;
 
+		public void SetupMove()
+        {
+
+        }
+
+		public Move()
+        {
+
+        }
+
+		public Move(MoveData data)
+        {
+			moveData = data;
+        }
+
 		// TODO: Add an array containing a series of attack hitboxes
 		// Add a timeline that changes the position and properties of hitboxes over time
 	}

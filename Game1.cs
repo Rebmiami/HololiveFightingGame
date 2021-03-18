@@ -10,6 +10,7 @@ using HololiveFightingGame.Graphics;
 using HololiveFightingGame.Graphics.Presets;
 using HololiveFightingGame.Input;
 using HololiveFightingGame.Combat;
+using HololiveFightingGame.Combat.Moves;
 
 namespace HololiveFightingGame
 {
