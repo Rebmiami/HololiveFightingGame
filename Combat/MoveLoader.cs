@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Text;
 using HololiveFightingGame.Collision;
 using Microsoft.Xna.Framework;
-using HololiveFightingGame.Combat;
 
 namespace HololiveFightingGame.Combat
 {
@@ -39,21 +38,5 @@ namespace HololiveFightingGame.Combat
                 }
             }
 		}
-
-		public static Move TestMove()
-		{
-			Move move = new Move();
-			move.hitboxes = new AttackHitbox[1];
-			move.hitboxes[0] = new AttackHitbox()
-			{
-				damage = 103,
-				type = AttackHitboxType.Attack,
-				collider = new Collider(new Capsule(Vector2.Zero, new Vector2(25, 0), 5)),
-				angle = 45,
-				launch = 14,
-			};
-			return move;
-		}
-		// Temporary - will be removed soon
 	}
 }

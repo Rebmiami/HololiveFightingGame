@@ -148,10 +148,12 @@ namespace HololiveFightingGame
 				{
 					if (ID != i && Game1.gameState.fighters[i].collider.Capsule.Intersects(capsule))
 					{
-						Attack attack = new Attack();
-						attack.damage = attackHitbox.damage;
-						attack.knockback = attackHitbox.LaunchAngle;
-						attack.knockback.X *= direction;
+                        Attack attack = new Attack
+                        {
+                            damage = attackHitbox.damage,
+                            knockback = attackHitbox.LaunchAngle
+                        };
+                        attack.knockback.X *= direction;
 						Game1.gameState.fighters[i].attacks.Add(attack);
 					}
 				}
