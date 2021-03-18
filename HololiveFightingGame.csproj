@@ -28,6 +28,9 @@
     <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.0.1641" />
   </ItemGroup>
   <ItemGroup>
+    <None Update="Data\Language.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Data\Moves\PekoraMoves.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

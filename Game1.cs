@@ -48,18 +48,18 @@ namespace HololiveFightingGame
 
 		protected override void LoadContent()
 		{
+			gamePath = new Regex(@"HololiveFightingGame\.exe$").Replace(Process.GetCurrentProcess().MainModule.FileName, "");
 			spriteBatch = new SpriteBatch(GraphicsDevice);
 
 			testFighter = Content.Load<Texture2D>("TestFighter");
 			testStage = Content.Load<Texture2D>("TestStage");
 			font = Content.Load<SpriteFont>("File");
 			//language = Content.Load<Language>("language");
-			language = new Language(new Dictionary<string, string>());
+			language = new Language();
 			GraphicsHandler.main = new InGamePreset();
 			gameState = new GameState();
 			inGameUI = Content.Load<Texture2D>("GameUI");
 			uiHandler = new UIHandler();
-			gamePath = new Regex(@"HololiveFightingGame\.exe$").Replace(Process.GetCurrentProcess().MainModule.FileName, "");
 			MoveLoader.LoadMoves(gameState.fighters);
 		}
 
