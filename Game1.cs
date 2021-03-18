@@ -10,7 +10,8 @@ using HololiveFightingGame.Graphics;
 using HololiveFightingGame.Graphics.Presets;
 using HololiveFightingGame.Input;
 using HololiveFightingGame.Combat;
-using HololiveFightingGame.Combat.Moves;
+using System.Diagnostics;
+using System.Text.RegularExpressions;
 
 namespace HololiveFightingGame
 {
@@ -28,6 +29,7 @@ namespace HololiveFightingGame
 
 		public static GameState gameState;
 		public static UIHandler uiHandler;
+		public static string gamePath;
 
 		protected override void Initialize()
 		{
@@ -57,6 +59,7 @@ namespace HololiveFightingGame
 			gameState = new GameState();
 			inGameUI = Content.Load<Texture2D>("GameUI");
 			uiHandler = new UIHandler();
+			gamePath = new Regex(@"HololiveFightingGame\.exe$").Replace(Process.GetCurrentProcess().MainModule.FileName, "");
 			MoveLoader.LoadMoves(gameState.fighters);
 		}
 

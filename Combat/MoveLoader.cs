@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using HololiveFightingGame.Collision;
 using Microsoft.Xna.Framework;
-using HololiveFightingGame.Combat.Moves;
+using HololiveFightingGame.Combat;
 
 namespace HololiveFightingGame.Combat
 {

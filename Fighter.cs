@@ -155,7 +155,6 @@ namespace HololiveFightingGame
 						Game1.gameState.fighters[i].attacks.Add(attack);
 					}
 				}
-				;
 			}
 
 			if (moveTimer > 0)

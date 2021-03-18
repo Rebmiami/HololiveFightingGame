@@ -4,7 +4,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using HololiveFightingGame.Collision;
 using System.Text.Json;
-using HololiveFightingGame.Combat.Moves;
+using HololiveFightingGame.Combat;
 
 namespace HololiveFightingGame.Combat
 {
@@ -21,7 +21,7 @@ namespace HololiveFightingGame.Combat
 		{
 			hitboxes = new AttackHitbox[1];
 			AttackHitbox hitbox = new AttackHitbox();
-			string json = PekoraMoves.JSON();
+			string json = System.IO.File.ReadAllText(Game1.gamePath + @"\Data\Moves\PekoraMoves.json");
 			moveData = (MoveData)JsonSerializer.Deserialize(json, typeof(MoveData));
 			hitbox.damage = moveData.Damage;
 			hitbox.angle = moveData.Angle;
