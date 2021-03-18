@@ -132,29 +132,37 @@ namespace HololiveFightingGame
 				launchTimer--;
 			}
 
-			if (moveTimer == 10)
+			// TODO: Make everything more dependent on JSON (timing, specifically)
+			if (moveTimer > 0)
 			{
-				AttackHitbox attackHitbox = MoveLoader.moves[ID][0].hitboxes[0];
-				Collider collider = attackHitbox.collider;
-				Capsule capsule = collider.Capsule;
-				if (direction == -1)
+				foreach (AttackHitbox attackHitbox in MoveLoader.moves[ID][0].hitboxes)
 				{
-					capsule.origin.X *= -1;
-					capsule.length.X *= -1;
-				}
-				capsule.origin = Center + capsule.origin;
-
-				for (int i = 0; i < Game1.gameState.fighters.Length; i++)
-				{
-					if (ID != i && Game1.gameState.fighters[i].collider.Capsule.Intersects(capsule))
+					//if (!attackHitbox.enabled)
+					if (moveTimer != 10)
 					{
-                        Attack attack = new Attack
-                        {
-                            damage = attackHitbox.damage,
-                            knockback = attackHitbox.LaunchAngle
-                        };
-                        attack.knockback.X *= direction;
-						Game1.gameState.fighters[i].attacks.Add(attack);
+						continue;
+					}
+					Collider collider = attackHitbox.collider;
+					Capsule capsule = collider.Capsule;
+					if (direction == -1)
+					{
+						capsule.origin.X *= -1;
+						capsule.length.X *= -1;
+					}
+					capsule.origin = Center + capsule.origin;
+
+					for (int i = 0; i < Game1.gameState.fighters.Length; i++)
+					{
+						if (ID != i && Game1.gameState.fighters[i].collider.Capsule.Intersects(capsule))
+						{
+							Attack attack = new Attack
+							{
+								damage = attackHitbox.damage,
+								knockback = attackHitbox.LaunchAngle
+							};
+							attack.knockback.X *= direction;
+							Game1.gameState.fighters[i].attacks.Add(attack);
+						}
 					}
 				}
 			}

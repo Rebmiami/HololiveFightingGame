@@ -19,18 +19,19 @@ namespace HololiveFightingGame.Combat
 
 		public void SetupMove()
 		{
-			hitboxes = new AttackHitbox[1];
-			AttackHitbox hitbox = new AttackHitbox();
 			string json = System.IO.File.ReadAllText(Game1.gamePath + @"\Data\Moves\PekoraMoves.json");
 			moveData = (MoveData)JsonSerializer.Deserialize(json, typeof(MoveData));
-			hitbox.damage = moveData.Damage;
-			hitbox.angle = moveData.Angle;
-			hitbox.launch = moveData.Launch;
-			hitbox.collider = new Collider(new Capsule(
-				new Vector2(moveData.Dims[0], moveData.Dims[1]),
-				new Vector2(moveData.Dims[2], moveData.Dims[3]),
-				moveData.Dims[4]));
-			hitboxes[0] = hitbox;
+			hitboxes = new AttackHitbox[moveData.Hitboxes.Length];
+            for (int i = 0; i < moveData.Hitboxes.Length; i++)
+            {
+				MoveData.DataHitbox data = moveData.Hitboxes[i];
+				AttackHitbox hitbox = new AttackHitbox();
+				hitbox.damage = data.Damage;
+				hitbox.angle = data.Angle;
+				hitbox.launch = data.Launch;
+				hitbox.collider = new Collider(new Capsule(data.Origin, data.Length, data.Radius));
+				hitboxes[i] = hitbox;
+			}
 		}
 
 		public Move()
