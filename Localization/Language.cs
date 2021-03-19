@@ -14,7 +14,8 @@ namespace HololiveFightingGame.Localization
 
 		public Language()
 		{
-			string json = File.ReadAllText(Game1.gamePath + @"\Data\Language.json");
+			Game1.jsonLoaderFilePath = @"\Data\Language.json";
+			string json = File.ReadAllText(Game1.gamePath + Game1.jsonLoaderFilePath);
 			Lang = (Dictionary<string, string>)JsonSerializer.Deserialize(json, typeof(Dictionary<string, string>));
 
 			// I don't know how to speak Japanese and this text is from Google Translate
