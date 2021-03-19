@@ -10,14 +10,11 @@ namespace HololiveFightingGame.Combat
 	public class AttackHitbox
 	{
 		public Collider collider;
-		public bool enabled;
-
 		public int damage;
 		public float angle;
 		public float launch;
 
 		public AttackHitboxType type;
-
 
 		public Vector2 LaunchAngle
 		{

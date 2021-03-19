@@ -4,6 +4,7 @@ using System.Text;
 
 namespace HololiveFightingGame
 {
+	// TODO: json
 	public enum FighterCharacter
 	{
 		UsadaPekora,

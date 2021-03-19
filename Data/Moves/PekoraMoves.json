@@ -1,5 +1,5 @@
 {
-	"MoveDuration": 20,
+	"MoveDuration": 16,
 	"Name": "Pekora_NeutralA_0",
 	"Hitboxes": [
 		{
@@ -18,19 +18,15 @@
 			"Enabled": false,
 			"Priority": 5,
 			"Motion": {
-				"0": {
-					"X": 0,
-					"Y": 0
-				}
 			},
 			"Activation": {
-				"10": true,
-				"11": false
+				"6": true,
+				"9": false
 			}
 		}
 	],
 	"AnimationFrames": {
 		"0": 0,
-		"10": 1
+		"6": 1
 	}
 }

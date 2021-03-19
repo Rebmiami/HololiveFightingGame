@@ -25,12 +25,14 @@ namespace HololiveFightingGame.Combat
             for (int i = 0; i < moveData.Hitboxes.Length; i++)
             {
 				MoveData.DataHitbox data = moveData.Hitboxes[i];
-				AttackHitbox hitbox = new AttackHitbox();
-				hitbox.damage = data.Damage;
-				hitbox.angle = data.Angle;
-				hitbox.launch = data.Launch;
-				hitbox.collider = new Collider(new Capsule(data.Origin, data.Length, data.Radius));
-				hitboxes[i] = hitbox;
+                AttackHitbox hitbox = new AttackHitbox
+                {
+                    damage = data.Damage,
+                    angle = data.Angle,
+                    launch = data.Launch,
+                    collider = new Collider(new Capsule(data.Origin, data.Length, data.Radius))
+                };
+                hitboxes[i] = hitbox;
 			}
 		}
 

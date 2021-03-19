@@ -21,12 +21,14 @@ namespace HololiveFightingGame
 
 		public int moveTimer;
 
-		public MoveRunner currentMove;
+		public MoveRunner moveRunner;
 
 		public int ID;
 		public bool keyboard = false;
 
 		public int launchTimer; // Launch frames where player has no control
+		public int invFrames; // The player is given some frames of invulnerability after getting hit to prevent the same attack from hitting multiple times when it shouldn't
+		// TODO: Prevent the player from being hit by the same hitbox repeatedly somehow
 
 		public int direction = 1;
 
@@ -104,6 +106,7 @@ namespace HololiveFightingGame
 				}
 			}
 
+			moveRunner?.Update(moveTimer);
 			if (launchTimer == 0)
 			{
 				if (Keybinds.TapJump(keyboard, ID) && jumps < 2)
@@ -123,8 +126,8 @@ namespace HololiveFightingGame
 
 				if (Keybinds.TapAtkNormal(keyboard, ID) && moveTimer == 0)
 				{
+					moveRunner = new MoveRunner(MoveLoader.moves[ID][0]);
 					moveTimer = 16;
-					currentMove = new MoveRunner(MoveLoader.moves[ID][0]);
 				}
 			}
 			else
@@ -132,18 +135,18 @@ namespace HololiveFightingGame
 				launchTimer--;
 			}
 
-			// TODO: Make everything more dependent on JSON (timing, specifically)
 			if (moveTimer > 0)
 			{
-				foreach (AttackHitbox attackHitbox in MoveLoader.moves[ID][0].hitboxes)
+				for (int i = 0; i < MoveLoader.moves[ID][0].hitboxes.Length; i++)
 				{
-					//if (!attackHitbox.enabled)
-					if (moveTimer != 10)
+					AttackHitbox attackHitbox = MoveLoader.moves[ID][0].hitboxes[i];
+					if (!moveRunner.enabled[i])
 					{
 						continue;
 					}
 					Collider collider = attackHitbox.collider;
 					Capsule capsule = collider.Capsule;
+					capsule.origin += moveRunner.pos[i];
 					if (direction == -1)
 					{
 						capsule.origin.X *= -1;
@@ -151,9 +154,9 @@ namespace HololiveFightingGame
 					}
 					capsule.origin = Center + capsule.origin;
 
-					for (int i = 0; i < Game1.gameState.fighters.Length; i++)
+					for (int j = 0; j < Game1.gameState.fighters.Length; j++)
 					{
-						if (ID != i && Game1.gameState.fighters[i].collider.Capsule.Intersects(capsule))
+						if (ID != j && Game1.gameState.fighters[j].collider.Capsule.Intersects(capsule) && Game1.gameState.fighters[j].invFrames == 0)
 						{
 							Attack attack = new Attack
 							{
@@ -161,7 +164,7 @@ namespace HololiveFightingGame
 								knockback = attackHitbox.LaunchAngle
 							};
 							attack.knockback.X *= direction;
-							Game1.gameState.fighters[i].attacks.Add(attack);
+							Game1.gameState.fighters[j].attacks.Add(attack);
 						}
 					}
 				}
@@ -172,7 +175,7 @@ namespace HololiveFightingGame
 				moveTimer--;
 				if (moveTimer == 0)
 				{
-					currentMove = null;
+					moveRunner = null;
 				}
 			}
 
@@ -191,6 +194,13 @@ namespace HololiveFightingGame
 
 		public Attack? Update_Hits() // Process damage dealt to the player and resolve conflicts.
 		{
+			if (invFrames > 0)
+			{
+				invFrames--;
+				attacks.Clear();
+				return null;
+			}
+
 			if (attacks.Count == 0)
 			{
 				return null;
@@ -232,10 +242,10 @@ namespace HololiveFightingGame
 				((AnimatedSprite)drawObject.texture).SwitchAnimation("jump", 0);
 			}
 
-			if (currentMove != null && currentMove.name == "Pekora_NeutralA_0")
+			if (moveRunner != null && moveRunner.name == "Pekora_NeutralA_0")
 			{
-				((AnimatedSprite)drawObject.texture).SwitchAnimation("punch", 0);
-				((AnimatedSprite)drawObject.texture).Playing.Frame = (20 - moveTimer) / 10;
+				((AnimatedSprite)drawObject.texture).SwitchAnimation("Pekora_NeutralA_0", 0);
+				((AnimatedSprite)drawObject.texture).Playing.Frame = moveRunner.frame;
 			}
 
 			if (launchTimer > 0)
@@ -268,12 +278,13 @@ namespace HololiveFightingGame
 			//GraphicsHandler.main.children["game"].children.Add("indicator_" + ID, new DrawObject(DrawObjectType.Text) { data = new TextData("P" + (ID + 1)) });
 			drawObject = GraphicsHandler.main.children["game"].children["fighter_" + ID];
 			drawObject.texture = new AnimatedSprite(Game1.testFighter, new Point(50, 80));
+			// TODO: JSONnify this
 			((AnimatedSprite)drawObject.texture).animations = new Dictionary<string, AnimatedSprite.Animation>()
 			{
 				{ "neutral",	new AnimatedSprite.Animation(0, 1, false) },
 				{ "walk",		new AnimatedSprite.Animation(1, 2, true, "walk") },
 				{ "jump",		new AnimatedSprite.Animation(2, 1, false) },
-				{ "punch",		new AnimatedSprite.Animation(3, 2, false, "neutral") },
+				{ "Pekora_NeutralA_0",		new AnimatedSprite.Animation(3, 2, false, "neutral") },
 				{ "launch",		new AnimatedSprite.Animation(4, 1, false) },
 			};
 			((AnimatedSprite)drawObject.texture).SetAnimFrames();
@@ -313,6 +324,7 @@ namespace HololiveFightingGame
 				grounded = false;
 				coyote = 0;
 			}
+			invFrames = 6;
 		}
 
 		public struct Attack : IComparable
