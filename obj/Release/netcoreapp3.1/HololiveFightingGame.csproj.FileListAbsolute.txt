@@ -25,3 +25,6 @@ C:\Users\rebmi\source\repos\HololiveFightingGame\obj\Release\netcoreapp3.1\Holol
 C:\Users\rebmi\source\repos\HololiveFightingGame\obj\Release\netcoreapp3.1\HololiveFightingGame.csprojAssemblyReference.cache
 C:\Users\rebmi\source\repos\HololiveFightingGame\bin\Release\netcoreapp3.1\Content\File.xnb
 C:\Users\rebmi\source\repos\HololiveFightingGame\bin\Release\netcoreapp3.1\Content\GameUI.xnb
+C:\Users\rebmi\source\repos\HololiveFightingGame\bin\Release\netcoreapp3.1\Data\Animations\PekoraAnims.json
+C:\Users\rebmi\source\repos\HololiveFightingGame\bin\Release\netcoreapp3.1\Data\Language.json
+C:\Users\rebmi\source\repos\HololiveFightingGame\bin\Release\netcoreapp3.1\Data\Moves\PekoraMoves.json

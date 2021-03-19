@@ -78,16 +78,22 @@ namespace HololiveFightingGame
 
 		protected override void Update(GameTime gameTime)
 		{
-			if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-				Exit();
+			
 			if (KeyHelper.Released(Keys.LeftControl))
 			{
 				displayLanguage = (DisplayLanguage)(((int)displayLanguage + 1) % 2);
 			}
 			if (jsonFailsafe)
-            {
+			{
 				if (KeyHelper.Pressed(Keys.Enter))
 					Process.Start("explorer.exe", gamePath);
+
+				if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+				{
+					Exit();
+					if (KeyHelper.Down(Keys.LeftShift) || KeyHelper.Down(Keys.RightShift))
+						Process.Start(Process.GetCurrentProcess().MainModule.FileName);
+				}
 			}
 			else
 			{
@@ -112,7 +118,7 @@ namespace HololiveFightingGame
 					"If possible, try to revert any changes you have made. If you cannot, visit https://github.com/Rebmiami/HololiveFightingGame, find the correct version of the offending file, and replace the offending file with it.\n " +
 					"The exact error message is as follows. This may help you diagnose and solve the issue:\n " +
 					jsonErrorMessage + "\n " +
-					"Press ESC to exit the program. Press ENTER to open File Explorer to the game directory." :
+					"Press ESC to exit the program. Press ENTER to open File Explorer to the game directory. Press SHIFT+ESC to close and re-launch the game if you have fixed the issue." :
 
 					"Japanese error text has not been added yet";
 
