@@ -21,7 +21,7 @@ namespace HololiveFightingGame
 
 		public int moveTimer;
 
-		public MoveType currentMove;
+		public MoveRunner currentMove;
 
 		public int ID;
 		public bool keyboard = false;
@@ -124,7 +124,7 @@ namespace HololiveFightingGame
 				if (Keybinds.TapAtkNormal(keyboard, ID) && moveTimer == 0)
 				{
 					moveTimer = 16;
-					currentMove = MoveType.NeutralA;
+					currentMove = new MoveRunner(MoveLoader.moves[ID][0]);
 				}
 			}
 			else
@@ -172,7 +172,7 @@ namespace HololiveFightingGame
 				moveTimer--;
 				if (moveTimer == 0)
 				{
-					currentMove = MoveType.None;
+					currentMove = null;
 				}
 			}
 
@@ -232,7 +232,7 @@ namespace HololiveFightingGame
 				((AnimatedSprite)drawObject.texture).SwitchAnimation("jump", 0);
 			}
 
-			if (currentMove != MoveType.None)
+			if (currentMove != null && currentMove.name == "Pekora_NeutralA_0")
 			{
 				((AnimatedSprite)drawObject.texture).SwitchAnimation("punch", 0);
 				((AnimatedSprite)drawObject.texture).Playing.Frame = (20 - moveTimer) / 10;
