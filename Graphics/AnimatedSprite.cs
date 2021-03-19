@@ -32,56 +32,19 @@ namespace HololiveFightingGame.Graphics
 			this.dimensions = dimensions;
 		}
 
-		/// <summary>
-		///		Specifies animations to be played by the <see cref="AnimatedSprite"/>.
-		/// </summary>
-		public class Animation
-		{
-			public string nextAnim; // If null, will halt on the last frame of the animation until a new animation is started.
-
-			public int animID;
-			public int frames; // Length of animation in frames.
-
-			public bool autoAnimate;
-			// If true, the animation will automatically progress through frames at a set framerate.
-			// If false, the frame must be set by any other arbitrary class.
-
-			public int progress;
-
-			public int Frame
-			{
-				get
-				{
-					return progress / (autoAnimate ? animFrameLength : 1);
-				}
-				set
-				{
-					progress = value * (autoAnimate ? animFrameLength : 1);
-				}
-			}
-
-			public Animation(int id, int length, bool auto, string next = null)
-			{
-				animID = id;
-				frames = length;
-				autoAnimate = auto;
-				nextAnim = next;
-			}
-		}
-
 		public void Update()
 		{
 			Animation animation = Playing;
-			if (animation.autoAnimate)
+			if (animation.AutoAnimate)
 			{
 				animation.progress++;
 
-				if (animation.Frame >= animation.frames)
+				if (animation.Frame >= animation.Frames)
 				{
-					if (animation.nextAnim == null)
+					if (animation.NextAnim == null)
 						animation.progress--;
 					else
-						SetAnimation(animation.nextAnim, 0);
+						SetAnimation(animation.NextAnim, 0);
 				}
 			}
 		}
@@ -92,9 +55,9 @@ namespace HololiveFightingGame.Graphics
 			foreach (string key in animations.Keys)
 			{
 				Animation animation = animations[key];
-				for (int i = 0; i < animation.frames; i++)
+				for (int i = 0; i < animation.Frames; i++)
 				{
-					slices.Add(key + i, new Rectangle(dimensions.X * animation.animID, dimensions.Y * i, dimensions.X, dimensions.Y));
+					slices.Add(key + i, new Rectangle(dimensions.X * animation.AnimID, dimensions.Y * i, dimensions.X, dimensions.Y));
 				}
 			}
 		}
@@ -112,7 +75,7 @@ namespace HololiveFightingGame.Graphics
 		public void SetAnimation(string animation, int startFrame)
 		{
 			currentAnim = animation;
-			Playing.progress = startFrame * (Playing.autoAnimate ? animFrameLength : 1);
+			Playing.progress = startFrame * (Playing.AutoAnimate ? animFrameLength : 1);
 		}
 
 		/// <summary>
@@ -125,7 +88,7 @@ namespace HololiveFightingGame.Graphics
 			if (currentAnim != animation)
 			{
 				currentAnim = animation;
-				Playing.progress = startFrame * (Playing.autoAnimate ? animFrameLength : 1);
+				Playing.progress = startFrame * (Playing.AutoAnimate ? animFrameLength : 1);
 			}
 		}
 

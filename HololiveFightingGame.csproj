@@ -28,6 +28,9 @@
     <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.0.1641" />
   </ItemGroup>
   <ItemGroup>
+    <None Update="Data\Animations\PekoraAnims.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Data\Language.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -36,7 +39,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Data\Animations\" />
     <Folder Include="Data\Fighters\" />
   </ItemGroup>
 </Project>

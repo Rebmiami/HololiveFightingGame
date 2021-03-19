@@ -1,0 +1,32 @@
+{
+	"neutral": {
+		"AnimID": 0,
+		"Frames": 1,
+		"AutoAnimate": false,
+		"NextAnim": null
+	},
+	"walk": {
+		"AnimID": 1,
+		"Frames": 2,
+		"AutoAnimate": true,
+		"NextAnim": "walk"
+	},
+	"jump": {
+		"AnimID": 2,
+		"Frames": 1,
+		"AutoAnimate": false,
+		"NextAnim": null
+	},
+	"Pekora_NeutralA_0": {
+		"AnimID": 3,
+		"Frames": 2,
+		"AutoAnimate": false,
+		"NextAnim": "neutral"
+	},
+	"launch": {
+		"AnimID": 4,
+		"Frames": 1,
+		"AutoAnimate": false,
+		"NextAnim": null
+	}
+}

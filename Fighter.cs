@@ -8,6 +8,7 @@ using HololiveFightingGame.Input;
 using HololiveFightingGame.Collision;
 using HololiveFightingGame.Graphics;
 using HololiveFightingGame.Combat;
+using System.Text.Json;
 
 namespace HololiveFightingGame
 {
@@ -278,15 +279,8 @@ namespace HololiveFightingGame
 			//GraphicsHandler.main.children["game"].children.Add("indicator_" + ID, new DrawObject(DrawObjectType.Text) { data = new TextData("P" + (ID + 1)) });
 			drawObject = GraphicsHandler.main.children["game"].children["fighter_" + ID];
 			drawObject.texture = new AnimatedSprite(Game1.testFighter, new Point(50, 80));
-			// TODO: JSONnify this
-			((AnimatedSprite)drawObject.texture).animations = new Dictionary<string, AnimatedSprite.Animation>()
-			{
-				{ "neutral",	new AnimatedSprite.Animation(0, 1, false) },
-				{ "walk",		new AnimatedSprite.Animation(1, 2, true, "walk") },
-				{ "jump",		new AnimatedSprite.Animation(2, 1, false) },
-				{ "Pekora_NeutralA_0",		new AnimatedSprite.Animation(3, 2, false, "neutral") },
-				{ "launch",		new AnimatedSprite.Animation(4, 1, false) },
-			};
+			string json = System.IO.File.ReadAllText(Game1.gamePath + @"\Data\Animations\PekoraAnims.json");
+			((AnimatedSprite)drawObject.texture).animations = (Dictionary<string, Animation>)JsonSerializer.Deserialize(json, typeof(Dictionary<string, Animation>));
 			((AnimatedSprite)drawObject.texture).SetAnimFrames();
 			drawObject.frame = "neutral";
 			attacks = new List<Attack>();
