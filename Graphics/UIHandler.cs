@@ -64,7 +64,7 @@ namespace HololiveFightingGame.Graphics
                 }
 				for (int j = 0; j < damage.Length; j++)
                 {
-					if (damage[j] == '.')
+					if (!char.IsNumber(damage[j]))
 						continue;
 					float offset = origin.X - damage.Length * 16 + j * 16;
 					if (j == damage.Length - 1)

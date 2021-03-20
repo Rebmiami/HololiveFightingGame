@@ -279,7 +279,7 @@ namespace HololiveFightingGame
 			//GraphicsHandler.main.children["game"].children.Add("indicator_" + ID, new DrawObject(DrawObjectType.Text) { data = new TextData("P" + (ID + 1)) });
 			drawObject = GraphicsHandler.main.children["game"].children["fighter_" + ID];
 			drawObject.texture = new AnimatedSprite(Game1.testFighter, new Point(50, 80));
-			Game1.jsonLoaderFilePath = @"Data\Animations\PekoraAnims.json";
+			Game1.jsonLoaderFilePath = @"\Data\Animations\PekoraAnims.json";
 			string json = System.IO.File.ReadAllText(Game1.gamePath + Game1.jsonLoaderFilePath);
 			((AnimatedSprite)drawObject.texture).animations = (Dictionary<string, Animation>)JsonSerializer.Deserialize(json, typeof(Dictionary<string, Animation>));
 			((AnimatedSprite)drawObject.texture).SetAnimFrames();
