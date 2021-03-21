@@ -10,9 +10,11 @@ using HololiveFightingGame.Graphics;
 using HololiveFightingGame.Graphics.Presets;
 using HololiveFightingGame.Input;
 using HololiveFightingGame.Combat;
+using HololiveFightingGame.Loading;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.Text;
+using System.Threading;
 
 namespace HololiveFightingGame
 {
@@ -58,43 +60,39 @@ namespace HololiveFightingGame
 		public static bool gameplayDeathScreen = false;
 		public static bool drawingDeathScreen = false;
 
+		public static GameLoader setup;
+
 		protected override void LoadContent()
 		{
 			font = Content.Load<SpriteFont>("File");
-			try
-			{
-				try
-				{
-					gamePath = new Regex(@"\\HololiveFightingGame\.exe$").Replace(Process.GetCurrentProcess().MainModule.FileName, "");
-					spriteBatch = new SpriteBatch(GraphicsDevice);
+			spriteBatch = new SpriteBatch(GraphicsDevice);
+			gamePath = new Regex(@"\\HololiveFightingGame\.exe$").Replace(Process.GetCurrentProcess().MainModule.FileName, "");
+			// These must be loaded first
 
-					testFighter = Content.Load<Texture2D>("TestFighter");
-					testStage = Content.Load<Texture2D>("TestStage");
-					language = new Language();
-					GraphicsHandler.main = new InGamePreset();
-					gameState = new GameState();
-					inGameUI = Content.Load<Texture2D>("GameUI");
-					uiHandler = new UIHandler();
-					MoveLoader.LoadMoves(gameState.fighters);
-				}
-				catch (JsonException exception)
-				{
-					jsonErrorMessage = exception.Message;
-					jsonDeathScreen = true;
-					isDeathScreen = true;
-				}
-			}
-			catch
-			{
-				loadingDeathScreen = true;
-				isDeathScreen = true;
-			}
+			setup = new GameLoader();
+
+			Thread thread = new Thread(new ThreadStart(setup.Load));
+			thread.Start();
+
+			testFighter = Content.Load<Texture2D>("TestFighter");
+			testStage = Content.Load<Texture2D>("TestStage");
+			language = new Language();
+			GraphicsHandler.main = new InGamePreset();
+			gameState = new GameState();
+			inGameUI = Content.Load<Texture2D>("GameUI");
+			uiHandler = new UIHandler();
+			MoveLoader.LoadMoves(gameState.fighters);
 		}
 
 		protected override void Update(GameTime gameTime)
 		{
-			try
-			{
+			if (!setup.done)
+            {
+				return;
+            }
+
+			//try
+			//{
 				if (KeyHelper.Released(Keys.LeftControl))
 				{
 					displayLanguage = (DisplayLanguage)(((int)displayLanguage + 1) % 2);
@@ -114,128 +112,156 @@ namespace HololiveFightingGame
 				else
 				{
 					gameState.Update();
+					if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+					{
+						Exit();
+					}
 				}
 				GamePadHelper.Update();
 				MouseHelper.Update();
 				KeyHelper.Update();
 				base.Update(gameTime);
-			}
-			catch
-			{
-				gameplayDeathScreen = true;
-				isDeathScreen = true;
-			}
+			//}
+			//catch
+			//{
+			//	gameplayDeathScreen = true;
+			//	isDeathScreen = true;
+			//}
 		}
 
 		protected override void Draw(GameTime gameTime)
 		{
-			try
-			{
-				GraphicsDevice.Clear(Color.Gray * 0.5f);
-				spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, SamplerState.PointClamp);
+			GraphicsDevice.Clear(Color.Gray * 0.5f);
+			spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, SamplerState.PointClamp);
+			if (!setup.done)
+            {
+				spriteBatch.DrawString(font, "Loading...", new Vector2(10), Color.White);
+				if (setup.firstRun)
+				{
+					spriteBatch.DrawString(font, "It looks like this is your first time running this version of the game.", new Vector2(10, 30), Color.White);
+					spriteBatch.DrawString(font, "Give us a moment while we set things up.", new Vector2(10, 50), Color.White);
+				}
+				spriteBatch.DrawString(font, setup.Status, new Vector2(10, 70), Color.White);
+
+				spriteBatch.End();
+				return;
+            }
+
+			//try
+			//{
 				if (isDeathScreen)
 				{
-					string errorMessage = "The game threw an error that does not have a death screen. This should not happen. Contact the developer.";
-
-					if (jsonDeathScreen)
-					{
-						errorMessage = displayLanguage == 0 ?
-							"An error was encountered while loading data from JSON.\n " +
-							"The offending file is located at " + jsonLoaderFilePath.Replace("\\", "/") + " within the game directory.\n " +
-							"If you have installed a modification that changes JSON or tried modifying the JSON yourself, this may be the cause. If the case is the former, check for mod conflicts or contact the mod authors.\n " +
-							"If possible, try to revert any changes you have made. If you cannot, visit https://github.com/Rebmiami/HololiveFightingGame, find the correct version of the offending file, and replace the offending file with it.\n " +
-							"The exact error message is as follows. This may help you diagnose and solve the issue:\n " +
-							jsonErrorMessage :
-
-							"Japanese error text has not been added yet";
-					}
-					if (loadingDeathScreen)
-					{
-						errorMessage = displayLanguage == 0 ?
-							"The error occured while the game was loading various assets and components." :
-
-							"Japanese error text has not been added yet";
-					}
-					if (gameplayDeathScreen)
-					{
-						errorMessage = displayLanguage == 0 ?
-							"The error occured while the game was updating in-game elements." :
-
-							"Japanese error text has not been added yet";
-					}
-					if (drawingDeathScreen)
-					{
-						errorMessage = displayLanguage == 0 ?
-							"The error occured while the game was drawing sprites to the screen." :
-
-							"Japanese error text has not been added yet";
-					}
-
-					errorMessage += "\n Press ESC to exit the program. Press ENTER to open File Explorer to the game directory. Press SHIFT+ESC to close and re-launch the game if you have fixed the issue.";
-
-					string[] words = errorMessage.Split(' ');
-					StringBuilder sb = new StringBuilder();
-					float lineWidth = 0f;
-					float spaceWidth = font.MeasureString(" ").X;
-					int maxLineWidth = Program.WindowBounds().Width - 20;
-
-					foreach (string word in words)
-					{
-						Vector2 size = font.MeasureString(word);
-
-						if (word.Contains("\n"))
-						{
-							lineWidth = 0f;
-							sb.Append(word + "\n");
-							continue;
-						}
-
-						if (lineWidth + size.X < maxLineWidth)
-						{
-							sb.Append(word + " ");
-							lineWidth += size.X + spaceWidth;
-						}
-						else
-						{
-							sb.Append("\n" + word + " ");
-							lineWidth = size.X + spaceWidth;
-						}
-					}
-					errorMessage = sb.ToString();
-
-					spriteBatch.DrawString(font, errorMessage, new Vector2(10), Color.White);
+					DrawDeathScreen();
 				}
 				else
 				{
 					GraphicsHandler.main.Draw(spriteBatch, new Transformation(Vector2.Zero, 2));
 				}
-				spriteBatch.End();
 				base.Draw(gameTime);
-			}
-			catch (Exception exception)
-			{
-				drawingDeathScreen = true;
-				isDeathScreen = true;
-				if (!System.IO.File.Exists(gamePath + @"\logs.txt"))
-                {
-					System.IO.File.Create(gamePath + @"\logs.txt");
-				}
-				bool written = false;
-				while (!written)
-				{
-					try
-					{
-						System.IO.File.WriteAllText(gamePath + @"\logs.txt", exception.Message);
-						written = true;
-					}
-					catch
-					{
+			//}
+			//catch (Exception exception)
+			//{
+			//	drawingDeathScreen = true;
+			//	isDeathScreen = true;
+			//	if (!System.IO.File.Exists(gamePath + @"\logs.txt"))
+			//	{
+			//		System.IO.File.Create(gamePath + @"\logs.txt");
+			//	}
+			//	bool written = false;
+			//	while (!written)
+			//	{
+			//		try
+			//		{
+			//			System.IO.File.WriteAllText(gamePath + @"\logs.txt", exception.Message);
+			//			written = true;
+			//		}
+			//		catch
+			//		{
+			//
+			//		}
+			//	}
+			//	Process.Start("explorer.exe", gamePath);
+			//	Exit();
+			//}
+			spriteBatch.End();
+		}
 
-					}
-				}
-				Process.Start("explorer.exe", gamePath);
-				Exit();
+		public void DrawDeathScreen()
+		{
+			string errorMessage = "The game threw an error that does not have a death screen. This should not happen. Contact the developer.";
+
+			if (jsonDeathScreen)
+			{
+				errorMessage = displayLanguage == 0 ?
+					"An error was encountered while loading data from JSON.\n " +
+					"The offending file is located at " + jsonLoaderFilePath.Replace("\\", "/") + " within the game directory.\n " +
+					"If you have installed a modification that changes JSON or tried modifying the JSON yourself, this may be the cause. If the case is the former, check for mod conflicts or contact the mod authors.\n " +
+					"If possible, try to revert any changes you have made. If you cannot, visit https://github.com/Rebmiami/HololiveFightingGame, find the correct version of the offending file, and replace the offending file with it.\n " +
+					"The exact error message is as follows. This may help you diagnose and solve the issue:\n " +
+					jsonErrorMessage :
+
+					"JSON エラー\n " +
+					"エラーメッセージ：\n " +
+					jsonErrorMessage;
 			}
+			if (loadingDeathScreen)
+			{
+				errorMessage = displayLanguage == 0 ?
+					"The error occured while the game was loading various assets and components from files." :
+
+					"エラー";
+			}
+			if (gameplayDeathScreen)
+			{
+				errorMessage = displayLanguage == 0 ?
+					"The error occured while the game was updating in-game elements." :
+
+					"エラー";
+			}
+			if (drawingDeathScreen)
+			{
+				errorMessage = displayLanguage == 0 ?
+					"The error occured while the game was drawing sprites to the screen." :
+
+					"エラー";
+			}
+
+			errorMessage += displayLanguage == 0 ?
+				"\n Press ESC to exit the program. Press ENTER to open File Explorer to the game directory. Press SHIFT+ESC to close and re-launch the game if you have fixed the issue." :
+
+				"\n Press ESC to exit the program. Press ENTER to open File Explorer to the game directory. Press SHIFT+ESC to close and re-launch the game if you have fixed the issue.";
+
+			string[] words = errorMessage.Split(' ');
+			StringBuilder sb = new StringBuilder();
+			float lineWidth = 0f;
+			float spaceWidth = font.MeasureString(" ").X;
+			int maxLineWidth = Program.WindowBounds().Width - 20;
+
+			foreach (string word in words)
+			{
+				Vector2 size = font.MeasureString(word);
+
+				if (word.Contains("\n"))
+				{
+					lineWidth = 0f;
+					sb.Append(word + "\n");
+					continue;
+				}
+
+				if (lineWidth + size.X < maxLineWidth)
+				{
+					sb.Append(word + " ");
+					lineWidth += size.X + spaceWidth;
+				}
+				else
+				{
+					sb.Append("\n" + word + " ");
+					lineWidth = size.X + spaceWidth;
+				}
+			}
+			errorMessage = sb.ToString();
+
+			spriteBatch.DrawString(font, errorMessage, new Vector2(10), Color.White);
 		}
 	}
 
