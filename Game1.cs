@@ -91,42 +91,39 @@ namespace HololiveFightingGame
 				return;
             }
 
-			//try
-			//{
-				if (KeyHelper.Released(Keys.LeftControl))
-				{
-					displayLanguage = (DisplayLanguage)(((int)displayLanguage + 1) % 2);
-				}
-				if (isDeathScreen)
-				{
-					if (KeyHelper.Pressed(Keys.Enter))
-						Process.Start("explorer.exe", gamePath);
+			if (KeyHelper.Pressed(Keys.Delete))
+            {
+				throw new Exception("Exception meant to be thrown if you press DELETE. This is for testing and will be removed. If you see this message in the crash report, then the crash report is working.");
+            }
 
-					if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-					{
-						Exit();
-						if (KeyHelper.Down(Keys.LeftShift) || KeyHelper.Down(Keys.RightShift))
-							Process.Start(Process.GetCurrentProcess().MainModule.FileName);
-					}
-				}
-				else
+			if (KeyHelper.Released(Keys.LeftControl))
+			{
+				displayLanguage = (DisplayLanguage)(((int)displayLanguage + 1) % 2);
+			}
+			if (isDeathScreen)
+			{
+				if (KeyHelper.Pressed(Keys.Enter))
+					Process.Start("explorer.exe", gamePath);
+
+				if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
 				{
-					gameState.Update();
-					if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-					{
-						Exit();
-					}
+					Exit();
+					if (KeyHelper.Down(Keys.LeftShift) || KeyHelper.Down(Keys.RightShift))
+						Process.Start(Process.GetCurrentProcess().MainModule.FileName);
 				}
-				GamePadHelper.Update();
-				MouseHelper.Update();
-				KeyHelper.Update();
-				base.Update(gameTime);
-			//}
-			//catch
-			//{
-			//	gameplayDeathScreen = true;
-			//	isDeathScreen = true;
-			//}
+			}
+			else
+			{
+				gameState.Update();
+				if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+				{
+					Exit();
+				}
+			}
+			GamePadHelper.Update();
+			MouseHelper.Update();
+			KeyHelper.Update();
+			base.Update(gameTime);
 		}
 
 		protected override void Draw(GameTime gameTime)
@@ -138,93 +135,41 @@ namespace HololiveFightingGame
 				spriteBatch.DrawString(font, "Loading...", new Vector2(10), Color.White);
 				if (setup.firstRun)
 				{
-					spriteBatch.DrawString(font, "It looks like this is your first time running this version of the game.", new Vector2(10, 30), Color.White);
-					spriteBatch.DrawString(font, "Give us a moment while we set things up.", new Vector2(10, 50), Color.White);
+					spriteBatch.DrawString(font, "Some user config files were missing or deformed.", new Vector2(10, 30), Color.White);
+					spriteBatch.DrawString(font, "If this is your first time running this version of the game, this is expected.", new Vector2(10, 50), Color.White);
+					spriteBatch.DrawString(font, "If not, check your settings after loading finishes. Some settings may have been changed.", new Vector2(10, 70), Color.White);
 				}
-				spriteBatch.DrawString(font, setup.Status, new Vector2(10, 70), Color.White);
+				spriteBatch.DrawString(font, setup.Status, new Vector2(10, 90), Color.White);
 
 				spriteBatch.End();
 				return;
             }
 
-			//try
-			//{
-				if (isDeathScreen)
-				{
-					DrawDeathScreen();
-				}
-				else
-				{
-					GraphicsHandler.main.Draw(spriteBatch, new Transformation(Vector2.Zero, 2));
-				}
-				base.Draw(gameTime);
-			//}
-			//catch (Exception exception)
-			//{
-			//	drawingDeathScreen = true;
-			//	isDeathScreen = true;
-			//	if (!System.IO.File.Exists(gamePath + @"\logs.txt"))
-			//	{
-			//		System.IO.File.Create(gamePath + @"\logs.txt");
-			//	}
-			//	bool written = false;
-			//	while (!written)
-			//	{
-			//		try
-			//		{
-			//			System.IO.File.WriteAllText(gamePath + @"\logs.txt", exception.Message);
-			//			written = true;
-			//		}
-			//		catch
-			//		{
-			//
-			//		}
-			//	}
-			//	Process.Start("explorer.exe", gamePath);
-			//	Exit();
-			//}
+			if (isDeathScreen)
+			{
+				DrawDeathScreen();
+			}
+			else
+			{
+				GraphicsHandler.main.Draw(spriteBatch, new Transformation(Vector2.Zero, 2));
+			}
+			base.Draw(gameTime);
 			spriteBatch.End();
 		}
 
 		public void DrawDeathScreen()
 		{
-			string errorMessage = "The game threw an error that does not have a death screen. This should not happen. Contact the developer.";
+			string errorMessage = displayLanguage == 0 ?
+				"An error was encountered while loading data from JSON.\n " +
+				"The offending file is located at " + jsonLoaderFilePath.Replace("\\", "/") + " within the game directory.\n " +
+				"If you have installed a modification that changes JSON or tried modifying the JSON yourself, this may be the cause. If the case is the former, check for mod conflicts or contact the mod authors.\n " +
+				"If possible, try to revert any changes you have made. If you cannot, visit https://github.com/Rebmiami/HololiveFightingGame, find the correct version of the offending file, and replace the offending file with it.\n " +
+				"The exact error message is as follows. This may help you diagnose and solve the issue:\n " +
+				jsonErrorMessage :
 
-			if (jsonDeathScreen)
-			{
-				errorMessage = displayLanguage == 0 ?
-					"An error was encountered while loading data from JSON.\n " +
-					"The offending file is located at " + jsonLoaderFilePath.Replace("\\", "/") + " within the game directory.\n " +
-					"If you have installed a modification that changes JSON or tried modifying the JSON yourself, this may be the cause. If the case is the former, check for mod conflicts or contact the mod authors.\n " +
-					"If possible, try to revert any changes you have made. If you cannot, visit https://github.com/Rebmiami/HololiveFightingGame, find the correct version of the offending file, and replace the offending file with it.\n " +
-					"The exact error message is as follows. This may help you diagnose and solve the issue:\n " +
-					jsonErrorMessage :
-
-					"JSON エラー\n " +
-					"エラーメッセージ：\n " +
-					jsonErrorMessage;
-			}
-			if (loadingDeathScreen)
-			{
-				errorMessage = displayLanguage == 0 ?
-					"The error occured while the game was loading various assets and components from files." :
-
-					"エラー";
-			}
-			if (gameplayDeathScreen)
-			{
-				errorMessage = displayLanguage == 0 ?
-					"The error occured while the game was updating in-game elements." :
-
-					"エラー";
-			}
-			if (drawingDeathScreen)
-			{
-				errorMessage = displayLanguage == 0 ?
-					"The error occured while the game was drawing sprites to the screen." :
-
-					"エラー";
-			}
+				"JSON エラー\n " +
+				"エラーメッセージ：\n " +
+				jsonErrorMessage;
 
 			errorMessage += displayLanguage == 0 ?
 				"\n Press ESC to exit the program. Press ENTER to open File Explorer to the game directory. Press SHIFT+ESC to close and re-launch the game if you have fixed the issue." :

@@ -27,51 +27,87 @@ namespace HololiveFightingGame.Loading
 
 		public void Load()
 		{
-			//try
-			//{
-				try
-				{
-					// Status = "Doing nothing for a few seconds";
-					// System.Threading.Thread.Sleep(3000);
-					// This is meant to see if the loading screen works
+			try
+			{
+				// Status = "Doing nothing for a few seconds";
+				// System.Threading.Thread.Sleep(3000);
+				// This is meant to see if the loading screen works
 
-					Status = "Checking for missing files and directories";
-					if (!AllConfigFilesPresent())
-					{
-						Status = "Creating missing files and directories";
-						firstRun = true;
-						FirstRunSetup();
-					}
-				}
-				catch (JsonException exception)
+				Status = "Checking for missing files and directories";
+				if (!AllConfigFilesPresent())
 				{
-					Game1.jsonErrorMessage = exception.Message;
-					Game1.jsonDeathScreen = true;
-					Game1.isDeathScreen = true;
+					Status = "Creating missing files and directories";
+					firstRun = true;
+					FirstRunSetup();
 				}
-			//}
-			//catch
-			//{
-			//	Game1.loadingDeathScreen = true;
-			//	Game1.isDeathScreen = true;
-			//}
+			}
+			catch (JsonException exception)
+			{
+				Game1.jsonErrorMessage = exception.Message;
+				Game1.jsonDeathScreen = true;
+				Game1.isDeathScreen = true;
+			}
 			done = true;
 		}
 
 		public bool AllConfigFilesPresent()
 		{
 			if (!Directory.Exists(Game1.gamePath + @"\Config"))
+			{
 				return false;
+			}
 			if (!Directory.Exists(Game1.gamePath + @"\Config\ControlProfiles"))
+			{
 				return false;
+			}
 			if (!File.Exists(Game1.gamePath + @"\Config\UserPrefs.json"))
+			{
 				return false;
+			}
+			else
+			{
+
+			}
 			if (!File.Exists(Game1.gamePath + @"\Config\ControlProfiles\Profile0.json"))
+			{
 				return false;
+			}
+			else
+			{
+
+			}
 
 			return true;
 		}
 
+		public string GetBadFile()
+		{
+			if (!Directory.Exists(Game1.gamePath + @"\Config"))
+			{
+				return "";
+			}
+			if (!Directory.Exists(Game1.gamePath + @"\Config\ControlProfiles"))
+			{
+				return "";
+			}
+			if (!File.Exists(Game1.gamePath + @"\Config\UserPrefs.json"))
+			{
+				return "";
+			}
+			else
+			{
+
+			}
+			if (!File.Exists(Game1.gamePath + @"\Config\ControlProfiles\Profile0.json"))
+			{
+				return "";
+			}
+			else
+			{
+
+			}
+			return "All is good, chief.";
+		}
 
 		/// <summary>
 		/// Performs necessary setup upon the first time the application is run on a client machine.
@@ -97,17 +133,15 @@ namespace HololiveFightingGame.Loading
 				// Status = "English (1) / 日本語 (2)?";
 				// TODO: Add language selection prompt. English is default for now.
 				Status = "Creating user preferences config file";
-                UserPrefLoader prefs = new UserPrefLoader
-                {
-                    Language = "EN"
-                };
-                string json = JsonSerializer.Serialize(prefs, typeof(UserPrefLoader), options);
-				using (StreamWriter sw = new StreamWriter(Game1.gamePath + @"\Config\UserPrefs.json"))
+				UserPrefLoader prefs = new UserPrefLoader
 				{
-					foreach (char ch in json)
-					{
-						sw.Write(ch);
-					}
+					Language = "EN"
+				};
+				string json = JsonSerializer.Serialize(prefs, typeof(UserPrefLoader), options);
+				using StreamWriter sw = new StreamWriter(Game1.gamePath + @"\Config\UserPrefs.json");
+				foreach (char ch in json)
+				{
+					sw.Write(ch);
 				}
 			}
 			if (!File.Exists(Game1.gamePath + @"\Config\ControlProfiles\Profile0.json"))
@@ -121,12 +155,10 @@ namespace HololiveFightingGame.Loading
 					Jump = "W"
 				};
 				string json = JsonSerializer.Serialize(profile, typeof(ControlProfileLoader), options);
-				using (StreamWriter sw = new StreamWriter(Game1.gamePath + @"\Config\ControlProfiles\Profile0.json"))
+				using StreamWriter sw = new StreamWriter(Game1.gamePath + @"\Config\ControlProfiles\Profile0.json");
+				foreach (char ch in json)
 				{
-					foreach (char ch in json)
-					{
-						sw.Write(ch);
-					}
+					sw.Write(ch);
 				}
 			}
 		}
