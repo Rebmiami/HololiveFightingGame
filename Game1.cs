@@ -87,14 +87,9 @@ namespace HololiveFightingGame
 		protected override void Update(GameTime gameTime)
 		{
 			if (!setup.done)
-            {
+			{
 				return;
-            }
-
-			if (KeyHelper.Pressed(Keys.Delete))
-            {
-				throw new Exception("Exception meant to be thrown if you press DELETE. This is for testing and will be removed. If you see this message in the crash report, then the crash report is working.");
-            }
+			}
 
 			if (KeyHelper.Released(Keys.LeftControl))
 			{
@@ -110,6 +105,7 @@ namespace HololiveFightingGame
 					Exit();
 					if (KeyHelper.Down(Keys.LeftShift) || KeyHelper.Down(Keys.RightShift))
 						Process.Start(Process.GetCurrentProcess().MainModule.FileName);
+					// Is there a more direct way to re-launch the program?
 				}
 			}
 			else
@@ -131,7 +127,7 @@ namespace HololiveFightingGame
 			GraphicsDevice.Clear(Color.Gray * 0.5f);
 			spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, SamplerState.PointClamp);
 			if (!setup.done)
-            {
+			{
 				spriteBatch.DrawString(font, "Loading...", new Vector2(10), Color.White);
 				if (setup.firstRun)
 				{
@@ -143,7 +139,7 @@ namespace HololiveFightingGame
 
 				spriteBatch.End();
 				return;
-            }
+			}
 
 			if (isDeathScreen)
 			{
