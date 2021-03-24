@@ -4,6 +4,7 @@ using System.Text;
 using System.Text.Json;
 using System.IO;
 using System.Diagnostics;
+using HololiveFightingGame.Input;
 
 namespace HololiveFightingGame.Loading
 {
@@ -40,6 +41,11 @@ namespace HololiveFightingGame.Loading
 					firstRun = true;
 					FirstRunSetup();
 				}
+
+				string json = File.ReadAllText(Game1.gamePath + @"\Config\ControlProfiles\Profile0.json");
+				ControlProfileLoader loader = JsonSerializer.Deserialize<ControlProfileLoader>(json);
+				ControlProfile profile = new ControlProfile(loader);
+				ProfileBinder.profile = profile;
 			}
 			catch (JsonException exception)
 			{
@@ -85,10 +91,10 @@ namespace HololiveFightingGame.Loading
 					UserPrefLoader test = JsonSerializer.Deserialize<UserPrefLoader>(json);
 				}
 				catch
-                {
+				{
 					return "UserPrefs.json";
 					// If there was an exception thrown trying to read the file, then it's most likely faulty.
-                }
+				}
 			}
 			if (!File.Exists(Game1.gamePath + @"\Config\ControlProfiles\Profile0.json"))
 			{

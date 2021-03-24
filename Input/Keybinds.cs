@@ -8,14 +8,13 @@ namespace HololiveFightingGame.Input
 {
 	class Keybinds
 	{
-		public static Keys tapJumpBind_Key = Keys.W;
 		public static Buttons tapJumpBind_Pad = Buttons.A;
 
 		public static bool TapJump(bool keyboard, int gamepadNumber)
 		{
 			if (keyboard)
 			{
-				return KeyHelper.Pressed(tapJumpBind_Key);
+				return KeyHelper.Pressed(ProfileBinder.profile.Keyboard_Jump);
 			}
 			else
 			{
@@ -23,15 +22,13 @@ namespace HololiveFightingGame.Input
 			}
 		}
 
-
-		public static Keys tapAtkNormalBind_Key = Keys.P;
 		public static Buttons tapAtkNormalBind_Pad = Buttons.B;
 
 		public static bool TapAtkNormal(bool keyboard, int gamepadNumber)
 		{
 			if (keyboard)
 			{
-				return KeyHelper.Pressed(tapAtkNormalBind_Key);
+				return KeyHelper.Pressed(ProfileBinder.profile.Keyboard_Attack);
 			}
 			else
 			{
@@ -39,8 +36,6 @@ namespace HololiveFightingGame.Input
 			}
 		}
 
-		public static Keys holdHorizMoveBindL_Key = Keys.A;
-		public static Keys holdHorizMoveBindR_Key = Keys.D;
 		public static Buttons holdHorizMoveBindL_Pad = 0;
 		public static Buttons holdHorizMoveBindR_Pad = 0;
 		public static bool? holdHorizMoveBindStick_IsRight_Pad = false;
@@ -50,11 +45,11 @@ namespace HololiveFightingGame.Input
 			if (keyboard)
 			{
 				float val = 0;
-				if (KeyHelper.Down(holdHorizMoveBindL_Key))
+				if (KeyHelper.Down(ProfileBinder.profile.Keyboard_MoveLeft))
 				{
 					val -= 1;
 				}
-				if (KeyHelper.Down(holdHorizMoveBindR_Key))
+				if (KeyHelper.Down(ProfileBinder.profile.Keyboard_MoveRight))
 				{
 					val += 1;
 				}
