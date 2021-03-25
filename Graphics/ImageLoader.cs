@@ -18,7 +18,7 @@ namespace HololiveFightingGame.Graphics
 		public static Texture2D LoadTexture(string path, bool depinkify = false)
 		{
 			Texture2D texture;
-			using (var filestream = new FileStream(Game1.gamePath + path, FileMode.Open))
+			using (var filestream = new FileStream(path, FileMode.Open))
 			{
 				texture = Texture2D.FromStream(Program.game.GraphicsDevice, filestream);
 			}

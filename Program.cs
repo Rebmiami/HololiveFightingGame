@@ -79,12 +79,12 @@ namespace HololiveFightingGame
 			error.Append("The game's files are located at " + Game1.gamePath + ", including this log file.");
 
 
-			using StreamWriter sw = new StreamWriter(Game1.gamePath + @"\logs.txt");
+			using StreamWriter sw = new StreamWriter(@".\logs.txt");
 			foreach (char ch in error.ToString())
 			{
 				sw.Write(ch);
 			}
-			Process.Start("notepad.exe", Game1.gamePath + @"\logs.txt");
+			Process.Start("notepad.exe", @".\logs.txt");
 			game.Exit();
 		}
 	}

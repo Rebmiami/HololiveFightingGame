@@ -42,7 +42,7 @@ namespace HololiveFightingGame.Loading
 					FirstRunSetup();
 				}
 
-				string json = File.ReadAllText(Game1.gamePath + @"\Config\ControlProfiles\Profile0.json");
+				string json = File.ReadAllText(@".\Config\ControlProfiles\Profile0.json");
 				ControlProfileLoader loader = JsonSerializer.Deserialize<ControlProfileLoader>(json);
 				ControlProfile profile = new ControlProfile(loader);
 				ProfileBinder.profile = profile;
@@ -63,15 +63,15 @@ namespace HololiveFightingGame.Loading
 
 		public string GetBadFile()
 		{
-			if (!Directory.Exists(Game1.gamePath + @"\Config"))
+			if (!Directory.Exists(@".\Config"))
 			{
 				return "Config";
 			}
-			if (!Directory.Exists(Game1.gamePath + @"\Config\ControlProfiles"))
+			if (!Directory.Exists(@".\Config\ControlProfiles"))
 			{
 				return "ControlProfiles";
 			}
-			if (!File.Exists(Game1.gamePath + @"\Config\UserPrefs.json"))
+			if (!File.Exists(@".\Config\UserPrefs.json"))
 			{
 				return "UserPrefs.json";
 			}
@@ -79,7 +79,7 @@ namespace HololiveFightingGame.Loading
 			{
 				try
 				{
-					string json = File.ReadAllText(Game1.gamePath + @"\Config\UserPrefs.json");
+					string json = File.ReadAllText(@".\Config\UserPrefs.json");
 					Dictionary<string, string> loader = JsonSerializer.Deserialize<Dictionary<string, string>>(json);
 					foreach (string element in loader.Values)
 					{
@@ -96,7 +96,7 @@ namespace HololiveFightingGame.Loading
 					// If there was an exception thrown trying to read the file, then it's most likely faulty.
 				}
 			}
-			if (!File.Exists(Game1.gamePath + @"\Config\ControlProfiles\Profile0.json"))
+			if (!File.Exists(@".\Config\ControlProfiles\Profile0.json"))
 			{
 				return "Profile0.json";
 			}
@@ -104,7 +104,7 @@ namespace HololiveFightingGame.Loading
 			{
 				try
 				{
-					string json = File.ReadAllText(Game1.gamePath + @"\Config\ControlProfiles\Profile0.json");
+					string json = File.ReadAllText(@".\Config\ControlProfiles\Profile0.json");
 					Dictionary<string, string> loader = JsonSerializer.Deserialize<Dictionary<string, string>>(json);
 					foreach (string element in loader.Values)
 					{
@@ -134,12 +134,12 @@ namespace HololiveFightingGame.Loading
 				if (GetBadFile() == "Config")
 				{
 					Status = "Creating config folder";
-					Directory.CreateDirectory(Game1.gamePath + @"\Config");
+					Directory.CreateDirectory(@".\Config");
 				}
 				if (GetBadFile() == "ControlProfiles")
 				{
 					Status = "Creating controller profile folder";
-					Directory.CreateDirectory(Game1.gamePath + @"\Config\ControlProfiles");
+					Directory.CreateDirectory(@".\Config\ControlProfiles");
 				}
 				if (GetBadFile() == "UserPrefs.json")
 				{
@@ -151,7 +151,7 @@ namespace HololiveFightingGame.Loading
 						Language = "EN"
 					};
 					string json = JsonSerializer.Serialize(prefs, typeof(UserPrefLoader), SerializerOptions);
-					using StreamWriter sw = new StreamWriter(Game1.gamePath + @"\Config\UserPrefs.json");
+					using StreamWriter sw = new StreamWriter(@".\Config\UserPrefs.json");
 					foreach (char ch in json)
 					{
 						sw.Write(ch);
@@ -168,7 +168,7 @@ namespace HololiveFightingGame.Loading
 						Jump = "W"
 					};
 					string json = JsonSerializer.Serialize(profile, typeof(ControlProfileLoader), SerializerOptions);
-					using StreamWriter sw = new StreamWriter(Game1.gamePath + @"\Config\ControlProfiles\Profile0.json");
+					using StreamWriter sw = new StreamWriter(@".\Config\ControlProfiles\Profile0.json");
 					foreach (char ch in json)
 					{
 						sw.Write(ch);
@@ -178,7 +178,7 @@ namespace HololiveFightingGame.Loading
 		}
 
 		public static JsonSerializerOptions SerializerOptions
-        {
+		{
 			get
 			{
 				return new JsonSerializerOptions

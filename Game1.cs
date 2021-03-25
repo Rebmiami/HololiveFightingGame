@@ -39,7 +39,6 @@ namespace HololiveFightingGame
 		public static GameState gameState;
 		public static UIHandler uiHandler;
 
-		// The path that the game executable is within. This is used to make access to files easier from within the program and for security
 		public static readonly string gamePath;
 
 		protected override void Initialize()
@@ -83,12 +82,12 @@ namespace HololiveFightingGame
 			thread.Start();
 
 			// testFighter = Content.Load<Texture2D>("TestFighter");
-			testFighter = ImageLoader.LoadTexture(@"\Assets\TestFighter.png", true);
-			testStage = ImageLoader.LoadTexture(@"\Assets\TestStage.png", true);
+			testFighter = ImageLoader.LoadTexture(@".\Assets\TestFighter.png", true);
+			testStage = ImageLoader.LoadTexture(@".\Assets\TestStage.png", true);
 			language = new Language();
 			GraphicsHandler.main = new InGamePreset();
 			gameState = new GameState();
-			inGameUI = ImageLoader.LoadTexture(@"\Assets\GameUI.png", true);
+			inGameUI = ImageLoader.LoadTexture(@".\Assets\GameUI.png", true);
 			uiHandler = new UIHandler();
 			FighterLoader.LoadMoves(gameState.fighters);
 		}
