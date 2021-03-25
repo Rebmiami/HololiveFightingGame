@@ -108,6 +108,8 @@ namespace HololiveFightingGame
 			}
 
 			moveRunner?.Update(moveTimer);
+
+			// Takes player inputs to perform actions
 			if (launchTimer == 0)
 			{
 				if (Keybinds.TapJump(keyboard, ID) && jumps < 2)
@@ -125,6 +127,8 @@ namespace HololiveFightingGame
 					jumps++;
 				}
 
+				// TODO: Change this to accept more move types
+				// Reworking keybinds may be necessary
 				if (Keybinds.TapAtkNormal(keyboard, ID) && moveTimer == 0)
 				{
 					moveRunner = new MoveRunner(MoveLoader.moves[ID][0]);
@@ -136,6 +140,7 @@ namespace HololiveFightingGame
 				launchTimer--;
 			}
 
+			// Checks if an attack is hitting an opponent and, if so, tells the opponent to be hit by the attack.
 			if (moveTimer > 0)
 			{
 				for (int i = 0; i < MoveLoader.moves[ID][0].hitboxes.Length; i++)
@@ -212,6 +217,8 @@ namespace HololiveFightingGame
 			// TODO: Loop through all incoming attacks and create a list of attackers to find potential conflicts
 			// Sort incoming attacks by priority
 			// Disregard all attacks with priority less than the highest priority attack
+
+			// TODO: If two fighters are trying to use attacks with the same priority and the hitboxes collide, cancel the attacks.
 		}
 
 		public void Update_PostHit(Attack? attack) // After conflicts are resolved and a winning attack is selected, apply the effects of the attack (damage, knockback, etc.)
@@ -243,9 +250,9 @@ namespace HololiveFightingGame
 				((AnimatedSprite)drawObject.texture).SwitchAnimation("jump", 0);
 			}
 
-			if (moveRunner != null && moveRunner.name == "Pekora_NeutralA_0")
+			if (moveRunner != null)
 			{
-				((AnimatedSprite)drawObject.texture).SwitchAnimation("Pekora_NeutralA_0", 0);
+				((AnimatedSprite)drawObject.texture).SwitchAnimation(moveRunner.name, 0);
 				((AnimatedSprite)drawObject.texture).Playing.Frame = moveRunner.frame;
 			}
 
@@ -258,9 +265,6 @@ namespace HololiveFightingGame
 			((AnimatedSprite)drawObject.texture).Update();
 			drawObject.frame = ((AnimatedSprite)drawObject.texture).GetFrame();
 			drawObject.Bottom = Bottom;
-
-			// ((TextData)GraphicsHandler.main.children["ui"].children["damage_" + ID].data).text = (damage / 10d).ToString("f1") + "%";
-			// GraphicsHandler.main.children["game"].children["indicator_" + ID].position = position - new Vector2(0, 40);
 			Game1.uiHandler.damages[ID] = damage;
 		}
 
@@ -275,8 +279,6 @@ namespace HololiveFightingGame
 			position = new Vector2(300, 0);
 			grounded = true;
 			GraphicsHandler.main.children["game"].children.Add("fighter_" + ID, new DrawObject(DrawObjectType.Sprite));
-			// GraphicsHandler.main.children["ui"].children.Add("damage_" + ID, new DrawObject(DrawObjectType.Text) { data = new TextData("dmg%"), position = new Vector2(100 + ID * 100, 300) } );
-			//GraphicsHandler.main.children["game"].children.Add("indicator_" + ID, new DrawObject(DrawObjectType.Text) { data = new TextData("P" + (ID + 1)) });
 			drawObject = GraphicsHandler.main.children["game"].children["fighter_" + ID];
 			drawObject.texture = new AnimatedSprite(Game1.testFighter, new Point(50, 80));
 			Game1.jsonLoaderFilePath = @"\Data\Animations\PekoraAnims.json";
@@ -299,7 +301,7 @@ namespace HololiveFightingGame
 			launchTimer = (int)(Math.Abs(knockback.Y) * 2.5f);
 			if (grounded)
 			{
-				velocity = knockback; // TODO: Work on how attack impacts affect velocity - this is not sufficient
+				velocity = knockback;
 			}
 			else
 			{
