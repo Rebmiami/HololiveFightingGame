@@ -44,6 +44,9 @@
     <None Update="Content\Data\FighterList.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Content\Data\Fighters\Pekora\Moves\NeutralB_0.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Content\Data\Fighters\Pekora\Moves\NeutralA_0.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

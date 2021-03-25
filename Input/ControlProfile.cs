@@ -9,32 +9,26 @@ namespace HololiveFightingGame.Input
 {
 	public class ControlProfile
 	{
-		public Keys Keyboard_Attack;
-		public Keys Keyboard_MoveLeft;
-		public Keys Keyboard_MoveRight;
-		public Keys Keyboard_Jump;
-
-		public MouseButtons Mouse_Attack;
-		public MouseButtons Mouse_MoveLeft;
-		public MouseButtons Mouse_MoveRight;
-		public MouseButtons Mouse_Jump;
-		// Mouse and Keyboard are treated as one controller.
-
-		public Buttons Gamepad_Attack;
-		public Buttons Gamepad_MoveLeft;
-		public Buttons Gamepad_MoveRight;
-		public Buttons Gamepad_Jump;
-
-		// TODO: Create a class for handling all inputs.
-		// Something involving the Keybinds class?
-		// Do this before adding any more inputs
+		public Keybind Attack;
+		public Keybind AttackB;
+		public Keybind MoveLeft;
+		public Keybind MoveRight;
+		public Keybind Jump;
+		// TODO: Further automate this.
 
 		public ControlProfile(ControlProfileLoader loader)
 		{
-			Keyboard_Attack = GetKeys(loader.Attack);
-			Keyboard_MoveLeft = GetKeys(loader.MoveLeft);
-			Keyboard_MoveRight = GetKeys(loader.MoveRight);
-			Keyboard_Jump = GetKeys(loader.Jump);
+			Attack = new Keybind();
+			AttackB = new Keybind();
+			MoveLeft = new Keybind();
+			MoveRight = new Keybind();
+			Jump = new Keybind();
+
+			Attack.key = GetKeys(loader.Attack);
+			AttackB.key = GetKeys(loader.AttackB);
+			MoveLeft.key = GetKeys(loader.MoveLeft);
+			MoveRight.key = GetKeys(loader.MoveRight);
+			Jump.key = GetKeys(loader.Jump);
 		}
 
 		public void SetKeybind()

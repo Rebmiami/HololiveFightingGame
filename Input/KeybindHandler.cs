@@ -14,7 +14,7 @@ namespace HololiveFightingGame.Input
 		{
 			if (keyboard)
 			{
-				return KeyHelper.Pressed(ProfileBinder.profile.Keyboard_Jump);
+				return KeyHelper.Pressed(ProfileBinder.profile.Jump.key);
 			}
 			else
 			{
@@ -28,11 +28,25 @@ namespace HololiveFightingGame.Input
 		{
 			if (keyboard)
 			{
-				return KeyHelper.Pressed(ProfileBinder.profile.Keyboard_Attack);
+				return KeyHelper.Pressed(ProfileBinder.profile.Attack.key);
 			}
 			else
 			{
 				return GamePadHelper.Pressed(tapAtkNormalBind_Pad, gamepadNumber);
+			}
+		}
+
+		public static Buttons tapAtkSecondBind_Pad = Buttons.X;
+
+		public static bool TapAtkSecond(bool keyboard, int gamepadNumber)
+		{
+			if (keyboard)
+			{
+				return KeyHelper.Pressed(ProfileBinder.profile.AttackB.key);
+			}
+			else
+			{
+				return GamePadHelper.Pressed(tapAtkSecondBind_Pad, gamepadNumber);
 			}
 		}
 
@@ -45,11 +59,11 @@ namespace HololiveFightingGame.Input
 			if (keyboard)
 			{
 				float val = 0;
-				if (KeyHelper.Down(ProfileBinder.profile.Keyboard_MoveLeft))
+				if (KeyHelper.Down(ProfileBinder.profile.MoveLeft.key))
 				{
 					val -= 1;
 				}
-				if (KeyHelper.Down(ProfileBinder.profile.Keyboard_MoveRight))
+				if (KeyHelper.Down(ProfileBinder.profile.MoveRight.key))
 				{
 					val += 1;
 				}

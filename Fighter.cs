@@ -132,7 +132,13 @@ namespace HololiveFightingGame
 				if (KeybindHandler.TapAtkNormal(keyboard, ID) && moveTimer == 0)
 				{
 					moveRunner = new MoveRunner(FighterLoader.moves[character]["NeutralA_0"]);
-					moveTimer = 16;
+					moveTimer = moveRunner.data.MoveDuration;
+				}
+
+				if (KeybindHandler.TapAtkSecond(keyboard, ID) && moveTimer == 0)
+				{
+					moveRunner = new MoveRunner(FighterLoader.moves[character]["NeutralB_0"]);
+					moveTimer = moveRunner.data.MoveDuration;
 				}
 			}
 			else

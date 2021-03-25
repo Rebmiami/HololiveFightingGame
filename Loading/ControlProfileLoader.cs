@@ -9,6 +9,8 @@ namespace HololiveFightingGame.Loading
 	{
 		public string Attack { get; set; }
 
+		public string AttackB { get; set; }
+
 		public string MoveLeft { get; set; }
 
 		public string MoveRight { get; set; }

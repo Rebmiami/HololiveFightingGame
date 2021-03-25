@@ -163,6 +163,7 @@ namespace HololiveFightingGame.Loading
 					ControlProfileLoader profile = new ControlProfileLoader
 					{
 						Attack = "P",
+						AttackB = "O",
 						MoveLeft = "A",
 						MoveRight = "D",
 						Jump = "W"
