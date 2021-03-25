@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework;
 using HololiveFightingGame.Collision;
 using System.Text.Json;
 using HololiveFightingGame.Combat;
+using HololiveFightingGame.Loading;
 
 namespace HololiveFightingGame.Combat
 {
@@ -21,25 +22,40 @@ namespace HololiveFightingGame.Combat
 		{
 			Game1.jsonLoaderFilePath = @"\Data\Moves\PekoraMoves.json";
 			string json = System.IO.File.ReadAllText(Game1.gamePath + Game1.jsonLoaderFilePath);
-			moveData = (MoveData)JsonSerializer.Deserialize(json, typeof(MoveData));
+			moveData = (MoveData)JsonSerializer.Deserialize(json, typeof(MoveData), GameLoader.SerializerOptions);
 			hitboxes = new AttackHitbox[moveData.Hitboxes.Length];
-            for (int i = 0; i < moveData.Hitboxes.Length; i++)
-            {
+			for (int i = 0; i < moveData.Hitboxes.Length; i++)
+			{
 				MoveData.DataHitbox data = moveData.Hitboxes[i];
-                AttackHitbox hitbox = new AttackHitbox
-                {
-                    damage = data.Damage,
-                    angle = data.Angle,
-                    launch = data.Launch,
-                    collider = new Collider(new Capsule(data.Origin, data.Length, data.Radius))
-                };
-                hitboxes[i] = hitbox;
+				AttackHitbox hitbox = new AttackHitbox
+				{
+					damage = data.Damage,
+					angle = data.Angle,
+					launch = data.Launch,
+					collider = new Collider(new Capsule(data.Origin, data.Length, data.Radius))
+				};
+				hitboxes[i] = hitbox;
 			}
 		}
 
-		public Move()
+		public Move(string move, string fighter)
 		{
-			
+			Game1.jsonLoaderFilePath = @"\Data\Fighters\" + fighter + @"\Moves\" + move + ".json";
+			string json = System.IO.File.ReadAllText(Game1.gamePath + Game1.jsonLoaderFilePath);
+			moveData = (MoveData)JsonSerializer.Deserialize(json, typeof(MoveData), GameLoader.SerializerOptions);
+			hitboxes = new AttackHitbox[moveData.Hitboxes.Length];
+			for (int i = 0; i < moveData.Hitboxes.Length; i++)
+			{
+				MoveData.DataHitbox data = moveData.Hitboxes[i];
+				AttackHitbox hitbox = new AttackHitbox
+				{
+					damage = data.Damage,
+					angle = data.Angle,
+					launch = data.Launch,
+					collider = new Collider(new Capsule(data.Origin, data.Length, data.Radius))
+				};
+				hitboxes[i] = hitbox;
+			}
 		}
 
 		// TODO: Add an array containing a series of attack hitboxes

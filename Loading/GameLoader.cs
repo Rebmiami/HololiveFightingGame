@@ -129,11 +129,6 @@ namespace HololiveFightingGame.Loading
 		/// </summary>
 		public void FirstRunSetup()
 		{
-			var options = new JsonSerializerOptions
-			{
-				WriteIndented = true,
-			};
-
 			while (GetBadFile() != "All is good, chief.")
 			{
 				if (GetBadFile() == "Config")
@@ -155,7 +150,7 @@ namespace HololiveFightingGame.Loading
 					{
 						Language = "EN"
 					};
-					string json = JsonSerializer.Serialize(prefs, typeof(UserPrefLoader), options);
+					string json = JsonSerializer.Serialize(prefs, typeof(UserPrefLoader), SerializerOptions);
 					using StreamWriter sw = new StreamWriter(Game1.gamePath + @"\Config\UserPrefs.json");
 					foreach (char ch in json)
 					{
@@ -172,13 +167,25 @@ namespace HololiveFightingGame.Loading
 						MoveRight = "D",
 						Jump = "W"
 					};
-					string json = JsonSerializer.Serialize(profile, typeof(ControlProfileLoader), options);
+					string json = JsonSerializer.Serialize(profile, typeof(ControlProfileLoader), SerializerOptions);
 					using StreamWriter sw = new StreamWriter(Game1.gamePath + @"\Config\ControlProfiles\Profile0.json");
 					foreach (char ch in json)
 					{
 						sw.Write(ch);
 					}
 				}
+			}
+		}
+
+		public static JsonSerializerOptions SerializerOptions
+        {
+			get
+			{
+				return new JsonSerializerOptions
+				{
+					WriteIndented = true,
+					ReadCommentHandling = JsonCommentHandling.Skip
+				};
 			}
 		}
 	}

@@ -33,7 +33,7 @@ namespace HololiveFightingGame
 
 		public int direction = 1;
 
-		public FighterCharacter character = FighterCharacter.UsadaPekora;
+		public string character = "Pekora";
 
 		public List<Attack> attacks;
 
@@ -131,7 +131,7 @@ namespace HololiveFightingGame
 				// Reworking keybinds may be necessary
 				if (KeybindHandler.TapAtkNormal(keyboard, ID) && moveTimer == 0)
 				{
-					moveRunner = new MoveRunner(MoveLoader.moves[ID][0]);
+					moveRunner = new MoveRunner(FighterLoader.moves[character]["NeutralA_0"]);
 					moveTimer = 16;
 				}
 			}
@@ -143,9 +143,9 @@ namespace HololiveFightingGame
 			// Checks if an attack is hitting an opponent and, if so, tells the opponent to be hit by the attack.
 			if (moveTimer > 0)
 			{
-				for (int i = 0; i < MoveLoader.moves[ID][0].hitboxes.Length; i++)
+				for (int i = 0; i < FighterLoader.moves[character][moveRunner.name].hitboxes.Length; i++)
 				{
-					AttackHitbox attackHitbox = MoveLoader.moves[ID][0].hitboxes[i];
+					AttackHitbox attackHitbox = FighterLoader.moves[character][moveRunner.name].hitboxes[i];
 					if (!moveRunner.enabled[i])
 					{
 						continue;
@@ -281,7 +281,7 @@ namespace HololiveFightingGame
 			GraphicsHandler.main.children["game"].children.Add("fighter_" + ID, new DrawObject(DrawObjectType.Sprite));
 			drawObject = GraphicsHandler.main.children["game"].children["fighter_" + ID];
 			drawObject.texture = new AnimatedSprite(Game1.testFighter, new Point(50, 80));
-			Game1.jsonLoaderFilePath = @"\Data\Animations\PekoraAnims.json";
+			Game1.jsonLoaderFilePath = @"\Data\Fighters\" + character + @"\Animations.json";
 			string json = System.IO.File.ReadAllText(Game1.gamePath + Game1.jsonLoaderFilePath);
 			((AnimatedSprite)drawObject.texture).animations = (Dictionary<string, Animation>)JsonSerializer.Deserialize(json, typeof(Dictionary<string, Animation>));
 			((AnimatedSprite)drawObject.texture).SetAnimFrames();

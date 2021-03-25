@@ -1,0 +1,6 @@
+{
+	// A list of all fighters. This list can be modified to add or remove fighters.
+	"Fighters": [
+		"Pekora"
+	]
+}

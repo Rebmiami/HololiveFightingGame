@@ -30,12 +30,17 @@ namespace HololiveFightingGame
 			Content.RootDirectory = "Content";
 			IsMouseVisible = true;
 		}
+		
+		static Game1()
+        {
+			gamePath = new Regex(@"\\HololiveFightingGame\.exe$").Replace(Process.GetCurrentProcess().MainModule.FileName, "");
+		}
 
 		public static GameState gameState;
 		public static UIHandler uiHandler;
 
 		// The path that the game executable is within. This is used to make access to files easier from within the program and for security
-		public static string gamePath;
+		public static readonly string gamePath;
 
 		protected override void Initialize()
 		{
@@ -70,7 +75,6 @@ namespace HololiveFightingGame
 		{
 			font = Content.Load<SpriteFont>("File");
 			spriteBatch = new SpriteBatch(GraphicsDevice);
-			gamePath = new Regex(@"\\HololiveFightingGame\.exe$").Replace(Process.GetCurrentProcess().MainModule.FileName, "");
 			// These must be loaded first
 
 			setup = new GameLoader();
@@ -86,7 +90,7 @@ namespace HololiveFightingGame
 			gameState = new GameState();
 			inGameUI = ImageLoader.LoadTexture(@"\Assets\GameUI.png", true);
 			uiHandler = new UIHandler();
-			MoveLoader.LoadMoves(gameState.fighters);
+			FighterLoader.LoadMoves(gameState.fighters);
 		}
 
 		protected override void Update(GameTime gameTime)

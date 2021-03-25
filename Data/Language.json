@@ -1,4 +1,5 @@
 ﻿{
-  "Test_EN": "This is some test text. It's beautiful and text-y.",
-  "Test_JP": "日本語の話し方がわかりません。このテキストはGoogle翻訳からのものです。"
+	// This is the test text shown on the top of the screen to test text printing.
+	"Test_EN": "This is some test text. It's beautiful and text-y.",
+	"Test_JP": "日本語の話し方がわかりません。このテキストはGoogle翻訳からのものです。"
 }
