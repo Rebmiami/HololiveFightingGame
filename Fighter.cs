@@ -53,7 +53,7 @@ namespace HololiveFightingGame
 			velocity.X *= grounded ? 0.8f : 0.95f;
 			if (launchTimer == 0)
 			{
-				velocity.X += Keybinds.HoldHorizMove(keyboard, ID);
+				velocity.X += KeybindHandler.HoldHorizMove(keyboard, ID);
 			}
 			Vector2 maxVelocity = new Vector2(6, 10);
 			if (launchTimer == 0)
@@ -112,7 +112,7 @@ namespace HololiveFightingGame
 			// Takes player inputs to perform actions
 			if (launchTimer == 0)
 			{
-				if (Keybinds.TapJump(keyboard, ID) && jumps < 2)
+				if (KeybindHandler.TapJump(keyboard, ID) && jumps < 2)
 				{
 					if (jumps == 0)
 					{
@@ -129,7 +129,7 @@ namespace HololiveFightingGame
 
 				// TODO: Change this to accept more move types
 				// Reworking keybinds may be necessary
-				if (Keybinds.TapAtkNormal(keyboard, ID) && moveTimer == 0)
+				if (KeybindHandler.TapAtkNormal(keyboard, ID) && moveTimer == 0)
 				{
 					moveRunner = new MoveRunner(MoveLoader.moves[ID][0]);
 					moveTimer = 16;
@@ -234,9 +234,9 @@ namespace HololiveFightingGame
 		{
 			if (grounded)
 			{
-				if (Math.Abs(Keybinds.HoldHorizMove(keyboard, ID)) > 0.1f)
+				if (Math.Abs(KeybindHandler.HoldHorizMove(keyboard, ID)) > 0.1f)
 				{
-					direction = Math.Sign(Keybinds.HoldHorizMove(keyboard, ID));
+					direction = Math.Sign(KeybindHandler.HoldHorizMove(keyboard, ID));
 
 					((AnimatedSprite)drawObject.texture).SwitchAnimation("walk", 0);
 				}

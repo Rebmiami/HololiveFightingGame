@@ -14,10 +14,10 @@ namespace HololiveFightingGame.Input
 		public Keys Keyboard_MoveRight;
 		public Keys Keyboard_Jump;
 
-		public MouseButton Mouse_Attack;
-		public MouseButton Mouse_MoveLeft;
-		public MouseButton Mouse_MoveRight;
-		public MouseButton Mouse_Jump;
+		public MouseButtons Mouse_Attack;
+		public MouseButtons Mouse_MoveLeft;
+		public MouseButtons Mouse_MoveRight;
+		public MouseButtons Mouse_Jump;
 		// Mouse and Keyboard are treated as one controller.
 
 		public Buttons Gamepad_Attack;
@@ -71,7 +71,7 @@ namespace HololiveFightingGame.Input
 				error.Append("\"" + keyname + "\" ");
 			}
 			error.Append("\n\nHere is a list of valid mouse buttons:\n");
-			foreach (string keyname in Enum.GetNames(typeof(MouseButton)))
+			foreach (string keyname in Enum.GetNames(typeof(MouseButtons)))
 			{
 				error.Append("\"" + keyname + "\" ");
 			}

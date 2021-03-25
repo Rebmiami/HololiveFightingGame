@@ -6,7 +6,7 @@ using System.Text;
 
 namespace HololiveFightingGame.Input
 {
-	class Keybinds
+	class KeybindHandler
 	{
 		public static Buttons tapJumpBind_Pad = Buttons.A;
 

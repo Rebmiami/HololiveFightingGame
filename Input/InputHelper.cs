@@ -44,17 +44,17 @@ namespace HololiveFightingGame.Input
 			oldMouse = Mouse.GetState();
 		}
 
-		public static bool Pressed(MouseButton button)
+		public static bool Pressed(MouseButtons button)
 		{
 			return Down(button) && !Down(button, true);
 		}
 
-		public static bool Released(MouseButton button)
+		public static bool Released(MouseButtons button)
 		{
 			return !Down(button) && Down(button, true);
 		}
 
-		public static bool Down(MouseButton button, bool old = false)
+		public static bool Down(MouseButtons button, bool old = false)
 		{
 			MouseState state = Mouse.GetState();
 			if (old)
@@ -63,15 +63,15 @@ namespace HololiveFightingGame.Input
 			}
 			switch (button)
 			{
-				case MouseButton.Left:
+				case MouseButtons.Left:
 					return state.LeftButton == ButtonState.Pressed;
-				case MouseButton.Right:
+				case MouseButtons.Right:
 					return state.RightButton == ButtonState.Pressed;
-				case MouseButton.Middle:
+				case MouseButtons.Middle:
 					return state.MiddleButton == ButtonState.Pressed;
-				case MouseButton.X1:
+				case MouseButtons.X1:
 					return state.XButton1 == ButtonState.Pressed;
-				case MouseButton.X2:
+				case MouseButtons.X2:
 					return state.XButton2 == ButtonState.Pressed;
 			}
 			return false;
@@ -83,7 +83,7 @@ namespace HololiveFightingGame.Input
 		}
 	}
 
-	public enum MouseButton
+	public enum MouseButtons
 	{
 		Left,
 		Right,
