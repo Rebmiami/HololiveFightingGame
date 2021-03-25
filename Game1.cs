@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.IO;
 using HololiveFightingGame.Localization;
 using HololiveFightingGame.Graphics;
 using HololiveFightingGame.Graphics.Presets;
@@ -32,6 +33,8 @@ namespace HololiveFightingGame
 
 		public static GameState gameState;
 		public static UIHandler uiHandler;
+
+		// The path that the game executable is within. This is used to make access to files easier from within the program and for security
 		public static string gamePath;
 
 		protected override void Initialize()
@@ -60,6 +63,7 @@ namespace HololiveFightingGame
 		public static bool gameplayDeathScreen = false;
 		public static bool drawingDeathScreen = false;
 
+		// Handles loading game content and assets, as well as first-run setup and repairing damaged files.
 		public static GameLoader setup;
 
 		protected override void LoadContent()
@@ -74,12 +78,13 @@ namespace HololiveFightingGame
 			Thread thread = new Thread(new ThreadStart(setup.Load));
 			thread.Start();
 
-			testFighter = Content.Load<Texture2D>("TestFighter");
-			testStage = Content.Load<Texture2D>("TestStage");
+			// testFighter = Content.Load<Texture2D>("TestFighter");
+			testFighter = ImageLoader.LoadTexture(@"\Assets\TestFighter.png", true);
+			testStage = ImageLoader.LoadTexture(@"\Assets\TestStage.png", true);
 			language = new Language();
 			GraphicsHandler.main = new InGamePreset();
 			gameState = new GameState();
-			inGameUI = Content.Load<Texture2D>("GameUI");
+			inGameUI = ImageLoader.LoadTexture(@"\Assets\GameUI.png", true);
 			uiHandler = new UIHandler();
 			MoveLoader.LoadMoves(gameState.fighters);
 		}
