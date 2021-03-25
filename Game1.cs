@@ -32,7 +32,7 @@ namespace HololiveFightingGame
 		}
 		
 		static Game1()
-        {
+		{
 			gamePath = new Regex(@"\\HololiveFightingGame\.exe$").Replace(Process.GetCurrentProcess().MainModule.FileName, "");
 		}
 
@@ -44,7 +44,7 @@ namespace HololiveFightingGame
 		protected override void Initialize()
 		{
 			displayLanguage = DisplayLanguage.EN;
-			//graphics.ToggleFullScreen();
+			// graphics.ToggleFullScreen();
 
 			base.Initialize();
 		}
@@ -82,12 +82,12 @@ namespace HololiveFightingGame
 			thread.Start();
 
 			// testFighter = Content.Load<Texture2D>("TestFighter");
-			testFighter = ImageLoader.LoadTexture(@".\Assets\TestFighter.png", true);
-			testStage = ImageLoader.LoadTexture(@".\Assets\TestStage.png", true);
+			testFighter = ImageLoader.LoadTexture(@".\Content\Assets\TestFighter.png", true);
+			testStage = ImageLoader.LoadTexture(@".\Content\Assets\TestStage.png", true);
 			language = new Language();
 			GraphicsHandler.main = new InGamePreset();
 			gameState = new GameState();
-			inGameUI = ImageLoader.LoadTexture(@".\Assets\GameUI.png", true);
+			inGameUI = ImageLoader.LoadTexture(@".\Content\Assets\GameUI.png", true);
 			uiHandler = new UIHandler();
 			FighterLoader.LoadMoves(gameState.fighters);
 		}

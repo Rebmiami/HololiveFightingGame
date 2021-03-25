@@ -17,7 +17,7 @@ namespace HololiveFightingGame.Combat
 		public static void LoadFighters()
 		{
 			// Load a list of fighter names.
-			Game1.jsonLoaderFilePath = @".\Data\FighterList.json";
+			Game1.jsonLoaderFilePath = @".\Content\Data\FighterList.json";
 			string json = File.ReadAllText(Game1.jsonLoaderFilePath);
 			allFighters = JsonSerializer.Deserialize<List<string>>(json, GameLoader.SerializerOptions);
 		}
@@ -46,7 +46,7 @@ namespace HololiveFightingGame.Combat
 				}
 
 				moves.Add(fighter, new Dictionary<string, Move>());
-				string movePath = @".\Data\Fighters\" + fighter + @"\Moves";
+				string movePath = @".\Content\Data\Fighters\" + fighter + @"\Moves";
 
 				// Finds all moves in the fighter's data folder and loads them.
 				string[] movesToLoad = Directory.GetFiles(movePath);

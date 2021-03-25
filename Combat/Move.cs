@@ -20,7 +20,7 @@ namespace HololiveFightingGame.Combat
 
 		public void SetupMove()
 		{
-			Game1.jsonLoaderFilePath = @".\Data\Moves\PekoraMoves.json";
+			Game1.jsonLoaderFilePath = @".\Content\Data\Moves\PekoraMoves.json";
 			string json = System.IO.File.ReadAllText(Game1.jsonLoaderFilePath);
 			moveData = (MoveData)JsonSerializer.Deserialize(json, typeof(MoveData), GameLoader.SerializerOptions);
 			hitboxes = new AttackHitbox[moveData.Hitboxes.Length];
@@ -40,7 +40,7 @@ namespace HololiveFightingGame.Combat
 
 		public Move(string move, string fighter)
 		{
-			Game1.jsonLoaderFilePath = @".\Data\Fighters\" + fighter + @"\Moves\" + move + ".json";
+			Game1.jsonLoaderFilePath = @".\Content\Data\Fighters\" + fighter + @"\Moves\" + move + ".json";
 			string json = System.IO.File.ReadAllText(Game1.jsonLoaderFilePath);
 			moveData = (MoveData)JsonSerializer.Deserialize(json, typeof(MoveData), GameLoader.SerializerOptions);
 			hitboxes = new AttackHitbox[moveData.Hitboxes.Length];

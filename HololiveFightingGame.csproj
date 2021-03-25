@@ -29,31 +29,31 @@
     <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.0.1641" />
   </ItemGroup>
   <ItemGroup>
-    <None Update="Assets\GameUI.png">
+    <None Update="Content\Assets\GameUI.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Assets\TestFighter.png">
+    <None Update="Content\Assets\TestFighter.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Assets\TestStage.png">
+    <None Update="Content\Assets\TestStage.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Data\Fighters\Pekora\Animations.json">
+    <None Update="Content\Data\Fighters\Pekora\Animations.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Data\FighterList.json">
+    <None Update="Content\Data\FighterList.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Data\Fighters\Pekora\Moves\NeutralA_0.json">
+    <None Update="Content\Data\Fighters\Pekora\Moves\NeutralA_0.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Data\Fighters\Pekora\Pekora.json">
+    <None Update="Content\Data\Fighters\Pekora\Pekora.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Data\Language.json">
+    <None Update="Content\Data\Language.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Documentation\Home.html">
+    <None Update="Content\Documentation\Home.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

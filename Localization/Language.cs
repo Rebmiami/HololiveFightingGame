@@ -15,7 +15,7 @@ namespace HololiveFightingGame.Localization
 
 		public Language()
 		{
-			Game1.jsonLoaderFilePath = @".\Data\Language.json";
+			Game1.jsonLoaderFilePath = @".\Content\Data\Language.json";
 			string json = File.ReadAllText(Game1.jsonLoaderFilePath);
 			Lang = (Dictionary<string, string>)JsonSerializer.Deserialize(json, typeof(Dictionary<string, string>), GameLoader.SerializerOptions);
 		}
