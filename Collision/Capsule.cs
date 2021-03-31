@@ -13,11 +13,11 @@ namespace HololiveFightingGame.Collision
 		public float radius;
 
 		public Capsule(Vector2 origin, Vector2 length, float radius)
-        {
+		{
 			this.origin = origin;
 			this.length = length;
 			this.radius = radius;
-        }
+		}
 
 		public float Distance(Vector2 vector)
 		{
@@ -54,9 +54,9 @@ namespace HololiveFightingGame.Collision
 		public bool Intersects(Capsule capsule)
 		{
 			if (GetBoundingBox().Intersects(capsule.GetBoundingBox()))
-            {
+			{
 				return Distance(capsule) <= radius + capsule.radius;
-            }
+			}
 			return false;
 		}
 

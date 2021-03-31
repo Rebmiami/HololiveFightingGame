@@ -55,6 +55,7 @@ namespace HololiveFightingGame
 		public static SpriteFont font;
 		public static Language language;
 		public static DisplayLanguage displayLanguage;
+		public static Effect capsuleRenderer;
 
 		// The following fields are used for handling the "death screens" that pop up when the game encounters an error.
 		public static bool isDeathScreen = false;
@@ -81,7 +82,6 @@ namespace HololiveFightingGame
 			Thread thread = new Thread(new ThreadStart(setup.Load));
 			thread.Start();
 
-			// testFighter = Content.Load<Texture2D>("TestFighter");
 			testFighter = ImageLoader.LoadTexture(@".\Content\Assets\TestFighter.png", true);
 			testStage = ImageLoader.LoadTexture(@".\Content\Assets\TestStage.png", true);
 			language = new Language();
@@ -90,6 +90,7 @@ namespace HololiveFightingGame
 			inGameUI = ImageLoader.LoadTexture(@".\Content\Assets\GameUI.png", true);
 			uiHandler = new UIHandler();
 			FighterLoader.LoadMoves(gameState.fighters);
+			capsuleRenderer = Content.Load<Effect>("Capsule");
 		}
 
 		protected override void Update(GameTime gameTime)
@@ -132,7 +133,11 @@ namespace HololiveFightingGame
 
 		protected override void Draw(GameTime gameTime)
 		{
+			RenderTarget2D RenderTarget = new RenderTarget2D(GraphicsDevice, GraphicsDevice.Viewport.Bounds.Width, GraphicsDevice.Viewport.Bounds.Height);
+			GraphicsDevice.SetRenderTarget(RenderTarget);
+
 			GraphicsDevice.Clear(Color.Gray * 0.5f);
+
 			spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, SamplerState.PointClamp);
 			if (!setup.done)
 			{
@@ -159,8 +164,27 @@ namespace HololiveFightingGame
 			}
 			base.Draw(gameTime);
 			spriteBatch.End();
+
+			GraphicsDevice.SetRenderTarget(null);
+
+			spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.PointClamp);
+
+			//Effect effect = capsuleRenderer.Clone();
+			//effect.Parameters["ViewportDimensions"].SetValue(new Vector2(GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height));
+			//effect.Parameters["Origin"].SetValue(Mouse.GetState().Position.ToVector2());
+			//effect.Parameters["Length"].SetValue(new Vector2(10, 5));
+			//effect.Parameters["Radius"].SetValue(15f);
+			//effect.Parameters["DrawColor"].SetValue(Color.Red.ToVector4());
+			//effect.CurrentTechnique.Passes[0].Apply();
+			spriteBatch.Draw(RenderTarget, Vector2.Zero, Color.White);
+
+			spriteBatch.End();
+
+			//effect.Dispose();
+			RenderTarget.Dispose();
 		}
 
+		// TODO: Create a separate "error handler" class with all these error messages/screens
 		public void DrawDeathScreen()
 		{
 			string errorMessage = displayLanguage == 0 ?
