@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Text;
 using HololiveFightingGame.Graphics;
 using HololiveFightingGame.Utils;
+using HololiveFightingGame.Combat;
 
 namespace HololiveFightingGame
 {
-	public class GameState
+    public class GameState
 	{
 		public int maxFighters = 4;
 		public Fighter[] fighters;
