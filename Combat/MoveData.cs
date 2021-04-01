@@ -6,15 +6,14 @@ using System.Text.Json;
 
 namespace HololiveFightingGame.Combat
 {
-	// TODO: Place this within a larger class containing a dictionary of all the fighter's moves
 	public class MoveData
 	{
 		public int MoveDuration { get; set; }
 		public string Name { get; set; }
 		public DataHitbox[] Hitboxes { get; set; }
 		public Dictionary<string, int> AnimationFrames { get; set; }
-
-		// TODO: Add support for "branching" attacks, such as charge-and-release or branches
+		public int LeadInto { get; set; }
+		public Dictionary<string, VectorLoader> Motion { get; set; }
 
 		public class DataHitbox
 		{
@@ -22,6 +21,7 @@ namespace HololiveFightingGame.Combat
 			public int Damage { get; set; }
 			public float Angle { get; set; }
 			public float Launch { get; set; }
+			public float KbScaling { get; set; }
 			// TODO: Add "effect" property for attacks with other effects
 			// TODO: Add support for projectiles
 
@@ -29,10 +29,14 @@ namespace HololiveFightingGame.Combat
 			public VectorLoader Origin { get; set; }
 			public VectorLoader Length { get; set; }
 			public float Radius { get; set; }
+			public bool AutoSwipe { get; set; }
 
 			// Collision data
 			public bool Enabled { get; set; }
 			public int Priority { get; set; }
+			public int Part { get; set; }
+			public bool Grounded { get; set; }
+			public bool Aerial { get; set; }
 
 			// Timeline information
 			public Dictionary<string, VectorLoader> Motion { get; set; }

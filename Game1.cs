@@ -1,20 +1,15 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using System;
-using System.Collections.Generic;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using System.IO;
-using HololiveFightingGame.Localization;
+﻿using HololiveFightingGame.Combat;
 using HololiveFightingGame.Graphics;
 using HololiveFightingGame.Graphics.Presets;
 using HololiveFightingGame.Input;
-using HololiveFightingGame.Combat;
 using HololiveFightingGame.Loading;
+using HololiveFightingGame.Localization;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System.Diagnostics;
-using System.Text.RegularExpressions;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 
 namespace HololiveFightingGame

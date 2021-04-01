@@ -14,6 +14,12 @@ namespace HololiveFightingGame.Combat
 		public float angle;
 		public float launch;
 
+		public float kbScaling;
+		public int priority;
+		public int part;
+
+		public bool autoSwipe;
+
 		public AttackHitboxType type;
 
 		public Vector2 LaunchAngle
@@ -24,6 +30,7 @@ namespace HololiveFightingGame.Combat
 			}
 			set
 			{
+				// I assume atan2 or dot products will be used when this is implemented
 				launch = value.Length();
 				throw new NotImplementedException();
 			}
