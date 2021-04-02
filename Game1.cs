@@ -33,6 +33,7 @@ namespace HololiveFightingGame
 
 		public static GameState gameState;
 		public static UIHandler uiHandler;
+		public static GameScreen gameScreen = GameScreen.Loading;
 
 		public static readonly string gamePath;
 
@@ -86,36 +87,39 @@ namespace HololiveFightingGame
 
 		protected override void Update(GameTime gameTime)
 		{
-			if (!setup.done)
-			{
-				return;
-			}
-
 			if (KeyHelper.Released(Keys.LeftControl))
 			{
 				displayLanguage = (DisplayLanguage)(((int)displayLanguage + 1) % 2);
 			}
-			if (isDeathScreen)
+			if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
 			{
-				if (KeyHelper.Pressed(Keys.Enter))
-					Process.Start("explorer.exe", gamePath);
+				Exit();
+				if (KeyHelper.Down(Keys.LeftShift) || KeyHelper.Down(Keys.RightShift))
+					Process.Start(Process.GetCurrentProcess().MainModule.FileName);
+				// Is there a more direct way to re-launch the program?
+			}
 
-				if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-				{
-					Exit();
-					if (KeyHelper.Down(Keys.LeftShift) || KeyHelper.Down(Keys.RightShift))
-						Process.Start(Process.GetCurrentProcess().MainModule.FileName);
-					// Is there a more direct way to re-launch the program?
-				}
-			}
-			else
+			switch (gameScreen)
 			{
-				gameState.Update();
-				if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-				{
-					Exit();
-				}
+				case GameScreen.Loading:
+					if (setup.done)
+					{
+						gameScreen = GameScreen.InGame;
+					}
+					break;
+				case GameScreen.InGame:
+					gameState.Update();
+					break;
+				case GameScreen.Editor:
+					break;
+				case GameScreen.DeathScreen:
+					if (KeyHelper.Pressed(Keys.Enter))
+						Process.Start("explorer.exe", gamePath);
+					break;
+				default:
+					break;
 			}
+
 			GamePadHelper.Update();
 			MouseHelper.Update();
 			KeyHelper.Update();
@@ -130,48 +134,40 @@ namespace HololiveFightingGame
 			GraphicsDevice.Clear(Color.Gray * 0.5f);
 
 			spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, SamplerState.PointClamp);
-			if (!setup.done)
-			{
-				spriteBatch.DrawString(Assets.font, "Loading...", new Vector2(10), Color.White);
-				if (setup.firstRun)
-				{
-					spriteBatch.DrawString(Assets.font, "Some user config files were missing or deformed.", new Vector2(10, 30), Color.White);
-					spriteBatch.DrawString(Assets.font, "If this is your first time running this version of the game, this is expected.", new Vector2(10, 50), Color.White);
-					spriteBatch.DrawString(Assets.font, "If not, check your settings after loading finishes. Some settings may have been changed.", new Vector2(10, 70), Color.White);
-				}
-				spriteBatch.DrawString(Assets.font, setup.Status, new Vector2(10, 90), Color.White);
 
-				spriteBatch.End();
-				return;
+			switch (gameScreen)
+			{
+				case GameScreen.Loading:
+					spriteBatch.DrawString(Assets.font, "Loading...", new Vector2(10), Color.White);
+					if (setup.firstRun)
+					{
+						spriteBatch.DrawString(Assets.font, "Some user config files were missing or deformed.", new Vector2(10, 30), Color.White);
+						spriteBatch.DrawString(Assets.font, "If this is your first time running this version of the game, this is expected.", new Vector2(10, 50), Color.White);
+						spriteBatch.DrawString(Assets.font, "If not, check your settings after loading finishes. Some settings may have been changed.", new Vector2(10, 70), Color.White);
+					}
+					spriteBatch.DrawString(Assets.font, setup.Status, new Vector2(10, 90), Color.White);
+					break;
+				case GameScreen.InGame:
+					GraphicsHandler.main.Draw(spriteBatch, new Transformation(Vector2.Zero, 2));
+					break;
+				case GameScreen.Editor:
+					break;
+				case GameScreen.DeathScreen:
+					DrawDeathScreen();
+					break;
+				default:
+					break;
 			}
 
-			if (isDeathScreen)
-			{
-				DrawDeathScreen();
-			}
-			else
-			{
-				GraphicsHandler.main.Draw(spriteBatch, new Transformation(Vector2.Zero, 2));
-			}
 			base.Draw(gameTime);
 			spriteBatch.End();
 
 			GraphicsDevice.SetRenderTarget(null);
-
 			spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.PointClamp);
 
-			//Effect effect = capsuleRenderer.Clone();
-			//effect.Parameters["ViewportDimensions"].SetValue(new Vector2(GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height));
-			//effect.Parameters["Origin"].SetValue(Mouse.GetState().Position.ToVector2());
-			//effect.Parameters["Length"].SetValue(new Vector2(10, 5));
-			//effect.Parameters["Radius"].SetValue(15f);
-			//effect.Parameters["DrawColor"].SetValue(Color.Red.ToVector4());
-			//effect.CurrentTechnique.Passes[0].Apply();
 			spriteBatch.Draw(RenderTarget, Vector2.Zero, Color.White);
 
 			spriteBatch.End();
-
-			//effect.Dispose();
 			RenderTarget.Dispose();
 		}
 

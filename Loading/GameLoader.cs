@@ -8,7 +8,7 @@ using HololiveFightingGame.Input;
 
 namespace HololiveFightingGame.Loading
 {
-    public class GameLoader
+	public class GameLoader
 	{
 		private string status = "...";
 		public string Status {
@@ -52,6 +52,7 @@ namespace HololiveFightingGame.Loading
 				Game1.jsonErrorMessage = exception.Message;
 				Game1.jsonDeathScreen = true;
 				Game1.isDeathScreen = true;
+				Game1.gameScreen = GameScreen.DeathScreen;
 			}
 			done = true;
 		}
