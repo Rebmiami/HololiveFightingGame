@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using HololiveFightingGame.Collision;
 using HololiveFightingGame.Graphics;
+using HololiveFightingGame.Loading;
 
 namespace HololiveFightingGame
 {
@@ -22,7 +23,7 @@ namespace HololiveFightingGame
 			stageBounds = Program.WindowBounds();
 
 			drawObject = GraphicsHandler.main.children["game"].children["stage"];
-			drawObject.texture = new SlicedSprite(Game1.testStage);
+			drawObject.texture = new SlicedSprite(Assets.testStage);
 			drawObject.position = collider.Rectangle.Location.ToVector2();
 		}
 	}

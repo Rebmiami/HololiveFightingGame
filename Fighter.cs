@@ -9,10 +9,11 @@ using HololiveFightingGame.Collision;
 using HololiveFightingGame.Graphics;
 using HololiveFightingGame.Combat;
 using System.Text.Json;
+using HololiveFightingGame.Loading;
 
 namespace HololiveFightingGame
 {
-	public class Fighter : Entity
+    public class Fighter : Entity
 	{
 		public bool grounded;
 		public int coyote;
@@ -286,7 +287,7 @@ namespace HololiveFightingGame
 			grounded = true;
 			GraphicsHandler.main.children["game"].children.Add("fighter_" + ID, new DrawObject(DrawObjectType.Sprite));
 			drawObject = GraphicsHandler.main.children["game"].children["fighter_" + ID];
-			drawObject.texture = new AnimatedSprite(Game1.testFighter, new Point(50, 80));
+			drawObject.texture = new AnimatedSprite(Assets.testFighter, new Point(50, 80));
 			Game1.jsonLoaderFilePath = @".\Content\Data\Fighters\" + character + @"\Animations.json";
 			string json = System.IO.File.ReadAllText(Game1.jsonLoaderFilePath);
 			((AnimatedSprite)drawObject.texture).animations = (Dictionary<string, Animation>)JsonSerializer.Deserialize(json, typeof(Dictionary<string, Animation>));

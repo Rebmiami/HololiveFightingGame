@@ -44,10 +44,6 @@ namespace HololiveFightingGame
 			base.Initialize();
 		}
 
-		public static Texture2D testFighter;
-		public static Texture2D testStage;
-		public static Texture2D inGameUI;
-		public static SpriteFont font;
 		public static Language language;
 		public static DisplayLanguage displayLanguage;
 		public static Effect capsuleRenderer;
@@ -68,7 +64,7 @@ namespace HololiveFightingGame
 
 		protected override void LoadContent()
 		{
-			font = Content.Load<SpriteFont>("File");
+			Assets.font = Content.Load<SpriteFont>("File");
 			spriteBatch = new SpriteBatch(GraphicsDevice);
 			// These must be loaded first
 
@@ -77,12 +73,12 @@ namespace HololiveFightingGame
 			Thread thread = new Thread(new ThreadStart(setup.Load));
 			thread.Start();
 
-			testFighter = ImageLoader.LoadTexture(@".\Content\Assets\TestFighter.png", true);
-			testStage = ImageLoader.LoadTexture(@".\Content\Assets\TestStage.png", true);
+			Assets.testFighter = ImageLoader.LoadTexture(@".\Content\Assets\TestFighter.png", true);
+			Assets.testStage = ImageLoader.LoadTexture(@".\Content\Assets\TestStage.png", true);
 			language = new Language();
 			GraphicsHandler.main = new InGamePreset();
 			gameState = new GameState();
-			inGameUI = ImageLoader.LoadTexture(@".\Content\Assets\GameUI.png", true);
+			Assets.inGameUI = ImageLoader.LoadTexture(@".\Content\Assets\GameUI.png", true);
 			uiHandler = new UIHandler();
 			FighterLoader.LoadMoves(gameState.fighters);
 			capsuleRenderer = Content.Load<Effect>("Capsule");
@@ -136,14 +132,14 @@ namespace HololiveFightingGame
 			spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, SamplerState.PointClamp);
 			if (!setup.done)
 			{
-				spriteBatch.DrawString(font, "Loading...", new Vector2(10), Color.White);
+				spriteBatch.DrawString(Assets.font, "Loading...", new Vector2(10), Color.White);
 				if (setup.firstRun)
 				{
-					spriteBatch.DrawString(font, "Some user config files were missing or deformed.", new Vector2(10, 30), Color.White);
-					spriteBatch.DrawString(font, "If this is your first time running this version of the game, this is expected.", new Vector2(10, 50), Color.White);
-					spriteBatch.DrawString(font, "If not, check your settings after loading finishes. Some settings may have been changed.", new Vector2(10, 70), Color.White);
+					spriteBatch.DrawString(Assets.font, "Some user config files were missing or deformed.", new Vector2(10, 30), Color.White);
+					spriteBatch.DrawString(Assets.font, "If this is your first time running this version of the game, this is expected.", new Vector2(10, 50), Color.White);
+					spriteBatch.DrawString(Assets.font, "If not, check your settings after loading finishes. Some settings may have been changed.", new Vector2(10, 70), Color.White);
 				}
-				spriteBatch.DrawString(font, setup.Status, new Vector2(10, 90), Color.White);
+				spriteBatch.DrawString(Assets.font, setup.Status, new Vector2(10, 90), Color.White);
 
 				spriteBatch.End();
 				return;
@@ -202,12 +198,12 @@ namespace HololiveFightingGame
 			string[] words = errorMessage.Split(' ');
 			StringBuilder sb = new StringBuilder();
 			float lineWidth = 0f;
-			float spaceWidth = font.MeasureString(" ").X;
+			float spaceWidth = Assets.font.MeasureString(" ").X;
 			int maxLineWidth = Program.WindowBounds().Width - 20;
 
 			foreach (string word in words)
 			{
-				Vector2 size = font.MeasureString(word);
+				Vector2 size = Assets.font.MeasureString(word);
 
 				if (word.Contains("\n"))
 				{
@@ -229,7 +225,7 @@ namespace HololiveFightingGame
 			}
 			errorMessage = sb.ToString();
 
-			spriteBatch.DrawString(font, errorMessage, new Vector2(10), Color.White);
+			spriteBatch.DrawString(Assets.font, errorMessage, new Vector2(10), Color.White);
 		}
 	}
 

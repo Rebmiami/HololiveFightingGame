@@ -9,7 +9,7 @@ using System.Web;
 
 namespace HololiveFightingGame.Localization
 {
-	public class Language
+    public class Language
 	{
 		private Dictionary<string, string> Lang { get; set; }
 

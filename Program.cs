@@ -6,7 +6,7 @@ using System.Text;
 
 namespace HololiveFightingGame
 {
-	public static class Program
+    public static class Program
 	{
 		[STAThread]
 		static void Main()

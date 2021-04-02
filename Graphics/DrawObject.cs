@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using HololiveFightingGame.Loading;
 
 namespace HololiveFightingGame.Graphics
 {
@@ -54,12 +55,12 @@ namespace HololiveFightingGame.Graphics
 				Vector2 drawPosition = position;
 				TransformVector(ref drawPosition, transformation);
 				if (type == DrawObjectType.Custom)
-                {
+				{
 					CustomDraw(spriteBatch, transformation);
 				}
 				else if (type == DrawObjectType.Text)
 				{
-					spriteBatch.DrawString(Game1.font, ((TextData)data).text, drawPosition, ((TextData)data).color);
+					spriteBatch.DrawString(Assets.font, ((TextData)data).text, drawPosition, ((TextData)data).color);
 				}
 				else
 				{
@@ -87,7 +88,7 @@ namespace HololiveFightingGame.Graphics
 		}
 
 		public static Vector2 TransformVector(Vector2 vector, Transformation transformation)
-        {
+		{
 			vector += transformation.offset;
 			vector -= Program.WindowBounds().Size.ToVector2() / 2;
 			vector *= transformation.zoom;

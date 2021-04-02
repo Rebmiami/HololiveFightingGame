@@ -9,7 +9,7 @@ using HololiveFightingGame.Loading;
 
 namespace HololiveFightingGame.Combat
 {
-	public class Move
+    public class Move
 	{
 		public AttackHitbox[] hitboxes;
 

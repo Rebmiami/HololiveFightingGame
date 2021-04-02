@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 
 namespace HololiveFightingGame.Combat
 {
-	public static class FighterLoader
+    public static class FighterLoader
 	{
 		public static List<string> allFighters;
 

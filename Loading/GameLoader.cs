@@ -8,7 +8,7 @@ using HololiveFightingGame.Input;
 
 namespace HololiveFightingGame.Loading
 {
-	public class GameLoader
+    public class GameLoader
 	{
 		private string status = "...";
 		public string Status {
