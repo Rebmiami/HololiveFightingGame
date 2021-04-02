@@ -18,6 +18,9 @@ namespace HololiveFightingGame.Combat
 		public int priority;
 		public int part;
 
+		public bool grounded;
+		public bool aerial;
+
 		public bool autoSwipe;
 
 		public AttackHitboxType type;

@@ -32,7 +32,13 @@ namespace HololiveFightingGame.Combat
 					damage = data.Damage,
 					angle = data.Angle,
 					launch = data.Launch,
-					collider = new Collider(new Capsule(data.Origin, data.Length, data.Radius))
+					collider = new Collider(new Capsule(data.Origin, data.Length, data.Radius)),
+					kbScaling = data.KbScaling,
+					priority = data.Priority,
+					part = data.Part,
+					autoSwipe = data.AutoSwipe,
+					grounded = data.Grounded,
+					aerial = data.Aerial
 				};
 				hitboxes[i] = hitbox;
 			}
