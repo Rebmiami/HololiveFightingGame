@@ -109,6 +109,8 @@ namespace HololiveFightingGame
 					break;
 				case GameScreen.InGame:
 					gameState.Update();
+					if (KeyHelper.Pressed(Keys.F12))
+						gameScreen = GameScreen.Editor;
 					break;
 				case GameScreen.Editor:
 					break;
