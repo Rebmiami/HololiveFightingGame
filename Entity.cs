@@ -72,7 +72,6 @@ namespace HololiveFightingGame
 
 		public Rectangle Hitbox()
 		{
-			// TODO: Replace rectangle with capsule collision and cut down on collision checks
 			return new Rectangle(position.ToPoint(), Dimensions.ToPoint());
 		}
 

@@ -13,11 +13,14 @@ using HololiveFightingGame.Loading;
 
 namespace HololiveFightingGame
 {
-    public class Fighter : Entity
+	public class Fighter : Entity
 	{
 		public bool grounded;
+		// If true, the fighter is grounded, otherwise, they are aerial.
 		public int coyote;
-		public int damage; // 999.9 to 0.0 by default. Div by 10 to get damage shown on screen
+		// Frames of coyote time.
+		public int damage; 
+		// 999.9 to 0.0 by default. Div by 10 to get damage shown on screen.
 
 		public int jumps;
 
@@ -28,8 +31,10 @@ namespace HololiveFightingGame
 		public int ID;
 		public bool keyboard = false;
 
-		public int launchTimer; // Launch frames where player has no control
-		public int invFrames; // The player is given some frames of invulnerability after getting hit to prevent the same attack from hitting multiple times when it shouldn't
+		public int launchTimer;
+		// Launch frames where player has no control
+		public int invFrames;
+		// The player is given some frames of invulnerability after getting hit to prevent the same attack from hitting multiple times when it shouldn't
 		// TODO: Prevent the player from being hit by the same hitbox repeatedly somehow
 
 		public int direction = 1;
@@ -205,7 +210,11 @@ namespace HololiveFightingGame
 			}
 		}
 
-		public Attack? Update_Hits() // Process damage dealt to the player and resolve conflicts.
+		/// <summary>
+		/// Process damage dealt to the player and resolve conflicts.
+		/// </summary>
+		/// <returns></returns>
+		public Attack? Update_Hits()
 		{
 			if (invFrames > 0)
 			{
@@ -228,7 +237,11 @@ namespace HololiveFightingGame
 			// TODO: If two fighters are trying to use attacks with the same priority and the hitboxes collide, cancel the attacks.
 		}
 
-		public void Update_PostHit(Attack? attack) // After conflicts are resolved and a winning attack is selected, apply the effects of the attack (damage, knockback, etc.)
+		/// <summary>
+		/// After conflicts are resolved and a winning attack is selected, apply the effects of the attack (damage, knockback, etc.)
+		/// </summary>
+		/// <param name="attack"></param>
+		public void Update_PostHit(Attack? attack)
 		{
 			if (attack != null)
 			{
@@ -237,7 +250,10 @@ namespace HololiveFightingGame
 			}
 		}
 
-		public void Update_Animation() // Sets animation frames and the direction the fighter's sprite should face
+		/// <summary>
+		/// Sets animation frames and the direction the fighter's sprite should face.
+		/// </summary>
+		public void Update_Animation()
 		{
 			if (grounded)
 			{
@@ -344,9 +360,11 @@ namespace HololiveFightingGame
 			public int damage;
 			public Vector2 knockback;
 
-			public int priority; // Used to resolve conflicts. If two attacks with the same priority conflict, they will cancel out.
+			public int priority;
+			// Used to resolve conflicts. If two attacks with the same priority conflict, they will cancel out.
 
-			public Fighter attacker; // Set attacker to null if the damage was not caused by a player (directly or indirectly)
+			public Fighter attacker;
+			// Set attacker to null if the damage was not caused by a player (directly or indirectly)
 
 			public int CompareTo(object obj)
 			{
