@@ -37,6 +37,12 @@
 		<None Update="Content\Assets\TestStage.png">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
+		<None Update="Content\Data\Fighters\Kiara\Animations.json">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="Content\Data\Fighters\Kiara\Kiara.json">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
 		<None Update="Content\Data\Fighters\Pekora\Animations.json">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
@@ -58,5 +64,8 @@
 		<None Update="Content\Documentation\Home.html">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Content\Data\Fighters\Kiara\Moves\" />
 	</ItemGroup>
 </Project>
