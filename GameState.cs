@@ -10,14 +10,18 @@ namespace HololiveFightingGame
 {
     public class GameState
 	{
-		public int maxFighters = 4;
+		public static readonly int maxFighters = 4;
 		public Fighter[] fighters;
 		public Stage stage;
 		public List<Projectile> projectiles;
 
-		public GameState()
+		public GameState(string[] fighterNames)
 		{
-			fighters = new Fighter[2] { new Fighter(0), new Fighter(1) };
+			fighters = new Fighter[fighterNames.Length];
+            for (int i = 0; i < fighterNames.Length; i++)
+            {
+				fighters[i] = new Fighter(i, fighterNames[i]);
+            }
 			stage = new Stage();
 			projectiles = new List<Projectile>();
 			fighters[1].keyboard = true;

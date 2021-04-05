@@ -11,6 +11,7 @@ using System.Diagnostics;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System;
 
 namespace HololiveFightingGame
 {
@@ -65,8 +66,8 @@ namespace HololiveFightingGame
 
 		protected override void LoadContent()
 		{
-			Assets.font = Content.Load<SpriteFont>("File");
 			spriteBatch = new SpriteBatch(GraphicsDevice);
+			Assets.font = Content.Load<SpriteFont>("File");
 			// These must be loaded first
 
 			setup = new GameLoader();
@@ -77,12 +78,26 @@ namespace HololiveFightingGame
 			Assets.testFighter = ImageLoader.LoadTexture(@".\Content\Assets\TestFighter.png", true);
 			Assets.testStage = ImageLoader.LoadTexture(@".\Content\Assets\TestStage.png", true);
 			language = new Language();
-			GraphicsHandler.main = new InGamePreset();
-			gameState = new GameState();
 			Assets.inGameUI = ImageLoader.LoadTexture(@".\Content\Assets\GameUI.png", true);
-			uiHandler = new UIHandler();
-			FighterLoader.LoadMoves(gameState.fighters);
 			capsuleRenderer = Content.Load<Effect>("Capsule");
+			LoadGameState(new string[] { "Pekora", "Kiara" });
+		}
+
+		public static void LoadGameState(string[] fighters)
+        {
+			if (fighters.Length > GameState.maxFighters)
+            {
+				throw new ArgumentException("The maximum number of fighters is " + GameState.maxFighters + ".");
+			}
+			if (fighters.Length < 2)
+			{
+				throw new ArgumentException("The minimum number of fighters is 2.");
+			}
+
+			GraphicsHandler.main = new InGamePreset();
+			gameState = new GameState(fighters);
+			FighterLoader.LoadMoves(fighters);
+			uiHandler = new UIHandler();
 		}
 
 		protected override void Update(GameTime gameTime)

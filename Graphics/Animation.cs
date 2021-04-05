@@ -33,9 +33,9 @@ namespace HololiveFightingGame.Graphics
 		}
 
 		public Animation()
-        {
+		{
 
-        }
+		}
 
 		public Animation(int id, int length, bool auto, string next = null)
 		{
