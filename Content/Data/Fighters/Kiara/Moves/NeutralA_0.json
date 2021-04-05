@@ -29,6 +29,7 @@
 		"0": 0,
 		"6": 1
 	},
+	"Sustain": 1,
 	"Animation": {
 		"AnimID": 3,
 		"Frames": 2,

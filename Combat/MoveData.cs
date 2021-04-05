@@ -15,6 +15,7 @@ namespace HololiveFightingGame.Combat
 		public Dictionary<string, int> AnimationFrames { get; set; }
 		public int LeadInto { get; set; }
 		public Dictionary<string, VectorLoader> Motion { get; set; }
+		public float Sustain { get; set; }
 		public Animation Animation { get; set; }
 
 		public class DataHitbox

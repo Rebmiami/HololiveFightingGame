@@ -13,6 +13,7 @@ namespace HololiveFightingGame.Combat
 		public bool[] enabled;
 		public Vector2[] pos;
 		public Vector2[] vel;
+		public Vector2 motion;
 		public int frame;
 
 		public Move move;
@@ -33,7 +34,8 @@ namespace HololiveFightingGame.Combat
 				pos[i] = Vector2.Zero;
 				vel[i] = Vector2.Zero;
 			}
-			Update(data.MoveDuration);
+			motion = Vector2.Zero;
+			// Update(data.MoveDuration);
 		}
 
 		public void Update(int time)
@@ -51,6 +53,9 @@ namespace HololiveFightingGame.Combat
 			}
 			if (data.AnimationFrames.ContainsKey(time.ToString()))
 				frame = data.AnimationFrames[time.ToString()];
+
+			if (data.Motion != null && data.Motion.ContainsKey(time.ToString()))
+			 	motion = data.Motion[time.ToString()];
 		}
 	}
 }

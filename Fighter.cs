@@ -67,6 +67,52 @@ namespace HololiveFightingGame
 				velocity = Vector2.Clamp(velocity, -maxVelocity, maxVelocity);
 			}
 
+			// Takes player inputs to perform actions
+			if (launchTimer == 0)
+			{
+				if (KeybindHandler.TapJump(keyboard, ID) && jumps < 2)
+				{
+					if (jumps == 0)
+					{
+						velocity.Y = -10;
+					}
+					else
+					{
+						velocity.Y = -8;
+					}
+					coyote = 0;
+					grounded = false;
+					jumps++;
+				}
+
+				// TODO: Change this to accept more move types
+				// Reworking keybinds may be necessary
+				if (KeybindHandler.TapAtkNormal(keyboard, ID) && moveTimer == 0)
+				{
+					moveRunner = new MoveRunner(FighterLoader.moves[character]["NeutralA_0"]);
+					moveTimer = moveRunner.data.MoveDuration;
+				}
+
+				if (KeybindHandler.TapAtkSecond(keyboard, ID) && moveTimer == 0)
+				{
+					moveRunner = new MoveRunner(FighterLoader.moves[character]["NeutralB_0"]);
+					moveTimer = moveRunner.data.MoveDuration;
+				}
+			}
+			else
+			{
+				launchTimer--;
+			}
+
+			if (moveRunner != null)
+			{
+				Vector2 oldVelocity = velocity;
+				moveRunner.Update(moveTimer);
+				if (moveRunner.motion != null)
+					velocity = moveRunner.motion * new Vector2(direction, 1);
+				velocity = Vector2.Lerp(velocity, oldVelocity, moveRunner.data.Sustain);
+			}
+
 			base.Update();
 
 			Rectangle stageCollider = Game1.gameState.stage.collider.Rectangle;
@@ -113,44 +159,7 @@ namespace HololiveFightingGame
 				}
 			}
 
-			moveRunner?.Update(moveTimer);
-
-			// Takes player inputs to perform actions
-			if (launchTimer == 0)
-			{
-				if (KeybindHandler.TapJump(keyboard, ID) && jumps < 2)
-				{
-					if (jumps == 0)
-					{
-						velocity.Y = -10;
-					}
-					else
-					{
-						velocity.Y = -8;
-					}
-					coyote = 0;
-					grounded = false;
-					jumps++;
-				}
-
-				// TODO: Change this to accept more move types
-				// Reworking keybinds may be necessary
-				if (KeybindHandler.TapAtkNormal(keyboard, ID) && moveTimer == 0)
-				{
-					moveRunner = new MoveRunner(FighterLoader.moves[character]["NeutralA_0"]);
-					moveTimer = moveRunner.data.MoveDuration;
-				}
-
-				if (KeybindHandler.TapAtkSecond(keyboard, ID) && moveTimer == 0)
-				{
-					moveRunner = new MoveRunner(FighterLoader.moves[character]["NeutralB_0"]);
-					moveTimer = moveRunner.data.MoveDuration;
-				}
-			}
-			else
-			{
-				launchTimer--;
-			}
+			
 
 			// Checks if an attack is hitting an opponent and, if so, tells the opponent to be hit by the attack.
 			if (moveTimer > 0)

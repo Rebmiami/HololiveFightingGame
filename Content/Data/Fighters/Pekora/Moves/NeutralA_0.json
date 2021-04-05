@@ -1,38 +1,39 @@
 {
-  "MoveDuration": 16,
-  "Name": "NeutralA_0",
-  "Hitboxes": [
-    {
-      "Damage": 103,
-      "Angle": 45,
-      "Launch": 14,
-      "Origin": {
-        "X": 0,
-        "Y": 0
-      },
-      "Length": {
-        "X": 25,
-        "Y": 0
-      },
-      "Radius": 5,
-      "Enabled": false,
-      "Priority": 5,
-      "Motion": {
-      },
-      "Activation": {
-        "6": true,
-        "9": false
-      }
-    }
-  ],
-  "AnimationFrames": {
-    "0": 0,
-    "6": 1
-  },
-  "Animation": {
-    "AnimID": 3,
-    "Frames": 2,
-    "AutoAnimate": false,
-    "NextAnim": "neutral"
-  }
+	"MoveDuration": 16,
+	"Name": "NeutralA_0",
+	"Hitboxes": [
+		{
+			"Damage": 103,
+			"Angle": 45,
+			"Launch": 14,
+			"Origin": {
+				"X": 0,
+				"Y": 0
+			},
+			"Length": {
+				"X": 25,
+				"Y": 0
+			},
+			"Radius": 5,
+			"Enabled": false,
+			"Priority": 5,
+			"Motion": {
+			},
+			"Activation": {
+				"6": true,
+				"9": false
+			}
+		}
+	],
+	"AnimationFrames": {
+		"0": 0,
+		"6": 1
+	},
+	"Sustain": 1,
+	"Animation": {
+		"AnimID": 3,
+		"Frames": 2,
+		"AutoAnimate": false,
+		"NextAnim": "neutral"
+	}
 }
