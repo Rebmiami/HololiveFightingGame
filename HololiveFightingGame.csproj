@@ -26,6 +26,12 @@
 	<ItemGroup>
 		<PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.0.1641" />
 		<PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.0.1641" />
+		<PackageReference Include="System.Security.Permissions" Version="5.0.0" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Reference Include="System.Windows.Forms">
+	    <HintPath>..\..\..\..\..\Windows\Microsoft.NET\Framework\v4.0.30319\System.Windows.Forms.dll</HintPath>
+	  </Reference>
 	</ItemGroup>
 	<ItemGroup>
 		<None Update="Content\Assets\GameUI.png">
