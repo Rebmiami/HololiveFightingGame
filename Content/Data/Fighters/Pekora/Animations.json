@@ -17,18 +17,6 @@
 		"AutoAnimate": false,
 		"NextAnim": null
 	},
-	"NeutralA_0": {
-		"AnimID": 3,
-		"Frames": 2,
-		"AutoAnimate": false,
-		"NextAnim": "neutral"
-	},
-	"NeutralB_0": {
-		"AnimID": 3,
-		"Frames": 2,
-		"AutoAnimate": false,
-		"NextAnim": "neutral"
-	},
 	"launch": {
 		"AnimID": 4,
 		"Frames": 1,

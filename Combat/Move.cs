@@ -16,17 +16,17 @@ namespace HololiveFightingGame.Combat
 		/// <summary>
 		/// Sets up the attack's hitboxes and dictates how the hitboxes should change over time
 		/// </summary>
-		public MoveData moveData;
+		public MoveData Data;
 
 		public void SetupMove()
 		{
 			Game1.jsonLoaderFilePath = @".\Content\Data\Moves\PekoraMoves.json";
 			string json = System.IO.File.ReadAllText(Game1.jsonLoaderFilePath);
-			moveData = (MoveData)JsonSerializer.Deserialize(json, typeof(MoveData), GameLoader.SerializerOptions);
-			hitboxes = new AttackHitbox[moveData.Hitboxes.Length];
-			for (int i = 0; i < moveData.Hitboxes.Length; i++)
+			Data = (MoveData)JsonSerializer.Deserialize(json, typeof(MoveData), GameLoader.SerializerOptions);
+			hitboxes = new AttackHitbox[Data.Hitboxes.Length];
+			for (int i = 0; i < Data.Hitboxes.Length; i++)
 			{
-				MoveData.DataHitbox data = moveData.Hitboxes[i];
+				MoveData.DataHitbox data = Data.Hitboxes[i];
 				AttackHitbox hitbox = new AttackHitbox
 				{
 					damage = data.Damage,
@@ -48,11 +48,11 @@ namespace HololiveFightingGame.Combat
 		{
 			Game1.jsonLoaderFilePath = @".\Content\Data\Fighters\" + fighter + @"\Moves\" + move + ".json";
 			string json = System.IO.File.ReadAllText(Game1.jsonLoaderFilePath);
-			moveData = (MoveData)JsonSerializer.Deserialize(json, typeof(MoveData), GameLoader.SerializerOptions);
-			hitboxes = new AttackHitbox[moveData.Hitboxes.Length];
-			for (int i = 0; i < moveData.Hitboxes.Length; i++)
+			Data = (MoveData)JsonSerializer.Deserialize(json, typeof(MoveData), GameLoader.SerializerOptions);
+			hitboxes = new AttackHitbox[Data.Hitboxes.Length];
+			for (int i = 0; i < Data.Hitboxes.Length; i++)
 			{
-				MoveData.DataHitbox data = moveData.Hitboxes[i];
+				MoveData.DataHitbox data = Data.Hitboxes[i];
 				AttackHitbox hitbox = new AttackHitbox
 				{
 					damage = data.Damage,

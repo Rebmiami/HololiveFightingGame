@@ -97,6 +97,7 @@ namespace HololiveFightingGame
 			GraphicsHandler.main = new InGamePreset();
 			gameState = new GameState(fighters);
 			FighterLoader.LoadMoves(fighters);
+			FighterLoader.LoadAnimations(gameState.fighters);
 			uiHandler = new UIHandler();
 		}
 

@@ -293,26 +293,29 @@ namespace HololiveFightingGame
 
 		public Fighter(int ID, string character)
 		{
+			// Moves are loaded in FighterLoader.cs, not here.
+
 			this.ID = ID;
 			this.character = character;
 
 			// TODO: Offload loading of animations to fighter loader
 
-			//collider = new Collider(new Rectangle());
 			collider = new Collider(new Capsule(position, new Vector2(0, -26), 19));
 			colliderOrigin = new Vector2(-1, -1);
 			colliderOffset = Vector2.Zero;
 			//Dimensions = new Vector2(38, 64);
 			position = new Vector2(300, 0);
+
 			grounded = true;
+
 			GraphicsHandler.main.children["game"].children.Add("fighter_" + ID, new DrawObject(DrawObjectType.Sprite));
 			drawObject = GraphicsHandler.main.children["game"].children["fighter_" + ID];
 			drawObject.texture = new AnimatedSprite(Assets.testFighter, new Point(50, 80));
-            Game1.jsonLoaderFilePath = @".\Content\Data\Fighters\" + this.character + @"\Animations.json";
-			string json = System.IO.File.ReadAllText(Game1.jsonLoaderFilePath);
-			((AnimatedSprite)drawObject.texture).animations = (Dictionary<string, Animation>)JsonSerializer.Deserialize(json, typeof(Dictionary<string, Animation>));
-			((AnimatedSprite)drawObject.texture).SetAnimFrames();
+
+			
+
 			// TODO: Load attack animations alongside the move they're associated with
+
 			drawObject.frame = "neutral";
 			attacks = new List<Attack>();
 		}

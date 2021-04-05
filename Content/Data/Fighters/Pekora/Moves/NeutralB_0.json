@@ -28,5 +28,11 @@
 	"AnimationFrames": {
 		"0": 0,
 		"12": 1
+	},
+	"Animation": {
+		"AnimID": 3,
+		"Frames": 2,
+		"AutoAnimate": false,
+		"NextAnim": "neutral"
 	}
 }

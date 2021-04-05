@@ -22,14 +22,14 @@ namespace HololiveFightingGame.Combat
 		public MoveRunner(Move move)
 		{
 			this.move = move;
-			data = move.moveData;
+			data = move.Data;
 			name = data.Name;
 			enabled = new bool[move.hitboxes.Length];
 			pos = new Vector2[move.hitboxes.Length];
 			vel = new Vector2[move.hitboxes.Length];
 			for (int i = 0; i < move.hitboxes.Length; i++)
 			{
-				enabled[i] = move.moveData.Hitboxes[i].Enabled;
+				enabled[i] = move.Data.Hitboxes[i].Enabled;
 				pos[i] = Vector2.Zero;
 				vel[i] = Vector2.Zero;
 			}
