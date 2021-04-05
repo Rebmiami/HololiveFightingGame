@@ -6,6 +6,6 @@ namespace HololiveFightingGame.MoveEditor
 {
 	public static class MovePreviewer
 	{
-		public static string Fighter;
+
 	}
 }

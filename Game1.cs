@@ -12,6 +12,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System;
+using HololiveFightingGame.MoveEditor;
 
 namespace HololiveFightingGame
 {
@@ -75,6 +76,8 @@ namespace HololiveFightingGame
 			Thread thread = new Thread(new ThreadStart(setup.Load));
 			thread.Start();
 
+			// TODO: Move following code to game loader.
+
 			Assets.testFighter = ImageLoader.LoadTexture(@".\Content\Assets\TestFighter.png", true);
 			Assets.testStage = ImageLoader.LoadTexture(@".\Content\Assets\TestStage.png", true);
 			language = new Language();
@@ -126,7 +129,10 @@ namespace HololiveFightingGame
 				case GameScreen.InGame:
 					gameState.Update();
 					if (KeyHelper.Pressed(Keys.F12))
+					{ 
 						gameScreen = GameScreen.Editor;
+						Editor.Load();
+					}
 					break;
 				case GameScreen.Editor:
 					break;
@@ -169,6 +175,7 @@ namespace HololiveFightingGame
 					GraphicsHandler.main.Draw(spriteBatch, new Transformation(Vector2.Zero, 2));
 					break;
 				case GameScreen.Editor:
+					GraphicsHandler.main.Draw(spriteBatch, new Transformation(Vector2.Zero, 1));
 					break;
 				case GameScreen.DeathScreen:
 					DrawDeathScreen();

@@ -307,25 +307,20 @@ namespace HololiveFightingGame
 			this.ID = ID;
 			this.character = character;
 
-			// TODO: Offload loading of animations to fighter loader
-
 			collider = new Collider(new Capsule(position, new Vector2(0, -26), 19));
 			colliderOrigin = new Vector2(-1, -1);
 			colliderOffset = Vector2.Zero;
 			//Dimensions = new Vector2(38, 64);
-			position = new Vector2(300, 0);
 
+			position = new Vector2(300, 0);
 			grounded = true;
 
+			// TODO: Offload this to another class so that fighter graphics in-editor can be handled differently
 			GraphicsHandler.main.children["game"].children.Add("fighter_" + ID, new DrawObject(DrawObjectType.Sprite));
 			drawObject = GraphicsHandler.main.children["game"].children["fighter_" + ID];
 			drawObject.texture = new AnimatedSprite(Assets.testFighter, new Point(50, 80));
 
-			
-
-			// TODO: Load attack animations alongside the move they're associated with
-
-			drawObject.frame = "neutral";
+			drawObject.frame = "neutral0";
 			attacks = new List<Attack>();
 		}
 
