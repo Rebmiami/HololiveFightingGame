@@ -9,13 +9,37 @@ namespace HololiveFightingGame.Combat
 {
 	public class MoveData
 	{
+		/// <summary>
+		/// The number of frames the move lasts for.
+		/// </summary>
 		public int MoveDuration { get; set; }
+		/// <summary>
+		/// The internal name of the move.
+		/// </summary>
 		public string Name { get; set; }
+		/// <summary>
+		/// The hitboxes of the move.
+		/// </summary>
 		public DataHitbox[] Hitboxes { get; set; }
+		/// <summary>
+		/// Which frames should be shown and when.
+		/// </summary>
 		public Dictionary<string, int> AnimationFrames { get; set; }
+		/// <summary>
+		/// Which part of the move should this move lead in to? This field is used for various things.
+		/// </summary>
 		public int LeadInto { get; set; }
+		/// <summary>
+		/// The velocity of the player as the move progresses.
+		/// </summary>
 		public Dictionary<string, VectorLoader> Motion { get; set; }
+		/// <summary>
+		/// How much of the player's existing momentum is preserved.
+		/// </summary>
 		public float Sustain { get; set; }
+		/// <summary>
+		/// The move animation.
+		/// </summary>
 		public Animation Animation { get; set; }
 
 		public class DataHitbox
