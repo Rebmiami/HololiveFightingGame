@@ -30,7 +30,7 @@ namespace HololiveFightingGame.MoveEditor
 
 		public static void Update()
 		{
-			if (KeyHelper.Pressed(Microsoft.Xna.Framework.Input.Keys.Multiply))
+			if (KeyHelper.Down(Microsoft.Xna.Framework.Input.Keys.LeftControl) && KeyHelper.Pressed(Microsoft.Xna.Framework.Input.Keys.O))
 			{
 				OpenFileDialog fighterSelect = new OpenFileDialog()
 				{
@@ -56,7 +56,7 @@ namespace HololiveFightingGame.MoveEditor
 		{
 			if (fighter == null)
 			{
-				spriteBatch.DrawString(Assets.font, "There is currently no fighter loaded.\nPress * to select a fighter.", Vector2.Zero, Color.White);
+				spriteBatch.DrawString(Assets.font, "There is currently no fighter loaded.\nPress CTRL+O to select a fighter.", Vector2.Zero, Color.White);
 			}
 			else
 			{
