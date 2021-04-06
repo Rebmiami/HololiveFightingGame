@@ -18,12 +18,16 @@ namespace HololiveFightingGame.MoveEditor
 	public static class Editor
 	{
 		public static Fighter fighter;
+		public static int cursor;
+		public static int items;
 
 		public static void Load()
 		{
 			// Unloads previously loaded graphics
 			GraphicsHandler.main.children.Clear();
 			GraphicsHandler.main.children.Add("game", new DrawObject(DrawObjectType.Layer));
+
+			items = Enum.GetNames(typeof(MoveType)).Length;
 
 			// MessageBox.Show("Welcome to the move editor!\n\nWhen you press \"OK\", you will be prompted to select a fighter to edit."); // If you need help at any point, you can press the * key to open documentation.\n\nThis message will only be shown once.", "Move Editor");
 		}
@@ -50,6 +54,24 @@ namespace HololiveFightingGame.MoveEditor
 					fighter.drawObject.position += new Vector2(100);
 				}
 			}
+
+			if (fighter != null)
+            {
+				if (KeyHelper.Pressed(Keys.W))
+                {
+					cursor -= 1;
+					if (cursor < 0)
+                    {
+						cursor = items - 1;
+                    }
+                }				
+
+				if (KeyHelper.Pressed(Keys.S))
+                {
+					cursor++;
+					cursor %= items;
+                }
+            }
 		}
 
 		public static void Draw(SpriteBatch spriteBatch)
@@ -67,6 +89,10 @@ namespace HololiveFightingGame.MoveEditor
                 for (int i = 0; i < attackNames.Length; i++)
                 {
 					string name = attackNames[i];
+					if (cursor == i)
+                    {
+						name = "> " + name;
+                    }
 					spriteBatch.DrawString(Assets.font, name, new Vector2(8, 8 + i * 16), Color.White);
 				}
 			}
