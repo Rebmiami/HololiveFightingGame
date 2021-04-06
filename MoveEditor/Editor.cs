@@ -11,7 +11,7 @@ using System.IO;
 using System.Security;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Windows.Forms;
+using Microsoft.Xna.Framework.Input;
 
 namespace HololiveFightingGame.MoveEditor
 {
@@ -30,9 +30,9 @@ namespace HololiveFightingGame.MoveEditor
 
 		public static void Update()
 		{
-			if (KeyHelper.Down(Microsoft.Xna.Framework.Input.Keys.LeftControl) && KeyHelper.Pressed(Microsoft.Xna.Framework.Input.Keys.O))
+			if (KeyHelper.Down(Keys.LeftControl) && KeyHelper.Pressed(Keys.O))
 			{
-				OpenFileDialog fighterSelect = new OpenFileDialog()
+				System.Windows.Forms.OpenFileDialog fighterSelect = new System.Windows.Forms.OpenFileDialog()
 				{
 					InitialDirectory = Game1.gamePath + @"\Content\Data\Fighters",
 					FileName = "[Name].json",
@@ -40,7 +40,7 @@ namespace HololiveFightingGame.MoveEditor
 					Title = "Select a fighter JSON file"
 				};
 				string selected = "";
-				if (fighterSelect.ShowDialog() == DialogResult.OK)
+				if (fighterSelect.ShowDialog() == System.Windows.Forms.DialogResult.OK)
 				{
 					selected = new Regex(@".+\\(.+)\..+").Replace(fighterSelect.FileName, "$1");
 					// Sets up a fighter to be edited
