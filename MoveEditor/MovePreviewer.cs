@@ -7,12 +7,12 @@ namespace HololiveFightingGame.MoveEditor
 {
 	public static class MovePreviewer
 	{
-		public static int Frame;
-		public static bool Playing;
-		public static bool Reverse;
-		public static float Speed;
+		public static int Frame = 0;
+		public static bool Playing = false;
+		public static bool Reverse = false;
+		public static float Speed = 1f;
 
-		public static Vector2 Pan;
-		public static int Zoom; 
+		public static Vector2 Pan = Vector2.Zero;
+		public static int Zoom = 1;
 	}
 }

@@ -60,7 +60,7 @@ namespace HololiveFightingGame.MoveEditor
 			}
 			else
 			{
-				GraphicsHandler.main.Draw(spriteBatch, new Transformation(Vector2.Zero, 1));
+				GraphicsHandler.main.Draw(spriteBatch, new Transformation(MovePreviewer.Pan, MovePreviewer.Zoom));
 			}
 		}
 	}
