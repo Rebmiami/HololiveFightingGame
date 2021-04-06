@@ -56,22 +56,22 @@ namespace HololiveFightingGame.MoveEditor
 			}
 
 			if (fighter != null)
-            {
+			{
 				if (KeyHelper.Pressed(Keys.W))
-                {
+				{
 					cursor -= 1;
 					if (cursor < 0)
-                    {
+					{
 						cursor = items - 1;
-                    }
-                }				
+					}
+				}				
 
 				if (KeyHelper.Pressed(Keys.S))
-                {
+				{
 					cursor++;
 					cursor %= items;
-                }
-            }
+				}
+			}
 		}
 
 		public static void Draw(SpriteBatch spriteBatch)
@@ -86,13 +86,26 @@ namespace HololiveFightingGame.MoveEditor
 
 				string[] attackNames = Enum.GetNames(typeof(MoveType));
 
-                for (int i = 0; i < attackNames.Length; i++)
-                {
+				for (int i = 0; i < attackNames.Length; i++)
+				{
 					string name = attackNames[i];
 					if (cursor == i)
-                    {
+					{
+						int count = 0;
+						foreach (Move move in FighterLoader.moves[fighter.character].Values)
+						{
+							if (move.Data.Name.Contains(name))
+							{
+								spriteBatch.DrawString(Assets.font, move.Data.Name, new Vector2(140, 8 + count * 16), Color.White);
+								count++;
+							}
+						}
+						if (count == 0)
+						{
+							spriteBatch.DrawString(Assets.font, "No moves.", new Vector2(140, 8), Color.White);
+						}
 						name = "> " + name;
-                    }
+					}
 					spriteBatch.DrawString(Assets.font, name, new Vector2(8, 8 + i * 16), Color.White);
 				}
 			}
