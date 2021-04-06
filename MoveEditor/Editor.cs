@@ -61,6 +61,14 @@ namespace HololiveFightingGame.MoveEditor
 			else
 			{
 				GraphicsHandler.main.Draw(spriteBatch, new Transformation(MovePreviewer.Pan, MovePreviewer.Zoom));
+
+				string[] attackNames = Enum.GetNames(typeof(MoveType));
+
+                for (int i = 0; i < attackNames.Length; i++)
+                {
+					string name = attackNames[i];
+					spriteBatch.DrawString(Assets.font, name, new Vector2(8, 8 + i * 16), Color.White);
+				}
 			}
 		}
 	}

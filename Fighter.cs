@@ -391,7 +391,6 @@ namespace HololiveFightingGame
 
 	public enum MoveType
 	{
-		None,
 		NeutralA,
 		SideA,
 		UpA,
@@ -408,6 +407,8 @@ namespace HololiveFightingGame
 		TDefend,
 		TSide,
 		TRecover,
-		TUltimate,
+		TFinisher1,
+		TFinisher2,
+		TFinisher3,
 	}
 }
