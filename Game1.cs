@@ -135,6 +135,7 @@ namespace HololiveFightingGame
 					}
 					break;
 				case GameScreen.Editor:
+					Editor.Update();
 					break;
 				case GameScreen.DeathScreen:
 					if (KeyHelper.Pressed(Keys.Enter))
@@ -175,7 +176,7 @@ namespace HololiveFightingGame
 					GraphicsHandler.main.Draw(spriteBatch, new Transformation(Vector2.Zero, 2));
 					break;
 				case GameScreen.Editor:
-					GraphicsHandler.main.Draw(spriteBatch, new Transformation(Vector2.Zero, 1));
+					Editor.Draw(spriteBatch);
 					break;
 				case GameScreen.DeathScreen:
 					DrawDeathScreen();
