@@ -88,6 +88,9 @@
 		<None Update="Content\Data\Language.json">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
+		<None Update="Content\Documentation\Editor.html">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
 		<None Update="Content\Documentation\Home.html">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
