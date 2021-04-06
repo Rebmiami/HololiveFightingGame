@@ -78,7 +78,7 @@ namespace HololiveFightingGame
 
 			// TODO: Move following code to game loader.
 
-			Assets.testFighter = ImageLoader.LoadTexture(@".\Content\Assets\TestFighter.png", true);
+			// Assets.testFighter = ImageLoader.LoadTexture(@".\Content\Assets\TestFighter.png", true);
 			Assets.testStage = ImageLoader.LoadTexture(@".\Content\Assets\TestStage.png", true);
 			language = new Language();
 			Assets.inGameUI = ImageLoader.LoadTexture(@".\Content\Assets\GameUI.png", true);

@@ -318,7 +318,7 @@ namespace HololiveFightingGame
 			// TODO: Offload this to another class so that fighter graphics in-editor can be handled differently
 			GraphicsHandler.main.children["game"].children.Add("fighter_" + ID, new DrawObject(DrawObjectType.Sprite));
 			drawObject = GraphicsHandler.main.children["game"].children["fighter_" + ID];
-			drawObject.texture = new AnimatedSprite(Assets.testFighter, new Point(50, 80));
+			
 
 			drawObject.frame = "neutral0";
 			attacks = new List<Attack>();

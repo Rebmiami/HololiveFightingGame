@@ -1,5 +1,7 @@
 ﻿using HololiveFightingGame.Graphics;
 using HololiveFightingGame.Loading;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -64,9 +66,12 @@ namespace HololiveFightingGame.Combat
 
 		public static void LoadAnimations(Fighter[] fighters)
 		{
-			// Sets up a fighter's animations.
+			// Sets up a fighter's sprite and animations.
 			foreach (Fighter fighter in fighters)
 			{
+				Texture2D fighterSprite = ImageLoader.LoadTexture(@".\Content\Data\Fighters\" + fighter.character + @"\Fighter.png", true);
+				fighter.drawObject.texture = new AnimatedSprite(fighterSprite, new Point(50, 80));
+
 				// Loads basic animations, such as idle, walking, jumping, etc.
 				Game1.jsonLoaderFilePath = @".\Content\Data\Fighters\" + fighter.character + @"\Animations.json";
 				string json = File.ReadAllText(Game1.jsonLoaderFilePath);

@@ -67,6 +67,9 @@
 		<None Update="Content\Data\Fighters\Kiara\Moves\NeutralB_0.json">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
+		<None Update="Content\Data\Fighters\Kiara\Fighter.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
 		<None Update="Content\Data\Fighters\Pekora\Animations.json">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
@@ -81,6 +84,9 @@
 		</None>
 		<None Update="Content\Data\Fighters\Pekora\Pekora.json">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="Content\Data\Fighters\Pekora\Fighter.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
 		<None Update="Content\Data\Language.json">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
