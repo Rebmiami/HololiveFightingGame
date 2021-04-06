@@ -21,6 +21,10 @@ namespace HololiveFightingGame.MoveEditor
 		public static int cursor;
 		public static int items;
 
+		public static EditorMenu[] menus;
+		public static int rightMenu;
+		public static int leftMenu;
+
 		public static void Load()
 		{
 			// Unloads previously loaded graphics
