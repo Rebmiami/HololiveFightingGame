@@ -7,7 +7,6 @@ namespace HololiveFightingGame.Loading
 {
     public class Assets
     {
-        public static Texture2D testFighter;
         public static Texture2D testStage;
         public static Texture2D inGameUI;
         public static SpriteFont font;

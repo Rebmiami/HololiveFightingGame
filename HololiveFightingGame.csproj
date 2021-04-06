@@ -37,9 +37,6 @@
 		<None Update="Content\Assets\GameUI.png">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
-		<None Update="Content\Assets\TestFighter.png">
-		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</None>
 		<None Update="Content\Assets\TestStage.png">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
