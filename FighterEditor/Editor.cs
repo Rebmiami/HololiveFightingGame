@@ -33,6 +33,12 @@ namespace HololiveFightingGame.FighterEditor
 			}
 		}
 
+		public static Move currentMove;
+		public static string currentAnimation;
+		// If currentMove is not null, then currentAnimation should always match the animation of currentMove.
+		// Find some way to ensure this is always the case?
+		// Note that animation names for moves are identical to the associated move's name.
+
 		public static void Load()
 		{
 			// Unloads previously loaded graphics
@@ -111,11 +117,18 @@ namespace HololiveFightingGame.FighterEditor
 			}
 		}
 
+		public static void Save()
+		{
+			// All changes made in editor are written to classes that can be directly serialized to JSON.
+			// TODO: Serialize fighter data and write to changed files
+			throw new NotImplementedException();
+		}
+
 		public static void Draw(SpriteBatch spriteBatch)
 		{
 			if (fighter == null)
 			{
-				spriteBatch.DrawString(Assets.font, "There is currently no fighter loaded.\nPress CTRL+O to select a fighter.", Vector2.Zero, Color.White);
+				spriteBatch.DrawString(Assets.font, "There is currently no fighter loaded.\nPress CTRL+O to select a fighter.", new Vector2(8), Color.White);
 			}
 			else
 			{

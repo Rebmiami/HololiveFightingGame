@@ -29,7 +29,7 @@ namespace HololiveFightingGame.FighterEditor.Menus
 					{
 						if (move.Data.Name.Contains(name))
 						{
-							spriteBatch.DrawString(Assets.font, move.Data.Name, new Vector2(140, 8 + count * 16), Color.White);
+							spriteBatch.DrawString(Assets.font, move.Data.Name, new Vector2(130, 8 + count * 16), Color.White);
 							count++;
 						}
 					}
