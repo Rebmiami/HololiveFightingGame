@@ -12,7 +12,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System;
-using HololiveFightingGame.MoveEditor;
+using HololiveFightingGame.FighterEditor;
 
 namespace HololiveFightingGame
 {

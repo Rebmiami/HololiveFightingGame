@@ -96,6 +96,6 @@
 		</None>
 	</ItemGroup>
 	<ItemGroup>
-	  <Folder Include="MoveEditor\MenuItems\" />
+	  <Folder Include="FighterEditor\MenuItems\" />
 	</ItemGroup>
 </Project>

@@ -2,20 +2,16 @@
 using HololiveFightingGame.Graphics;
 using HololiveFightingGame.Input;
 using HololiveFightingGame.Loading;
+using HololiveFightingGame.FighterEditor.Menus;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Security;
-using System.Text;
-using System.Text.RegularExpressions;
 using Microsoft.Xna.Framework.Input;
+using System;
+using System.Text.RegularExpressions;
 
-namespace HololiveFightingGame.MoveEditor
+namespace HololiveFightingGame.FighterEditor
 {
-	public static class Editor
+    public static class Editor
 	{
 		public static Fighter fighter;
 		public static int cursor;
@@ -36,6 +32,20 @@ namespace HololiveFightingGame.MoveEditor
 			GraphicsHandler.main.children.Add("game", new DrawObject(DrawObjectType.Layer));
 
 			items = Enum.GetNames(typeof(MoveType)).Length;
+
+			menus = new EditorMenu[]
+			{
+				new FileMenu(),
+				new FighterMenu(),
+				new MoveMenu(),
+				new AnimationMenu(),
+				new MoveEditor(),
+				new AnimationEditor(),
+				new HurtboxEditor(),
+				new HitboxEditor()
+			};
+			rightMenu = 0;
+			leftMenu = 4;
 
 			// MessageBox.Show("Welcome to the move editor!\n\nWhen you press \"OK\", you will be prompted to select a fighter to edit."); // If you need help at any point, you can press the * key to open documentation.\n\nThis message will only be shown once.", "Move Editor");
 		}

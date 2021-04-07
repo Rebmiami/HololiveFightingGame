@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace HololiveFightingGame.MoveEditor.Menus
+namespace HololiveFightingGame.FighterEditor.Menus
 {
 	class FighterMenu : EditorMenu
 	{

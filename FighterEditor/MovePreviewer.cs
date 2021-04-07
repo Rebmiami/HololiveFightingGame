@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace HololiveFightingGame.MoveEditor
+namespace HololiveFightingGame.FighterEditor
 {
 	public static class MovePreviewer
 	{
