@@ -11,7 +11,7 @@ using System.Text.RegularExpressions;
 
 namespace HololiveFightingGame.FighterEditor
 {
-    public static class Editor
+	public static class Editor
 	{
 		public static Fighter fighter;
 		public static int cursor;
@@ -24,6 +24,14 @@ namespace HololiveFightingGame.FighterEditor
 		public static int activeMenu;
 
 		public static EditorMenuItem menuItem;
+
+		public static int ActiveMenu
+		{
+			get
+			{
+				return activeMenu == 0 ? rightMenu : leftMenu;
+			}
+		}
 
 		public static void Load()
 		{
@@ -44,7 +52,7 @@ namespace HololiveFightingGame.FighterEditor
 				new HurtboxEditor(),
 				new HitboxEditor()
 			};
-			rightMenu = 0;
+			rightMenu = 2;
 			leftMenu = 4;
 
 			// MessageBox.Show("Welcome to the move editor!\n\nWhen you press \"OK\", you will be prompted to select a fighter to edit."); // If you need help at any point, you can press the * key to open documentation.\n\nThis message will only be shown once.", "Move Editor");
@@ -69,7 +77,9 @@ namespace HololiveFightingGame.FighterEditor
 					fighter = new Fighter(0, selected);
 					FighterLoader.LoadMoves(new Fighter[] { fighter });
 					FighterLoader.LoadAnimations(new Fighter[] { fighter });
-					fighter.drawObject.position += new Vector2(100);
+					fighter.Bottom = Program.WindowBounds().Size.ToVector2() / 2;
+
+					fighter.drawObject.Bottom = fighter.Bottom;
 				}
 			}
 
@@ -83,17 +93,17 @@ namespace HololiveFightingGame.FighterEditor
 
 				if (KeyHelper.Pressed(Keys.W))
 				{
-					cursor -= 1;
-					if (cursor < 0)
+					menus[ActiveMenu].cursor -= 1;
+					if (menus[ActiveMenu].cursor < 0)
 					{
-						cursor = items - 1;
+						menus[ActiveMenu].cursor = menus[ActiveMenu].itemCount - 1;
 					}
 				}				
 
 				if (KeyHelper.Pressed(Keys.S))
 				{
-					cursor++;
-					cursor %= items;
+					menus[ActiveMenu].cursor++;
+					menus[ActiveMenu].cursor %= menus[ActiveMenu].itemCount;
 				}
 			}
 		}
@@ -108,30 +118,8 @@ namespace HololiveFightingGame.FighterEditor
 			{
 				GraphicsHandler.main.Draw(spriteBatch, new Transformation(MovePreviewer.Pan, MovePreviewer.Zoom));
 
-				string[] attackNames = Enum.GetNames(typeof(MoveType));
-
-				for (int i = 0; i < attackNames.Length; i++)
-				{
-					string name = attackNames[i];
-					if (cursor == i)
-					{
-						int count = 0;
-						foreach (Move move in FighterLoader.moves[fighter.character].Values)
-						{
-							if (move.Data.Name.Contains(name))
-							{
-								spriteBatch.DrawString(Assets.font, move.Data.Name, new Vector2(140, 8 + count * 16), Color.White);
-								count++;
-							}
-						}
-						if (count == 0)
-						{
-							spriteBatch.DrawString(Assets.font, "No moves.", new Vector2(140, 8), Color.White);
-						}
-						name = "> " + name;
-					}
-					spriteBatch.DrawString(Assets.font, name, new Vector2(8, 8 + i * 16), Color.White);
-				}
+				menus[rightMenu].Draw(spriteBatch, true);
+				menus[leftMenu].Draw(spriteBatch, false);
 			}
 		}
 	}

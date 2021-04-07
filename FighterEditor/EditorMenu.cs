@@ -5,12 +5,14 @@ using System.Text;
 
 namespace HololiveFightingGame.FighterEditor
 {
-	public class EditorMenu
+	public abstract class EditorMenu
 	{
 		public EditorMenuItem[] items;
 		public int cursor;
 
-		public void Draw(SpriteBatch spriteBatch)
+		public int itemCount;
+
+		public virtual void Draw(SpriteBatch spriteBatch, bool rightMenu)
 		{
 
 		}
