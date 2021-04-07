@@ -15,9 +15,15 @@ namespace HololiveFightingGame.FighterEditor.Menus
 			itemCount = Enum.GetNames(typeof(MoveType)).Length;
 		}
 
-        public override void Draw(SpriteBatch spriteBatch, bool rightMenu)
-        {
+		public override void Draw(SpriteBatch spriteBatch, bool rightMenu)
+		{
 			string[] attackNames = Enum.GetNames(typeof(MoveType));
+
+			Vector2 origin = new Vector2(8, 8);
+			if (rightMenu)
+			{
+				origin.X += 550;
+			}
 
 			for (int i = 0; i < attackNames.Length; i++)
 			{
@@ -29,19 +35,19 @@ namespace HololiveFightingGame.FighterEditor.Menus
 					{
 						if (move.Data.Name.Contains(name))
 						{
-							spriteBatch.DrawString(Assets.font, move.Data.Name, new Vector2(130, 8 + count * 16), Color.White);
+							spriteBatch.DrawString(Assets.font, move.Data.Name, origin + new Vector2(120, count * 16), Color.White);
 							count++;
 						}
 					}
 					if (count == 0)
 					{
-						spriteBatch.DrawString(Assets.font, "No moves.", new Vector2(130, 8), Color.White);
+						spriteBatch.DrawString(Assets.font, "No moves.", origin + new Vector2(120, 0), Color.White);
 					}
 					name = "> " + name;
 				}
-				spriteBatch.DrawString(Assets.font, name, new Vector2(8, 8 + i * 16), Color.White);
+				spriteBatch.DrawString(Assets.font, name, origin + new Vector2(0, i * 16), Color.White);
 			}
 			base.Draw(spriteBatch, rightMenu);
-        }
-    }
+		}
+	}
 }

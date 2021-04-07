@@ -18,8 +18,8 @@ namespace HololiveFightingGame.FighterEditor
 		public static int items;
 
 		public static EditorMenu[] menus;
-		public static int rightMenu;
 		public static int leftMenu;
+		public static int rightMenu;
 
 		public static int activeMenu;
 
@@ -29,7 +29,7 @@ namespace HololiveFightingGame.FighterEditor
 		{
 			get
 			{
-				return activeMenu == 0 ? rightMenu : leftMenu;
+				return activeMenu == 1 ? rightMenu : leftMenu;
 			}
 		}
 
@@ -58,8 +58,8 @@ namespace HololiveFightingGame.FighterEditor
 				new HurtboxEditor(),
 				new HitboxEditor()
 			};
-			rightMenu = 2;
-			leftMenu = 4;
+			leftMenu = 2;
+			rightMenu = 4;
 
 			// MessageBox.Show("Welcome to the move editor!\n\nWhen you press \"OK\", you will be prompted to select a fighter to edit."); // If you need help at any point, you can press the * key to open documentation.\n\nThis message will only be shown once.", "Move Editor");
 		}
@@ -95,6 +95,33 @@ namespace HololiveFightingGame.FighterEditor
 				{
 					activeMenu++;
 					activeMenu %= 2;
+				}
+
+				for (int i = 0; i < menus.Length; i++)
+				{
+					if (KeyHelper.Pressed((Keys)(i + 49)))
+					{
+						if (KeyHelper.Down(Keys.LeftShift))
+						{
+							if (leftMenu == i)
+							{
+								leftMenu = rightMenu;
+								activeMenu++;
+								activeMenu %= 2;
+							}
+							rightMenu = i;
+						}
+						else
+						{
+							if (rightMenu == i)
+							{
+								rightMenu = leftMenu;
+								activeMenu++;
+								activeMenu %= 2;
+							}
+							leftMenu = i;
+                        }
+					}
 				}
 
 				if (menus[ActiveMenu].itemCount > 0)
@@ -134,8 +161,8 @@ namespace HololiveFightingGame.FighterEditor
 			{
 				GraphicsHandler.main.Draw(spriteBatch, new Transformation(MovePreviewer.Pan, MovePreviewer.Zoom));
 
-				menus[rightMenu].Draw(spriteBatch, true);
 				menus[leftMenu].Draw(spriteBatch, false);
+				menus[rightMenu].Draw(spriteBatch, true);
 			}
 		}
 	}
