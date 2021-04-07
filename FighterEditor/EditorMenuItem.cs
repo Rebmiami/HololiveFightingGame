@@ -34,7 +34,8 @@ namespace HololiveFightingGame.FighterEditor
 		}
 
 		/// <summary>
-		/// Called when pressing Escape to exit a mid-level menu item or pressing Enter to confirm edits made to a lowest-level menu item.
+		/// Called when pressing Escape to exit a mid-level menu item or pressing Enter to confirm edits made to a lowest-level menu item. <br />
+		/// Use "ref" keyword to reference variables to write to, because you can't make references to value types.
 		/// </summary>
 		public virtual void Escape()
 		{
