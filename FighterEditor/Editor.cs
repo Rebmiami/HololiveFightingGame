@@ -91,19 +91,22 @@ namespace HololiveFightingGame.FighterEditor
 					activeMenu %= 2;
 				}
 
-				if (KeyHelper.Pressed(Keys.W))
+				if (menus[ActiveMenu].itemCount > 0)
 				{
-					menus[ActiveMenu].cursor -= 1;
-					if (menus[ActiveMenu].cursor < 0)
+					if (KeyHelper.Pressed(Keys.W))
 					{
-						menus[ActiveMenu].cursor = menus[ActiveMenu].itemCount - 1;
+						menus[ActiveMenu].cursor -= 1;
+						if (menus[ActiveMenu].cursor < 0)
+						{
+							menus[ActiveMenu].cursor = menus[ActiveMenu].itemCount - 1;
+						}
 					}
-				}				
 
-				if (KeyHelper.Pressed(Keys.S))
-				{
-					menus[ActiveMenu].cursor++;
-					menus[ActiveMenu].cursor %= menus[ActiveMenu].itemCount;
+					if (KeyHelper.Pressed(Keys.S))
+					{
+						menus[ActiveMenu].cursor++;
+						menus[ActiveMenu].cursor %= menus[ActiveMenu].itemCount;
+					}
 				}
 			}
 		}
