@@ -95,7 +95,4 @@
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
 	</ItemGroup>
-	<ItemGroup>
-	  <Folder Include="FighterEditor\MenuItems\" />
-	</ItemGroup>
 </Project>

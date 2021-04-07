@@ -23,8 +23,6 @@ namespace HololiveFightingGame.FighterEditor
 
 		public static int activeMenu;
 
-		public static EditorMenuItem menuItem;
-
 		public static int ActiveMenu
 		{
 			get
