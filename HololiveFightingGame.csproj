@@ -95,4 +95,8 @@
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
 	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="MoveEditor\Menus\" />
+	  <Folder Include="MoveEditor\MenuItems\" />
+	</ItemGroup>
 </Project>

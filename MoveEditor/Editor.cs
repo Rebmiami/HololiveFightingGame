@@ -25,6 +25,10 @@ namespace HololiveFightingGame.MoveEditor
 		public static int rightMenu;
 		public static int leftMenu;
 
+		public static int activeMenu;
+
+		public static EditorMenuItem menuItem;
+
 		public static void Load()
 		{
 			// Unloads previously loaded graphics
@@ -61,6 +65,12 @@ namespace HololiveFightingGame.MoveEditor
 
 			if (fighter != null)
 			{
+				if (KeyHelper.Pressed(Keys.Tab))
+				{
+					activeMenu++;
+					activeMenu %= 2;
+				}
+
 				if (KeyHelper.Pressed(Keys.W))
 				{
 					cursor -= 1;

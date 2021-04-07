@@ -4,26 +4,26 @@ using System.Text;
 
 namespace HololiveFightingGame.MoveEditor
 {
-	public class EditorMenuItem
+	public abstract class EditorMenuItem
 	{
-		public void Enter()
-        {
+		public virtual void Enter()
+		{
+			Editor.menuItem = this;
+		}
 
-        }
+		public virtual void Erase()
+		{
 
-		public void Erase()
-        {
+		}
 
-        }
+		public virtual void Edit()
+		{
 
-        public void Edit()
-        {
+		}
 
-        }
-
-		public void Escape()
-        {
-
-        }
+		public virtual void Escape()
+		{
+			Editor.menuItem = null;
+		}
 	}
 }
