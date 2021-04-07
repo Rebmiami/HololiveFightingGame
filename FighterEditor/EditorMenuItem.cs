@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace HololiveFightingGame.FighterEditor
 {
-	public abstract class EditorMenuItem
+    public abstract class EditorMenuItem
 	{
 		public virtual void Enter()
 		{
@@ -24,6 +23,13 @@ namespace HololiveFightingGame.FighterEditor
 		public virtual void Escape()
 		{
 			Editor.menuItem = null;
+		}
+
+		public bool selected;
+
+		public virtual void Draw(SpriteBatch spriteBatch, Vector2 position)
+		{
+
 		}
 	}
 }
