@@ -151,14 +151,22 @@ namespace HololiveFightingGame.FighterEditor
 
 		public static void Draw(SpriteBatch spriteBatch)
 		{
+			if (fighter != null)
+			{
+				GraphicsHandler.main.Draw(spriteBatch, new Transformation(MovePreviewer.Pan, MovePreviewer.Zoom));
+			}
+
+			spriteBatch.End();
+			spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.PointClamp);
+
+			// Button.Draw(spriteBatch, new Rectangle(2, 2, 40, 30));
+
 			if (fighter == null)
 			{
 				spriteBatch.DrawString(Assets.font, "There is currently no fighter loaded.\nPress CTRL+O to select a fighter.", new Vector2(8), Color.White);
 			}
 			else
 			{
-				GraphicsHandler.main.Draw(spriteBatch, new Transformation(MovePreviewer.Pan, MovePreviewer.Zoom));
-
 				menus[leftMenu].Draw(spriteBatch, false);
 				menus[rightMenu].Draw(spriteBatch, true);
 			}
