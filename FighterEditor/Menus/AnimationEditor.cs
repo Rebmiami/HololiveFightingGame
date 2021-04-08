@@ -14,7 +14,7 @@ namespace HololiveFightingGame.FighterEditor.Menus
 			Vector2 origin = new Vector2(8, 8);
 			if (rightMenu)
 			{
-				origin.X += 550;
+				origin.X += 546;
 			}
 
 			spriteBatch.DrawString(Assets.font, "Animation Editor", origin, Color.White);

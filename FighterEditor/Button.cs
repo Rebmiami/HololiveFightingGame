@@ -23,7 +23,7 @@ namespace HololiveFightingGame.FighterEditor
 			new Rectangle(7, 7, 2, 2)
 		};
 
-		public static void Draw(SpriteBatch spriteBatch, Rectangle dimensions)
+		public static void Draw(SpriteBatch spriteBatch, Rectangle dimensions, int flavor = 0)
 		{
 			for (int i = 0; i < 3; i++)
 			{
@@ -50,6 +50,8 @@ namespace HololiveFightingGame.FighterEditor
 					{
 						destination.Y += dimensions.Height - 2;
 					}
+
+					source.Y += flavor * 10;
 
 					spriteBatch.Draw(Assets.editorButton, destination, source, Color.White); //, 0, Vector2.Zero, SpriteEffects.None, 0);
 				}

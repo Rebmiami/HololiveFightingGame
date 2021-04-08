@@ -22,7 +22,7 @@ namespace HololiveFightingGame.FighterEditor.Menus
 			Vector2 origin = new Vector2(8, 8);
 			if (rightMenu)
 			{
-				origin.X += 550;
+				origin.X += 546;
 			}
 
 			for (int i = 0; i < attackNames.Length; i++)
@@ -35,7 +35,7 @@ namespace HololiveFightingGame.FighterEditor.Menus
 					{
 						if (move.Data.Name.Contains(name))
 						{
-							spriteBatch.DrawString(Assets.font, move.Data.Name, origin + new Vector2(120, count * 16), Color.White);
+							spriteBatch.DrawString(Assets.font, move.Data.Name, origin + new Vector2(120, count * 18), Color.White);
 							count++;
 						}
 					}
@@ -45,7 +45,7 @@ namespace HololiveFightingGame.FighterEditor.Menus
 					}
 					name = "> " + name;
 				}
-				spriteBatch.DrawString(Assets.font, name, origin + new Vector2(0, i * 16), Color.White);
+				spriteBatch.DrawString(Assets.font, name, origin + new Vector2(0, i * 18), Color.White);
 			}
 			base.Draw(spriteBatch, rightMenu);
 		}
