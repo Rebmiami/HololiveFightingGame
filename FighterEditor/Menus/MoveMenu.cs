@@ -35,7 +35,8 @@ namespace HololiveFightingGame.FighterEditor.Menus
 					{
 						if (move.Data.Name.Contains(name))
 						{
-							spriteBatch.DrawString(Assets.font, move.Data.Name, origin + new Vector2(120, count * 18), Color.White);
+							Button.Draw(spriteBatch, new Rectangle((int)origin.X - 2 + 120, (int)origin.Y - 2 + count * 20, 100, 20), cursor == i ? 1 : 0);
+							spriteBatch.DrawString(Assets.font, move.Data.Name, origin + new Vector2(120, count * 20), Color.White);
 							count++;
 						}
 					}
@@ -43,9 +44,9 @@ namespace HololiveFightingGame.FighterEditor.Menus
 					{
 						spriteBatch.DrawString(Assets.font, "No moves.", origin + new Vector2(120, 0), Color.White);
 					}
-					name = "> " + name;
 				}
-				spriteBatch.DrawString(Assets.font, name, origin + new Vector2(0, i * 18), Color.White);
+				Button.Draw(spriteBatch, new Rectangle((int)origin.X - 2, (int)origin.Y - 2 + i * 20, 100, 20), cursor == i ? 1 : 0);
+				spriteBatch.DrawString(Assets.font, name, origin + new Vector2(0, i * 20), Color.White);
 			}
 			base.Draw(spriteBatch, rightMenu);
 		}

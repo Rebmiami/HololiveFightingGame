@@ -21,6 +21,9 @@ namespace HololiveFightingGame.FighterEditor
 		public static int leftMenu;
 		public static int rightMenu;
 
+		public const int panelOffset = 546;
+		// TODO: Make this dependent on screen size (when resizing screens is implemented)
+
 		public static int activeMenu;
 
 		public static int ActiveMenu
@@ -168,7 +171,7 @@ namespace HololiveFightingGame.FighterEditor
 				Button.Draw(spriteBatch, new Rectangle(2, 2, 250, 420), activeMenu == 0 ? 2 : 0);
 				menus[leftMenu].Draw(spriteBatch, false);
 
-				Button.Draw(spriteBatch, new Rectangle(548, 2, 250, 420), activeMenu == 1 ? 2 : 0);
+				Button.Draw(spriteBatch, new Rectangle(2 + panelOffset, 2, 250, 420), activeMenu == 1 ? 2 : 0);
 				menus[rightMenu].Draw(spriteBatch, true);
 			}
 		}
