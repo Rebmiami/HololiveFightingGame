@@ -14,8 +14,6 @@ namespace HololiveFightingGame.FighterEditor
 	public static class Editor
 	{
 		public static Fighter fighter;
-		public static int cursor;
-		public static int items;
 
 		public static EditorMenu[] menus;
 		public static int leftMenu;
@@ -39,28 +37,34 @@ namespace HololiveFightingGame.FighterEditor
 		// If currentMove is not null, then currentAnimation should always match the animation of currentMove.
 		// Find some way to ensure this is always the case?
 		// Note that animation names for moves are identical to the associated move's name.
+		// Perhaps use the MoveType_# format for moves and single words for animations?
+		public static string CurrentActionName
+		{
+			get
+			{
+				if (CurrentActionIsMove)
+				{
+					return currentMove.Data.Name;
+				}
+				else
+				{
+					return currentAnimation;
+				}
+			}
+		}
+		public static bool CurrentActionIsMove
+		{
+			get
+			{
+				return currentMove != null;
+			}
+		}
 
 		public static void Load()
 		{
 			// Unloads previously loaded graphics
 			GraphicsHandler.main.children.Clear();
 			GraphicsHandler.main.children.Add("game", new DrawObject(DrawObjectType.Layer));
-
-			items = Enum.GetNames(typeof(MoveType)).Length;
-
-			menus = new EditorMenu[]
-			{
-				new FileMenu(),
-				new FighterMenu(),
-				new MoveMenu(),
-				new AnimationMenu(),
-				new MoveEditor(),
-				new AnimationEditor(),
-				new HurtboxEditor(),
-				new HitboxEditor()
-			};
-			leftMenu = 2;
-			rightMenu = 4;
 
 			// MessageBox.Show("Welcome to the move editor!\n\nWhen you press \"OK\", you will be prompted to select a fighter to edit."); // If you need help at any point, you can press the * key to open documentation.\n\nThis message will only be shown once.", "Move Editor");
 		}
@@ -69,25 +73,7 @@ namespace HololiveFightingGame.FighterEditor
 		{
 			if (KeyHelper.Down(Keys.LeftControl) && KeyHelper.Pressed(Keys.O))
 			{
-				System.Windows.Forms.OpenFileDialog fighterSelect = new System.Windows.Forms.OpenFileDialog()
-				{
-					InitialDirectory = Game1.gamePath + @"\Content\Data\Fighters",
-					FileName = "[Name].json",
-					Filter = "JSON files (*.json)|*.json",
-					Title = "Select a fighter JSON file"
-				};
-				string selected = "";
-				if (fighterSelect.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-				{
-					selected = new Regex(@".+\\(.+)\..+").Replace(fighterSelect.FileName, "$1");
-					// Sets up a fighter to be edited
-					fighter = new Fighter(0, selected);
-					FighterLoader.LoadMoves(new Fighter[] { fighter });
-					FighterLoader.LoadAnimations(new Fighter[] { fighter });
-					fighter.Bottom = Program.WindowBounds().Size.ToVector2() / 2;
-
-					fighter.drawObject.Bottom = fighter.Bottom;
-				}
+				LoadFighter();
 			}
 
 			if (fighter != null)
@@ -125,23 +111,74 @@ namespace HololiveFightingGame.FighterEditor
 					}
 				}
 
-				if (menus[ActiveMenu].itemCount > 0)
+				if (menus[ActiveMenu].items.Length > 0)
 				{
 					if (KeyHelper.Pressed(Keys.W))
 					{
-						menus[ActiveMenu].cursor -= 1;
-						if (menus[ActiveMenu].cursor < 0)
-						{
-							menus[ActiveMenu].cursor = menus[ActiveMenu].itemCount - 1;
-						}
+						menus[ActiveMenu].Scroll(true);
 					}
 
 					if (KeyHelper.Pressed(Keys.S))
 					{
-						menus[ActiveMenu].cursor++;
-						menus[ActiveMenu].cursor %= menus[ActiveMenu].itemCount;
+						menus[ActiveMenu].Scroll(false);
 					}
 				}
+
+				if (KeyHelper.Pressed(Keys.D) && menus[ActiveMenu].CurrentItemPool.Length > 0 && menus[ActiveMenu].HighlightedItem.children.Length > 0)
+				{
+					if (menus[ActiveMenu].HighlightedItem.button)
+					{
+						object obj = new object();
+						menus[ActiveMenu].HighlightedItem.Escape(ref obj);
+					}
+					else
+					{
+						menus[ActiveMenu].HighlightedItem.Enter();
+					}
+				}
+
+				if (KeyHelper.Pressed(Keys.A) && menus[ActiveMenu].escapeRoute.Count > 0)
+				{
+					object obj = new object();
+					menus[ActiveMenu].escapeRoute.Peek().Escape(ref obj);
+				}
+			}
+		}
+
+		public static void LoadFighter()
+		{
+			System.Windows.Forms.OpenFileDialog fighterSelect = new System.Windows.Forms.OpenFileDialog()
+			{
+				InitialDirectory = Game1.gamePath + @"\Content\Data\Fighters",
+				FileName = "[Name].json",
+				Filter = "JSON files (*.json)|*.json",
+				Title = "Select a fighter JSON file"
+			};
+			string selected;
+			if (fighterSelect.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+			{
+				selected = new Regex(@".+\\(.+)\..+").Replace(fighterSelect.FileName, "$1");
+				// Sets up a fighter to be edited
+				fighter = new Fighter(0, selected);
+				FighterLoader.LoadMoves(new Fighter[] { fighter });
+				FighterLoader.LoadAnimations(new Fighter[] { fighter });
+				fighter.Bottom = Program.WindowBounds().Size.ToVector2() / 2;
+
+				fighter.drawObject.Bottom = fighter.Bottom;
+
+				menus = new EditorMenu[]
+				{
+					new FileMenu(),
+					new FighterMenu(),
+					new MoveMenu(),
+					new AnimationMenu(),
+					new MoveEditor(),
+					new AnimationEditor(),
+					new HurtboxEditor(),
+					new HitboxEditor()
+				};
+				leftMenu = 2;
+				rightMenu = 4;
 			}
 		}
 
@@ -173,6 +210,22 @@ namespace HololiveFightingGame.FighterEditor
 
 				Button.Draw(spriteBatch, new Rectangle(2 + panelOffset, 2, 250, 420), activeMenu == 1 ? 2 : 0);
 				menus[rightMenu].Draw(spriteBatch, true);
+
+				Button.Draw(spriteBatch, new Rectangle(254, 2, 292, 30));
+				string text;
+				if (currentMove == null && currentAnimation == null)
+				{
+					text = "No move or animation selected.";
+				}
+				else if (CurrentActionIsMove)
+				{
+					text = "Current Move: " + CurrentActionName;
+				}
+				else
+				{
+					text = "Current Anim: " + CurrentActionName;
+				}
+				spriteBatch.DrawString(Assets.font, text, new Vector2(262, 8), Color.White);
 			}
 		}
 	}

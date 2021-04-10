@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 
 namespace HololiveFightingGame.FighterEditor
 {
@@ -17,8 +18,7 @@ namespace HololiveFightingGame.FighterEditor
 
 		/// <summary>
 		/// Called when pressing Backspace while a lowest-level menu item is selected. <br />
-		/// Clears the item's value and allows the user to input a new one. <br />
-		/// If the item is meant to be a button without an "editing" state, call <see cref="Escape"/> within this method.
+		/// Clears the item's value and allows the user to input a new one.
 		/// </summary>
 		public virtual void Erase()
 		{
@@ -35,27 +35,67 @@ namespace HololiveFightingGame.FighterEditor
 
 		/// <summary>
 		/// Called when pressing Escape to exit a mid-level menu item or pressing Enter to confirm edits made to a lowest-level menu item. <br />
-		/// Use "ref" keyword to reference variables to write to, because you can't make references to value types.
+		/// If the lowest-level menu item is a button, this is called without <see cref="Erase"/> or <see cref="Edit"/>.
 		/// </summary>
-		public virtual void Escape()
+		public virtual void Escape(ref object target)
 		{
 			if (!lowestLevel)
 			{
-				parent.escapeRoute.Pop();
-				parent.cursor = ID;
+				parent.cursor = parent.escapeRoute.Pop().ID;
 			}
 		}
 
-		public bool selected;
-		public bool highlighted;
+		public EditorMenuItem(EditorMenu parent, int ID)
+		{
+			this.parent = parent;
+			this.ID = ID;
+		}
+
+		public bool Selected
+		{
+			get
+			{
+				return parent.escapeRoute.Contains(this);
+			}
+		}
+		public bool Highlighted
+		{
+			get
+			{
+				if (Selected)
+					return false;
+				if (parent.escapeRoute.Count == 0)
+					return parent.cursor == ID && new List<EditorMenuItem>(parent.items).Contains(this);
+
+				if (!new List<EditorMenuItem>(parent.CurrentItemPool).Contains(this))
+					return false;
+
+				return parent.cursor == ID && parent.escapeRoute.Peek().Selected;
+			}
+		}
+
 		public EditorMenu parent;
 		public int ID;
 		public bool lowestLevel;
+		public bool button;
+		public bool open;
 		public EditorMenuItem[] children;
 
 		public virtual void Draw(SpriteBatch spriteBatch, Vector2 position)
 		{
 
+		}
+
+		public int Flavor 
+		{ 
+			get
+			{
+				if (Selected)
+					return 2;
+				if (Highlighted)
+					return 1;
+				return 0;
+			}
 		}
 	}
 }
