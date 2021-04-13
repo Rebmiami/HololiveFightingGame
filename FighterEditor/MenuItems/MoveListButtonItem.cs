@@ -13,11 +13,17 @@ namespace HololiveFightingGame.FighterEditor.MenuItems
 		public string move;
 
 		public MoveListButtonItem(EditorMenu parent, int ID, string move) : base(parent, ID)
-        {
+		{
 			this.move = move;
-            button = true;
+			button = true;
 			lowestLevel = true;
-        }
+		}
+
+		public override void Escape(ref object target)
+		{
+			Editor.currentMove = FighterLoader.moves[Editor.fighter.character][move];
+			base.Escape(ref target);
+		}
 
 		public void Draw(SpriteBatch spriteBatch, Vector2 position, int i)
 		{

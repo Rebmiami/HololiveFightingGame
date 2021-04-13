@@ -124,14 +124,21 @@ namespace HololiveFightingGame.FighterEditor
 					}
 				}
 
-				if (KeyHelper.Pressed(Keys.D) && menus[ActiveMenu].CurrentItemPool.Length > 0 && menus[ActiveMenu].HighlightedItem.children.Length > 0)
+				if (KeyHelper.Pressed(Keys.D) && menus[ActiveMenu].CurrentItemPool.Length > 0)
 				{
-					if (menus[ActiveMenu].HighlightedItem.button)
+					if (menus[ActiveMenu].HighlightedItem.lowestLevel)
 					{
-						object obj = new object();
-						menus[ActiveMenu].HighlightedItem.Escape(ref obj);
+						if (menus[ActiveMenu].HighlightedItem.button)
+                        {
+							object obj = new object();
+							menus[ActiveMenu].HighlightedItem.Escape(ref obj);
+						}
+						else
+                        {
+							// TODO: Call "erase" and implement editing
+                        }
 					}
-					else
+					else if (menus[ActiveMenu].HighlightedItem.children.Length > 0)
 					{
 						menus[ActiveMenu].HighlightedItem.Enter();
 					}

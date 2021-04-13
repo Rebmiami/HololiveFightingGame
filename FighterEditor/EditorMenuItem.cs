@@ -49,6 +49,7 @@ namespace HololiveFightingGame.FighterEditor
 		{
 			this.parent = parent;
 			this.ID = ID;
+			children = new EditorMenuItem[0];
 		}
 
 		public bool Selected

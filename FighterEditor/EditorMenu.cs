@@ -40,6 +40,7 @@ namespace HololiveFightingGame.FighterEditor
 		public EditorMenu()
 		{
 			escapeRoute = new Stack<EditorMenuItem>();
+			items = new EditorMenuItem[0];
 		}
 
 		public virtual void Draw(SpriteBatch spriteBatch, bool rightMenu)
