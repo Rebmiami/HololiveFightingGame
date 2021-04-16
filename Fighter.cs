@@ -43,6 +43,9 @@ namespace HololiveFightingGame
 
 		public List<Attack> attacks;
 
+		// This is temporary.
+		public bool takeInputs = true;
+
 		public override void Update()
 		{
 			if (!Game1.gameState.stage.stageBounds.Intersects(Hitbox()))
@@ -70,34 +73,10 @@ namespace HololiveFightingGame
 			// Takes player inputs to perform actions
 			if (launchTimer == 0)
 			{
-				if (KeybindHandler.TapJump(keyboard, ID) && jumps < 2)
-				{
-					if (jumps == 0)
-					{
-						velocity.Y = -10;
-					}
-					else
-					{
-						velocity.Y = -8;
-					}
-					coyote = 0;
-					grounded = false;
-					jumps++;
-				}
-
-				// TODO: Change this to accept more move types
-				// Reworking keybinds may be necessary
-				if (KeybindHandler.TapAtkNormal(keyboard, ID) && moveTimer == 0)
-				{
-					moveRunner = new MoveRunner(FighterLoader.moves[character]["NeutralA_0"]);
-					moveTimer = moveRunner.data.MoveDuration;
-				}
-
-				if (KeybindHandler.TapAtkSecond(keyboard, ID) && moveTimer == 0)
-				{
-					moveRunner = new MoveRunner(FighterLoader.moves[character]["NeutralB_0"]);
-					moveTimer = moveRunner.data.MoveDuration;
-				}
+				// TODO: Overhaul input handling
+				// It should allow CPU fighters and give the user more options in-editor
+				if (takeInputs)
+					Update_Inputs();
 			}
 			else
 			{
@@ -216,6 +195,38 @@ namespace HololiveFightingGame
 					velocity.X += direction;
 					fighter.velocity.X -= direction;
 				}
+			}
+		}
+
+		public void Update_Inputs()
+		{
+			if (KeybindHandler.TapJump(keyboard, ID) && jumps < 2)
+			{
+				if (jumps == 0)
+				{
+					velocity.Y = -10;
+				}
+				else
+				{
+					velocity.Y = -8;
+				}
+				coyote = 0;
+				grounded = false;
+				jumps++;
+			}
+
+			// TODO: Change this to accept more move types
+			// Reworking keybinds may be necessary
+			if (KeybindHandler.TapAtkNormal(keyboard, ID) && moveTimer == 0)
+			{
+				moveRunner = new MoveRunner(FighterLoader.moves[character]["NeutralA_0"]);
+				moveTimer = moveRunner.data.MoveDuration;
+			}
+
+			if (KeybindHandler.TapAtkSecond(keyboard, ID) && moveTimer == 0)
+			{
+				moveRunner = new MoveRunner(FighterLoader.moves[character]["NeutralB_0"]);
+				moveTimer = moveRunner.data.MoveDuration;
 			}
 		}
 

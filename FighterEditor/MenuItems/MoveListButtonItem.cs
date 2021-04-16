@@ -1,4 +1,5 @@
 ﻿using HololiveFightingGame.Combat;
+using HololiveFightingGame.Graphics;
 using HololiveFightingGame.Loading;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -22,6 +23,7 @@ namespace HololiveFightingGame.FighterEditor.MenuItems
 		public override void Escape(ref object target)
 		{
 			Editor.currentMove = FighterLoader.moves[Editor.fighter.character][move];
+			((AnimatedSprite)Editor.fighter.drawObject.texture).SwitchAnimation(Editor.currentMove.Data.Name, 0);
 			base.Escape(ref target);
 		}
 

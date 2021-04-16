@@ -129,14 +129,14 @@ namespace HololiveFightingGame.FighterEditor
 					if (menus[ActiveMenu].HighlightedItem.lowestLevel)
 					{
 						if (menus[ActiveMenu].HighlightedItem.button)
-                        {
+						{
 							object obj = new object();
 							menus[ActiveMenu].HighlightedItem.Escape(ref obj);
 						}
 						else
-                        {
+						{
 							// TODO: Call "erase" and implement editing
-                        }
+						}
 					}
 					else if (menus[ActiveMenu].HighlightedItem.children.Length > 0)
 					{
@@ -170,7 +170,7 @@ namespace HololiveFightingGame.FighterEditor
 				FighterLoader.LoadMoves(new Fighter[] { fighter });
 				FighterLoader.LoadAnimations(new Fighter[] { fighter });
 				fighter.Bottom = Program.WindowBounds().Size.ToVector2() / 2;
-
+				fighter.takeInputs = false;
 				fighter.drawObject.Bottom = fighter.Bottom;
 
 				menus = new EditorMenu[]

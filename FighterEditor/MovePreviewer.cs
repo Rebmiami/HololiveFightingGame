@@ -14,5 +14,30 @@ namespace HololiveFightingGame.FighterEditor
 
 		public static Vector2 Pan = Vector2.Zero;
 		public static int Zoom = 1;
+
+		public static void TakeCommandInputs()
+		{
+
+		}
+
+		public static void Update()
+		{
+			Editor.fighter.Update();
+		}
+
+		public static void AdvanceFrame()
+		{
+
+		}
+
+		public static void SetFrame(int frame)
+		{
+
+		}
+
+		public static void Refresh()
+		{
+
+		}
 	}
 }
