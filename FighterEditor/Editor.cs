@@ -149,6 +149,8 @@ namespace HololiveFightingGame.FighterEditor
 					object obj = new object();
 					menus[ActiveMenu].escapeRoute.Peek().Escape(ref obj);
 				}
+
+				MovePreviewer.Update();
 			}
 		}
 
@@ -233,6 +235,7 @@ namespace HololiveFightingGame.FighterEditor
 					text = "Current Anim: " + CurrentActionName;
 				}
 				spriteBatch.DrawString(Assets.font, text, new Vector2(262, 8), Color.White);
+				spriteBatch.Draw(Assets.editorPlayIcon, new Vector2(260, 80), new Rectangle(MovePreviewer.Playing ? 9 : 0, 0, 8, 8), Color.White);
 			}
 		}
 	}

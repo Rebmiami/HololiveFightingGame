@@ -37,6 +37,9 @@
 		<None Update="Content\Assets\EditorButtons.png">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
+		<None Update="Content\Assets\EditorPlayIcon.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
 		<None Update="Content\Assets\GameUI.png">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>

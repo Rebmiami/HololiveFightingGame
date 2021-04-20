@@ -9,7 +9,10 @@ namespace HololiveFightingGame.Loading
     {
         public static Texture2D testStage;
         public static Texture2D inGameUI;
+
         public static Texture2D editorButton;
+        public static Texture2D editorPlayIcon;
+
         public static SpriteFont font;
     }
 }

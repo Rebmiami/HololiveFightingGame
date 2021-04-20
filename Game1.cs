@@ -82,6 +82,7 @@ namespace HololiveFightingGame
 			language = new Language();
 			Assets.inGameUI = ImageLoader.LoadTexture(@".\Content\Assets\GameUI.png", true);
 			Assets.editorButton = ImageLoader.LoadTexture(@".\Content\Assets\EditorButtons.png", true);
+			Assets.editorPlayIcon = ImageLoader.LoadTexture(@".\Content\Assets\EditorPlayIcon.png", true);
 			capsuleRenderer = Content.Load<Effect>("Capsule");
 			LoadGameState(new string[] { "Pekora", "Kiara" });
 		}
