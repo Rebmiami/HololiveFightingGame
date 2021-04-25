@@ -18,6 +18,8 @@ namespace HololiveFightingGame.Graphics
 		// If true, the animation will automatically progress through frames at a set framerate.
 		// If false, the frame must be set by any other arbitrary class.
 
+
+
 		public int progress = 0;
 
 		public int Frame

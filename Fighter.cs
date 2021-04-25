@@ -13,7 +13,7 @@ using HololiveFightingGame.Loading;
 
 namespace HololiveFightingGame
 {
-	public class Fighter : Entity
+    public class Fighter : Entity
 	{
 		public bool grounded;
 		// If true, the fighter is grounded, otherwise, they are aerial.
@@ -45,6 +45,8 @@ namespace HololiveFightingGame
 
 		// This is temporary.
 		public bool takeInputs = true;
+
+		public HurtBody body;
 
 		public override void Update()
 		{
@@ -368,36 +370,10 @@ namespace HololiveFightingGame
 				coyote = 0;
 			}
 			invFrames = 6;
+			moveRunner = null;
 		}
 
-		public struct Attack : IComparable
-		{
-			public Attack(int damage, Vector2 knockback, int priority = 1, Fighter attacker = null)
-			{
-				this.damage = damage;
-				this.knockback = knockback;
-				this.priority = priority;
-				this.attacker = attacker;
-			}
-
-			public int damage;
-			public Vector2 knockback;
-
-			public int priority;
-			// Used to resolve conflicts. If two attacks with the same priority conflict, they will cancel out.
-
-			public Fighter attacker;
-			// Set attacker to null if the damage was not caused by a player (directly or indirectly)
-
-			public int CompareTo(object obj)
-			{
-				if (obj is Attack attack)
-				{
-					return attack.priority - priority;
-				}
-				throw new ArgumentException("An attempt was made to compare an Attack object with an object that is not an Attack.");
-			}
-		}
+		
 	}
 
 	public enum MoveType

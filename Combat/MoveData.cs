@@ -1,4 +1,5 @@
 ﻿using HololiveFightingGame.Graphics;
+using HololiveFightingGame.Loading;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -29,14 +30,34 @@ namespace HololiveFightingGame.Combat
 		/// Which part of the move should this move lead in to? This field is used for various things.
 		/// </summary>
 		public int LeadInto { get; set; }
+
 		/// <summary>
 		/// The velocity of the player as the move progresses.
 		/// </summary>
 		public Dictionary<string, VectorLoader> Motion { get; set; }
+
 		/// <summary>
 		/// How much of the player's existing momentum is preserved.
 		/// </summary>
 		public float Sustain { get; set; }
+		/// <summary>
+		/// Sustain change over time. To be implemented.
+		/// </summary>
+		// public Dictionary<string, float> Motion { get; set; }
+
+
+
+		/// <summary>
+		/// Whether or not the player is allowed to turn at this point in the move.
+		/// </summary>
+		public Dictionary<string, bool> CanTurn { get; set; }
+		/// <summary>
+		/// Whether or not the player is allowed to cancel the move by jumping, shielding, etc. at this point in the move.
+		/// </summary>
+		public Dictionary<string, bool> CanCancel { get; set; }
+
+
+
 		/// <summary>
 		/// The move animation.
 		/// </summary>
@@ -68,17 +89,6 @@ namespace HololiveFightingGame.Combat
 			// Timeline information
 			public Dictionary<string, VectorLoader> Motion { get; set; }
 			public Dictionary<string, bool> Activation { get; set; }
-		}
-
-		public class VectorLoader
-		{
-			public float X { get; set; }
-			public float Y { get; set; }
-
-			public static implicit operator Vector2(VectorLoader vector)
-			{
-				return new Vector2(vector.X, vector.Y);
-			}
 		}
 	}
 }
