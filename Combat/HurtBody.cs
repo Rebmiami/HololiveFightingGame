@@ -11,9 +11,43 @@ namespace HololiveFightingGame.Combat
 
 		public Vector2 foot;
 
-		public Attack CheckHits()
+        public HurtBody()
         {
-			throw new NotImplementedException();
+            body = new List<Hurtbox>();
+        }
+
+		public Attack CheckHits(AttackHitbox hitbox, Fighter fighter)
+        {
+			bool hit = false;
+			foreach (Hurtbox hurtbox in body)
+            {
+				if (!hurtbox.Tangible)
+                {
+					continue;
+                }
+				if (hurtbox.collider.Intersects(hitbox.collider))
+                {
+					if (hurtbox.Vulnerable)
+                    {
+                        hit = true;
+                    }
+					else
+                    {
+                        // Invulnerable hitboxes always take priority over vulnerable ones.
+                        // ie if an attack hits a vulnerable hitbox and an invulnerable one, the attack will deal no damage.
+                        Attack attack = new Attack(hitbox, fighter)
+                        {
+                            dealDamage = false
+                        };
+                        return attack;
+                    }
+                }
+            }
+            if (hit)
+            {
+                return new Attack(hitbox, fighter);
+            }
+            return null;
         }
 	}
 }

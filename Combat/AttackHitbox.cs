@@ -7,7 +7,7 @@ using HololiveFightingGame.Utils;
 
 namespace HololiveFightingGame.Combat
 {
-	public class AttackHitbox
+	public class AttackHitbox : ICloneable
 	{
 		public Collider collider;
 		public int damage;
@@ -38,7 +38,26 @@ namespace HololiveFightingGame.Combat
 				throw new NotImplementedException();
 			}
 		}
-	}
+
+		// AttackHitbox is not a struct but this will be necessary for hit detection
+        public object Clone()
+        {
+			return new AttackHitbox
+			{
+				collider = collider,
+				damage = damage,
+				angle = angle,
+				launch = launch,
+				kbScaling = kbScaling,
+				priority = priority,
+				part = part,
+				grounded = grounded,
+				aerial = aerial,
+				autoSwipe = autoSwipe,
+				type = type
+			};
+        }
+    }
 
 	public enum AttackHitboxType
 	{

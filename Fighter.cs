@@ -232,7 +232,7 @@ namespace HololiveFightingGame
 		/// Process damage dealt to the player and resolve conflicts.
 		/// </summary>
 		/// <returns></returns>
-		public Attack? Update_Hits()
+		public Attack Update_Hits()
 		{
 			if (invFrames > 0)
 			{
@@ -259,11 +259,11 @@ namespace HololiveFightingGame
 		/// After conflicts are resolved and a winning attack is selected, apply the effects of the attack (damage, knockback, etc.)
 		/// </summary>
 		/// <param name="attack"></param>
-		public void Update_PostHit(Attack? attack)
+		public void Update_PostHit(Attack attack)
 		{
 			if (attack != null)
 			{
-				Damage((Attack)attack);
+				Damage(attack);
 				attacks.Clear();
 			}
 		}
@@ -331,6 +331,9 @@ namespace HololiveFightingGame
 
 			drawObject.frame = "neutral0";
 			attacks = new List<Attack>();
+
+			body = new HurtBody();
+			body.body.Add(new Hurtbox(collider.Capsule));
 		}
 
 		public void Damage(Attack attack)

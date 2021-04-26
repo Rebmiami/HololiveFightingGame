@@ -12,5 +12,12 @@ namespace HololiveFightingGame.Combat
 
 		public Collider collider;
 		// Should always be a capsule
+
+		public Hurtbox(Capsule capsule)
+        {
+			collider = new Collider(capsule);
+			Vulnerable = true;
+			Tangible = true;
+        }
 	}
 }

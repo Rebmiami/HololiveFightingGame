@@ -5,7 +5,7 @@ using System.Text;
 
 namespace HololiveFightingGame.Combat
 {
-	public struct Attack : IComparable
+	public class Attack : IComparable
 	{
 		public Attack(AttackHitbox hitbox, Fighter attacker)
 		{
@@ -14,6 +14,7 @@ namespace HololiveFightingGame.Combat
 			knockback = hitbox.LaunchAngle;
 			priority = hitbox.priority;
 			this.attacker = attacker;
+			dealDamage = true;
 		}
 
 		public AttackHitbox attackHitbox;
@@ -26,6 +27,9 @@ namespace HololiveFightingGame.Combat
 
 		public Fighter attacker;
 		// Set attacker to null if the damage was not caused by a player (directly or indirectly)
+
+		public bool dealDamage;
+		// Set to true if the attack landed but won't deal damage, ie deflected by shield or hitting an invincible hitbox.
 
 		public int CompareTo(object obj)
 		{

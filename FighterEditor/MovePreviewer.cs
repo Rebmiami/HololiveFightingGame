@@ -26,7 +26,7 @@ namespace HololiveFightingGame.FighterEditor
 				if (KeyHelper.Pressed(Keys.Space))
 				{
 					Playing = !Playing;
-					if (Frame >= Editor.fighter.moveRunner.frame)
+					if (Frame >= Editor.fighter.moveRunner.data.MoveDuration)
 					{
 						Frame = 0;
 					}
@@ -42,7 +42,7 @@ namespace HololiveFightingGame.FighterEditor
 				step += Speed;
 
 				AdvanceFrame();
-				if (Frame >= Editor.fighter.moveRunner.frame)
+				if (Frame >= Editor.fighter.moveRunner.data.MoveDuration)
 				{
 					Playing = false;
 				}
