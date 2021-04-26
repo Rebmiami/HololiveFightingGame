@@ -13,7 +13,7 @@ using HololiveFightingGame.Loading;
 
 namespace HololiveFightingGame
 {
-    public class Fighter : Entity
+	public class Fighter : Entity
 	{
 		public bool grounded;
 		// If true, the fighter is grounded, otherwise, they are aerial.
@@ -143,7 +143,7 @@ namespace HololiveFightingGame
 			
 
 			// Checks if an attack is hitting an opponent and, if so, tells the opponent to be hit by the attack.
-			if (moveTimer > 0)
+			if (moveRunner != null)
 			{
 				for (int i = 0; i < FighterLoader.moves[character][moveRunner.name].hitboxes.Length; i++)
 				{
@@ -166,11 +166,7 @@ namespace HololiveFightingGame
 					{
 						if (ID != j && Game1.gameState.fighters[j].collider.Capsule.Intersects(capsule) && Game1.gameState.fighters[j].invFrames == 0)
 						{
-							Attack attack = new Attack
-							{
-								damage = attackHitbox.damage,
-								knockback = attackHitbox.LaunchAngle
-							};
+							Attack attack = new Attack(attackHitbox, this);
 							attack.knockback.X *= direction;
 							Game1.gameState.fighters[j].attacks.Add(attack);
 						}
