@@ -59,13 +59,23 @@ namespace HololiveFightingGame
 				case ColliderType.Point:
 					break;
 				case ColliderType.Rectangle:
-					Vector2 dimensions = Hitbox().Size.ToVector2();
-					Vector2 center = dimensions / 2 * colliderOrigin + dimensions / 2;
-					center += colliderOffset;
-					collider.SetPosition(position, center);
+					{
+						Vector2 dimensions = Hitbox().Size.ToVector2();
+						Vector2 center = dimensions / 2 * colliderOrigin + dimensions / 2;
+						center += colliderOffset;
+						collider.SetPosition(position, center);
+					}
 					break;
 				case ColliderType.Capsule:
-					collider.SetPosition(position, new Vector2(19, 45)); // TODO: Do this automatically
+					{
+						Vector2 dimensions = Hitbox().Size.ToVector2();
+
+						Vector2 center = dimensions / 2 * colliderOrigin + dimensions / 2;
+
+						center += colliderOffset;
+
+						collider.SetPosition(position, center);
+					}
 					break;
 			}
 		}

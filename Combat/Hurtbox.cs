@@ -12,6 +12,7 @@ namespace HololiveFightingGame.Combat
 
 		public Collider collider;
 		// Should always be a capsule
+		// if possible, exception for rushia (rectangles are flatter than capsules)
 
 		public Hurtbox(Capsule capsule)
         {

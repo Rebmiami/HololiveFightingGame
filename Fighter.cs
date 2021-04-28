@@ -95,6 +95,7 @@ namespace HololiveFightingGame
 			}
 
 			base.Update();
+			
 
 			Rectangle stageCollider = Game1.gameState.stage.collider.Rectangle;
 
@@ -317,8 +318,8 @@ namespace HololiveFightingGame
 			this.character = character;
 
 			collider = new Collider(new Capsule(position, new Vector2(0, -26), 19));
-			colliderOrigin = new Vector2(-1, -1);
-			colliderOffset = Vector2.Zero;
+			colliderOrigin = new Vector2(1, 1);
+			colliderOffset = new Vector2(0, 0);
 			//Dimensions = new Vector2(38, 64);
 
 			position = new Vector2(300, 0);
