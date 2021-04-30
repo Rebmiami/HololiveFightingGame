@@ -107,45 +107,36 @@ namespace HololiveFightingGame.Collision
 
 		public bool Intersects(Vector2 vector)
 		{
-			switch (type)
-			{
-				case ColliderType.Point:
-					return Point == vector;
-				case ColliderType.Rectangle:
-					return Rectangle.Contains(vector);
-				case ColliderType.Capsule:
-					return Capsule.Contains(vector);
-			}
-			throw new ArgumentException("The collider checked for intersection does not have a valid collider type.");
-		}
+            return type switch
+            {
+                ColliderType.Point => Point == vector,
+                ColliderType.Rectangle => Rectangle.Contains(vector),
+                ColliderType.Capsule => Capsule.Contains(vector),
+                _ => throw new ArgumentException("The collider checked for intersection does not have a valid collider type."),
+            };
+        }
 
 		public bool Intersects(Rectangle rectangle)
 		{
-			switch (type)
-			{
-				case ColliderType.Point:
-					return rectangle.Contains(Point);
-				case ColliderType.Rectangle:
-					return rectangle.Intersects(Rectangle);
-				case ColliderType.Capsule:
-					return Capsule.Intersects(rectangle);
-			}
-			throw new ArgumentException("The collider checked for intersection does not have a valid collider type.");
-		}
+            return type switch
+            {
+                ColliderType.Point => rectangle.Contains(Point),
+                ColliderType.Rectangle => rectangle.Intersects(Rectangle),
+                ColliderType.Capsule => Capsule.Intersects(rectangle),
+                _ => throw new ArgumentException("The collider checked for intersection does not have a valid collider type."),
+            };
+        }
 
 		public bool Intersects(Capsule capsule)
 		{
-			switch (type)
-			{
-				case ColliderType.Point:
-					return capsule.Contains(Point);
-				case ColliderType.Rectangle:
-					return capsule.Intersects(Rectangle);
-				case ColliderType.Capsule:
-					return capsule.Intersects(Capsule);
-			}
-			throw new ArgumentException("The collider checked for intersection does not have a valid collider type.");
-		}
+            return type switch
+            {
+                ColliderType.Point => capsule.Contains(Point),
+                ColliderType.Rectangle => capsule.Intersects(Rectangle),
+                ColliderType.Capsule => capsule.Intersects(Capsule),
+                _ => throw new ArgumentException("The collider checked for intersection does not have a valid collider type."),
+            };
+        }
 
 		public void SetPosition(Vector2 vector, Vector2 offset = default)
 		{

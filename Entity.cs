@@ -69,11 +69,8 @@ namespace HololiveFightingGame
 				case ColliderType.Capsule:
 					{
 						Vector2 dimensions = Hitbox().Size.ToVector2();
-
 						Vector2 center = dimensions / 2 * colliderOrigin + dimensions / 2;
-
 						center += colliderOffset;
-
 						collider.SetPosition(position, center);
 					}
 					break;

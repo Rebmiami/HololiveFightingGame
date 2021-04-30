@@ -94,8 +94,21 @@ namespace HololiveFightingGame
 				velocity = Vector2.Lerp(velocity, oldVelocity, moveRunner.data.Sustain);
 			}
 
+			// Pushes fighters apart to prevent overlapping
+			for (int i = 0; i < Game1.gameState.fighters.Length; i++)
+			{
+				Fighter fighter = Game1.gameState.fighters[i];
+				if (ID != i && fighter.Hitbox().Intersects(Hitbox()))
+				{
+					float direction = Math.Sign(position.X - fighter.position.X) * 0.4f;
+					velocity.X += direction;
+					fighter.velocity.X -= direction;
+				}
+			}
+
 			base.Update();
-			
+
+			body.foot = new Vector2(Hitbox().Center.X, Hitbox().Bottom);
 
 			Rectangle stageCollider = Game1.gameState.stage.collider.Rectangle;
 
@@ -146,9 +159,9 @@ namespace HololiveFightingGame
 			// Checks if an attack is hitting an opponent and, if so, tells the opponent to be hit by the attack.
 			if (moveRunner != null)
 			{
-				for (int i = 0; i < FighterLoader.moves[character][moveRunner.name].hitboxes.Length; i++)
+				for (int i = 0; i < moveRunner.move.hitboxes.Length; i++)
 				{
-					AttackHitbox attackHitbox = FighterLoader.moves[character][moveRunner.name].hitboxes[i];
+					AttackHitbox attackHitbox = moveRunner.move.hitboxes[i];
 					if (!moveRunner.enabled[i])
 					{
 						continue;
@@ -165,11 +178,22 @@ namespace HololiveFightingGame
 
 					for (int j = 0; j < Game1.gameState.fighters.Length; j++)
 					{
-						if (ID != j && Game1.gameState.fighters[j].collider.Capsule.Intersects(capsule) && Game1.gameState.fighters[j].invFrames == 0)
+						Fighter target = Game1.gameState.fighters[j];
+						if (ID != j && target.invFrames == 0)
 						{
-							Attack attack = new Attack(attackHitbox, this);
-							attack.knockback.X *= direction;
-							Game1.gameState.fighters[j].attacks.Add(attack);
+							Capsule capsule1 = capsule;
+							capsule1.origin -= target.body.foot;
+
+							AttackHitbox checkHitbox = (AttackHitbox)attackHitbox.Clone();
+							checkHitbox.collider = new Collider(capsule1);
+
+							Attack attack = target.body.CheckHits(checkHitbox, this);
+							// Attack attack = new Attack(attackHitbox, this);
+							if (attack != null)
+							{
+								attack.knockback.X *= direction;
+								target.attacks.Add(attack);
+							}
 						}
 					}
 				}
@@ -181,18 +205,6 @@ namespace HololiveFightingGame
 				if (moveTimer == 0)
 				{
 					moveRunner = null;
-				}
-			}
-
-			// Pushes fighters apart to prevent overlapping
-			for (int i = 0; i < Game1.gameState.fighters.Length; i++)
-			{
-				Fighter fighter = Game1.gameState.fighters[i];
-				if (ID != i && fighter.Hitbox().Intersects(Hitbox()))
-				{
-					float direction = Math.Sign(position.X - fighter.position.X) * 0.4f;
-					velocity.X += direction;
-					fighter.velocity.X -= direction;
 				}
 			}
 		}
