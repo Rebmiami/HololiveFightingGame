@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Text.RegularExpressions;
+using HololiveFightingGame.Graphics.CapsuleShader;
 
 namespace HololiveFightingGame.FighterEditor
 {
@@ -71,6 +72,7 @@ namespace HololiveFightingGame.FighterEditor
 
 		public static void Update()
 		{
+
 			if (KeyHelper.Down(Keys.LeftControl) && KeyHelper.Pressed(Keys.O))
 			{
 				LoadFighter();
@@ -150,6 +152,7 @@ namespace HololiveFightingGame.FighterEditor
 					menus[ActiveMenu].escapeRoute.Peek().Escape(ref obj);
 				}
 
+				// CapsuleRenderer.capsuleShaders.Add(new CapsuleShaderData(fighter.body.body[0].collider.Capsule, Color.Maroon));
 				MovePreviewer.Update();
 			}
 		}

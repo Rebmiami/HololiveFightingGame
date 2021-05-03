@@ -43,10 +43,6 @@ namespace HololiveFightingGame
 			}
 			foreach (Fighter fighter in fighters)
 			{
-				; // This doesn't cause an error?
-			}
-			foreach (Fighter fighter in fighters)
-			{
 				fighter.Update_PostHit(fighter.Update_Hits());
 			}
 			foreach (Fighter fighter in fighters)

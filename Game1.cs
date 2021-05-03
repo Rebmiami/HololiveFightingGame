@@ -13,6 +13,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System;
 using HololiveFightingGame.FighterEditor;
+using HololiveFightingGame.Graphics.CapsuleShader;
 
 namespace HololiveFightingGame
 {
@@ -49,7 +50,7 @@ namespace HololiveFightingGame
 
 		public static Language language;
 		public static DisplayLanguage displayLanguage;
-		public static Effect capsuleRenderer;
+		public static Effect capsuleRenderShader;
 
 		// The following fields are used for handling the "death screens" that pop up when the game encounters an error.
 		public static bool isDeathScreen = false;
@@ -83,7 +84,8 @@ namespace HololiveFightingGame
 			Assets.inGameUI = ImageLoader.LoadTexture(@".\Content\Assets\GameUI.png", true);
 			Assets.editorButton = ImageLoader.LoadTexture(@".\Content\Assets\EditorButtons.png", true);
 			Assets.editorPlayIcon = ImageLoader.LoadTexture(@".\Content\Assets\EditorPlayIcon.png", true);
-			capsuleRenderer = Content.Load<Effect>("Capsule");
+			capsuleRenderShader = Content.Load<Effect>("Capsule");
+			capsuleRenderShader.Parameters["ViewportDimensions"].SetValue(Program.WindowBounds().Size.ToVector2());
 			LoadGameState(new string[] { "Pekora", "Kiara" });
 		}
 
@@ -189,11 +191,17 @@ namespace HololiveFightingGame
 			base.Draw(gameTime);
 			spriteBatch.End();
 
+			
+
 			GraphicsDevice.SetRenderTarget(null);
 			spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.PointClamp);
 
-			spriteBatch.Draw(RenderTarget, Vector2.Zero, Color.White);
+			if (gameScreen == GameScreen.Editor)
+				CapsuleRenderer.Draw(spriteBatch, new Transformation(Vector2.Zero, 1));
+			else
+				CapsuleRenderer.Draw(spriteBatch, new Transformation(GraphicsHandler.main.children["game"].position, 2));
 
+			spriteBatch.Draw(RenderTarget, Vector2.Zero, Color.White);
 			spriteBatch.End();
 			RenderTarget.Dispose();
 		}
