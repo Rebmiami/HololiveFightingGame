@@ -1,4 +1,7 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using HololiveFightingGame.Collision;
+using HololiveFightingGame.Input;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 
 namespace HololiveFightingGame.Graphics.CapsuleShader
@@ -17,8 +20,9 @@ namespace HololiveFightingGame.Graphics.CapsuleShader
 			foreach (CapsuleShaderData capsule in capsuleShaders)
 			{
 				Effect shader = Game1.capsuleRenderShader;
+
 				shader.Parameters["Origin"].SetValue(DrawObject.TransformVector(capsule.capsule.origin, transformation));
-				shader.Parameters["Length"].SetValue(capsule.capsule.length * transformation.zoom);
+				shader.Parameters["Length"].SetValue(capsule.capsule.length * -transformation.zoom);
 				shader.Parameters["Radius"].SetValue(capsule.capsule.radius * transformation.zoom);
 				shader.Parameters["DrawColor"].SetValue(capsule.color.ToVector3());
 				shader.CurrentTechnique.Passes[0].Apply();

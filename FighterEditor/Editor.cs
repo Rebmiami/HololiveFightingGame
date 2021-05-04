@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using System.Text.RegularExpressions;
 using HololiveFightingGame.Graphics.CapsuleShader;
+using HololiveFightingGame.Collision;
 
 namespace HololiveFightingGame.FighterEditor
 {
@@ -152,7 +153,13 @@ namespace HololiveFightingGame.FighterEditor
 					menus[ActiveMenu].escapeRoute.Peek().Escape(ref obj);
 				}
 
-				// CapsuleRenderer.capsuleShaders.Add(new CapsuleShaderData(fighter.body.body[0].collider.Capsule, Color.Maroon));
+				foreach (Hurtbox hurtbox in fighter.body.body)
+				{
+					Capsule capsule = hurtbox.collider.Capsule;
+					capsule.origin += fighter.position;
+					CapsuleRenderer.capsuleShaders.Add(new CapsuleShaderData(capsule, Color.White));
+				}
+				// CapsuleRenderer.capsuleShaders.Add(new CapsuleShaderData(new Collision.Capsule(Vector2.Zero, Vector2.Zero, 100`), Color.Maroon));
 				MovePreviewer.Update();
 			}
 		}

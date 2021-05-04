@@ -34,9 +34,16 @@ float4 MainPS(VertexShaderOutput input) : COLOR
 	bool change = false;
 
 	float2 normal = normalize(Length);
+	// Length normal.
+
 	float dot1 = dot(pixel - Origin, normal);
 	float2 center = normal * dot1 + Origin;
-	center = clamp(center, Origin, Origin + Length);
+	// Finds closest point on line to pixel position.
+
+	float2 lower = float2(min(Origin.x, Origin.x + Length.x), min(Origin.y, Origin.y + Length.y));
+	float2 upper = float2(max(Origin.x, Origin.x + Length.x), max(Origin.y, Origin.y + Length.y));
+	center = clamp(center, lower, upper);
+	// Clamps centerpoint to dimensions of capsule.
 
 	if (distance(pixel, center) < Radius)
 	{
