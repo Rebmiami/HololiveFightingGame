@@ -37,6 +37,7 @@ namespace HololiveFightingGame
 		public static GameState gameState;
 		public static UIHandler uiHandler;
 		public static GameScreen gameScreen = GameScreen.Loading;
+		public static bool showHitboxes;
 
 		public static readonly string gamePath;
 
@@ -120,6 +121,10 @@ namespace HololiveFightingGame
 					Process.Start(Process.GetCurrentProcess().MainModule.FileName);
 				// Is there a more direct way to re-launch the program?
 			}
+			if (KeyHelper.Pressed(Keys.F11))
+			{
+				showHitboxes = true;
+			}
 
 			switch (gameScreen)
 			{
@@ -191,18 +196,20 @@ namespace HololiveFightingGame
 			base.Draw(gameTime);
 			spriteBatch.End();
 
-			
+
+			if (gameScreen == GameScreen.Editor)
+				CapsuleRenderer.Draw(spriteBatch, new Transformation(Vector2.Zero, 1), GraphicsDevice);
+			else
+				CapsuleRenderer.Draw(spriteBatch, new Transformation(GraphicsHandler.main.children["game"].position, 2), GraphicsDevice);
+			// End my suffering
+
 
 			GraphicsDevice.SetRenderTarget(null);
 			spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.PointClamp);
 
-			if (gameScreen == GameScreen.Editor)
-				CapsuleRenderer.Draw(spriteBatch, new Transformation(Vector2.Zero, 1));
-			else
-				CapsuleRenderer.Draw(spriteBatch, new Transformation(GraphicsHandler.main.children["game"].position, 2));
-
 			spriteBatch.Draw(RenderTarget, Vector2.Zero, Color.White);
 			spriteBatch.End();
+
 			RenderTarget.Dispose();
 		}
 

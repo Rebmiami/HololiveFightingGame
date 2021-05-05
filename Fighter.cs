@@ -10,6 +10,7 @@ using HololiveFightingGame.Graphics;
 using HololiveFightingGame.Combat;
 using System.Text.Json;
 using HololiveFightingGame.Loading;
+using HololiveFightingGame.Graphics.CapsuleShader;
 
 namespace HololiveFightingGame
 {
@@ -205,6 +206,16 @@ namespace HololiveFightingGame
 				if (moveTimer == 0)
 				{
 					moveRunner = null;
+				}
+			}
+
+			if (Game1.showHitboxes)
+            {
+				foreach (Hurtbox hurtbox in body.body)
+				{
+					Capsule capsule = hurtbox.collider.Capsule;
+					capsule.origin += position;
+					CapsuleRenderer.capsuleShaders.Add(new CapsuleShaderData(capsule, Color.White));
 				}
 			}
 		}
