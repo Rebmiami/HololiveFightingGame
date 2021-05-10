@@ -25,10 +25,22 @@ namespace HololiveFightingGame.Graphics.CapsuleShader
 
 			foreach (CapsuleShaderData capsule in capsuleShaders)
 			{
-				shader.Parameters["Origin"].SetValue(DrawObject.TransformVector(capsule.capsule.origin, transformation));
-				shader.Parameters["Length"].SetValue(capsule.capsule.length * -transformation.zoom);
-				shader.Parameters["Radius"].SetValue(capsule.capsule.radius * transformation.zoom);
-				shader.Parameters["DrawColor"].SetValue(capsule.color.ToVector3());
+				if (capsule.transform)
+                {
+					shader.Parameters["Origin"].SetValue(DrawObject.TransformVector(capsule.capsule.origin, transformation));
+					shader.Parameters["Length"].SetValue(capsule.capsule.length * -transformation.zoom);
+					shader.Parameters["Radius"].SetValue(capsule.capsule.radius * transformation.zoom);
+					shader.Parameters["DrawColor"].SetValue(capsule.color.ToVector3() * (1 / (capsule.color.A / 256f)));
+					shader.Parameters["Opacity"].SetValue(capsule.color.A / 256f);
+				}
+				else
+                {
+					shader.Parameters["Origin"].SetValue(capsule.capsule.origin + Program.WindowBounds().Size.ToVector2() / 2);
+					shader.Parameters["Length"].SetValue(capsule.capsule.length);
+					shader.Parameters["Radius"].SetValue(capsule.capsule.radius);
+					shader.Parameters["DrawColor"].SetValue(capsule.color.ToVector3() * (1 / (capsule.color.A / 256f)));
+					shader.Parameters["Opacity"].SetValue(capsule.color.A / 256f);
+				}
 
 				// shader.CurrentTechnique.Passes[0].Apply();
 				spriteBatch.Begin(effect: shader);

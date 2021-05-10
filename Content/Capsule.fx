@@ -13,6 +13,7 @@ float2 Origin;
 float2 Length;
 float Radius;
 float4 DrawColor;
+float Opacity;
 
 sampler2D SpriteTextureSampler = sampler_state
 {
@@ -47,8 +48,8 @@ float4 MainPS(VertexShaderOutput input) : COLOR
 
 	if (distance(pixel, center) < Radius)
 	{
-		color *= 0.5;
-		color += DrawColor * 0.5;
+		color *= 1 - Opacity;
+		color += DrawColor * Opacity;
 	}
 	return color;
 }

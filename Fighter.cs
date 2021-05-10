@@ -195,7 +195,27 @@ namespace HololiveFightingGame
 								attack.knockback.X *= direction;
 								target.attacks.Add(attack);
 							}
+
+							if (Game1.showHitboxes)
+							{
+								foreach (Hurtbox hurtbox in body.body)
+								{
+									Capsule capsule2 = capsule1;
+									CapsuleRenderer.capsuleShaders.Add(new CapsuleShaderData(capsule2, Color.Orange * 0.3f, false));
+								}
+
+								foreach (Hurtbox hurtbox in target.body.body)
+								{
+									Capsule capsule2 = hurtbox.collider.Capsule;
+									CapsuleRenderer.capsuleShaders.Add(new CapsuleShaderData(capsule2, Color.White * 0.3f, false));
+								}
+							}
 						}
+					}
+
+					if (Game1.showHitboxes)
+					{
+						CapsuleRenderer.capsuleShaders.Add(new CapsuleShaderData(capsule, Color.Yellow * 0.3f));
 					}
 				}
 			}
@@ -210,13 +230,15 @@ namespace HololiveFightingGame
 			}
 
 			if (Game1.showHitboxes)
-            {
+			{
 				foreach (Hurtbox hurtbox in body.body)
 				{
 					Capsule capsule = hurtbox.collider.Capsule;
 					capsule.origin += position;
-					CapsuleRenderer.capsuleShaders.Add(new CapsuleShaderData(capsule, Color.White));
+					CapsuleRenderer.capsuleShaders.Add(new CapsuleShaderData(capsule, Color.White * 0.3f));
 				}
+				CapsuleRenderer.capsuleShaders.Add(new CapsuleShaderData(new Capsule(position, Vector2.Zero, 5), Color.Red));
+				CapsuleRenderer.capsuleShaders.Add(new CapsuleShaderData(new Capsule(Bottom, Vector2.Zero, 5), Color.Green));
 			}
 		}
 

@@ -22,9 +22,15 @@ namespace HololiveFightingGame.Collision
 		public float Distance(Vector2 vector)
 		{
 			Vector2 normal = Vector2.Normalize(length);
+			if (length == Vector2.Zero)
+            {
+				normal = Vector2.Zero;
+            }
 			float dot = Vector2.Dot(vector - origin, normal);
 			Vector2 point = normal * dot + origin;
-			point = Vector2.Clamp(point, Base, Tip);
+			Vector2 lower = new Vector2(Math.Min(Base.X, Tip.X), Math.Min(Base.Y, Tip.Y));
+			Vector2 upper = new Vector2(Math.Max(Base.X, Tip.X), Math.Max(Base.Y, Tip.Y));
+			point = Vector2.Clamp(point, lower, upper);
 			return Vector2.Distance(vector, point);
 		}
 
@@ -38,7 +44,7 @@ namespace HololiveFightingGame.Collision
 			distances[3] = capsule.Distance(Tip);
 
 			Array.Sort(distances);
-			return distances[0];
+			return distances[0] - (capsule.radius + radius);
 		}
 
 		public bool Contains(Vector2 vector)
@@ -53,9 +59,10 @@ namespace HololiveFightingGame.Collision
 
 		public bool Intersects(Capsule capsule)
 		{
-			if (GetBoundingBox().Intersects(capsule.GetBoundingBox()))
+			// if (GetBoundingBox().Intersects(capsule.GetBoundingBox()))
 			{
-				return Distance(capsule) <= radius + capsule.radius;
+				float distance = Distance(capsule);
+				return distance <= 0;
 			}
 			return false;
 		}

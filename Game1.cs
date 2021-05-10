@@ -14,6 +14,7 @@ using System.Threading;
 using System;
 using HololiveFightingGame.FighterEditor;
 using HololiveFightingGame.Graphics.CapsuleShader;
+using HololiveFightingGame.Collision;
 
 namespace HololiveFightingGame
 {
