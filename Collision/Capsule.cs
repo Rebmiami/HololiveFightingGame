@@ -59,6 +59,7 @@ namespace HololiveFightingGame.Collision
 
 		public bool Intersects(Capsule capsule)
 		{
+			// TODO: Figure this out later
 			// if (GetBoundingBox().Intersects(capsule.GetBoundingBox()))
 			{
 				float distance = Distance(capsule);

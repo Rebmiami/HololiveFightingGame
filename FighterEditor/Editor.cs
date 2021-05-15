@@ -73,7 +73,6 @@ namespace HololiveFightingGame.FighterEditor
 
 		public static void Update()
 		{
-
 			if (KeyHelper.Down(Keys.LeftControl) && KeyHelper.Pressed(Keys.O))
 			{
 				LoadFighter();
@@ -161,6 +160,7 @@ namespace HololiveFightingGame.FighterEditor
 				}
 				// CapsuleRenderer.capsuleShaders.Add(new CapsuleShaderData(new Collision.Capsule(Vector2.Zero, Vector2.Zero, 100`), Color.Maroon));
 				MovePreviewer.Update();
+				fighter.AddCapsules();
 			}
 		}
 

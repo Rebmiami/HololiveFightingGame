@@ -16,6 +16,11 @@ namespace HololiveFightingGame.Graphics.CapsuleShader
 			capsuleShaders = new List<CapsuleShaderData>();
 		}
 
+		public static void QuickPoint(Vector2 position, Color color)
+        {
+			capsuleShaders.Add(new CapsuleShaderData(new Capsule(position, Vector2.Zero, 5), color));
+        }
+
 		public static void Draw(SpriteBatch spriteBatch, Transformation transformation, GraphicsDevice graphicsDevice)
 		{
 			Effect shader = Game1.capsuleRenderShader;

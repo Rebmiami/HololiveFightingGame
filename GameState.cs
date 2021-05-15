@@ -48,6 +48,8 @@ namespace HololiveFightingGame
 			foreach (Fighter fighter in fighters)
 			{
 				fighter.Update_Animation();
+				if (Game1.showHitboxes)
+					fighter.AddCapsules();
 			}
 			playerCenter /= fighters.Length;
 			Vector2 cameraTarget = Vector2.Lerp(playerCenter, new Vector2(stage.collider.Rectangle.Center.X, stage.collider.Rectangle.Top), 0.5f);

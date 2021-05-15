@@ -175,6 +175,14 @@ namespace HololiveFightingGame
 						capsule.origin.X *= -1;
 						capsule.length.X *= -1;
 					}
+
+					// if (Game1.showHitboxes)
+					// {
+					// 	Capsule capsule1 = capsule;
+					// 	capsule1.origin += position + new Vector2(Hitbox().Width / 2, 0);
+					// 	CapsuleRenderer.capsuleShaders.Add(new CapsuleShaderData(capsule1, Color.Yellow * 0.3f));
+					// }
+
 					capsule.origin = Center + capsule.origin;
 
 					for (int j = 0; j < Game1.gameState.fighters.Length; j++)
@@ -196,26 +204,20 @@ namespace HololiveFightingGame
 								target.attacks.Add(attack);
 							}
 
-							if (Game1.showHitboxes)
-							{
-								foreach (Hurtbox hurtbox in body.body)
-								{
-									Capsule capsule2 = capsule1;
-									CapsuleRenderer.capsuleShaders.Add(new CapsuleShaderData(capsule2, Color.Orange * 0.3f, false));
-								}
-
-								foreach (Hurtbox hurtbox in target.body.body)
-								{
-									Capsule capsule2 = hurtbox.collider.Capsule;
-									CapsuleRenderer.capsuleShaders.Add(new CapsuleShaderData(capsule2, Color.White * 0.3f, false));
-								}
-							}
+							// if (Game1.showHitboxes)
+							// {
+							// 	foreach (Hurtbox hurtbox in body.body)
+							// 	{
+							// 		CapsuleRenderer.capsuleShaders.Add(new CapsuleShaderData(capsule1, Color.Orange * 0.3f, false));
+							// 	}
+							// 
+							// 	foreach (Hurtbox hurtbox in target.body.body)
+							// 	{
+							// 		Capsule capsule2 = hurtbox.collider.Capsule;
+							// 		CapsuleRenderer.capsuleShaders.Add(new CapsuleShaderData(capsule2, Color.White * 0.3f, false));
+							// 	}
+							// }
 						}
-					}
-
-					if (Game1.showHitboxes)
-					{
-						CapsuleRenderer.capsuleShaders.Add(new CapsuleShaderData(capsule, Color.Yellow * 0.3f));
 					}
 				}
 			}
@@ -229,17 +231,17 @@ namespace HololiveFightingGame
 				}
 			}
 
-			if (Game1.showHitboxes)
-			{
-				foreach (Hurtbox hurtbox in body.body)
-				{
-					Capsule capsule = hurtbox.collider.Capsule;
-					capsule.origin += position;
-					CapsuleRenderer.capsuleShaders.Add(new CapsuleShaderData(capsule, Color.White * 0.3f));
-				}
-				CapsuleRenderer.capsuleShaders.Add(new CapsuleShaderData(new Capsule(position, Vector2.Zero, 5), Color.Red));
-				CapsuleRenderer.capsuleShaders.Add(new CapsuleShaderData(new Capsule(Bottom, Vector2.Zero, 5), Color.Green));
-			}
+			// if (Game1.showHitboxes)
+			// {
+			// 	foreach (Hurtbox hurtbox in body.body)
+			// 	{
+			// 		Capsule capsule = hurtbox.collider.Capsule;
+			// 		capsule.origin += position + new Vector2(Hitbox().Width / 2, 0);
+			// 		CapsuleRenderer.capsuleShaders.Add(new CapsuleShaderData(capsule, Color.White * 0.3f));
+			// 	}
+			// 	CapsuleRenderer.QuickPoint(position, Color.Red);
+			// 	CapsuleRenderer.QuickPoint(Bottom, Color.Green);
+			// }
 		}
 
 		public void Update_Inputs()
@@ -353,6 +355,42 @@ namespace HololiveFightingGame
 			drawObject.frame = ((AnimatedSprite)drawObject.texture).GetFrame();
 			drawObject.Bottom = Bottom;
 			Game1.uiHandler.damages[ID] = damage;
+		}
+
+		public void AddCapsules()
+        {
+			if (moveRunner != null)
+			{
+				for (int i = 0; i < moveRunner.move.hitboxes.Length; i++)
+				{
+					AttackHitbox attackHitbox = moveRunner.move.hitboxes[i];
+					if (!moveRunner.enabled[i])
+					{
+						continue;
+					}
+					Collider collider = attackHitbox.collider;
+					Capsule capsule = collider.Capsule;
+					capsule.origin += moveRunner.pos[i];
+					if (direction == 1)
+					{
+						capsule.origin.X *= -1;
+						capsule.length.X *= -1;
+					}
+
+					Capsule capsule1 = capsule;
+					capsule1.origin += position + new Vector2(Hitbox().Width / 2, 0);
+					CapsuleRenderer.capsuleShaders.Add(new CapsuleShaderData(capsule1, Color.Yellow * 0.3f));
+				}
+			}
+
+			foreach (Hurtbox hurtbox in body.body)
+			{
+				Capsule capsule = hurtbox.collider.Capsule;
+				capsule.origin += position + new Vector2(Hitbox().Width / 2, 0);
+				CapsuleRenderer.capsuleShaders.Add(new CapsuleShaderData(capsule, Color.White * 0.3f));
+			}
+			CapsuleRenderer.QuickPoint(position, Color.Red);
+			CapsuleRenderer.QuickPoint(Bottom, Color.Green);
 		}
 
 		public Fighter(int ID, string character)
