@@ -197,6 +197,7 @@ namespace HololiveFightingGame.FighterEditor
 			}
 		}
 
+
 		public static void Save()
 		{
 			// All changes made in editor are written to classes that can be directly serialized to JSON.

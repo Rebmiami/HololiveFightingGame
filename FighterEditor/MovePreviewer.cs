@@ -24,11 +24,11 @@ namespace HololiveFightingGame.FighterEditor
 
 		public static void TakeCommandInputs()
 		{
-			if (Editor.fighter.moveRunner != null)
+			if (Editor.currentMove != null)
 				if (KeyHelper.Pressed(Keys.Space))
 				{
 					Playing = !Playing;
-					if (Frame >= Editor.fighter.moveRunner.data.MoveDuration)
+					if (Editor.fighter.moveRunner == null)
 					{
 						Reset();
 					}
@@ -61,9 +61,8 @@ namespace HololiveFightingGame.FighterEditor
 
 		public static void SetFrame(int frame)
 		{
-			int frames = Frame;
 			Reset();
-			for (int i = 0; i < frames; i++)
+			for (int i = 0; i < frame; i++)
 			{
 				AdvanceFrame();
 			}
