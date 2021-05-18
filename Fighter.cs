@@ -51,7 +51,7 @@ namespace HololiveFightingGame
 
 		public override void Update()
 		{
-			if (!Game1.gameState.stage.stageBounds.Intersects(Hitbox()))
+			if (!Game1.gameState.stage.stageBounds.Intersects(Hitbox()) && takeInputs)
 			{
 				position = new Vector2(300, 0);
 				velocity = Vector2.Zero;

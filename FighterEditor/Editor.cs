@@ -65,10 +65,14 @@ namespace HololiveFightingGame.FighterEditor
 		public static void Load()
 		{
 			// Unloads previously loaded graphics
+			ResetGraphics();
+			// MessageBox.Show("Welcome to the move editor!\n\nWhen you press \"OK\", you will be prompted to select a fighter to edit."); // If you need help at any point, you can press the * key to open documentation.\n\nThis message will only be shown once.", "Move Editor");
+		}
+
+		public static void ResetGraphics()
+        {
 			GraphicsHandler.main.children.Clear();
 			GraphicsHandler.main.children.Add("game", new DrawObject(DrawObjectType.Layer));
-
-			// MessageBox.Show("Welcome to the move editor!\n\nWhen you press \"OK\", you will be prompted to select a fighter to edit."); // If you need help at any point, you can press the * key to open documentation.\n\nThis message will only be shown once.", "Move Editor");
 		}
 
 		public static void Update()
@@ -151,14 +155,6 @@ namespace HololiveFightingGame.FighterEditor
 					object obj = new object();
 					menus[ActiveMenu].escapeRoute.Peek().Escape(ref obj);
 				}
-
-				foreach (Hurtbox hurtbox in fighter.body.body)
-				{
-					Capsule capsule = hurtbox.collider.Capsule;
-					capsule.origin += fighter.position;
-					CapsuleRenderer.capsuleShaders.Add(new CapsuleShaderData(capsule, Color.White));
-				}
-				// CapsuleRenderer.capsuleShaders.Add(new CapsuleShaderData(new Collision.Capsule(Vector2.Zero, Vector2.Zero, 100`), Color.Maroon));
 				MovePreviewer.Update();
 				fighter.AddCapsules();
 			}

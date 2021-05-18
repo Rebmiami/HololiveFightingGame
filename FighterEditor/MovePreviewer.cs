@@ -1,4 +1,6 @@
-﻿using HololiveFightingGame.Input;
+﻿using HololiveFightingGame.Combat;
+using HololiveFightingGame.Graphics;
+using HololiveFightingGame.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
@@ -28,7 +30,7 @@ namespace HololiveFightingGame.FighterEditor
 					Playing = !Playing;
 					if (Frame >= Editor.fighter.moveRunner.data.MoveDuration)
 					{
-						Frame = 0;
+						Reset();
 					}
 				}
 		}
@@ -42,7 +44,7 @@ namespace HololiveFightingGame.FighterEditor
 				step += Speed;
 
 				AdvanceFrame();
-				if (Frame >= Editor.fighter.moveRunner.data.MoveDuration)
+				if (Editor.fighter.moveRunner == null)
 				{
 					Playing = false;
 				}
@@ -52,6 +54,7 @@ namespace HololiveFightingGame.FighterEditor
 		public static void AdvanceFrame()
 		{
 			Editor.fighter.Update();
+			Editor.fighter.Update_PostHit(Editor.fighter.Update_Hits());
 			Editor.fighter.Update_Animation();
 			Frame++;
 		}
@@ -59,7 +62,7 @@ namespace HololiveFightingGame.FighterEditor
 		public static void SetFrame(int frame)
 		{
 			int frames = Frame;
-			SetFrame(0);
+			Reset();
 			for (int i = 0; i < frames; i++)
 			{
 				AdvanceFrame();
@@ -73,7 +76,17 @@ namespace HololiveFightingGame.FighterEditor
 
 		public static void Reset()
 		{
-			SetFrame(0);
+			Frame = 0;
+			Editor.ResetGraphics();
+			Editor.fighter = new Fighter(Editor.fighter.ID, Editor.fighter.character)
+            {
+                moveRunner = new Combat.MoveRunner(Editor.currentMove)
+            };
+			FighterLoader.LoadAnimations(new Fighter[] { Editor.fighter });
+			Editor.fighter.Bottom = Program.WindowBounds().Size.ToVector2() / 2;
+			Editor.fighter.takeInputs = false;
+			((AnimatedSprite)Editor.fighter.drawObject.texture).SwitchAnimation(Editor.currentMove.Data.Name, 0);
+			Editor.fighter.moveTimer = Editor.fighter.moveRunner.data.MoveDuration;
 		}
 	}
 }

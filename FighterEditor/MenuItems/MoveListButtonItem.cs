@@ -25,6 +25,7 @@ namespace HololiveFightingGame.FighterEditor.MenuItems
 			Editor.currentMove = FighterLoader.moves[Editor.fighter.character][move];
 			Editor.fighter.moveRunner = new MoveRunner(Editor.currentMove);
 			((AnimatedSprite)Editor.fighter.drawObject.texture).SwitchAnimation(Editor.currentMove.Data.Name, 0);
+			Editor.fighter.moveTimer = Editor.fighter.moveRunner.data.MoveDuration;
 			base.Escape(ref target);
 		}
 
