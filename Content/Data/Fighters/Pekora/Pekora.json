@@ -1,3 +1,115 @@
 {
-	"FullName": "Usada Pekora"
+	"FullName": "Usada Pekora",
+	"Body": {
+		"Head": {
+			"Origin": {
+				"X": 0,
+				"Y": 0
+			},
+			"Length": {
+				"X": 0,
+				"Y": 0
+			},
+			"Radius": 0
+		},
+		"Torso": {
+			"Origin": {
+				"X": 0,
+				"Y": 0
+			},
+			"Length": {
+				"X": 0,
+				"Y": 0
+			},
+			"Radius": 0
+		},
+		"Thigh1": {
+			"Origin": {
+				"X": 0,
+				"Y": 0
+			},
+			"Length": {
+				"X": 0,
+				"Y": 0
+			},
+			"Radius": 0
+		},
+		"Calf1": {
+			"Origin": {
+				"X": 0,
+				"Y": 0
+			},
+			"Length": {
+				"X": 0,
+				"Y": 0
+			},
+			"Radius": 0
+		},
+		"UpperArm1": {
+			"Origin": {
+				"X": 0,
+				"Y": 0
+			},
+			"Length": {
+				"X": 0,
+				"Y": 0
+			},
+			"Radius": 0
+		},
+		"ForeArm1": {
+			"Origin": {
+				"X": 0,
+				"Y": 0
+			},
+			"Length": {
+				"X": 0,
+				"Y": 0
+			},
+			"Radius": 0
+		},
+		"Thigh2": {
+			"Origin": {
+				"X": 0,
+				"Y": 0
+			},
+			"Length": {
+				"X": 0,
+				"Y": 0
+			},
+			"Radius": 0
+		},
+		"Calf2": {
+			"Origin": {
+				"X": 0,
+				"Y": 0
+			},
+			"Length": {
+				"X": 0,
+				"Y": 0
+			},
+			"Radius": 0
+		},
+		"UpperArm2": {
+			"Origin": {
+				"X": 0,
+				"Y": 0
+			},
+			"Length": {
+				"X": 0,
+				"Y": 0
+			},
+			"Radius": 0
+		},
+		"ForeArm2": {
+			"Origin": {
+				"X": 0,
+				"Y": 0
+			},
+			"Length": {
+				"X": 0,
+				"Y": 0
+			},
+			"Radius": 0
+		}
+	}
 }
