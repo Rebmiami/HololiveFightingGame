@@ -76,16 +76,7 @@ namespace HololiveFightingGame.FighterEditor
 		public static void Reset()
 		{
 			Frame = 0;
-			Editor.ResetGraphics();
-			Editor.fighter = new Fighter(Editor.fighter.ID, Editor.fighter.character)
-            {
-                moveRunner = new Combat.MoveRunner(Editor.currentMove)
-            };
-			FighterLoader.LoadAnimations(new Fighter[] { Editor.fighter });
-			Editor.fighter.Bottom = Program.WindowBounds().Size.ToVector2() / 2;
-			Editor.fighter.takeInputs = false;
-			((AnimatedSprite)Editor.fighter.drawObject.texture).SwitchAnimation(Editor.currentMove.Data.Name, 0);
-			Editor.fighter.moveTimer = Editor.fighter.moveRunner.data.MoveDuration;
+			Editor.ResetFighter();
 		}
 	}
 }

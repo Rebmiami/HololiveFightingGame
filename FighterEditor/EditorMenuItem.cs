@@ -1,5 +1,7 @@
-﻿using Microsoft.Xna.Framework;
+﻿using HololiveFightingGame.Input;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 
 namespace HololiveFightingGame.FighterEditor
@@ -81,6 +83,10 @@ namespace HololiveFightingGame.FighterEditor
 		public bool button;
 		public bool open;
 		public EditorMenuItem[] children;
+		public Rectangle clickbox;
+
+		public string helpText;
+		public string helpArticle;
 
 		public virtual void Draw(SpriteBatch spriteBatch, Vector2 position)
 		{
@@ -98,5 +104,20 @@ namespace HololiveFightingGame.FighterEditor
 				return 0;
 			}
 		}
+
+		public bool Hovering()
+        {
+			return clickbox.Contains(Mouse.GetState().Position);
+        }
+
+		public bool IsClicked()
+        {
+			return Hovering() && MouseHelper.Down(MouseButtons.Left);
+        }
+
+		public void Clicked()
+        {
+
+        }
 	}
 }
