@@ -85,6 +85,8 @@ namespace HololiveFightingGame.FighterEditor
 		public EditorMenuItem[] children;
 		public Rectangle clickbox;
 
+		public bool disabled;
+
 		public string helpText;
 		public string helpArticle;
 
