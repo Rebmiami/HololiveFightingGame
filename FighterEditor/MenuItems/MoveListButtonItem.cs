@@ -9,7 +9,7 @@ using System.Text;
 
 namespace HololiveFightingGame.FighterEditor.MenuItems
 {
-	class MoveListButtonItem : EditorMenuItem
+	class MoveListButtonItem : EditorUIItem
 	{
 		public string move;
 
@@ -18,6 +18,7 @@ namespace HololiveFightingGame.FighterEditor.MenuItems
 			this.move = move;
 			button = true;
 			lowestLevel = true;
+			type = EditorMenuItemType.Button;
 		}
 
 		public override void Escape(ref object target)

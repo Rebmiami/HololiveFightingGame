@@ -15,7 +15,7 @@ namespace HololiveFightingGame.FighterEditor.Menus
 		{
 			attackNames = Enum.GetNames(typeof(MoveType));
 
-			items = new EditorMenuItem[attackNames.Length];
+			items = new EditorUIItem[attackNames.Length];
 			for (int i = 0; i < items.Length; i++)
 			{
 				items[i] = new MoveListItem(this, i, attackNames[i]);

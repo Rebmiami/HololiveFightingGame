@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace HololiveFightingGame.FighterEditor
 {
-	public abstract class EditorMenuItem
+	public abstract class EditorUIItem
 	{
 		/// <summary>
 		/// Called when pressing Enter while a mid-level menu item is selected. Allows the user to select menu items within this item. <br />
@@ -47,11 +47,58 @@ namespace HololiveFightingGame.FighterEditor
 			}
 		}
 
-		public EditorMenuItem(EditorMenu parent, int ID)
+		/// <summary>
+		/// Called every frame.
+		/// </summary>
+		public virtual void Update()
+        {
+			foreach (EditorUIItem item in children)
+            {
+				item.Update();
+            }
+
+            switch (type)
+            {
+                case EditorMenuItemType.Button:
+                    break;
+                case EditorMenuItemType.Hoverable:
+                    break;
+                case EditorMenuItemType.Tickbox:
+                    break;
+                case EditorMenuItemType.ToggleButton:
+                    break;
+                case EditorMenuItemType.EditableText:
+                    break;
+                case EditorMenuItemType.Dropdown:
+                    break;
+                case EditorMenuItemType.VerticalList:
+                    break;
+                case EditorMenuItemType.CompactList:
+                    break;
+                case EditorMenuItemType.Selectable:
+                    break;
+                case EditorMenuItemType.AngleKnob:
+                    break;
+                case EditorMenuItemType.Spinner:
+                    break;
+                default:
+                    break;
+            }
+        }
+
+		/// <summary>
+		/// Called when something is changed and the clickbox (or something else) needs to be adjusted
+		/// </summary>
+		public virtual void Refresh()
+        {
+
+        }
+
+		public EditorUIItem(EditorMenu parent, int ID)
 		{
 			this.parent = parent;
 			this.ID = ID;
-			children = new EditorMenuItem[0];
+			children = new EditorUIItem[0];
 		}
 
 		public bool Selected
@@ -65,12 +112,14 @@ namespace HololiveFightingGame.FighterEditor
 		{
 			get
 			{
+				return Hovering();
+
 				if (Selected)
 					return false;
 				if (parent.escapeRoute.Count == 0)
-					return parent.cursor == ID && new List<EditorMenuItem>(parent.items).Contains(this);
+					return parent.cursor == ID && new List<EditorUIItem>(parent.items).Contains(this);
 
-				if (!new List<EditorMenuItem>(parent.CurrentItemPool).Contains(this))
+				if (!new List<EditorUIItem>(parent.CurrentItemPool).Contains(this))
 					return false;
 
 				return parent.cursor == ID && parent.escapeRoute.Peek().Selected;
@@ -81,8 +130,9 @@ namespace HololiveFightingGame.FighterEditor
 		public int ID;
 		public bool lowestLevel;
 		public bool button;
+		public EditorMenuItemType type;
 		public bool open;
-		public EditorMenuItem[] children;
+		public EditorUIItem[] children;
 		public Rectangle clickbox;
 
 		public bool disabled;
@@ -108,18 +158,18 @@ namespace HololiveFightingGame.FighterEditor
 		}
 
 		public bool Hovering()
-        {
+		{
 			return clickbox.Contains(Mouse.GetState().Position);
-        }
+		}
 
 		public bool IsClicked()
-        {
+		{
 			return Hovering() && MouseHelper.Down(MouseButtons.Left);
-        }
+		}
 
 		public void Clicked()
-        {
+		{
 
-        }
+		}
 	}
 }

@@ -18,6 +18,6 @@ namespace HololiveFightingGame.FighterEditor
 		Selectable, // An item that can be selected but not un-selected. Only one can be selected at a time in a given context.
 		AngleKnob, // A knob specifying an angle.
 		Spinner, // A numerical value increased or decreased in increments.
-			// Shift = smaller increments, Ctrl = larger increments, Shift + Ctrl = reset to default value
+			// Shift = smaller increments, Ctrl = larger increments, Shift + Ctrl = reset to default value.
 	}
 }

@@ -7,14 +7,14 @@ namespace HololiveFightingGame.FighterEditor
 {
 	public abstract class EditorMenu
 	{
-		public EditorMenuItem[] items;
-		public Stack<EditorMenuItem> escapeRoute;
+		public EditorUIItem[] items;
+		public Stack<EditorUIItem> escapeRoute;
 		public int cursor;
 
 		/// <summary>
-		/// The <see cref="EditorMenuItem"/> that the cursor is focused on.
+		/// The <see cref="EditorUIItem"/> that the cursor is focused on.
 		/// </summary>
-		public EditorMenuItem HighlightedItem
+		public EditorUIItem HighlightedItem
 		{
 			get
 			{
@@ -25,9 +25,9 @@ namespace HololiveFightingGame.FighterEditor
 		}
 
 		/// <summary>
-		/// An array of type <see cref="EditorMenuItem"/> containing all items that the user can select in the current context.
+		/// An array of type <see cref="EditorUIItem"/> containing all items that the user can select in the current context.
 		/// </summary>
-		public EditorMenuItem[] CurrentItemPool
+		public EditorUIItem[] CurrentItemPool
 		{
 			get
 			{
@@ -39,8 +39,8 @@ namespace HololiveFightingGame.FighterEditor
 
 		public EditorMenu()
 		{
-			escapeRoute = new Stack<EditorMenuItem>();
-			items = new EditorMenuItem[0];
+			escapeRoute = new Stack<EditorUIItem>();
+			items = new EditorUIItem[0];
 		}
 
 		public virtual void Draw(SpriteBatch spriteBatch, bool rightMenu)

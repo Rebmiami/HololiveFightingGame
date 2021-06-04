@@ -8,7 +8,7 @@ using System.Text;
 
 namespace HololiveFightingGame.FighterEditor.MenuItems
 {
-	public class MoveListItem : EditorMenuItem
+	public class MoveListItem : EditorUIItem
 	{
 		public string move;
 		public string[] subMoves;
@@ -25,11 +25,12 @@ namespace HololiveFightingGame.FighterEditor.MenuItems
 				}
 			}
 			subMoves = subMoveList.ToArray();
-			children = new EditorMenuItem[subMoves.Length];
+			children = new EditorUIItem[subMoves.Length];
 			for (int i = 0; i < subMoves.Length; i++)
 			{
 				children[i] = new MoveListButtonItem(parent, i, subMoves[i]);
 			}
+			type = EditorMenuItemType.Hoverable;
 		}
 
 		public void Draw(SpriteBatch spriteBatch, Vector2 position, int i)
