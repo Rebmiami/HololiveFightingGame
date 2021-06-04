@@ -64,5 +64,13 @@ namespace HololiveFightingGame.FighterEditor
 				cursor %= CurrentItemPool.Length;
 			}
 		}
+
+		public void Update()
+        {
+			foreach (EditorUIItem item in items)
+            {
+				item.Update();
+            }
+        }
 	}
 }

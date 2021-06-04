@@ -33,7 +33,16 @@ namespace HololiveFightingGame.FighterEditor.MenuItems
 			type = EditorMenuItemType.Hoverable;
 		}
 
-		public void Draw(SpriteBatch spriteBatch, Vector2 position, int i)
+        public override void Refresh()
+        {
+			Vector2 origin = new Vector2(8, 8);
+			// origin.X += 546;
+			origin.Y += 25;
+			clickbox = new Rectangle((int)origin.X - 2, (int)origin.Y - 2 + ID * 20, 100, 20);
+			base.Refresh();
+        }
+
+        public void Draw(SpriteBatch spriteBatch, Vector2 position, int i)
 		{
 			if (Highlighted || Selected)
 			{

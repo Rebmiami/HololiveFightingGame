@@ -115,6 +115,8 @@ namespace HololiveFightingGame.FighterEditor
 							leftMenu = i;
 						}
 					}
+					menus[rightMenu].Update();
+					menus[leftMenu].Update();
 				}
 
 				if (menus[ActiveMenu].items.Length > 0)

@@ -62,6 +62,10 @@ namespace HololiveFightingGame.FighterEditor
                 case EditorMenuItemType.Button:
                     break;
                 case EditorMenuItemType.Hoverable:
+					if (Hovering())
+                    {
+						parent.cursor = ID;
+                    }
                     break;
                 case EditorMenuItemType.Tickbox:
                     break;
@@ -99,6 +103,7 @@ namespace HololiveFightingGame.FighterEditor
 			this.parent = parent;
 			this.ID = ID;
 			children = new EditorUIItem[0];
+			Refresh();
 		}
 
 		public bool Selected
@@ -112,8 +117,6 @@ namespace HololiveFightingGame.FighterEditor
 		{
 			get
 			{
-				return Hovering();
-
 				if (Selected)
 					return false;
 				if (parent.escapeRoute.Count == 0)
