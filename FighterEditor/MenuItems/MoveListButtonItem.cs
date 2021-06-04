@@ -16,7 +16,6 @@ namespace HololiveFightingGame.FighterEditor.MenuItems
 		public MoveListButtonItem(EditorMenu parent, int ID, string move) : base(parent, ID)
 		{
 			this.move = move;
-			button = true;
 			lowestLevel = true;
 			type = EditorMenuItemType.Button;
 		}

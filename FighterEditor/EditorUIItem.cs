@@ -138,8 +138,8 @@ namespace HololiveFightingGame.FighterEditor
 		public EditorMenu parent;
 		public int ID;
 		public bool lowestLevel;
-		public bool button;
 		public EditorMenuItemType type;
+		public ButtonFlavor flavor;
 		public bool open;
 		public EditorUIItem[] children;
 		public Rectangle clickbox;

@@ -146,7 +146,7 @@ namespace HololiveFightingGame.FighterEditor
 				{
 					if (menus[ActiveMenu].HighlightedItem.lowestLevel)
 					{
-						if (menus[ActiveMenu].HighlightedItem.button)
+						if (menus[ActiveMenu].HighlightedItem.type == EditorMenuItemType.Button)
 						{
 							object obj = new object();
 							menus[ActiveMenu].HighlightedItem.Escape(ref obj);
