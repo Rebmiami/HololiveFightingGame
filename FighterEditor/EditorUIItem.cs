@@ -80,8 +80,12 @@ namespace HololiveFightingGame.FighterEditor
                 case EditorMenuItemType.CompactList:
                     break;
                 case EditorMenuItemType.Selectable:
-                    break;
-                case EditorMenuItemType.AngleKnob:
+					if (IsClicked())
+					{
+						parent.cursor = ID;
+					}
+					break;
+				case EditorMenuItemType.AngleKnob:
                     break;
                 case EditorMenuItemType.Spinner:
                     break;

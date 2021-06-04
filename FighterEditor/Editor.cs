@@ -94,26 +94,36 @@ namespace HololiveFightingGame.FighterEditor
 				{
 					if (KeyHelper.Pressed((Keys)(i + 49)))
 					{
-						if (KeyHelper.Down(Keys.LeftShift))
-						{
-							if (leftMenu == i)
-							{
-								leftMenu = rightMenu;
-								activeMenu++;
-								activeMenu %= 2;
-							}
+						if (i > 3)
+                        {
 							rightMenu = i;
-						}
+                        }
 						else
-						{
-							if (rightMenu == i)
-							{
-								rightMenu = leftMenu;
-								activeMenu++;
-								activeMenu %= 2;
-							}
+                        {
 							leftMenu = i;
-						}
+                        }
+
+						// Old nav system. Some users may prefer this, so it may be reimplemented later.
+						// if (KeyHelper.Down(Keys.LeftShift))
+						// {
+						// 	if (leftMenu == i)
+						// 	{
+						// 		leftMenu = rightMenu;
+						// 		activeMenu++;
+						// 		activeMenu %= 2;
+						// 	}
+						// 	rightMenu = i;
+						// }
+						// else
+						// {
+						// 	if (rightMenu == i)
+						// 	{
+						// 		rightMenu = leftMenu;
+						// 		activeMenu++;
+						// 		activeMenu %= 2;
+						// 	}
+						// 	leftMenu = i;
+						// }
 					}
 					menus[rightMenu].Update();
 					menus[leftMenu].Update();
@@ -191,8 +201,8 @@ namespace HololiveFightingGame.FighterEditor
 					new AnimationMenu(),
 					new MoveEditor(),
 					new AnimationEditor(),
-					new HurtboxEditor(),
-					new HitboxEditor()
+					new HitboxEditor(),
+					new DynamicsEditor(),
 				};
 				leftMenu = 2;
 				rightMenu = 4;

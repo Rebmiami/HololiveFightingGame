@@ -30,7 +30,7 @@ namespace HololiveFightingGame.FighterEditor.MenuItems
 			{
 				children[i] = new MoveListButtonItem(parent, i, subMoves[i]);
 			}
-			type = EditorMenuItemType.Hoverable;
+			type = EditorMenuItemType.Selectable;
 		}
 
         public override void Refresh()
@@ -57,7 +57,7 @@ namespace HololiveFightingGame.FighterEditor.MenuItems
 					spriteBatch.DrawString(Assets.font, "No moves.", position + new Vector2(120, 0), Color.White);
 				}
 			}
-			Button.Draw(spriteBatch, new Rectangle((int)position.X - 2, (int)position.Y - 2 + i * 20, 100, 20), Flavor);
+			Button.Draw(spriteBatch, clickbox, Flavor);
 			spriteBatch.DrawString(Assets.font, move, position + new Vector2(0, i * 20), Color.White);
 		}
 	}

@@ -7,7 +7,7 @@ using System.Text;
 
 namespace HololiveFightingGame.FighterEditor.Menus
 {
-	class HurtboxEditor : EditorMenu
+	class DynamicsEditor : EditorMenu
 	{
 		public override void Draw(SpriteBatch spriteBatch, bool rightMenu)
 		{
@@ -17,7 +17,7 @@ namespace HololiveFightingGame.FighterEditor.Menus
 				origin.X += 546;
 			}
 
-			spriteBatch.DrawString(Assets.font, "Hurtbox Editor", origin, Color.White);
+			spriteBatch.DrawString(Assets.font, "Dynamics Editor", origin, Color.White);
 			base.Draw(spriteBatch, rightMenu);
 		}
 	}
