@@ -60,7 +60,9 @@ namespace HololiveFightingGame.FighterEditor
             switch (type)
             {
                 case EditorMenuItemType.Button:
-                    break;
+					object obj = new object();
+					Escape(ref obj);
+					break;
                 case EditorMenuItemType.Hoverable:
 					if (Hovering())
                     {
@@ -95,7 +97,7 @@ namespace HololiveFightingGame.FighterEditor
         }
 
 		/// <summary>
-		/// Called when something is changed and the clickbox (or something else) needs to be adjusted
+		/// Called when something is changed and the clickbox (or something else) needs to be adjusted.
 		/// </summary>
 		public virtual void Refresh()
         {
