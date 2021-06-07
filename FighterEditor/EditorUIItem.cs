@@ -48,24 +48,24 @@ namespace HololiveFightingGame.FighterEditor
 		}
 
 		public void ComeOverHere()
-        {
+		{
 			parentMenu.escapeRoute.Clear();
 			parentMenu.escapeRoute = new Stack<EditorUIItem>(PathToMe());
 			// Enter();
-        }
+		}
 
 		public EditorUIItem[] PathToMe()
-        {
+		{
 			EditorUIItem leParent = parent;
 			List<EditorUIItem> path = new List<EditorUIItem>();
 			while (leParent != null)
-            {
+			{
 				path.Add(leParent);
 				leParent = leParent.parent;
-            }
+			}
 			path.Reverse();
 			return path.ToArray();
-        }
+		}
 
 		/// <summary>
 		/// Called every frame.
@@ -132,15 +132,15 @@ namespace HololiveFightingGame.FighterEditor
 		public virtual void Refresh()
 		{
 			foreach (EditorUIItem child in children)
-            {
+			{
 				child.parent = this;
 				child.Refresh();
-            }
+			}
 		}
 
-		public EditorUIItem(EditorMenu parent, int ID)
+		public EditorUIItem(EditorMenu parentMenu, int ID)
 		{
-			this.parentMenu = parent;
+			this.parentMenu = parentMenu;
 			this.ID = ID;
 			children = new EditorUIItem[0];
 			Refresh();
