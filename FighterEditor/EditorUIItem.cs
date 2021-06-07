@@ -51,7 +51,6 @@ namespace HololiveFightingGame.FighterEditor
 		{
 			parentMenu.escapeRoute.Clear();
 			parentMenu.escapeRoute = new Stack<EditorUIItem>(PathToMe());
-			// Enter();
 		}
 
 		public EditorUIItem[] PathToMe()
