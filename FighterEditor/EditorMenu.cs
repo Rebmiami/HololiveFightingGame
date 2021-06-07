@@ -72,5 +72,16 @@ namespace HololiveFightingGame.FighterEditor
 				item.Update();
             }
         }
+
+		/// <summary>
+		/// Runs through the hierarchy of items and sets some values. Should be called any time the hierarchy is edited.
+		/// </summary>
+		public void Refresh()
+        {
+			foreach (EditorUIItem item in items)
+            {
+				item.Refresh();
+            }
+        }
 	}
 }

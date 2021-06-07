@@ -8,6 +8,9 @@ using System.Text;
 
 namespace HololiveFightingGame.FighterEditor
 {
+	/// <summary>
+	/// Class for drawing buttons. Note that it does not contain any actual button functionality.
+	/// </summary>
 	public class Button
 	{
 		public static Rectangle[] Parts => new Rectangle[]
@@ -23,7 +26,12 @@ namespace HololiveFightingGame.FighterEditor
 			new Rectangle(7, 7, 2, 2)
 		};
 
-		public static void Draw(SpriteBatch spriteBatch, Rectangle dimensions, int flavor = 0)
+		public static void Draw(SpriteBatch spriteBatch, Rectangle dimensions, ButtonFlavor flavor = ButtonFlavor.Latent)
+        {
+			Draw(spriteBatch, dimensions, (int)flavor);
+        }
+
+		public static void Draw(SpriteBatch spriteBatch, Rectangle dimensions, int flavor)
 		{
 			for (int i = 0; i < 3; i++)
 			{

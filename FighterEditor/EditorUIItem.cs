@@ -14,8 +14,8 @@ namespace HololiveFightingGame.FighterEditor
 		/// </summary>
 		public virtual void Enter()
 		{
-			parent.escapeRoute.Push(this);
-			parent.cursor = 0;
+			parentMenu.escapeRoute.Push(this);
+			parentMenu.cursor = 0;
 		}
 
 		/// <summary>
@@ -43,9 +43,29 @@ namespace HololiveFightingGame.FighterEditor
 		{
 			if (!lowestLevel)
 			{
-				parent.cursor = parent.escapeRoute.Pop().ID;
+				parentMenu.cursor = parentMenu.escapeRoute.Pop().ID;
 			}
 		}
+
+		public void ComeOverHere()
+        {
+			parentMenu.escapeRoute.Clear();
+			parentMenu.escapeRoute = new Stack<EditorUIItem>(PathToMe());
+			// Enter();
+        }
+
+		public EditorUIItem[] PathToMe()
+        {
+			EditorUIItem leParent = parent;
+			List<EditorUIItem> path = new List<EditorUIItem>();
+			while (leParent != null)
+            {
+				path.Add(leParent);
+				leParent = leParent.parent;
+            }
+			path.Reverse();
+			return path.ToArray();
+        }
 
 		/// <summary>
 		/// Called every frame.
@@ -59,19 +79,21 @@ namespace HololiveFightingGame.FighterEditor
 				}
 
 			if (!disabled)
+			{
 				switch (type)
 				{
 					case EditorMenuItemType.Button:
 						if (IsClicked())
 						{
 							object obj = new object();
+							parentMenu.cursor = ID;
 							Escape(ref obj);
 						}
 						break;
 					case EditorMenuItemType.Hoverable:
 						if (Hovering())
 						{
-							parent.cursor = ID;
+							parentMenu.cursor = ID;
 						}
 						break;
 					case EditorMenuItemType.Tickbox:
@@ -89,7 +111,9 @@ namespace HololiveFightingGame.FighterEditor
 					case EditorMenuItemType.Selectable:
 						if (IsClicked())
 						{
-							parent.cursor = ID;
+							parentMenu.cursor = ID;
+							ComeOverHere();
+							Enter();
 						}
 						break;
 					case EditorMenuItemType.AngleKnob:
@@ -99,19 +123,24 @@ namespace HololiveFightingGame.FighterEditor
 					default:
 						break;
 				}
+			}
 		}
 
 		/// <summary>
-		/// Called when something is changed and the clickbox (or something else) needs to be adjusted.
+		/// Called when something is changed and various values need to be adjusted.
 		/// </summary>
 		public virtual void Refresh()
 		{
-
+			foreach (EditorUIItem child in children)
+            {
+				child.parent = this;
+				child.Refresh();
+            }
 		}
 
 		public EditorUIItem(EditorMenu parent, int ID)
 		{
-			this.parent = parent;
+			this.parentMenu = parent;
 			this.ID = ID;
 			children = new EditorUIItem[0];
 			Refresh();
@@ -121,7 +150,7 @@ namespace HololiveFightingGame.FighterEditor
 		{
 			get
 			{
-				return parent.escapeRoute.Contains(this);
+				return parentMenu.escapeRoute.Contains(this);
 			}
 		}
 
@@ -131,17 +160,18 @@ namespace HololiveFightingGame.FighterEditor
 			{
 				if (Selected)
 					return false;
-				if (parent.escapeRoute.Count == 0)
-					return parent.cursor == ID && new List<EditorUIItem>(parent.items).Contains(this);
+				if (parentMenu.escapeRoute.Count == 0)
+					return parentMenu.cursor == ID && new List<EditorUIItem>(parentMenu.items).Contains(this);
 
-				if (!new List<EditorUIItem>(parent.CurrentItemPool).Contains(this))
+				if (!new List<EditorUIItem>(parentMenu.CurrentItemPool).Contains(this))
 					return false;
 
-				return parent.cursor == ID && parent.escapeRoute.Peek().Selected;
+				return parentMenu.cursor == ID && parentMenu.escapeRoute.Peek().Selected;
 			}
 		}
 
-		public EditorMenu parent;
+		public EditorMenu parentMenu;
+		public EditorUIItem parent;
 		public int ID;
 		public bool lowestLevel;
 		public EditorMenuItemType type;
@@ -180,7 +210,7 @@ namespace HololiveFightingGame.FighterEditor
 
 		public bool IsClicked()
 		{
-			return Hovering() && MouseHelper.Down(MouseButtons.Left);
+			return Hovering() && MouseHelper.Pressed(MouseButtons.Left);
 		}
 
 		public void Clicked()

@@ -248,10 +248,10 @@ namespace HololiveFightingGame.FighterEditor
 			}
 			else
 			{
-				Button.Draw(spriteBatch, new Rectangle(2, 2, 250, 420), activeMenu == 0 ? 2 : 0);
+				Button.Draw(spriteBatch, new Rectangle(2, 2, 250, 420), activeMenu == 0 ? 1 : 0);
 				menus[leftMenu].Draw(spriteBatch, false);
 
-				Button.Draw(spriteBatch, new Rectangle(2 + panelOffset, 2, 250, 420), activeMenu == 1 ? 2 : 0);
+				Button.Draw(spriteBatch, new Rectangle(2 + panelOffset, 2, 250, 420), activeMenu == 1 ? 1 : 0);
 				menus[rightMenu].Draw(spriteBatch, true);
 
 				Button.Draw(spriteBatch, new Rectangle(254, 2, 292, 30));
