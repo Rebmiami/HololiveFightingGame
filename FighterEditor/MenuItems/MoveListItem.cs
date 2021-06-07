@@ -31,6 +31,7 @@ namespace HololiveFightingGame.FighterEditor.MenuItems
 				children[i] = new MoveListButtonItem(parent, i, subMoves[i]);
 			}
 			type = EditorMenuItemType.Selectable;
+			onlyUpdateChildrenIfSelected = true;
 		}
 
         public override void Refresh()

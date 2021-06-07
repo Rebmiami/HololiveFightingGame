@@ -51,58 +51,63 @@ namespace HololiveFightingGame.FighterEditor
 		/// Called every frame.
 		/// </summary>
 		public virtual void Update()
-        {
-			foreach (EditorUIItem item in children)
-            {
-				item.Update();
-            }
+		{
+			if (!onlyUpdateChildrenIfSelected || (Selected || Highlighted))
+				foreach (EditorUIItem item in children)
+				{
+					item.Update();
+				}
 
-            switch (type)
-            {
-                case EditorMenuItemType.Button:
-					object obj = new object();
-					Escape(ref obj);
-					break;
-                case EditorMenuItemType.Hoverable:
-					if (Hovering())
-                    {
-						parent.cursor = ID;
-                    }
-                    break;
-                case EditorMenuItemType.Tickbox:
-                    break;
-                case EditorMenuItemType.ToggleButton:
-                    break;
-                case EditorMenuItemType.EditableText:
-                    break;
-                case EditorMenuItemType.Dropdown:
-                    break;
-                case EditorMenuItemType.VerticalList:
-                    break;
-                case EditorMenuItemType.CompactList:
-                    break;
-                case EditorMenuItemType.Selectable:
-					if (IsClicked())
-					{
-						parent.cursor = ID;
-					}
-					break;
-				case EditorMenuItemType.AngleKnob:
-                    break;
-                case EditorMenuItemType.Spinner:
-                    break;
-                default:
-                    break;
-            }
-        }
+			if (!disabled)
+				switch (type)
+				{
+					case EditorMenuItemType.Button:
+						if (IsClicked())
+						{
+							object obj = new object();
+							Escape(ref obj);
+						}
+						break;
+					case EditorMenuItemType.Hoverable:
+						if (Hovering())
+						{
+							parent.cursor = ID;
+						}
+						break;
+					case EditorMenuItemType.Tickbox:
+						break;
+					case EditorMenuItemType.ToggleButton:
+						break;
+					case EditorMenuItemType.EditableText:
+						break;
+					case EditorMenuItemType.Dropdown:
+						break;
+					case EditorMenuItemType.VerticalList:
+						break;
+					case EditorMenuItemType.CompactList:
+						break;
+					case EditorMenuItemType.Selectable:
+						if (IsClicked())
+						{
+							parent.cursor = ID;
+						}
+						break;
+					case EditorMenuItemType.AngleKnob:
+						break;
+					case EditorMenuItemType.Spinner:
+						break;
+					default:
+						break;
+				}
+		}
 
 		/// <summary>
 		/// Called when something is changed and the clickbox (or something else) needs to be adjusted.
 		/// </summary>
 		public virtual void Refresh()
-        {
+		{
 
-        }
+		}
 
 		public EditorUIItem(EditorMenu parent, int ID)
 		{
@@ -119,6 +124,7 @@ namespace HololiveFightingGame.FighterEditor
 				return parent.escapeRoute.Contains(this);
 			}
 		}
+
 		public bool Highlighted
 		{
 			get
@@ -143,6 +149,7 @@ namespace HololiveFightingGame.FighterEditor
 		public bool open;
 		public EditorUIItem[] children;
 		public Rectangle clickbox;
+		public bool onlyUpdateChildrenIfSelected;
 
 		public bool disabled;
 
