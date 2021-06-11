@@ -21,6 +21,10 @@ namespace HololiveFightingGame.FighterEditor
 		EditorHitbox,
 		EditorDynamics,
 
+		EditorAI,
+		EditorProjectile,
+		EditorEntity,
+
 		HitboxTypeNormal,
 		HitboxTypeGrab,
 		HitboxTypeShield,
@@ -32,9 +36,22 @@ namespace HololiveFightingGame.FighterEditor
 		HurtboxTypeInvulnerable,
 		HurtboxTypeIntangible,
 
+		HitboxPosition,
+		HitboxRadius,
+		HitboxKeyframe,
+		HitboxDamage,
+		HitboxKnockback,
+		HitboxKnockbackGrowth,
+		HitboxLaunchAngle,
+		MoveDuration,
+		HitboxAutoswipe,
+		HitboxEnabled,
+
 		HitboxGrounded,
 		HitboxAerial,
-		NA1,
+
+		HitboxPart,
+		HitboxPriority,
 
 		TagIcon,
 		TagMaleSign,
@@ -46,9 +63,6 @@ namespace HololiveFightingGame.FighterEditor
 		TagPaintbrush,
 		TagGroup,
 		TagOther,
-
-		NA2,
-		NA3,
 
 		PreviewPlay,
 		PreviewPause,
@@ -69,36 +83,45 @@ namespace HololiveFightingGame.FighterEditor
 		PreviewShowGrounded,
 		PreviewShowAerial,
 
-		NA4,
+		NA1,
 
 		CostumeIcon,
 		CostumeCustomizable,
 		CostumeSprite,
 
-		NA5,
-		NA6,
-		NA7,
+		CostumeIdol,
+		CostumeBeach,
+		CostumeChallenge,
 
 		AnimationIcon,
 		AnimationFrame,
 		AnimationSoundEffect,
 		AnimationFlash,
 
-		NA8,
-		NA9,
-
-		DynamicsTrigger,
-		DynamicsScript,
-		DynamicsVariable,
-
-		NA10,
-		NA11,
-		NA12,
+		NA2,
+		NA3,
 
 		Add,
 		Delete,
 		Clone,
 		MoveBack,
-		MoveForth
+		MoveForth,
+
+		NA4,
+
+		DynamicsTrigger,
+		DynamicsScript,
+		DynamicsVariable,
+
+		DynamicsTypeBool,
+		DynamicsTypeInt,
+		DynamicsTypeString,
+		DynamicsTypeVector,
+		DynamicsTypeFighter,
+		DynamicsTypeFloat,
+		DynamicsTypeEntity,
+
+		NA5,
+		NA6,
 	}
 }
