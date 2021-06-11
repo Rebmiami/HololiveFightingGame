@@ -39,17 +39,18 @@ namespace HololiveFightingGame.FighterEditor
 		HitboxPosition,
 		HitboxRadius,
 		HitboxKeyframe,
+
 		HitboxDamage,
 		HitboxKnockback,
 		HitboxKnockbackGrowth,
 		HitboxLaunchAngle,
+
 		MoveDuration,
 		HitboxAutoswipe,
 		HitboxEnabled,
 
 		HitboxGrounded,
 		HitboxAerial,
-
 		HitboxPart,
 		HitboxPriority,
 
@@ -82,13 +83,11 @@ namespace HololiveFightingGame.FighterEditor
 		PreviewShowSprite,
 		PreviewShowGrounded,
 		PreviewShowAerial,
-
-		NA1,
+		PreviewShowFlashes,
 
 		CostumeIcon,
 		CostumeCustomizable,
 		CostumeSprite,
-
 		CostumeIdol,
 		CostumeBeach,
 		CostumeChallenge,
