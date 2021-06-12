@@ -9,6 +9,11 @@ namespace HololiveFightingGame.FighterEditor.Menus
 {
 	class FileMenu : EditorMenu
 	{
+		public FileMenu()
+        {
+
+        }
+
 		public override void Draw(SpriteBatch spriteBatch, Point position)
 		{
 			Vector2 origin = position.ToVector2();

@@ -32,7 +32,8 @@ namespace HololiveFightingGame.FighterEditor.Menus
 
 			for (int i = 0; i < attackNames.Length; i++)
 			{
-				((MoveListItem)items[i]).Draw(spriteBatch, origin, i);
+				bool childDrawChildren = true;
+				((MoveListItem)items[i]).Draw(spriteBatch, origin, ref childDrawChildren);
 			}
 		}
 	}

@@ -185,9 +185,16 @@ namespace HololiveFightingGame.FighterEditor
 		public string helpText;
 		public string helpArticle;
 
-		public virtual void Draw(SpriteBatch spriteBatch, Vector2 position)
+		public virtual void Draw(SpriteBatch spriteBatch, Vector2 position, ref bool drawChildren)
 		{
-
+			Button.Draw(spriteBatch, clickbox, (ButtonFlavor)Flavor);
+			if (drawChildren)
+			for (int j = 0; j < children.Length; j++)
+			{
+				var menuItem = children[j];
+				bool childDrawChildren = true;
+				menuItem.Draw(spriteBatch, position, ref childDrawChildren);
+			}
 		}
 
 		public int Flavor 

@@ -46,7 +46,7 @@ namespace HololiveFightingGame.FighterEditor
 
 		public virtual void Draw(SpriteBatch spriteBatch, bool rightMenu)
 		{
-			Button.Draw(spriteBatch, rightMenu ? EditorOffsets.rightPanel : EditorOffsets.leftPanel, Editor.activeMenu == 0 ? ButtonFlavor.Highlight : ButtonFlavor.Latent);
+			Button.Draw(spriteBatch, rightMenu ? EditorOffsets.rightPanel : EditorOffsets.leftPanel, ButtonFlavor.Latent);
 			Draw(spriteBatch, (rightMenu ? EditorOffsets.rightPanel.Location : EditorOffsets.leftPanel.Location) + EditorOffsets.innerPadding);
 		}
 

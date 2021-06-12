@@ -37,10 +37,10 @@ namespace HololiveFightingGame.FighterEditor.MenuItems
 			base.Refresh();
         }
 
-        public void Draw(SpriteBatch spriteBatch, Vector2 position, int i)
+        public override void Draw(SpriteBatch spriteBatch, Vector2 position, ref bool drawChildren)
 		{
-			Button.Draw(spriteBatch, new Rectangle((int)position.X - 2 + 120, (int)position.Y - 2 + i * 20, 100, 20), (ButtonFlavor)Flavor);
-			spriteBatch.DrawString(Assets.font, move, position + new Vector2(120, i * 20), Color.White);
+			base.Draw(spriteBatch, position, ref drawChildren);
+			spriteBatch.DrawString(Assets.font, move, clickbox.Location.ToVector2() + new Vector2(2, 2), Color.White);
 		}
 	}
 }

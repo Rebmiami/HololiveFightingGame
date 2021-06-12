@@ -44,23 +44,23 @@ namespace HololiveFightingGame.FighterEditor.MenuItems
 			base.Refresh();
         }
 
-        public void Draw(SpriteBatch spriteBatch, Vector2 position, int i)
+        public override void Draw(SpriteBatch spriteBatch, Vector2 position, ref bool drawChildren)
 		{
 			if (Highlighted || Selected)
 			{
-				for (int j = 0; j < children.Length; j++)
-				{
-					MoveListButtonItem menuItem = (MoveListButtonItem)children[j];
-
-					menuItem.Draw(spriteBatch, position, j);
-				}
+				drawChildren = true;
 				if (children.Length == 0)
 				{
 					spriteBatch.DrawString(Assets.font, "No moves.", position + new Vector2(120, 0), Color.White);
+					drawChildren = false;
 				}
 			}
-			Button.Draw(spriteBatch, clickbox, (ButtonFlavor)Flavor);
-			spriteBatch.DrawString(Assets.font, move, position + new Vector2(0, i * 20), Color.White);
+			else
+            {
+				drawChildren = false;
+            }
+			base.Draw(spriteBatch, position, ref drawChildren);
+			spriteBatch.DrawString(Assets.font, move, clickbox.Location.ToVector2() + new Vector2(2, 2), Color.White);
 		}
 	}
 }
