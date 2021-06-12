@@ -39,6 +39,7 @@ namespace HololiveFightingGame.FighterEditor.MenuItems
 			Vector2 origin = new Vector2(8, 8);
 			// origin.X += 546;
 			origin.Y += 25;
+			origin.Y += 32;
 			clickbox = new Rectangle((int)origin.X - 2, (int)origin.Y - 2 + ID * 20, 100, 20);
 			base.Refresh();
         }
@@ -58,7 +59,7 @@ namespace HololiveFightingGame.FighterEditor.MenuItems
 					spriteBatch.DrawString(Assets.font, "No moves.", position + new Vector2(120, 0), Color.White);
 				}
 			}
-			Button.Draw(spriteBatch, clickbox, Flavor);
+			Button.Draw(spriteBatch, clickbox, (ButtonFlavor)Flavor);
 			spriteBatch.DrawString(Assets.font, move, position + new Vector2(0, i * 20), Color.White);
 		}
 	}

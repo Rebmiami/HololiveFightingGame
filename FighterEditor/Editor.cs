@@ -90,20 +90,25 @@ namespace HololiveFightingGame.FighterEditor
 					activeMenu %= 2;
 				}
 
-				for (int i = 0; i < menus.Length; i++)
+				for (int i = 0; i < 7; i++)
 				{
-					if (KeyHelper.Pressed((Keys)(i + 49)))
+					if (KeyHelper.Pressed((Keys)(i + 49)) && KeyHelper.Down(Keys.LeftControl) || KeyHelper.Down(Keys.RightControl))
 					{
-						if (i > 3)
-                        {
-							rightMenu = i;
-                        }
+						if (KeyHelper.Down(Keys.LeftShift) || KeyHelper.Down(Keys.RightShift))
+						{
+							rightMenu = i + 4;
+						}
 						else
                         {
-							leftMenu = i;
-                        }
+							if (i <= 3)
+								leftMenu = i;
+						}
 
 						// Old nav system. Some users may prefer this, so it may be reimplemented later.
+						// This code no longer works, so it used to allow the user to set any panel to any menu or editor.
+						// The functionality to allow this kind of system is still present however.
+						// Changes will need to be made to account for the increased number of editors.
+						// Perhaps use the Alt key?
 						// if (KeyHelper.Down(Keys.LeftShift))
 						// {
 						// 	if (leftMenu == i)
@@ -203,6 +208,9 @@ namespace HololiveFightingGame.FighterEditor
 					new AnimationEditor(),
 					new HitboxEditor(),
 					new DynamicsEditor(),
+					new AIEditor(),
+					new ProjectileEditor(),
+					new EntityEditor(),
 				};
 				leftMenu = 2;
 				rightMenu = 4;
@@ -248,13 +256,10 @@ namespace HololiveFightingGame.FighterEditor
 			}
 			else
 			{
-				Button.Draw(spriteBatch, new Rectangle(2, 2, 250, 420), activeMenu == 0 ? 1 : 0);
 				menus[leftMenu].Draw(spriteBatch, false);
-
-				Button.Draw(spriteBatch, new Rectangle(2 + panelOffset, 2, 250, 420), activeMenu == 1 ? 1 : 0);
 				menus[rightMenu].Draw(spriteBatch, true);
 
-				Button.Draw(spriteBatch, new Rectangle(254, 2, 292, 30));
+				Button.Draw(spriteBatch, EditorOffsets.overhead);
 				string text;
 				if (currentMove == null && currentAnimation == null)
 				{
@@ -268,8 +273,9 @@ namespace HololiveFightingGame.FighterEditor
 				{
 					text = "Current Anim: " + CurrentActionName;
 				}
+				//TODO: Add overhead text support for projectiles and entities
 				spriteBatch.DrawString(Assets.font, text, new Vector2(262, 8), Color.White);
-				spriteBatch.Draw(Assets.editorPlayIcon, new Vector2(260, 80), new Rectangle(MovePreviewer.Playing ? 9 : 0, 0, 8, 8), Color.White);
+				IconArtist.DrawIcon(spriteBatch, new Vector2(260, 160), MovePreviewer.Playing ? EditorIcon.PreviewPause : EditorIcon.PreviewPlay);
 			}
 		}
 	}

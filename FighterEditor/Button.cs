@@ -26,17 +26,26 @@ namespace HololiveFightingGame.FighterEditor
 			new Rectangle(7, 7, 2, 2)
 		};
 
-		public static void Draw(SpriteBatch spriteBatch, Rectangle dimensions, ButtonFlavor flavor = ButtonFlavor.Latent)
-        {
-			Draw(spriteBatch, dimensions, (int)flavor);
-        }
+		public static void Draw(SpriteBatch spriteBatch, Rectangle dimensions, ButtonFlavor flavor = ButtonFlavor.Latent, bool[] sides = null)
+		{
+			if (sides == null || sides.Length !=  9)
+			{
+				sides = new bool[] { true, true, true, true, true, true, true, true, true};
+			}
+			Draw(spriteBatch, dimensions, (int)flavor, sides);
+		}
 
-		public static void Draw(SpriteBatch spriteBatch, Rectangle dimensions, int flavor)
+		private static void Draw(SpriteBatch spriteBatch, Rectangle dimensions, int flavor, bool[] sides)
 		{
 			for (int i = 0; i < 3; i++)
 			{
 				for (int j = 0; j < 3; j++)
 				{
+					if (!sides[i + j * 3])
+					{
+						continue;
+					}
+
 					Rectangle destination = new Rectangle(dimensions.Location, new Point(2, 2));
 					Rectangle source = Parts[i + j * 3];
 

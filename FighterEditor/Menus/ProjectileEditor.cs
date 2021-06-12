@@ -7,12 +7,12 @@ using System.Text;
 
 namespace HololiveFightingGame.FighterEditor.Menus
 {
-	public class AnimationEditor : EditorMenu
+    class ProjectileEditor : EditorMenu
 	{
 		public override void Draw(SpriteBatch spriteBatch, Point position)
 		{
 			Vector2 origin = position.ToVector2();
-			spriteBatch.DrawString(Assets.font, "Animation Editor", origin, Color.White);
+			spriteBatch.DrawString(Assets.font, "Projectile Editor", origin, Color.White);
 		}
 	}
 }
