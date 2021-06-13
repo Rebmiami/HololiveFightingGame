@@ -199,6 +199,8 @@ namespace HololiveFightingGame.FighterEditor
 				fighter.takeInputs = false;
 				fighter.drawObject.Bottom = fighter.Bottom;
 
+				// TODO: Handle invalid files being selected
+
 				menus = new EditorMenu[]
 				{
 					new FileMenu(),
@@ -215,6 +217,10 @@ namespace HololiveFightingGame.FighterEditor
 				};
 				leftMenu = 2;
 				rightMenu = 4;
+				foreach (EditorMenu menu in menus)
+                {
+					menu.Refresh();
+                }
 			}
 		}
 

@@ -189,12 +189,12 @@ namespace HololiveFightingGame.FighterEditor
 		{
 			Button.Draw(spriteBatch, clickbox, (ButtonFlavor)Flavor);
 			if (drawChildren)
-			for (int j = 0; j < children.Length; j++)
-			{
-				var menuItem = children[j];
-				bool childDrawChildren = true;
-				menuItem.Draw(spriteBatch, position, ref childDrawChildren);
-			}
+				for (int j = 0; j < children.Length; j++)
+				{
+					var menuItem = children[j];
+					bool childDrawChildren = true;
+					menuItem.Draw(spriteBatch, position, ref childDrawChildren);
+				}
 		}
 
 		public int Flavor 

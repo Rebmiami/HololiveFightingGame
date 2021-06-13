@@ -12,12 +12,10 @@ namespace HololiveFightingGame
 		static void Main()
 		{
 #if DEBUG
-			using (var game1 = new Game1())
-			{
-				game = game1;
+            using var game1 = new Game1();
+            game = game1;
 
-				game1.Run();
-			}
+            game1.Run();
 #else
 			try
 			{
@@ -34,7 +32,7 @@ namespace HololiveFightingGame
 			}
 			// In release builds, use a custom error handler as Visual Studio debugging will not be available to most users.
 #endif
-		}
+        }
 
 		public static Game1 game;
 

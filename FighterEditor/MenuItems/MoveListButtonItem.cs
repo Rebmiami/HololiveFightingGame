@@ -27,7 +27,7 @@ namespace HololiveFightingGame.FighterEditor.MenuItems
 			base.Escape(ref target);
 		}
 
-        public override void Refresh()
+		public override void Refresh()
 		{
 			Vector2 origin = new Vector2(8, 8);
 			// origin.X += 546;
@@ -35,9 +35,9 @@ namespace HololiveFightingGame.FighterEditor.MenuItems
 			origin.Y += 32;
 			clickbox = new Rectangle((int)origin.X - 2 + 120, (int)origin.Y - 2 + ID * 20, 100, 20);
 			base.Refresh();
-        }
+		}
 
-        public override void Draw(SpriteBatch spriteBatch, Vector2 position, ref bool drawChildren)
+		public override void Draw(SpriteBatch spriteBatch, Vector2 position, ref bool drawChildren)
 		{
 			base.Draw(spriteBatch, position, ref drawChildren);
 			spriteBatch.DrawString(Assets.font, move, clickbox.Location.ToVector2() + new Vector2(2, 2), Color.White);

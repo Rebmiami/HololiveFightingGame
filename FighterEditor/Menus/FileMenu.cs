@@ -1,4 +1,5 @@
-﻿using HololiveFightingGame.Loading;
+﻿using HololiveFightingGame.FighterEditor.MenuItems;
+using HololiveFightingGame.Loading;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -11,7 +12,11 @@ namespace HololiveFightingGame.FighterEditor.Menus
 	{
 		public FileMenu()
         {
-
+			items = new EditorUIItem[9];
+			for (int i = 0; i < 9; i++)
+            {
+				items[i] = new FileMenuButton(this, i);
+            }
         }
 
 		public override void Draw(SpriteBatch spriteBatch, Point position)
