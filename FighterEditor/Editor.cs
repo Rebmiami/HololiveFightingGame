@@ -17,6 +17,8 @@ namespace HololiveFightingGame.FighterEditor
 	{
 		public static Fighter fighter;
 
+		public static string loadedFighterPath;
+
 		public static EditorMenu[] menus;
 		public static int leftMenu;
 		public static int rightMenu;
@@ -75,11 +77,23 @@ namespace HololiveFightingGame.FighterEditor
 			GraphicsHandler.main.children.Add("game", new DrawObject(DrawObjectType.Layer));
 		}
 
+		/// <summary>
+		/// Empties the editor all the way.
+		/// </summary>
+		public static void ClearEditor()
+		{
+			ResetGraphics();
+			menus = null;
+			fighter = null;
+			currentMove = null;
+			currentAnimation = null;
+		}
+
 		public static void Update()
 		{
 			if (KeyHelper.Down(Keys.LeftControl) && KeyHelper.Pressed(Keys.O))
 			{
-				LoadFighter();
+				OpenFighter();
 			}
 
 			if (fighter != null)
@@ -100,7 +114,7 @@ namespace HololiveFightingGame.FighterEditor
 							rightMenu = i + 4;
 						}
 						else
-                        {
+						{
 							if (i <= 3)
 								leftMenu = i;
 						}
@@ -178,7 +192,7 @@ namespace HololiveFightingGame.FighterEditor
 			}
 		}
 
-		public static void LoadFighter()
+		public static void OpenFighter()
 		{
 			System.Windows.Forms.OpenFileDialog fighterSelect = new System.Windows.Forms.OpenFileDialog()
 			{
@@ -187,40 +201,49 @@ namespace HololiveFightingGame.FighterEditor
 				Filter = "JSON files (*.json)|*.json",
 				Title = "Select a fighter JSON file"
 			};
-			string selected;
 			if (fighterSelect.ShowDialog() == System.Windows.Forms.DialogResult.OK)
 			{
-				selected = new Regex(@".+\\(.+)\..+").Replace(fighterSelect.FileName, "$1");
-				// Sets up a fighter to be edited
-				fighter = new Fighter(0, selected);
-				FighterLoader.LoadMoves(new Fighter[] { fighter });
-				FighterLoader.LoadAnimations(new Fighter[] { fighter });
-				fighter.Bottom = Program.WindowBounds().Size.ToVector2() / 2;
-				fighter.takeInputs = false;
-				fighter.drawObject.Bottom = fighter.Bottom;
+				LoadFighter(fighterSelect.FileName);
+			}
+		}
 
-				// TODO: Handle invalid files being selected
+		public static void LoadFighter(string path)
+		{
+			// Clears the editor
+			ClearEditor();
+			loadedFighterPath = path;
 
-				menus = new EditorMenu[]
-				{
-					new FileMenu(),
-					new FighterMenu(),
-					new MoveMenu(),
-					new AnimationMenu(),
-					new MoveEditor(),
-					new AnimationEditor(),
-					new HitboxEditor(),
-					new DynamicsEditor(),
-					new AIEditor(),
-					new ProjectileEditor(),
-					new EntityEditor(),
-				};
-				leftMenu = 2;
-				rightMenu = 4;
-				foreach (EditorMenu menu in menus)
-                {
-					menu.Refresh();
-                }
+			string selected;
+			selected = new Regex(@".+\\(.+)\..+").Replace(path, "$1");
+			// Sets up a fighter to be edited
+			fighter = new Fighter(0, selected);
+			FighterLoader.LoadMoves(new Fighter[] { fighter });
+			FighterLoader.LoadAnimations(new Fighter[] { fighter });
+			fighter.Bottom = Program.WindowBounds().Size.ToVector2() / 2;
+			fighter.takeInputs = false;
+			fighter.drawObject.Bottom = fighter.Bottom;
+
+			// TODO: Handle invalid files being selected
+
+			menus = new EditorMenu[]
+			{
+				new FileMenu(),
+				new FighterMenu(),
+				new MoveMenu(),
+				new AnimationMenu(),
+				new MoveEditor(),
+				new AnimationEditor(),
+				new HitboxEditor(),
+				new DynamicsEditor(),
+				new AIEditor(),
+				new ProjectileEditor(),
+				new EntityEditor(),
+			};
+			leftMenu = 2;
+			rightMenu = 4;
+			foreach (EditorMenu menu in menus)
+			{
+				menu.Refresh();
 			}
 		}
 

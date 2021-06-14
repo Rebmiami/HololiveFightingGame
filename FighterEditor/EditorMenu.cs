@@ -52,8 +52,12 @@ namespace HololiveFightingGame.FighterEditor
 
 		public virtual void Draw(SpriteBatch spriteBatch, Point position)
         {
-
-        }
+			for (int i = 0; i < items.Length; i++)
+			{
+				bool childDrawChildren = true;
+				items[i].Draw(spriteBatch, position.ToVector2(), ref childDrawChildren);
+			}
+		}
 
 		public void Scroll(bool up)
 		{

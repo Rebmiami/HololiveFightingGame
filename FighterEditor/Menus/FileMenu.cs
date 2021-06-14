@@ -23,6 +23,7 @@ namespace HololiveFightingGame.FighterEditor.Menus
 		{
 			Vector2 origin = position.ToVector2();
 			spriteBatch.DrawString(Assets.font, "File Menu", origin, Color.White);
+			base.Draw(spriteBatch, position);
 		}
 	}
 }

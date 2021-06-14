@@ -27,7 +27,6 @@ C:\Users\rebmi\source\repos\HololiveFightingGame\bin\Release\netcoreapp3.1\Conte
 C:\Users\rebmi\source\repos\HololiveFightingGame\bin\Release\netcoreapp3.1\Content\GameUI.xnb
 C:\Users\rebmi\source\repos\HololiveFightingGame\bin\Release\netcoreapp3.1\Content\Capsule.xnb
 C:\Users\rebmi\source\repos\HololiveFightingGame\bin\Release\netcoreapp3.1\Content\Assets\GameUI.png
-C:\Users\rebmi\source\repos\HololiveFightingGame\bin\Release\netcoreapp3.1\Content\Assets\TestFighter.png
 C:\Users\rebmi\source\repos\HololiveFightingGame\bin\Release\netcoreapp3.1\Content\Assets\TestStage.png
 C:\Users\rebmi\source\repos\HololiveFightingGame\bin\Release\netcoreapp3.1\Content\Assets\UsadaPekora.png
 C:\Users\rebmi\source\repos\HololiveFightingGame\bin\Release\netcoreapp3.1\Content\Data\FighterList.json
@@ -58,3 +57,9 @@ C:\Users\rebmi\source\repos\HololiveFightingGame\bin\Release\netcoreapp3.1\Syste
 C:\Users\rebmi\source\repos\HololiveFightingGame\bin\Release\netcoreapp3.1\Accessibility.dll
 C:\Users\rebmi\source\repos\HololiveFightingGame\bin\Release\netcoreapp3.1\System.Deployment.dll
 C:\Users\rebmi\source\repos\HololiveFightingGame\bin\Release\netcoreapp3.1\System.Runtime.Serialization.Formatters.Soap.dll
+C:\Users\rebmi\source\repos\HololiveFightingGame\bin\Release\netcoreapp3.1\Content\Assets\EditorButtons.png
+C:\Users\rebmi\source\repos\HololiveFightingGame\bin\Release\netcoreapp3.1\Content\Assets\EditorIcons.png
+C:\Users\rebmi\source\repos\HololiveFightingGame\bin\Release\netcoreapp3.1\Content\Assets\EditorPlayIcon.png
+C:\Users\rebmi\source\repos\HololiveFightingGame\bin\Release\netcoreapp3.1\Content\Data\Fighters\Kiara\Fighter.png
+C:\Users\rebmi\source\repos\HololiveFightingGame\bin\Release\netcoreapp3.1\Content\Data\Fighters\Pekora\Fighter.png
+C:\Users\rebmi\source\repos\HololiveFightingGame\bin\Release\netcoreapp3.1\Content\Documentation\Editor.html
