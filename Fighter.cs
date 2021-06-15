@@ -155,7 +155,11 @@ namespace HololiveFightingGame
 				}
 			}
 
-			
+			// Failsafe
+			if (moveRunner != null && moveRunner.move == null)
+            {
+				moveRunner = null;
+            }
 
 			// Checks if an attack is hitting an opponent and, if so, tells the opponent to be hit by the attack.
 			if (moveRunner != null)

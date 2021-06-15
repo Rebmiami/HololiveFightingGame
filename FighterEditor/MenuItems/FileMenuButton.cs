@@ -4,7 +4,9 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace HololiveFightingGame.FighterEditor.MenuItems
 {
@@ -37,15 +39,15 @@ namespace HololiveFightingGame.FighterEditor.MenuItems
 				case FileButtonAction.SaveAs:
 					// TODO: Open save dialog and change focus to new location
 					break;
-				case FileButtonAction.ResetAndReload:
-					// TODO: This is hacky and causes the entire editor to reset. Change later when editor is more functional.
-					Editor.LoadFighter(Editor.loadedFighterPath);
+				case FileButtonAction.ReloadMoves:
+					FighterLoader.ReloadMoves();
+					MovePreviewer.Refresh();
 					break;
 				case FileButtonAction.ReloadFighterTexture:
-
+					Editor.ResetFighter();
 					break;
 				case FileButtonAction.ReloadAllTextures:
-
+					// TODO: Add this when there are actually textures to reload
 					break;
 				case FileButtonAction.ReloadSounds:
 
@@ -54,10 +56,11 @@ namespace HololiveFightingGame.FighterEditor.MenuItems
 
 					break;
 				case FileButtonAction.OpenFileLocation:
-
+					// new Regex(@"\\HololiveFightingGame\.exe$").Replace(Process.GetCurrentProcess().MainModule.FileName, "");
+					// Process.Start("explorer.exe", Editor.loadedFighterPath);
 					break;
 				case FileButtonAction.Exit:
-
+					Program.game.Exit();
 					break;
 				default:
 					break;
@@ -99,7 +102,7 @@ namespace HololiveFightingGame.FighterEditor.MenuItems
 			/// <summary>
 			/// Clears the editor and reloads the focused fighter from JSON. If there are unsaved changes, the user will be warned.
 			/// </summary>
-			ResetAndReload,
+			ReloadMoves,
 			/// <summary>
 			/// Reloads the player sprites belonging to the focused fighter.
 			/// </summary>

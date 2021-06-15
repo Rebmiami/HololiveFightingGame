@@ -22,8 +22,7 @@ namespace HololiveFightingGame.FighterEditor.MenuItems
 
 		public override void Escape(ref object target)
 		{
-			Editor.currentMove = FighterLoader.moves[Editor.fighter.character][move];
-			Editor.ResetFighter();
+			MovePreviewer.SetMove(move);
 			base.Escape(ref target);
 		}
 

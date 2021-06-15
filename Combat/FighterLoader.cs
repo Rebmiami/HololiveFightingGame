@@ -64,6 +64,15 @@ namespace HololiveFightingGame.Combat
 			}
 		}
 
+		public static void ReloadMoves()
+        {
+			string[] fighters = new string[moves.Count];
+			moves.Keys.CopyTo(fighters, 0);
+
+			moves.Clear();
+			LoadMoves(fighters);
+        }
+
 		public static void LoadAnimations(Fighter[] fighters)
 		{
 			// Sets up a fighter's sprite and animations.

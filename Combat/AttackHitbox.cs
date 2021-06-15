@@ -40,8 +40,8 @@ namespace HololiveFightingGame.Combat
 		}
 
 		// AttackHitbox is not a struct but this will be necessary for hit detection
-        public object Clone()
-        {
+		public object Clone()
+		{
 			return new AttackHitbox
 			{
 				collider = collider,
@@ -56,14 +56,16 @@ namespace HololiveFightingGame.Combat
 				autoSwipe = autoSwipe,
 				type = type
 			};
-        }
-    }
+		}
+	}
 
 	public enum AttackHitboxType
 	{
 		Attack,
-		Shield,
-		Counter,
 		Grab,
+		Shield,
+		Wind,
+		Trigger,
+		Projectile
 	}
 }

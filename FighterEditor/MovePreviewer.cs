@@ -78,5 +78,11 @@ namespace HololiveFightingGame.FighterEditor
 			Frame = 0;
 			Editor.ResetFighter();
 		}
+
+		public static void SetMove(string move)
+		{
+			Reset();
+			Editor.currentMove = FighterLoader.moves[Editor.fighter.character][move];
+		}
 	}
 }

@@ -250,17 +250,24 @@ namespace HololiveFightingGame.FighterEditor
 		public static void ResetFighter()
 		{
 			ResetGraphics();
-			fighter = new Fighter(fighter.ID, fighter.character)
-			{
-				moveRunner = new MoveRunner(currentMove)
-			};
+			fighter = new Fighter(fighter.ID, fighter.character);
+
+			if (currentMove != null)
+				fighter.moveRunner = new MoveRunner(currentMove);
+
 			FighterLoader.LoadAnimations(new Fighter[] { fighter });
 			fighter.Bottom = Program.WindowBounds().Size.ToVector2() / 2;
 			fighter.takeInputs = false;
-			((AnimatedSprite)fighter.drawObject.texture).SwitchAnimation(currentMove.Data.Name, 0);
-			fighter.moveTimer = fighter.moveRunner.data.MoveDuration;
-			fighter.Update();
-			fighter.Update_Animation();
+
+
+			if (currentMove != null)
+			{
+				((AnimatedSprite)fighter.drawObject.texture).SwitchAnimation(currentMove.Data.Name, 0);
+				fighter.moveTimer = fighter.moveRunner.data.MoveDuration;
+
+				fighter.Update();
+				fighter.Update_Animation();
+			}
 		}
 
 		public static void Save()

@@ -18,9 +18,9 @@ namespace HololiveFightingGame.Combat
 		/// </summary>
 		public MoveData Data;
 
-		public void SetupMove()
+		public Move(string move, string fighter)
 		{
-			Game1.jsonLoaderFilePath = @".\Content\Data\Moves\PekoraMoves.json";
+			Game1.jsonLoaderFilePath = @".\Content\Data\Fighters\" + fighter + @"\Moves\" + move + ".json";
 			string json = System.IO.File.ReadAllText(Game1.jsonLoaderFilePath);
 			Data = (MoveData)JsonSerializer.Deserialize(json, typeof(MoveData), GameLoader.SerializerOptions);
 			hitboxes = new AttackHitbox[Data.Hitboxes.Length];
@@ -39,26 +39,6 @@ namespace HololiveFightingGame.Combat
 					autoSwipe = data.AutoSwipe,
 					grounded = data.Grounded,
 					aerial = data.Aerial
-				};
-				hitboxes[i] = hitbox;
-			}
-		}
-
-		public Move(string move, string fighter)
-		{
-			Game1.jsonLoaderFilePath = @".\Content\Data\Fighters\" + fighter + @"\Moves\" + move + ".json";
-			string json = System.IO.File.ReadAllText(Game1.jsonLoaderFilePath);
-			Data = (MoveData)JsonSerializer.Deserialize(json, typeof(MoveData), GameLoader.SerializerOptions);
-			hitboxes = new AttackHitbox[Data.Hitboxes.Length];
-			for (int i = 0; i < Data.Hitboxes.Length; i++)
-			{
-				MoveData.DataHitbox data = Data.Hitboxes[i];
-				AttackHitbox hitbox = new AttackHitbox
-				{
-					damage = data.Damage,
-					angle = data.Angle,
-					launch = data.Launch,
-					collider = new Collider(new Capsule(data.Origin, data.Length, data.Radius))
 				};
 				hitboxes[i] = hitbox;
 			}
