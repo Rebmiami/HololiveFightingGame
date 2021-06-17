@@ -1,5 +1,21 @@
 {
 	"FullName": "Usada Pekora",
+	"Tags": {
+		"Gender": "F",
+		"Group": "Hololive",
+		"Branch": "JP",
+		"Generation": "3",
+		"SkinTone": 1,
+		"Height": 153,
+		"Species": [
+			"Human",
+			"Humanoid",
+			"Rabbit"
+		],
+		"OtherTags": [
+
+		]
+	},
 	"Body": {
 		"Head": {
 			"Origin": {

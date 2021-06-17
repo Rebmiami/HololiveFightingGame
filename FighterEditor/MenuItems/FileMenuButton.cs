@@ -25,10 +25,7 @@ namespace HololiveFightingGame.FighterEditor.MenuItems
 			switch (action)
 			{
 				case FileButtonAction.Open:
-					// Editor.ResetGraphics();
-
 					// TODO:
-					// Add method for emptying editor if necessary
 					// Add warning before emptying editor
 
 					Editor.OpenFighter();

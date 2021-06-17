@@ -463,26 +463,31 @@ namespace HololiveFightingGame
 		
 	}
 
-	public enum MoveType
+	public enum MoveTypes
 	{
-		NeutralA,
+		Jab,
+		Dash,
 		SideA,
 		UpA,
 		DownA,
-		Dash,
-		NeutralAir,
-		ForwardAir,
+		NAir,
+		FAir,
 		BackAir,
 		DownAir,
+		UpAir,
 		NeutralB,
 		SideB,
 		UpB,
 		DownB,
-		TDefend,
-		TSide,
-		TRecover,
-		TFinisher1,
-		TFinisher2,
-		TFinisher3,
+		UFinish,
+		DFinish,
+		SFinish,
+		Guard,
+		Sidestep,
+		Roll,
+		AirDodge,
+		UTaunt,
+		DTaunt,
+		STaunt,
 	}
 }
