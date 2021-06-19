@@ -25,16 +25,7 @@ namespace HololiveFightingGame.Graphics
 
 			if (depinkify)
 			{
-				Color[] textureData = new Color[texture.Width * texture.Height];
-				texture.GetData(textureData);
-				for (int i = 0; i < textureData.Length; i++)
-				{
-					if (textureData[i] == Color.Magenta)
-					{
-						textureData[i] = Color.Transparent;
-					}
-				}
-				texture.SetData(textureData);
+				ColorTracker.Depinkify(ref texture);
 			}
 
 			return texture;

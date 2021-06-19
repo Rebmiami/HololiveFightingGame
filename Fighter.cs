@@ -463,7 +463,7 @@ namespace HololiveFightingGame
 		
 	}
 
-	public enum MoveTypes
+	public enum MoveType
 	{
 		Jab,
 		Dash,
