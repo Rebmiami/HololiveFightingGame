@@ -1,4 +1,5 @@
-﻿using HololiveFightingGame.Combat;
+﻿using HololiveFightingGame.FighterEditor.GUI;
+using HololiveFightingGame.Gameplay.Combat;
 using HololiveFightingGame.Loading;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -8,7 +9,7 @@ using System.Text;
 
 namespace HololiveFightingGame.FighterEditor.MenuItems
 {
-	public class MoveListItem : EditorUIItem
+    public class MoveListItem : EditorUIItem
 	{
 		public string move;
 		public string[] subMoves;

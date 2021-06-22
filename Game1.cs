@@ -1,5 +1,4 @@
-﻿using HololiveFightingGame.Combat;
-using HololiveFightingGame.Graphics;
+﻿using HololiveFightingGame.Graphics;
 using HololiveFightingGame.Graphics.Presets;
 using HololiveFightingGame.Input;
 using HololiveFightingGame.Loading;
@@ -14,11 +13,11 @@ using System.Threading;
 using System;
 using HololiveFightingGame.FighterEditor;
 using HololiveFightingGame.Graphics.CapsuleShader;
-using HololiveFightingGame.Collision;
+using HololiveFightingGame.Gameplay;
 
 namespace HololiveFightingGame
 {
-	public class Game1 : Game
+    public class Game1 : Game
 	{
 		private GraphicsDeviceManager graphics;
 		private SpriteBatch spriteBatch;

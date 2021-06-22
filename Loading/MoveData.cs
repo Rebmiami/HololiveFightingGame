@@ -1,12 +1,11 @@
 ﻿using HololiveFightingGame.Graphics;
-using HololiveFightingGame.Loading;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 
-namespace HololiveFightingGame.Combat
+namespace HololiveFightingGame.Loading
 {
 	public class MoveData
 	{

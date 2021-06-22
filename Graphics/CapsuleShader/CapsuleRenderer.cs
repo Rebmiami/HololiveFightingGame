@@ -1,4 +1,4 @@
-﻿using HololiveFightingGame.Collision;
+﻿using HololiveFightingGame.Gameplay.Collision;
 using HololiveFightingGame.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace HololiveFightingGame.Graphics.CapsuleShader
 {
-	public static class CapsuleRenderer
+    public static class CapsuleRenderer
 	{
 		public static List<CapsuleShaderData> capsuleShaders;
 

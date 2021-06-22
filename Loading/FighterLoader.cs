@@ -1,5 +1,5 @@
-﻿using HololiveFightingGame.Graphics;
-using HololiveFightingGame.Loading;
+﻿using HololiveFightingGame.Gameplay.Combat;
+using HololiveFightingGame.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -9,9 +9,9 @@ using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 
-namespace HololiveFightingGame.Combat
+namespace HololiveFightingGame.Loading
 {
-	public static class FighterLoader
+    public static class FighterLoader
 	{
 		public static List<string> allFighters;
 
@@ -86,7 +86,7 @@ namespace HololiveFightingGame.Combat
 				Game1.jsonLoaderFilePath = @".\Content\Data\Fighters\" + fighter.character + @"\Animations.json";
 				string json = File.ReadAllText(Game1.jsonLoaderFilePath);
 				((AnimatedSprite)fighter.drawObject.texture).animations = JsonSerializer.Deserialize<Dictionary<string, Animation>>(json);
-				
+
 				// Loads animations for moves.
 				foreach (Move move in moves[fighter.character].Values)
 				{

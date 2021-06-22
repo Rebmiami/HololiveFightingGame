@@ -1,13 +1,13 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
-using HololiveFightingGame.Collision;
 using HololiveFightingGame.Graphics;
 using System.Collections.Generic;
 using System.Text;
+using HololiveFightingGame.Gameplay.Collision;
 
-namespace HololiveFightingGame
+namespace HololiveFightingGame.Gameplay
 {
-	public abstract class Entity
+    public abstract class Entity
 	{
 		public Vector2 position;
 		public Vector2 velocity;

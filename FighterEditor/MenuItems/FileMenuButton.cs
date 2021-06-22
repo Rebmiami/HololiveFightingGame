@@ -1,4 +1,4 @@
-﻿using HololiveFightingGame.Combat;
+﻿using HololiveFightingGame.FighterEditor.GUI;
 using HololiveFightingGame.Graphics;
 using HololiveFightingGame.Loading;
 using Microsoft.Xna.Framework;
@@ -12,7 +12,7 @@ using System.Text.RegularExpressions;
 
 namespace HololiveFightingGame.FighterEditor.MenuItems
 {
-	public class FileMenuButton : EditorUIItem
+    public class FileMenuButton : EditorUIItem
 	{
 		public FileButtonAction action;
 

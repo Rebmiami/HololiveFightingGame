@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace HololiveFightingGame.Collision
+namespace HololiveFightingGame.Gameplay.Collision
 {
 	public struct Capsule
 	{
@@ -23,9 +23,9 @@ namespace HololiveFightingGame.Collision
 		{
 			Vector2 normal = Vector2.Normalize(length);
 			if (length == Vector2.Zero)
-            {
+			{
 				normal = Vector2.Zero;
-            }
+			}
 			float dot = Vector2.Dot(vector - origin, normal);
 			Vector2 point = normal * dot + origin;
 			Vector2 lower = new Vector2(Math.Min(Base.X, Tip.X), Math.Min(Base.Y, Tip.Y));
@@ -65,7 +65,6 @@ namespace HololiveFightingGame.Collision
 				float distance = Distance(capsule);
 				return distance <= 0;
 			}
-			return false;
 		}
 
 		public bool Intersects(Rectangle rectangle)

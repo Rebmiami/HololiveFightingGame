@@ -1,6 +1,6 @@
-﻿using HololiveFightingGame.Combat;
-using HololiveFightingGame.Graphics;
+﻿using HololiveFightingGame.Graphics;
 using HololiveFightingGame.Input;
+using HololiveFightingGame.Loading;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
@@ -9,7 +9,7 @@ using System.Text;
 
 namespace HololiveFightingGame.FighterEditor
 {
-	public static class MovePreviewer
+    public static class MovePreviewer
 	{
 		public static int Frame = 0;
 		public static bool Playing = false;

@@ -4,9 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace HololiveFightingGame.FighterEditor
+namespace HololiveFightingGame.FighterEditor.GUI
 {
-	public abstract class EditorMenu
+    public abstract class EditorMenu
 	{
 		public EditorUIItem[] items;
 		public Stack<EditorUIItem> escapeRoute;
@@ -51,7 +51,7 @@ namespace HololiveFightingGame.FighterEditor
 		}
 
 		public virtual void Draw(SpriteBatch spriteBatch, Point position)
-        {
+		{
 			for (int i = 0; i < items.Length; i++)
 			{
 				bool childDrawChildren = true;
@@ -77,22 +77,22 @@ namespace HololiveFightingGame.FighterEditor
 		}
 
 		public void Update()
-        {
+		{
 			foreach (EditorUIItem item in items)
-            {
+			{
 				item.Update();
-            }
-        }
+			}
+		}
 
 		/// <summary>
 		/// Runs through the hierarchy of items and sets some values. Should be called any time the hierarchy is edited.
 		/// </summary>
 		public void Refresh()
-        {
+		{
 			foreach (EditorUIItem item in items)
-            {
+			{
 				item.Refresh();
-            }
-        }
+			}
+		}
 	}
 }

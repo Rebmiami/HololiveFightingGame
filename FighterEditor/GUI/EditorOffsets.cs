@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace HololiveFightingGame.FighterEditor
+namespace HololiveFightingGame.FighterEditor.GUI
 {
 	/// <summary>
 	/// A set of positions used by the editor for handling the placement of UI objects.

@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace HololiveFightingGame.FighterEditor
+namespace HololiveFightingGame.FighterEditor.GUI
 {
 	public static class MenuNavTabs
 	{
@@ -39,13 +39,13 @@ namespace HololiveFightingGame.FighterEditor
 
 			Point leftOrigin = new Point(EditorOffsets.leftPanel.Right, EditorOffsets.leftPanel.Top);
 			Point rightOrigin = new Point(EditorOffsets.rightPanel.Left - EditorOffsets.iconSize.X, EditorOffsets.rightPanel.Top);
-            for (int i = 0; i < 4; i++)
-            {
+			for (int i = 0; i < 4; i++)
+			{
 				leftTabs[i] = new Rectangle(leftOrigin, EditorOffsets.iconSize);
 				leftOrigin.Y += EditorOffsets.iconSize.Y;
-            }
-            for (int i = 0; i < 7; i++)
-            {
+			}
+			for (int i = 0; i < 7; i++)
+			{
 				rightTabs[i] = new Rectangle(rightOrigin, EditorOffsets.iconSize);
 				rightOrigin.Y += EditorOffsets.iconSize.Y;
 			}
@@ -53,8 +53,8 @@ namespace HololiveFightingGame.FighterEditor
 
 		public static void Draw(SpriteBatch spritebatch)
 		{
-            for (int i = 0; i < leftTabs.Length; i++)
-            {
+			for (int i = 0; i < leftTabs.Length; i++)
+			{
 				DrawTab(spritebatch, leftTabs[i], leftIcons[i], i == Editor.leftMenu, true);
 			}
 			for (int i = 0; i < rightTabs.Length; i++)
@@ -68,7 +68,7 @@ namespace HololiveFightingGame.FighterEditor
 			Rectangle stretchedButton = button;
 			bool[] sides;
 			if (left)
-            {
+			{
 				sides = new bool[] {
 					false, true, true,
 					false, true, true,
@@ -76,9 +76,9 @@ namespace HololiveFightingGame.FighterEditor
 				};
 				stretchedButton.X -= open ? 4 : 2;
 				stretchedButton.Width += open ? 4 : 2;
-            }
+			}
 			else
-            {
+			{
 				sides = new bool[] {
 					true, true, false,
 					true, true, false,
@@ -93,8 +93,8 @@ namespace HololiveFightingGame.FighterEditor
 
 		public static void Update()
 		{
-            for (int i = 0; i < leftTabs.Length; i++)
-            {
+			for (int i = 0; i < leftTabs.Length; i++)
+			{
 				if (MouseHelper.Pressed(MouseButtons.Left) && leftTabs[i].Contains(Mouse.GetState().Position))
 					Editor.leftMenu = i;
 			}

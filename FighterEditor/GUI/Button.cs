@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace HololiveFightingGame.FighterEditor
+namespace HololiveFightingGame.FighterEditor.GUI
 {
 	/// <summary>
 	/// Class for drawing buttons. Note that it does not contain any actual button functionality.
@@ -28,9 +28,9 @@ namespace HololiveFightingGame.FighterEditor
 
 		public static void Draw(SpriteBatch spriteBatch, Rectangle dimensions, ButtonFlavor flavor = ButtonFlavor.Latent, bool[] sides = null)
 		{
-			if (sides == null || sides.Length !=  9)
+			if (sides == null || sides.Length != 9)
 			{
-				sides = new bool[] { true, true, true, true, true, true, true, true, true};
+				sides = new bool[] { true, true, true, true, true, true, true, true, true };
 			}
 			Draw(spriteBatch, dimensions, (int)flavor, sides);
 		}

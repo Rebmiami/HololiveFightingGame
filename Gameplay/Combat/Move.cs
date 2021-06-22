@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
-using HololiveFightingGame.Collision;
 using System.Text.Json;
-using HololiveFightingGame.Combat;
 using HololiveFightingGame.Loading;
+using HololiveFightingGame.Gameplay.Collision;
 
-namespace HololiveFightingGame.Combat
+namespace HololiveFightingGame.Gameplay.Combat
 {
-    public class Move
+	public class Move
 	{
 		public AttackHitbox[] hitboxes;
 

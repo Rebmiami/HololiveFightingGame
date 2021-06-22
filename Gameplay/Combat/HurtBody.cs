@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace HololiveFightingGame.Combat
+namespace HololiveFightingGame.Gameplay.Combat
 {
-	public class HurtBody
+    public class HurtBody
 	{
 		public List<Hurtbox> body;
 
@@ -18,22 +18,22 @@ namespace HololiveFightingGame.Combat
 		}
 
 		public Attack CheckHits(AttackHitbox[] hitboxes, Fighter fighter)
-        {
+		{
 			List<Attack> attacks = new List<Attack>();
 			foreach (AttackHitbox hitbox in hitboxes)
-            {
+			{
 				int index = 0;
 				foreach (Attack attack in attacks)
-                {
+				{
 					if (attack.attackHitbox.priority < hitbox.priority)
-                    {
+					{
 						index++;
-                    }
-                }
+					}
+				}
 				attacks.Insert(index, CheckHits(hitbox, fighter));
-            }
+			}
 			return null;
-        }
+		}
 
 		public Attack CheckHits(AttackHitbox hitbox, Fighter fighter)
 		{

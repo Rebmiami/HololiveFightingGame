@@ -2,15 +2,15 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using HololiveFightingGame.Collision;
 using HololiveFightingGame.Graphics;
 using HololiveFightingGame.Loading;
+using HololiveFightingGame.Gameplay.Collision;
 
-namespace HololiveFightingGame
+namespace HololiveFightingGame.Gameplay.Combat
 {
 	public class Stage
 	{
-		public Collider collider; 
+		public Collider collider;
 		// TODO: Support multiple colliders per stage
 		// TODO: Move stages from rectangle to new collider system
 		public Rectangle stageBounds;

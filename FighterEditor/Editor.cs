@@ -1,5 +1,4 @@
-﻿using HololiveFightingGame.Combat;
-using HololiveFightingGame.Graphics;
+﻿using HololiveFightingGame.Graphics;
 using HololiveFightingGame.Input;
 using HololiveFightingGame.Loading;
 using HololiveFightingGame.FighterEditor.Menus;
@@ -9,11 +8,12 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using System.Text.RegularExpressions;
 using HololiveFightingGame.Graphics.CapsuleShader;
-using HololiveFightingGame.Collision;
+using HololiveFightingGame.FighterEditor.GUI;
+using HololiveFightingGame.Gameplay.Combat;
 
 namespace HololiveFightingGame.FighterEditor
 {
-	public static class Editor
+    public static class Editor
 	{
 		public static Fighter fighter;
 

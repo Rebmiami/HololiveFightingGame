@@ -1,9 +1,10 @@
-﻿using Microsoft.Xna.Framework;
+﻿using HololiveFightingGame.Loading;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace HololiveFightingGame.Combat
+namespace HololiveFightingGame.Gameplay.Combat
 {
 	/// <summary>
 	/// Used by the fighter to store information about the currently running move.
@@ -55,7 +56,7 @@ namespace HololiveFightingGame.Combat
 				frame = data.AnimationFrames[time.ToString()];
 
 			if (data.Motion != null && data.Motion.ContainsKey(time.ToString()))
-			 	motion = data.Motion[time.ToString()];
+				motion = data.Motion[time.ToString()];
 		}
 	}
 }

@@ -1,4 +1,5 @@
-﻿using HololiveFightingGame.Loading;
+﻿using HololiveFightingGame.FighterEditor.GUI;
+using HololiveFightingGame.Loading;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -7,7 +8,7 @@ using System.Text;
 
 namespace HololiveFightingGame.FighterEditor.Menus
 {
-	class DynamicsEditor : EditorMenu
+    class DynamicsEditor : EditorMenu
 	{
 		public override void Draw(SpriteBatch spriteBatch, Point position)
 		{

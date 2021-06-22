@@ -1,5 +1,4 @@
-﻿using HololiveFightingGame.Graphics;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -8,7 +7,7 @@ using System.Text.Json;
 
 namespace HololiveFightingGame.Loading
 {
-	public static class AnimationSetData
+    public static class AnimationSetData
 	{
 		public class AnimationData
 		{

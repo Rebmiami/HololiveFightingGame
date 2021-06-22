@@ -1,4 +1,4 @@
-﻿using HololiveFightingGame.Collision;
+﻿using HololiveFightingGame.Gameplay.Collision;
 using Microsoft.Xna.Framework;
 
 namespace HololiveFightingGame.Graphics.CapsuleShader

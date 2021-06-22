@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using System.Text;
-using HololiveFightingGame.Collision;
 using HololiveFightingGame.Utils;
+using HololiveFightingGame.Gameplay.Collision;
 
-namespace HololiveFightingGame.Combat
+namespace HololiveFightingGame.Gameplay.Combat
 {
 	public class AttackHitbox : ICloneable
 	{

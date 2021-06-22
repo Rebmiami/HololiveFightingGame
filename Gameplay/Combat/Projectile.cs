@@ -1,8 +1,9 @@
-﻿using System;
+﻿using HololiveFightingGame.Gameplay;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace HololiveFightingGame.Combat
+namespace HololiveFightingGame.Gameplay.Combat
 {
 	public class Projectile : Entity
 	{

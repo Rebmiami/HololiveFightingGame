@@ -1,4 +1,5 @@
-﻿using HololiveFightingGame.FighterEditor.MenuItems;
+﻿using HololiveFightingGame.FighterEditor.GUI;
+using HololiveFightingGame.FighterEditor.MenuItems;
 using HololiveFightingGame.Loading;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -8,7 +9,7 @@ using System.Text;
 
 namespace HololiveFightingGame.FighterEditor.Menus
 {
-	class FileMenu : EditorMenu
+    class FileMenu : EditorMenu
 	{
 		public FileMenu()
         {

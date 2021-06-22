@@ -5,22 +5,22 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using HololiveFightingGame.Input;
-using HololiveFightingGame.Collision;
 using HololiveFightingGame.Graphics;
-using HololiveFightingGame.Combat;
 using System.Text.Json;
 using HololiveFightingGame.Loading;
 using HololiveFightingGame.Graphics.CapsuleShader;
+using HololiveFightingGame.Gameplay;
+using HololiveFightingGame.Gameplay.Collision;
 
-namespace HololiveFightingGame
+namespace HololiveFightingGame.Gameplay.Combat
 {
-	public class Fighter : Entity
+    public class Fighter : Entity
 	{
 		public bool grounded;
 		// If true, the fighter is grounded, otherwise, they are aerial.
 		public int coyote;
 		// Frames of coyote time.
-		public int damage; 
+		public int damage;
 		// 999.9 to 0.0 by default. Div by 10 to get damage shown on screen.
 
 		public int jumps;
@@ -157,9 +157,9 @@ namespace HololiveFightingGame
 
 			// Failsafe
 			if (moveRunner != null && moveRunner.move == null)
-            {
+			{
 				moveRunner = null;
-            }
+			}
 
 			// Checks if an attack is hitting an opponent and, if so, tells the opponent to be hit by the attack.
 			if (moveRunner != null)
@@ -362,7 +362,7 @@ namespace HololiveFightingGame
 		}
 
 		public void AddCapsules()
-        {
+		{
 			if (moveRunner != null)
 			{
 				for (int i = 0; i < moveRunner.move.hitboxes.Length; i++)
@@ -415,7 +415,7 @@ namespace HololiveFightingGame
 			// TODO: Offload this to another class so that fighter graphics in-editor can be handled differently
 			GraphicsHandler.main.children["game"].children.Add("fighter_" + ID, new DrawObject(DrawObjectType.Sprite));
 			drawObject = GraphicsHandler.main.children["game"].children["fighter_" + ID];
-			
+
 
 			drawObject.frame = "neutral0";
 			attacks = new List<Attack>();
@@ -460,7 +460,7 @@ namespace HololiveFightingGame
 			moveRunner = null;
 		}
 
-		
+
 	}
 
 	public enum MoveType

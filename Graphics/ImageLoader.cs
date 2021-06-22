@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using HololiveFightingGame.Loading;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Text;
 
 namespace HololiveFightingGame.Graphics
 {
-	public static class ImageLoader
+    public static class ImageLoader
 	{
 		/// <summary>
 		/// Loads a <see cref="Texture2D"/> from the specified path.

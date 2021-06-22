@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Text;
 using HololiveFightingGame.Graphics;
 using HololiveFightingGame.Utils;
-using HololiveFightingGame.Combat;
+using HololiveFightingGame.Gameplay.Combat;
 
-namespace HololiveFightingGame
+namespace HololiveFightingGame.Gameplay
 {
     public class GameState
 	{
@@ -18,10 +18,10 @@ namespace HololiveFightingGame
 		public GameState(string[] fighterNames)
 		{
 			fighters = new Fighter[fighterNames.Length];
-            for (int i = 0; i < fighterNames.Length; i++)
-            {
+			for (int i = 0; i < fighterNames.Length; i++)
+			{
 				fighters[i] = new Fighter(i, fighterNames[i]);
-            }
+			}
 			stage = new Stage();
 			projectiles = new List<Projectile>();
 			fighters[1].keyboard = true;
@@ -30,11 +30,11 @@ namespace HololiveFightingGame
 		public void Update()
 		{
 			Vector2 playerCenter = Vector2.Zero;
-			ListCleaner.CleanList(projectiles, delegate(Projectile projectile)
+			ListCleaner.CleanList(projectiles, delegate (Projectile projectile)
 			{
 				projectile.Update();
 				return projectile.timeLeft <= 0;
-			} );
+			});
 			foreach (Fighter fighter in fighters)
 			{
 				fighter.Update();

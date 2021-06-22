@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace HololiveFightingGame.Combat
+namespace HololiveFightingGame.Gameplay.Combat
 {
-	public class Attack : IComparable
+    public class Attack : IComparable
 	{
 		public Attack(AttackHitbox hitbox, Fighter attacker)
 		{

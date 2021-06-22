@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 
-namespace HololiveFightingGame.FighterEditor
+namespace HololiveFightingGame.FighterEditor.GUI
 {
 	public abstract class EditorUIItem
 	{
@@ -71,7 +71,7 @@ namespace HololiveFightingGame.FighterEditor
 		/// </summary>
 		public virtual void Update()
 		{
-			if (!onlyUpdateChildrenIfSelected || (Selected || Highlighted))
+			if (!onlyUpdateChildrenIfSelected || Selected || Highlighted)
 				foreach (EditorUIItem item in children)
 				{
 					item.Update();
@@ -197,8 +197,8 @@ namespace HololiveFightingGame.FighterEditor
 				}
 		}
 
-		public int Flavor 
-		{ 
+		public int Flavor
+		{
 			get
 			{
 				if (Selected)
