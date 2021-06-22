@@ -12,8 +12,8 @@ namespace HololiveFightingGame.FighterEditor.Menus
 	{
 		public FileMenu()
         {
-			items = new EditorUIItem[9];
-			for (int i = 0; i < 9; i++)
+			items = new EditorUIItem[11];
+			for (int i = 0; i < 11; i++)
             {
 				items[i] = new FileMenuButton(this, i);
             }

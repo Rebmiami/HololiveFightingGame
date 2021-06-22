@@ -1,10 +1,12 @@
 ﻿using HololiveFightingGame.Combat;
+using HololiveFightingGame.Graphics;
 using HololiveFightingGame.Loading;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -52,9 +54,14 @@ namespace HololiveFightingGame.FighterEditor.MenuItems
 				case FileButtonAction.ReloadAssets:
 
 					break;
+				case FileButtonAction.ConstructAnimations:
+					Texture2D fighterSprite = ImageLoader.LoadTexture(@".\Content\Data\Fighters\" + Editor.fighter.character + @"\Fighter.png", true);
+					string json = AnimationSetData.ToJSON(AnimationSetData.ConstructAnimations(fighterSprite));
+					File.WriteAllText(@".\Content\Data\Fighters\" + Editor.fighter.character + @"\AnimationFrames.json", json);
+					break;
 				case FileButtonAction.OpenFileLocation:
 					// new Regex(@"\\HololiveFightingGame\.exe$").Replace(Process.GetCurrentProcess().MainModule.FileName, "");
-					// Process.Start("explorer.exe", Editor.loadedFighterPath);
+					Process.Start("explorer.exe", @".\Content\Data\Fighters\" + Editor.fighter.character);
 					break;
 				case FileButtonAction.Exit:
 					Program.game.Exit();
@@ -116,6 +123,10 @@ namespace HololiveFightingGame.FighterEditor.MenuItems
 			/// Reloads all graphical and audio assets related to the focused fighter.
 			/// </summary>
 			ReloadAssets,
+			/// <summary>
+			/// Refreshes the fighter's animation frame data (frame-marked).
+			/// </summary>
+			ConstructAnimations,
 			/// <summary>
 			/// Opens File Explorer to the focused address.
 			/// </summary>

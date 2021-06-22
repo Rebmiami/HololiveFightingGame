@@ -12,10 +12,10 @@ namespace HololiveFightingGame.Loading
 	{
 		public class AnimationData
 		{
-			public VectorLoader origin { get; set; }
-			public VectorLoader frameSize { get; set; }
+			public VectorLoader Origin { get; set; }
+			public VectorLoader FrameSize { get; set; }
 
-			public VectorLoader foot { get; set; }
+			public VectorLoader Foot { get; set; }
 			public int length { get; set; }
 		}
 
@@ -66,9 +66,9 @@ namespace HololiveFightingGame.Loading
 		private static AnimationData GetData(Point point, Color[,] colors)
 		{
 			AnimationData data = new AnimationData();
-			data.origin = new VectorLoader(point.X, point.Y);
-			data.frameSize = new VectorLoader(0, 0);
-			data.foot = new VectorLoader(0, 0);
+			data.Origin = new VectorLoader(point.X, point.Y);
+			data.FrameSize = new VectorLoader(0, 0);
+			data.Foot = new VectorLoader(0, 0);
 
 			bool yFootNotSet = true;
 			bool xFootNotSet = true;
@@ -76,51 +76,51 @@ namespace HololiveFightingGame.Loading
 
 			// Finds the height of the frame by searching downward from the origin until reaching a red or blue dot.
 			// Also finds the Y position of the entity's foot by watching for a yellow dot along the way.
-			while (colors[point.X, (int)data.frameSize.Y + point.Y] != Color.Red || colors[point.X, (int)data.frameSize.Y + point.Y] != Color.Blue)
+			while (colors[point.X, (int)data.FrameSize.Y + point.Y] != Color.Red && colors[point.X, (int)data.FrameSize.Y + point.Y] != Color.Blue)
 			{
 				// If a yellow pixel hasn't yet been found, move the Y position of the foot down.
 				if (yFootNotSet)
 				{
-					data.foot.Y++;
-					if (colors[point.X, (int)data.frameSize.Y + point.Y] == Color.Yellow)
+					data.Foot.Y++;
+					if (colors[point.X, (int)data.FrameSize.Y + point.Y] == Color.Yellow)
 					{
 						yFootNotSet = false;
 					}
 				}
 
-				data.frameSize.Y++;
+				data.FrameSize.Y++;
 			}
 
 			// If the dot is blue, we already know that the animation has a length of 1 and we do not need to search for it again.
-			if (colors[point.X, (int)data.frameSize.Y + point.Y] == Color.Blue)
+			if (colors[point.X, (int)data.FrameSize.Y + point.Y] == Color.Blue)
 			{
 				data.length = 1;
 			}
 
 			// The height of the frame should be extended one pixel longer, as the frame includes the height of the red/blue pixel.
-			data.frameSize.Y++;
+			data.FrameSize.Y++;
 
 
 			// Finds the width of the frame by searching rightward from the origin until reaching a red dot.
 			// Also finds the X position of the entity's foot by watching for a yellow dot along the way.
-			while (colors[(int)data.frameSize.X + point.X, point.Y] != Color.Red)
+			while (colors[(int)data.FrameSize.X + point.X, point.Y] != Color.Red)
 			{
 				// If a yellow pixel hasn't yet been found, move the X position of the foot right.
 				if (xFootNotSet)
 				{
-					data.foot.X++;
+					data.Foot.X++;
 					// The yellow pixel appears at the bottom of the frame, which isn't where we're looking for the red pixel.
 					// But we already know the height of the frame, so we can look along the bottom of the frame while finding its width.
-					if (colors[(int)data.frameSize.X + point.X, (int)data.frameSize.Y + point.Y] == Color.Yellow)
+					if (colors[(int)data.FrameSize.X + point.X, (int)data.FrameSize.Y + point.Y - 1] == Color.Yellow)
 					{
 						xFootNotSet = false;
 					}
 				}
 
-				data.frameSize.X++;
+				data.FrameSize.X++;
 			}
 			// The width of the frame should be extended one pixel longer, as the frame includes the width of the red pixel.
-			data.frameSize.X++;
+			data.FrameSize.X++;
 
 			// Only look for the length of the animation if we don't already know it.
 			if (data.length == 0)
@@ -132,7 +132,7 @@ namespace HololiveFightingGame.Loading
 				{
 					data.length++;
 				} 
-				while (colors[point.X, (int)data.frameSize.Y * data.length + point.Y - 1] != Color.Blue);
+				while (colors[point.X, (int)data.FrameSize.Y * data.length + point.Y - 1] != Color.Blue);
 			}
 
 			// TODO: Handle failures caused by bad pixel placement on user's end.
