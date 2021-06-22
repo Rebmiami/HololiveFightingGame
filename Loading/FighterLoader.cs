@@ -11,9 +11,11 @@ using System.Text.RegularExpressions;
 
 namespace HololiveFightingGame.Loading
 {
-    public static class FighterLoader
+	public static class FighterLoader
 	{
 		public static List<string> allFighters;
+
+		public static List<FighterData> fighterData;
 
 		public static Dictionary<string, Dictionary<string, Move>> moves;
 		// The first index is the fighter, and the second index is the move.
