@@ -14,5 +14,23 @@ namespace HololiveFightingGame.Loading
 		{
 			return new Vector2(vector.X, vector.Y);
 		}
+
+		public VectorLoader()
+		{
+			X = 0;
+			Y = 0;
+		}
+
+		public VectorLoader(int n)
+		{
+			X = n;
+			Y = n;
+		}
+
+		public VectorLoader(int x, int y)
+		{
+			X = x;
+			Y = y;
+		}
 	}
 }

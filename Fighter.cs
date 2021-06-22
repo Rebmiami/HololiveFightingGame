@@ -465,7 +465,7 @@ namespace HololiveFightingGame
 
 	public enum MoveType
 	{
-		Jab,
+		NeutralA,
 		Dash,
 		SideA,
 		UpA,

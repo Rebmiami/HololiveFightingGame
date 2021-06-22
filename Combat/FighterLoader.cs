@@ -79,9 +79,7 @@ namespace HololiveFightingGame.Combat
 			foreach (Fighter fighter in fighters)
 			{
 				Texture2D fighterSprite = ImageLoader.LoadTexture(@".\Content\Data\Fighters\" + fighter.character + @"\Fighter.png", true);
-				Color[,] colors;
-				Dictionary<Color, List<Point>> positions;
-				ColorTracker.TrackColors(ref fighterSprite, new Color[] { Color.Lime, Color.Red, Color.Yellow, Color.Blue }, out colors, out positions, true);
+				ColorTracker.StripColors(ref fighterSprite, new Color[] { Color.Lime, Color.Red, Color.Yellow, Color.Blue });
 				fighter.drawObject.texture = new AnimatedSprite(fighterSprite, new Point(50, 80));
 
 				// Loads basic animations, such as idle, walking, jumping, etc.
