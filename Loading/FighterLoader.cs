@@ -13,20 +13,15 @@ namespace HololiveFightingGame.Loading
 {
 	public static class FighterLoader
 	{
+		// A list of loaded fighters.
 		public static List<string> allFighters;
 
-		public static List<FighterData> fighterData;
+		// Loading middleman. Contains textures and information directly deserialized from JSON.
+		public static Dictionary<string, FighterData> fighterData;
 
+		// A list of moves that each fighter can perform.
 		public static Dictionary<string, Dictionary<string, Move>> moves;
 		// The first index is the fighter, and the second index is the move.
-
-		public static void LoadFighters()
-		{
-			// Load a list of fighter names.
-			Game1.jsonLoaderFilePath = @".\Content\Data\FighterList.json";
-			string json = File.ReadAllText(Game1.jsonLoaderFilePath);
-			allFighters = JsonSerializer.Deserialize<List<string>>(json, GameLoader.SerializerOptions);
-		}
 
 		public static void LoadMoves(Fighter[] fighters)
 		{
@@ -52,16 +47,9 @@ namespace HololiveFightingGame.Loading
 				}
 
 				moves.Add(fighter, new Dictionary<string, Move>());
-				string movePath = @".\Content\Data\Fighters\" + fighter + @"\Moves";
-
-				// Finds all moves in the fighter's data folder and loads them.
-				string[] movesToLoad = Directory.GetFiles(movePath);
-				foreach (string moveName in movesToLoad)
+				foreach (string moveName in fighterData[fighter].moves.Keys)
 				{
-					// Clip off the directory and file type
-					string clippedName = moveName.Substring((movePath + @"\").Length);
-					clippedName = clippedName.Split('.')[0];
-					moves[fighter].Add(clippedName, new Move(clippedName, fighter));
+					moves[fighter].Add(moveName, new Move(fighterData[fighter].moves[moveName]));
 				}
 			}
 		}
@@ -80,23 +68,22 @@ namespace HololiveFightingGame.Loading
 			// Sets up a fighter's sprite and animations.
 			foreach (Fighter fighter in fighters)
 			{
-				Texture2D fighterSprite = ImageLoader.LoadTexture(@".\Content\Data\Fighters\" + fighter.character + @"\Fighter.png", true);
-				ColorTracker.StripColors(ref fighterSprite, new Color[] { Color.Lime, Color.Red, Color.Yellow, Color.Blue });
-				fighter.drawObject.texture = new AnimatedSprite(fighterSprite, new Point(50, 80));
-
-				// Loads basic animations, such as idle, walking, jumping, etc.
-				Game1.jsonLoaderFilePath = @".\Content\Data\Fighters\" + fighter.character + @"\Animations.json";
-				string json = File.ReadAllText(Game1.jsonLoaderFilePath);
-				((AnimatedSprite)fighter.drawObject.texture).animations = JsonSerializer.Deserialize<Dictionary<string, Animation>>(json);
-
-				// Loads animations for moves.
-				foreach (Move move in moves[fighter.character].Values)
-				{
-					((AnimatedSprite)fighter.drawObject.texture).animations.Add(move.Data.Name, move.Data.Animation);
-				}
-
-				// Finalizes animation setup.
+				// TODO: Use new animation frames system instead of the system with the fixed frame sizes
+				fighter.drawObject.texture = new AnimatedSprite(fighterData[fighter.character].texture, new Point(50, 80));
+				((AnimatedSprite)fighter.drawObject.texture).animations = fighterData[fighter.character].animations;
 				((AnimatedSprite)fighter.drawObject.texture).SetAnimFrames();
+			}
+		}
+
+		public static void LoadFighterData(string[] fighters)
+		{
+			fighterData = new Dictionary<string, FighterData>();
+			for (int i = 0; i < fighters.Length; i++)
+			{
+				string fighter = fighters[i];
+				FighterData data = new FighterData(fighter);
+				fighterData.Add(fighter, data);
+				data.Load(@".\Content\Data\Fighters\" + fighter);
 			}
 		}
 	}

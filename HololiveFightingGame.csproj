@@ -52,6 +52,9 @@
 		<None Update="Content\Assets\UsadaPekora.png">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
+		<None Update="Content\Data\Fighters\Kiara\AnimationFrames.json">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
 		<None Update="Content\Data\Fighters\Kiara\Assets\GameUI.png">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
@@ -74,6 +77,9 @@
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
 		<None Update="Content\Data\Fighters\Kiara\Fighter.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="Content\Data\Fighters\Pekora\AnimationFrames.json">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
 		<None Update="Content\Data\Fighters\Pekora\Animations.json">

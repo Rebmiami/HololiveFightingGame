@@ -1,19 +1,18 @@
-﻿using HololiveFightingGame.Graphics;
+﻿using HololiveFightingGame.FighterEditor.GUI;
+using HololiveFightingGame.FighterEditor.Menus;
+using HololiveFightingGame.Gameplay.Combat;
+using HololiveFightingGame.Graphics;
 using HololiveFightingGame.Input;
 using HololiveFightingGame.Loading;
-using HololiveFightingGame.FighterEditor.Menus;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Text.RegularExpressions;
-using HololiveFightingGame.Graphics.CapsuleShader;
-using HololiveFightingGame.FighterEditor.GUI;
-using HololiveFightingGame.Gameplay.Combat;
 
 namespace HololiveFightingGame.FighterEditor
 {
-    public static class Editor
+	public static class Editor
 	{
 		public static Fighter fighter;
 

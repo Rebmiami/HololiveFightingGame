@@ -17,7 +17,7 @@ using HololiveFightingGame.Gameplay;
 
 namespace HololiveFightingGame
 {
-    public class Game1 : Game
+	public class Game1 : Game
 	{
 		private GraphicsDeviceManager graphics;
 		private SpriteBatch spriteBatch;
@@ -103,8 +103,12 @@ namespace HololiveFightingGame
 
 			GraphicsHandler.main = new InGamePreset();
 			gameState = new GameState(fighters);
+
+			FighterLoader.LoadFighterData(fighters);
+
 			FighterLoader.LoadMoves(fighters);
 			FighterLoader.LoadAnimations(gameState.fighters);
+
 			uiHandler = new UIHandler();
 		}
 
