@@ -23,7 +23,7 @@ namespace HololiveFightingGame.FighterEditor.GUI
 
 		EditorAI,
 		EditorProjectile,
-		EditorEntity,
+		EditorEntity, // Unused
 
 		HitboxTypeNormal,
 		HitboxTypeGrab,

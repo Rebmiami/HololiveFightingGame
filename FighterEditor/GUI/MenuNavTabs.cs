@@ -18,7 +18,7 @@ namespace HololiveFightingGame.FighterEditor.GUI
 		static MenuNavTabs()
 		{
 			leftTabs = new Rectangle[4];
-			rightTabs = new Rectangle[7];
+			rightTabs = new Rectangle[6];
 			leftIcons = new EditorIcon[]
 			{
 				EditorIcon.MenuFile,
@@ -34,7 +34,6 @@ namespace HololiveFightingGame.FighterEditor.GUI
 				EditorIcon.EditorDynamics,
 				EditorIcon.EditorAI,
 				EditorIcon.EditorProjectile,
-				EditorIcon.EditorEntity,
 			};
 
 			Point leftOrigin = new Point(EditorOffsets.leftPanel.Right, EditorOffsets.leftPanel.Top);
@@ -44,7 +43,7 @@ namespace HololiveFightingGame.FighterEditor.GUI
 				leftTabs[i] = new Rectangle(leftOrigin, EditorOffsets.iconSize);
 				leftOrigin.Y += EditorOffsets.iconSize.Y;
 			}
-			for (int i = 0; i < 7; i++)
+			for (int i = 0; i < 6; i++)
 			{
 				rightTabs[i] = new Rectangle(rightOrigin, EditorOffsets.iconSize);
 				rightOrigin.Y += EditorOffsets.iconSize.Y;

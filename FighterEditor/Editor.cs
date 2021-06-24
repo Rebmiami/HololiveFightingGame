@@ -236,7 +236,6 @@ namespace HololiveFightingGame.FighterEditor
 				new DynamicsEditor(),
 				new AIEditor(),
 				new ProjectileEditor(),
-				new EntityEditor(),
 			};
 			leftMenu = 2;
 			rightMenu = 4;
