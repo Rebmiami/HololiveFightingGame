@@ -71,7 +71,7 @@ namespace HololiveFightingGame.Loading
 				// TODO: Use new animation frames system instead of the system with the fixed frame sizes
 				fighter.drawObject.texture = new AnimatedSprite(fighterData[fighter.character].texture, new Point(50, 80));
 				((AnimatedSprite)fighter.drawObject.texture).animations = fighterData[fighter.character].animations;
-				((AnimatedSprite)fighter.drawObject.texture).SetAnimFrames();
+				((AnimatedSprite)fighter.drawObject.texture).SetAnimFrames(fighterData[fighter.character].animationData);
 			}
 		}
 

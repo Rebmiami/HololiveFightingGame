@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework;
+using System.Collections.Generic;
+using static HololiveFightingGame.Loading.AnimationSetData;
 
 namespace HololiveFightingGame.Graphics
 {
@@ -49,15 +48,16 @@ namespace HololiveFightingGame.Graphics
 			}
 		}
 
-		public void SetAnimFrames() // Called once after animations are set up to set all the frames. In the case of flashes, pre-set animations are used to save resources.
+		public void SetAnimFrames(List<AnimationData> animationData) // Called once after animations are set up to set all the frames.
 		{
 			slices = new Dictionary<string, Rectangle>();
 			foreach (string key in animations.Keys)
 			{
 				Animation animation = animations[key];
-				for (int i = 0; i < animation.Frames; i++)
+				AnimationData data = animationData[animation.AnimID];
+				for (int i = 0; i < data.length; i++)
 				{
-					slices.Add(key + i, new Rectangle(dimensions.X * animation.AnimID, dimensions.Y * i, dimensions.X, dimensions.Y));
+					slices.Add(key + i, new Rectangle((int)data.Origin.X, (int)data.Origin.Y + (int)data.FrameSize.Y * i, (int)data.FrameSize.X, (int)data.FrameSize.Y));
 				}
 			}
 		}
