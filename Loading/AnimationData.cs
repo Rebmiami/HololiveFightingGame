@@ -33,9 +33,9 @@ namespace HololiveFightingGame.Loading
 		/// </summary>
 		/// <param name="animations"></param>
 		/// <returns></returns>
-		public static string ToJSON(List<AnimationData> animations)
+		public static string ToJSON(List<AnimationData> animations, JsonSerializerOptions options = null)
 		{
-			return JsonSerializer.Serialize(animations);
+			return JsonSerializer.Serialize(animations, options);
 		}
 
 		/// <summary>

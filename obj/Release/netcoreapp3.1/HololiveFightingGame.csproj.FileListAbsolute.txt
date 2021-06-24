@@ -63,3 +63,5 @@ C:\Users\rebmi\source\repos\HololiveFightingGame\bin\Release\netcoreapp3.1\Conte
 C:\Users\rebmi\source\repos\HololiveFightingGame\bin\Release\netcoreapp3.1\Content\Data\Fighters\Kiara\Fighter.png
 C:\Users\rebmi\source\repos\HololiveFightingGame\bin\Release\netcoreapp3.1\Content\Data\Fighters\Pekora\Fighter.png
 C:\Users\rebmi\source\repos\HololiveFightingGame\bin\Release\netcoreapp3.1\Content\Documentation\Editor.html
+C:\Users\rebmi\source\repos\HololiveFightingGame\bin\Release\netcoreapp3.1\Content\Data\Fighters\Kiara\AnimationFrames.json
+C:\Users\rebmi\source\repos\HololiveFightingGame\bin\Release\netcoreapp3.1\Content\Data\Fighters\Pekora\AnimationFrames.json

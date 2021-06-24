@@ -26,9 +26,9 @@ namespace HololiveFightingGame.Loading
 		public Dictionary<string, Animation> animations;
 
 		public FighterData(string name)
-        {
+		{
 			this.name = name;
-        }
+		}
 
 		/// <summary>
 		/// Loads a fighter from a folder from the specified file address.
@@ -83,7 +83,36 @@ namespace HololiveFightingGame.Loading
 		/// <param name="address"></param>
 		public void Write(string address)
 		{
-			throw new NotImplementedException();
+			JsonSerializerOptions options = new JsonSerializerOptions();
+			options.WriteIndented = true;
+			// TODO: Make this an option, somehow
+
+			// TODO: Find a way to get textures to work here.
+			// You could load the texture without stripping any colors and cache that somewhere
+
+
+			// --- SAVE MOVES ---
+			foreach (KeyValuePair<string, MoveData> pair in moves)
+			{
+				string name = pair.Key;
+				string moveJson = JsonSerializer.Serialize(pair.Value, options);
+				File.WriteAllText(address + @"\Moves\" + name + ".json", moveJson);
+			}
+
+
+			// --- SAVE ANIMATION FRAMES --- 
+			string animFramesJson = ToJSON(animationData, options);
+			File.WriteAllText(address + @"\AnimationFrames.json", animFramesJson);
+
+
+			// --- SAVE ANIMATIONS ---
+			Dictionary<string, Animation> nonMoveAnims = new Dictionary<string, Animation>(animations);
+			foreach (MoveData data in moves.Values)
+			{
+				nonMoveAnims.Remove(data.Name);
+			}
+			string animsJson = JsonSerializer.Serialize(nonMoveAnims, options);
+			File.WriteAllText(address + @"\Animations.json", animsJson);
 		}
 	}
 }

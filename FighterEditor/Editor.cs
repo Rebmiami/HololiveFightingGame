@@ -210,7 +210,7 @@ namespace HololiveFightingGame.FighterEditor
 		{
 			// Clears the editor
 			ClearEditor();
-			loadedFighterPath = path;
+			loadedFighterPath = new Regex(@"(.+)\\.+\..+").Replace(path, "$1");
 
 			string selected;
 			selected = new Regex(@".+\\(.+)\..+").Replace(path, "$1");
@@ -272,8 +272,8 @@ namespace HololiveFightingGame.FighterEditor
 		public static void Save()
 		{
 			// All changes made in editor are written to classes that can be directly serialized to JSON.
-			// TODO: Serialize fighter data and write to changed files
-			throw new NotImplementedException();
+
+			FighterLoader.fighterData[fighter.character].Write(loadedFighterPath);
 		}
 
 		public static void Draw(SpriteBatch spriteBatch)

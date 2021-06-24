@@ -46,6 +46,7 @@ namespace HololiveFightingGame.Loading
 					continue;
 				}
 
+				// Loads moves
 				moves.Add(fighter, new Dictionary<string, Move>());
 				foreach (string moveName in fighterData[fighter].moves.Keys)
 				{
@@ -56,9 +57,11 @@ namespace HololiveFightingGame.Loading
 
 		public static void ReloadMoves()
 		{
+			// Gets a list of fighters with moves loaded and copies it to an array.
 			string[] fighters = new string[moves.Count];
 			moves.Keys.CopyTo(fighters, 0);
 
+			// Clears list of loaded moves and reconstructs it, loading the fighters in the array.
 			moves.Clear();
 			LoadMoves(fighters);
 		}
@@ -68,11 +71,16 @@ namespace HololiveFightingGame.Loading
 			// Sets up a fighter's sprite and animations.
 			foreach (Fighter fighter in fighters)
 			{
-				// TODO: Use new animation frames system instead of the system with the fixed frame sizes
-				fighter.drawObject.texture = new AnimatedSprite(fighterData[fighter.character].texture, new Point(50, 80));
-				((AnimatedSprite)fighter.drawObject.texture).animations = fighterData[fighter.character].animations;
-				((AnimatedSprite)fighter.drawObject.texture).SetAnimFrames(fighterData[fighter.character].animationData);
+				LoadAnimations(fighter);
 			}
+		}
+
+		public static void LoadAnimations(Fighter fighter)
+		{
+			// TODO: Use new animation frames system instead of the system with the fixed frame sizes
+			fighter.drawObject.texture = new AnimatedSprite(fighterData[fighter.character].texture, new Point(50, 80));
+			((AnimatedSprite)fighter.drawObject.texture).animations = fighterData[fighter.character].animations;
+			((AnimatedSprite)fighter.drawObject.texture).SetAnimFrames(fighterData[fighter.character].animationData);
 		}
 
 		public static void LoadFighterData(string[] fighters)
@@ -83,6 +91,8 @@ namespace HololiveFightingGame.Loading
 				string fighter = fighters[i];
 				FighterData data = new FighterData(fighter);
 				fighterData.Add(fighter, data);
+
+				// Loads files into the fighter data classes.
 				data.Load(@".\Content\Data\Fighters\" + fighter);
 			}
 		}

@@ -43,6 +43,7 @@ namespace HololiveFightingGame.FighterEditor.MenuItems
 					MovePreviewer.Refresh();
 					break;
 				case FileButtonAction.ReloadFighterTexture:
+					FighterLoader.LoadAnimations(Editor.fighter);
 					Editor.ResetFighter();
 					break;
 				case FileButtonAction.ReloadAllTextures:
