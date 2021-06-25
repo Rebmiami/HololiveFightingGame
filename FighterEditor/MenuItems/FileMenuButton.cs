@@ -9,10 +9,11 @@ using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 namespace HololiveFightingGame.FighterEditor.MenuItems
 {
-    public class FileMenuButton : EditorUIItem
+	public class FileMenuButton : EditorUIItem
 	{
 		public FileButtonAction action;
 
@@ -27,45 +28,55 @@ namespace HololiveFightingGame.FighterEditor.MenuItems
 			switch (action)
 			{
 				case FileButtonAction.Open:
-					// TODO:
-					// Add warning before emptying editor
-
+					MessageBox.Show("Any unsaved changes will be lost.");
 					Editor.OpenFighter();
 					break;
+
 				case FileButtonAction.Save:
 					Editor.Save();
 					break;
+
 				case FileButtonAction.SaveAs:
+					throw new NotImplementedException();
 					// TODO: Open save dialog and change focus to new location
-					break;
+
 				case FileButtonAction.ReloadMoves:
+					FighterLoader.LoadFighterData(new string[] { Editor.fighter.character });
 					FighterLoader.ReloadMoves();
 					MovePreviewer.Refresh();
 					break;
+
 				case FileButtonAction.ReloadFighterTexture:
 					FighterLoader.LoadAnimations(Editor.fighter);
 					Editor.ResetFighter();
 					break;
+
 				case FileButtonAction.ReloadAllTextures:
 					// TODO: Add this when there are actually textures to reload
 					break;
+
 				case FileButtonAction.ReloadSounds:
 
 					break;
+
 				case FileButtonAction.ReloadAssets:
 
 					break;
+
 				case FileButtonAction.ConstructAnimations:
-					Texture2D fighterSprite = ImageLoader.LoadTexture(@".\Content\Data\Fighters\" + Editor.fighter.character + @"\Fighter.png", true);
+					// TODO: Cache unfiltered texture so it doesn't have to be loaded from the files here
+					Texture2D fighterSprite = ImageLoader.LoadTexture(Editor.loadedFighterPath + @"\Fighter.png", true);
 					FighterLoader.fighterData[Editor.fighter.character].animationData = AnimationSetData.ConstructAnimations(fighterSprite);
 					break;
+
 				case FileButtonAction.OpenFileLocation:
-					// new Regex(@"\\HololiveFightingGame\.exe$").Replace(Process.GetCurrentProcess().MainModule.FileName, "");
-					Process.Start("explorer.exe", @".\Content\Data\Fighters\" + Editor.fighter.character);
+					Process.Start("explorer.exe", Editor.loadedFighterPath);
 					break;
+
 				case FileButtonAction.Exit:
 					Program.game.Exit();
 					break;
+
 				default:
 					break;
 			}
