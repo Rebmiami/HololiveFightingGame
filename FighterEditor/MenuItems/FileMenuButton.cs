@@ -57,8 +57,7 @@ namespace HololiveFightingGame.FighterEditor.MenuItems
 					break;
 				case FileButtonAction.ConstructAnimations:
 					Texture2D fighterSprite = ImageLoader.LoadTexture(@".\Content\Data\Fighters\" + Editor.fighter.character + @"\Fighter.png", true);
-					string json = AnimationSetData.ToJSON(AnimationSetData.ConstructAnimations(fighterSprite));
-					File.WriteAllText(@".\Content\Data\Fighters\" + Editor.fighter.character + @"\AnimationFrames.json", json);
+					FighterLoader.fighterData[Editor.fighter.character].animationData = AnimationSetData.ConstructAnimations(fighterSprite);
 					break;
 				case FileButtonAction.OpenFileLocation:
 					// new Regex(@"\\HololiveFightingGame\.exe$").Replace(Process.GetCurrentProcess().MainModule.FileName, "");

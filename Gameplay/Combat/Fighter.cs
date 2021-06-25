@@ -357,7 +357,18 @@ namespace HololiveFightingGame.Gameplay.Combat
 			drawObject.spriteEffects = direction == -1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
 			((AnimatedSprite)drawObject.texture).Update();
 			drawObject.frame = ((AnimatedSprite)drawObject.texture).GetFrame();
-			drawObject.Bottom = Bottom;
+			drawObject.position = Bottom;
+
+			AnimationSetData.AnimationData animationData = FighterLoader.fighterData[character].animationData[((AnimatedSprite)drawObject.texture).Playing.AnimID];
+			Vector2 foot = animationData.Foot;
+			if (direction == -1)
+            {
+				foot.X *= -1;
+				foot.X += animationData.FrameSize.X;
+            }
+			drawObject.position -= foot;
+
+
 			Game1.uiHandler.damages[ID] = damage;
 		}
 
