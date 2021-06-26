@@ -1,26 +1,30 @@
 {
 	"neutral": {
+		"NextAnim": null,
 		"AnimID": 0,
 		"Frames": 1,
 		"AutoAnimate": false,
-		"NextAnim": null
+		"Frame": 0
 	},
 	"walk": {
+		"NextAnim": "walk",
 		"AnimID": 1,
 		"Frames": 2,
 		"AutoAnimate": true,
-		"NextAnim": "walk"
+		"Frame": 0
 	},
 	"jump": {
+		"NextAnim": null,
 		"AnimID": 2,
 		"Frames": 1,
 		"AutoAnimate": false,
-		"NextAnim": null
+		"Frame": 0
 	},
 	"launch": {
-		"AnimID": 4,
+		"NextAnim": null,
+		"AnimID": 3,
 		"Frames": 1,
 		"AutoAnimate": false,
-		"NextAnim": null
+		"Frame": 0
 	}
 }
