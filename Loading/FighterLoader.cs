@@ -89,6 +89,10 @@ namespace HololiveFightingGame.Loading
 			for (int i = 0; i < fighters.Length; i++)
 			{
 				string fighter = fighters[i];
+				if (fighterData.ContainsKey(fighter))
+				{
+					continue;
+				}
 				FighterData data = new FighterData(fighter);
 				fighterData.Add(fighter, data);
 
