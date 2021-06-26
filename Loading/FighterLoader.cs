@@ -1,4 +1,5 @@
-﻿using HololiveFightingGame.Gameplay.Combat;
+﻿using HololiveFightingGame.FighterEditor;
+using HololiveFightingGame.Gameplay.Combat;
 using HololiveFightingGame.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -97,7 +98,15 @@ namespace HololiveFightingGame.Loading
 				fighterData.Add(fighter, data);
 
 				// Loads files into the fighter data classes.
-				data.Load(@".\Content\Data\Fighters\" + fighter);
+				if (Game1.gameScreen == GameScreen.Editor)
+				{
+					// Editor should be able to load from any arbitrary file path
+					data.Load(Editor.loadedFighterPath);
+				}
+				else
+				{
+					data.Load(@".\Content\Data\Fighters\" + fighter);
+				}
 			}
 		}
 	}
