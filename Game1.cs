@@ -185,7 +185,7 @@ namespace HololiveFightingGame
 					spriteBatch.DrawString(Assets.font, setup.Status, new Vector2(10, 90), Color.White);
 					break;
 				case GameScreen.InGame:
-					GraphicsHandler.main.Draw(spriteBatch, new Transformation(Vector2.Zero, 2));
+					GraphicsHandler.main.Draw(spriteBatch, new Transformation(Vector2.Zero, gameState.zoom));
 					break;
 				case GameScreen.Editor:
 					Editor.Draw(spriteBatch);

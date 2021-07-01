@@ -19,8 +19,8 @@ namespace HololiveFightingGame.Gameplay.Combat
 
 		public Stage()
 		{
-			collider = new Collider(new Rectangle((Program.WindowBounds().Width - 500) / 2, 300, 500, 100));
-			stageBounds = Program.WindowBounds();
+			collider = new Collider(new Rectangle(150, 300, 500, 100));
+			stageBounds = new Rectangle(-150, -200, 1100, 780);
 
 			drawObject = GraphicsHandler.main.children["game"].children["stage"];
 			drawObject.texture = new SlicedSprite(Assets.testStage);
