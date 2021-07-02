@@ -14,7 +14,7 @@ using HololiveFightingGame.Gameplay.Collision;
 
 namespace HololiveFightingGame.Gameplay.Combat
 {
-    public class Fighter : Entity
+	public class Fighter : Entity
 	{
 		public bool grounded;
 		// If true, the fighter is grounded, otherwise, they are aerial.
@@ -362,10 +362,10 @@ namespace HololiveFightingGame.Gameplay.Combat
 			AnimationSetData.AnimationData animationData = FighterLoader.fighterData[character].animationData[((AnimatedSprite)drawObject.texture).Playing.AnimID];
 			Vector2 foot = animationData.Foot;
 			if (direction == -1)
-            {
+			{
 				foot.X *= -1;
 				foot.X += animationData.FrameSize.X;
-            }
+			}
 			drawObject.position -= foot;
 
 
@@ -435,13 +435,10 @@ namespace HololiveFightingGame.Gameplay.Combat
 
 		public void Damage(Attack attack)
 		{
-			Damage(attack.damage, attack.knockback);
-		}
-
-		public void Damage(int damage, Vector2 knockback)
-		{
-			knockback += knockback * (this.damage / 2000f);
-			this.damage = Math.Min(this.damage + damage, 9999);
+			// 1 unit of knockback growth = 1 unit of knockback per 100% damage
+			Vector2 knockback = attack.attackHitbox.LaunchAngle * (1 + damage / 1000f * attack.attackHitbox.kbScaling);
+			knockback.X *= attack.attacker.direction;
+			damage = Math.Min(attack.attackHitbox.damage + damage, 9999);
 			launchTimer = (int)(Math.Abs(knockback.Y) * 2.5f);
 			if (grounded)
 			{
@@ -468,8 +465,6 @@ namespace HololiveFightingGame.Gameplay.Combat
 			invFrames = 6;
 			moveRunner = null;
 		}
-
-
 	}
 
 	public enum MoveType

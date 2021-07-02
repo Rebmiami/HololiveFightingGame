@@ -1,26 +1,30 @@
 {
-	"neutral": {
-		"AnimID": 0,
-		"Frames": 1,
-		"AutoAnimate": false,
-		"NextAnim": null
-	},
-	"walk": {
-		"AnimID": 1,
-		"Frames": 2,
-		"AutoAnimate": true,
-		"NextAnim": "walk"
-	},
-	"jump": {
-		"AnimID": 2,
-		"Frames": 1,
-		"AutoAnimate": false,
-		"NextAnim": null
-	},
-	"launch": {
-		"AnimID": 4,
-		"Frames": 1,
-		"AutoAnimate": false,
-		"NextAnim": null
-	}
+  "neutral": {
+    "NextAnim": null,
+    "AnimID": 0,
+    "Frames": 1,
+    "AutoAnimate": false,
+    "Frame": 0
+  },
+  "walk": {
+    "NextAnim": "walk",
+    "AnimID": 1,
+    "Frames": 2,
+    "AutoAnimate": true,
+    "Frame": 0
+  },
+  "jump": {
+    "NextAnim": null,
+    "AnimID": 2,
+    "Frames": 1,
+    "AutoAnimate": false,
+    "Frame": 0
+  },
+  "launch": {
+    "NextAnim": null,
+    "AnimID": 4,
+    "Frames": 1,
+    "AutoAnimate": false,
+    "Frame": 0
+  }
 }

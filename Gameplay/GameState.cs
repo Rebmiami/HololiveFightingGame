@@ -74,6 +74,11 @@ namespace HololiveFightingGame.Gameplay
 
 			Vector2 cameraTarget = Vector2.Lerp(playerCenter, new Vector2(stage.collider.Rectangle.Center.X, stage.collider.Rectangle.Top), 0.3f);
 			GraphicsHandler.main.children["game"].position = -(Vector2.Lerp(cameraTarget, -GraphicsHandler.main.children["game"].position + Program.WindowBounds().Size.ToVector2() / 2, 0.9f) - Program.WindowBounds().Size.ToVector2() / 2);
+
+			// TODO: Use rectangles for camera position.
+			// A rectangle for the area the camera is allowed in; if it goes outside, then move it inward.
+			// Place a rectangle around the fighters and use the union of all the fighter rectangles.
+			// Use this rectangle's center and dimensions to find the position and zoom value of the camera.
 		}
 	}
 }

@@ -5,8 +5,8 @@
     {
       "Damage": 225,
       "Angle": 30,
-      "Launch": 20,
-      "KbScaling": 0,
+      "Launch": 6,
+      "KbScaling": 4,
       "Origin": {
         "X": 0,
         "Y": 0
@@ -49,7 +49,7 @@
   "CanCancel": null,
   "Animation": {
     "NextAnim": "neutral",
-    "AnimID": 4,
+    "AnimID": 3,
     "Frames": 2,
     "AutoAnimate": false,
     "Frame": 0
