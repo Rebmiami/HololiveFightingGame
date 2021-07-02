@@ -161,7 +161,7 @@ namespace HololiveFightingGame.Gameplay.Combat
 				moveRunner = null;
 			}
 
-			if (moveRunner.move.Data.Aerial && grounded)
+			if (moveRunner != null && moveRunner.move.Data.Aerial && grounded)
             {
 				moveRunner = null;
             }
