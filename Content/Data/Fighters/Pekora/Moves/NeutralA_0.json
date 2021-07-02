@@ -40,7 +40,7 @@
   "CanCancel": null,
   "Animation": {
     "NextAnim": "neutral",
-    "AnimID": 3,
+    "AnimID": 4,
     "Frames": 2,
     "AutoAnimate": false,
     "Frame": 1
