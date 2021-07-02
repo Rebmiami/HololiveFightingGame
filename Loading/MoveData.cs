@@ -39,11 +39,16 @@ namespace HololiveFightingGame.Loading
 		/// How much of the player's existing momentum is preserved.
 		/// </summary>
 		public float Sustain { get; set; }
-		/// <summary>
-		/// Sustain change over time. To be implemented.
-		/// </summary>
+		// <summary>
+		// Sustain change over time. To be implemented.
+		// </summary>
 		// public Dictionary<string, float> Motion { get; set; }
 
+
+		/// <summary>
+		/// Whether or not the move is aerial. Aerial moves will be interrupted if the fighter lands on the ground.
+		/// </summary>
+		public bool Aerial { get; set; }
 
 
 		/// <summary>

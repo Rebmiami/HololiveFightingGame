@@ -161,6 +161,11 @@ namespace HololiveFightingGame.Gameplay.Combat
 				moveRunner = null;
 			}
 
+			if (moveRunner.move.Data.Aerial && grounded)
+            {
+				moveRunner = null;
+            }
+
 			// Checks if an attack is hitting an opponent and, if so, tells the opponent to be hit by the attack.
 			if (moveRunner != null)
 			{
