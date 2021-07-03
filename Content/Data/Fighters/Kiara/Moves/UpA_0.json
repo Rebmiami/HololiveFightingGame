@@ -1,10 +1,10 @@
 {
   "MoveDuration": 16,
-  "Name": "SideTilt_0",
+  "Name": "UpA_0",
   "Hitboxes": [
     {
       "Damage": 103,
-      "Angle": 10,
+      "Angle": 80,
       "Launch": 10,
       "KbScaling": 0.7,
       "Origin": {
@@ -39,7 +39,7 @@
   "CanCancel": null,
   "Animation": {
     "NextAnim": "neutral",
-    "AnimID": 4,
+    "AnimID": 3,
     "Frames": 2,
     "AutoAnimate": false,
     "Frame": 1

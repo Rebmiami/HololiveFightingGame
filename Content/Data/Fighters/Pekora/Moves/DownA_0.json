@@ -1,6 +1,6 @@
 {
 	"MoveDuration": 16,
-	"Name": "DownTilt_0",
+	"Name": "DownA_0",
 	"Hitboxes": [
 		{
 			"Damage": 103,
@@ -39,7 +39,7 @@
 	"CanCancel": null,
 	"Animation": {
 		"NextAnim": "neutral",
-		"AnimID": 3,
+		"AnimID": 4,
 		"Frames": 2,
 		"AutoAnimate": false,
 		"Frame": 1

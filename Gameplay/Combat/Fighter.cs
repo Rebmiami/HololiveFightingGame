@@ -271,7 +271,9 @@ namespace HololiveFightingGame.Gameplay.Combat
 			}
 
 
-			// Initialize moves
+			// Initialize moves based on inputs
+
+			// TODO: Allow some moves to be interrupted early
 			if (moveTimer == 0)
 			{
 				string move = "None";
@@ -333,16 +335,16 @@ namespace HololiveFightingGame.Gameplay.Combat
 									break;
 
 								case "U":
-									move = "UpTilt";
+									move = "UpA";
 									break;
 
 								case "D":
-									move = "DownTilt";
+									move = "DownA";
 									break;
 
 								case "R":
 								case "L":
-									move = "SideTilt";
+									move = "SideA";
 									break;
 							}
 							break;
@@ -371,9 +373,19 @@ namespace HololiveFightingGame.Gameplay.Combat
 							{
 
 							}
+							break;
+
+						case "Taunt":
+							switch (direction)
+							{
+
+							}
 
 							break;
 					}
+
+					// TODO: Allow some moves to select which moves they can be cancelled into
+					// TODO: Give moves control over which phase is the first (change "_0")
 
 					if (move != "None")
 					{
