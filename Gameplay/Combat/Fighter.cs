@@ -65,7 +65,7 @@ namespace HololiveFightingGame.Gameplay.Combat
 			velocity.X *= grounded ? 0.8f : 0.95f;
 			if (launchTimer == 0)
 			{
-				velocity.X += KeybindHandler.HoldHorizMove(keyboard, ID);
+				velocity.X += KeybindHandler.ControlDirection(keyboard, ID).X;
 			}
 			Vector2 maxVelocity = new Vector2(6, 10);
 			if (launchTimer == 0)
@@ -162,9 +162,9 @@ namespace HololiveFightingGame.Gameplay.Combat
 			}
 
 			if (moveRunner != null && moveRunner.move.Data.Aerial && grounded)
-            {
+			{
 				moveRunner = null;
-            }
+			}
 
 			// Checks if an attack is hitting an opponent and, if so, tells the opponent to be hit by the attack.
 			if (moveRunner != null)
@@ -270,18 +270,117 @@ namespace HololiveFightingGame.Gameplay.Combat
 				jumps++;
 			}
 
-			// TODO: Change this to accept more move types
-			// Reworking keybinds may be necessary
-			if (KeybindHandler.TapAtkNormal(keyboard, ID) && moveTimer == 0)
-			{
-				moveRunner = new MoveRunner(FighterLoader.moves[character]["NeutralA_0"]);
-				moveTimer = moveRunner.data.MoveDuration;
-			}
 
-			if (KeybindHandler.TapAtkSecond(keyboard, ID) && moveTimer == 0)
+			// Initialize moves
+			if (moveTimer == 0)
 			{
-				moveRunner = new MoveRunner(FighterLoader.moves[character]["NeutralB_0"]);
-				moveTimer = moveRunner.data.MoveDuration;
+				string move = "None";
+
+				Vector2 direction = KeybindHandler.ControlDirection(keyboard, ID);
+				string dir;
+				string type = "None";
+
+				if (KeybindHandler.TapAtkNormal(keyboard, ID))
+				{
+					// if (grounded)
+					// {
+						type = "Normal";
+						// TODO: Add dash and finisher moves
+					// }
+					// else
+					// {
+					// 	type = "Aerial";
+					// }
+				}
+
+				if (KeybindHandler.TapAtkSpecial(keyboard, ID))
+				{
+					type = "Special";
+				}
+
+				if (type != "None")
+				{
+
+					if (direction == Vector2.Zero)
+					{
+						dir = "N";
+					}
+					else if (-Math.Abs(direction.X) >= direction.Y)
+					{
+						dir = "U";
+					}
+					else if (Math.Abs(direction.X) < direction.Y)
+					{
+						dir = "D";
+					}
+					else if (direction.X > 0)
+					{
+						dir = "R";
+					}
+					else
+					{
+						dir = "L";
+					}
+
+
+					switch (type)
+                    {
+						case "Normal":
+							switch (dir)
+                            {
+								case "N":
+									move = "NeutralA";
+									break;
+
+								case "U":
+									move = "UpTilt";
+									break;
+
+								case "D":
+									move = "DownTilt";
+									break;
+
+								case "R":
+								case "L":
+									move = "SideTilt";
+									break;
+							}
+							break;
+
+						case "Dash":
+
+
+							break;
+						case "Aerial":
+							switch (direction)
+							{
+
+							}
+
+							break;
+						case "Finisher":
+							switch (direction)
+							{
+
+							}
+
+							break;
+						case "Special":
+							move = "NeutralB";
+							switch (direction)
+							{
+
+							}
+
+							break;
+					}
+
+					if (move != "None")
+					{
+						moveRunner = new MoveRunner(FighterLoader.moves[character][move + "_0"]);
+						moveTimer = moveRunner.data.MoveDuration;
+					}
+				}
 			}
 		}
 
@@ -332,9 +431,9 @@ namespace HololiveFightingGame.Gameplay.Combat
 		{
 			if (grounded)
 			{
-				if (Math.Abs(KeybindHandler.HoldHorizMove(keyboard, ID)) > 0.1f)
+				if (Math.Abs(KeybindHandler.ControlDirection(keyboard, ID).X) > 0.1f)
 				{
-					direction = Math.Sign(KeybindHandler.HoldHorizMove(keyboard, ID));
+					direction = Math.Sign(KeybindHandler.ControlDirection(keyboard, ID).X);
 
 					((AnimatedSprite)drawObject.texture).SwitchAnimation("walk", 0);
 				}

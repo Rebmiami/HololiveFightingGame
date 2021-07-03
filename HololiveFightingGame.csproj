@@ -70,6 +70,15 @@
 		<None Update="Content\Data\Fighters\Kiara\Kiara.json">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
+		<None Update="Content\Data\Fighters\Kiara\Moves\SideTilt_0.json">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="Content\Data\Fighters\Kiara\Moves\DownTilt_0.json">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="Content\Data\Fighters\Kiara\Moves\UpTilt_0.json">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
 		<None Update="Content\Data\Fighters\Kiara\Moves\NeutralA_0.json">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
@@ -88,11 +97,20 @@
 		<None Update="Content\Data\FighterList.json">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
+		<None Update="Content\Data\Fighters\Pekora\Moves\DownTilt_0.json">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
 		<None Update="Content\Data\Fighters\Pekora\Moves\NeutralB_0.json">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
 		<None Update="Content\Data\Fighters\Pekora\Moves\NeutralA_0.json">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="Content\Data\Fighters\Pekora\Moves\SideTilt_0.json">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="Content\Data\Fighters\Pekora\Moves\UpTilt_0.json">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
 		<None Update="Content\Data\Fighters\Pekora\Pekora.json">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>

@@ -11,8 +11,10 @@ namespace HololiveFightingGame.Input
 	{
 		public Keybind Attack;
 		public Keybind AttackB;
-		public Keybind MoveLeft;
-		public Keybind MoveRight;
+		public Keybind ControlLeft;
+		public Keybind ControlRight;
+		public Keybind ControlUp;
+		public Keybind ControlDown;
 		public Keybind Jump;
 		// TODO: Further automate this.
 
@@ -20,14 +22,18 @@ namespace HololiveFightingGame.Input
 		{
 			Attack = new Keybind();
 			AttackB = new Keybind();
-			MoveLeft = new Keybind();
-			MoveRight = new Keybind();
+			ControlLeft = new Keybind();
+			ControlRight = new Keybind();
+			ControlUp = new Keybind();
+			ControlDown = new Keybind();
 			Jump = new Keybind();
 
 			Attack.key = GetKeys(loader.Attack);
 			AttackB.key = GetKeys(loader.AttackB);
-			MoveLeft.key = GetKeys(loader.MoveLeft);
-			MoveRight.key = GetKeys(loader.MoveRight);
+			ControlLeft.key = GetKeys(loader.ControlLeft);
+			ControlRight.key = GetKeys(loader.ControlRight);
+			ControlUp.key = GetKeys(loader.ControlUp);
+			ControlDown.key = GetKeys(loader.ControlDown);
 			Jump.key = GetKeys(loader.Jump);
 		}
 
@@ -46,8 +52,7 @@ namespace HololiveFightingGame.Input
 					return Enum.Parse<Keys>(keybind);
 				}
 			}
-			Program.WriteErrorLog(new ArgumentException(BadKeybindErrorMessage()));
-			return Keys.None;
+			throw new ArgumentException(BadKeybindErrorMessage());
 		}
 
 		// public MouseButton GetMouseButton(string keybind)

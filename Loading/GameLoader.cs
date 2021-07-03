@@ -109,12 +109,13 @@ namespace HololiveFightingGame.Loading
 					Dictionary<string, string> loader = JsonSerializer.Deserialize<Dictionary<string, string>>(json);
 					foreach (string element in loader.Values)
 					{
-						if (element == default)
+						if (element == default || element == null)
 						{
 							return "Profile0.json";
 						}
 					}
 					ControlProfileLoader test = JsonSerializer.Deserialize<ControlProfileLoader>(json);
+					ControlProfile test1 = new ControlProfile(test);
 				}
 				catch
 				{
@@ -165,8 +166,10 @@ namespace HololiveFightingGame.Loading
 					{
 						Attack = "P",
 						AttackB = "O",
-						MoveLeft = "A",
-						MoveRight = "D",
+						ControlLeft = "A",
+						ControlRight = "D",
+						ControlUp = "W",
+						ControlDown = "S",
 						Jump = "W"
 					};
 					string json = JsonSerializer.Serialize(profile, typeof(ControlProfileLoader), SerializerOptions);

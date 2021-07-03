@@ -36,9 +36,9 @@ namespace HololiveFightingGame.Input
 			}
 		}
 
-		public static Buttons tapAtkSecondBind_Pad = Buttons.X;
+		public static Buttons tapAtkSpecialBind_Pad = Buttons.X;
 
-		public static bool TapAtkSecond(bool keyboard, int gamepadNumber)
+		public static bool TapAtkSpecial(bool keyboard, int gamepadNumber)
 		{
 			if (keyboard)
 			{
@@ -46,45 +46,65 @@ namespace HololiveFightingGame.Input
 			}
 			else
 			{
-				return GamePadHelper.Pressed(tapAtkSecondBind_Pad, gamepadNumber);
+				return GamePadHelper.Pressed(tapAtkSpecialBind_Pad, gamepadNumber);
 			}
 		}
 
 		public static Buttons holdHorizMoveBindL_Pad = 0;
 		public static Buttons holdHorizMoveBindR_Pad = 0;
+		public static Buttons holdHorizMoveBindU_Pad = 0;
+		public static Buttons holdHorizMoveBindD_Pad = 0;
 		public static bool? holdHorizMoveBindStick_IsRight_Pad = false;
 
-		public static float HoldHorizMove(bool keyboard, int gamepadNumber)
+		public static Vector2 ControlDirection(bool keyboard, int gamepadNumber)
 		{
 			if (keyboard)
 			{
-				float val = 0;
-				if (KeyHelper.Down(ProfileBinder.profile.MoveLeft.key))
+				float x = 0;
+				float y = 0;
+				if (KeyHelper.Down(ProfileBinder.profile.ControlLeft.key))
 				{
-					val -= 1;
+					x -= 1;
 				}
-				if (KeyHelper.Down(ProfileBinder.profile.MoveRight.key))
+				if (KeyHelper.Down(ProfileBinder.profile.ControlRight.key))
 				{
-					val += 1;
+					x += 1;
 				}
-				return val;
+				if (KeyHelper.Down(ProfileBinder.profile.ControlUp.key))
+				{
+					y -= 1;
+				}
+				if (KeyHelper.Down(ProfileBinder.profile.ControlDown.key))
+				{
+					y += 1;
+				}
+				return new Vector2(x, y);
 			}
 			else
 			{
 				if (holdHorizMoveBindStick_IsRight_Pad == null)
 				{
-					float val = 0;
+					float x = 0;
+					float y = 0;
 					if (GamePadHelper.Down(holdHorizMoveBindL_Pad, gamepadNumber))
 					{
-						val -= 1;
+						x -= 1;
 					}
 					if (GamePadHelper.Down(holdHorizMoveBindR_Pad, gamepadNumber))
 					{
-						val += 1;
+						x += 1;
 					}
-					return val;
+					if (GamePadHelper.Down(holdHorizMoveBindU_Pad, gamepadNumber))
+					{
+						y -= 1;
+					}
+					if (GamePadHelper.Down(holdHorizMoveBindD_Pad, gamepadNumber))
+					{
+						y += 1;
+					}
+					return new Vector2(x, y);
 				}
-				return GamePadHelper.ThumbSticks(gamepadNumber, (bool)holdHorizMoveBindStick_IsRight_Pad).X;
+				return GamePadHelper.ThumbSticks(gamepadNumber, (bool)holdHorizMoveBindStick_IsRight_Pad) * new Vector2(1, -1);
 			}
 		}
 	}

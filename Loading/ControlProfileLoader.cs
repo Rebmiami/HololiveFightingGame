@@ -11,9 +11,13 @@ namespace HololiveFightingGame.Loading
 
 		public string AttackB { get; set; }
 
-		public string MoveLeft { get; set; }
+		public string ControlLeft { get; set; }
 
-		public string MoveRight { get; set; }
+		public string ControlRight { get; set; }
+
+		public string ControlUp { get; set; }
+
+		public string ControlDown { get; set; }
 
 		public string Jump { get; set; }
 	}

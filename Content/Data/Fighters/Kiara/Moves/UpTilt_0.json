@@ -1,0 +1,47 @@
+{
+  "MoveDuration": 16,
+  "Name": "UpTilt_0",
+  "Hitboxes": [
+    {
+      "Damage": 103,
+      "Angle": 80,
+      "Launch": 10,
+      "KbScaling": 0.7,
+      "Origin": {
+        "X": 0,
+        "Y": 0
+      },
+      "Length": {
+        "X": 25,
+        "Y": 0
+      },
+      "Radius": 5,
+      "AutoSwipe": false,
+      "Enabled": false,
+      "Priority": 5,
+      "Part": 0,
+      "Grounded": false,
+      "Motion": {},
+      "Activation": {
+        "6": true,
+        "9": false
+      }
+    }
+  ],
+  "AnimationFrames": {
+    "0": 0,
+    "6": 1
+  },
+  "LeadInto": 0,
+  "Motion": null,
+  "Sustain": 1,
+  "CanTurn": null,
+  "CanCancel": null,
+  "Animation": {
+    "NextAnim": "neutral",
+    "AnimID": 3,
+    "Frames": 2,
+    "AutoAnimate": false,
+    "Frame": 1
+  }
+}
