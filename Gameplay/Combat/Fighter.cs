@@ -49,6 +49,8 @@ namespace HololiveFightingGame.Gameplay.Combat
 
 		public HurtBody body;
 
+		public FighterController controller;
+
 		public override void Update()
 		{
 			if (!Game1.gameState.stage.stageBounds.Intersects(Hitbox()) && takeInputs)
@@ -255,6 +257,8 @@ namespace HololiveFightingGame.Gameplay.Combat
 
 		public void Update_Inputs()
 		{
+			controller.Update();
+
 			if (KeybindHandler.TapJump(keyboard, ID) && jumps < 2)
 			{
 				if (jumps == 0)
@@ -279,14 +283,21 @@ namespace HololiveFightingGame.Gameplay.Combat
 				string move = "None";
 
 				Vector2 direction = KeybindHandler.ControlDirection(keyboard, ID);
-				string dir;
+				string dir = "N";
 				string type = "None";
 
 				if (KeybindHandler.TapAtkNormal(keyboard, ID))
 				{
 					// if (grounded)
 					// {
+					if (controller.flick != 0)
+					{
+						type = "Finisher";
+					}
+					else
+					{
 						type = "Normal";
+					}
 						// TODO: Add dash and finisher moves
 					// }
 					// else
@@ -302,26 +313,23 @@ namespace HololiveFightingGame.Gameplay.Combat
 
 				if (type != "None")
 				{
+					controller.direction4.Deconstruct(out float x, out float y);
+					(float, float) dirTuple = (x, y);
 
-					if (direction == Vector2.Zero)
-					{
-						dir = "N";
-					}
-					else if (-Math.Abs(direction.X) >= direction.Y)
-					{
-						dir = "U";
-					}
-					else if (Math.Abs(direction.X) < direction.Y)
-					{
-						dir = "D";
-					}
-					else if (direction.X > 0)
-					{
-						dir = "R";
-					}
-					else
-					{
-						dir = "L";
+					switch (dirTuple)
+                    {
+						case (1, 0):
+							dir = "R";
+							break;
+						case (-1, 0):
+							dir = "L";
+							break;
+						case (0, 1):
+							dir = "D";
+							break;
+						case (0, -1):
+							dir = "U";
+							break;
 					}
 
 
@@ -547,6 +555,7 @@ namespace HololiveFightingGame.Gameplay.Combat
 
 			body = new HurtBody();
 			body.body.Add(new Hurtbox(collider.Capsule));
+			controller = new FighterController(this, ProfileBinder.profile);
 		}
 
 		public void Damage(Attack attack)

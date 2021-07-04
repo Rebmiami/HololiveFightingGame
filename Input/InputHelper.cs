@@ -33,6 +33,42 @@ namespace HololiveFightingGame.Input
 			}
 			return Keyboard.GetState().IsKeyDown(key);
 		}
+
+		public static bool AnyDown(Keys[] keys, bool old = false)
+        {
+            foreach (Keys key in keys)
+            {
+				if (Down(key, old))
+                {
+					return true;
+                }
+            }
+			return false;
+        }
+
+		public static bool AnyPressed(Keys[] keys)
+		{
+			foreach (Keys key in keys)
+			{
+				if (Pressed(key))
+				{
+					return true;
+				}
+			}
+			return false;
+		}
+
+		public static bool AnyReleased(Keys[] keys)
+		{
+			foreach (Keys key in keys)
+			{
+				if (Released(key))
+				{
+					return true;
+				}
+			}
+			return false;
+		}
 	}
 
 	public static class MouseHelper

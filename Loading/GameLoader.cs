@@ -5,6 +5,9 @@ using System.Text.Json;
 using System.IO;
 using System.Diagnostics;
 using HololiveFightingGame.Input;
+using HololiveFightingGame.Graphics;
+using HololiveFightingGame.Localization;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace HololiveFightingGame.Loading
 {

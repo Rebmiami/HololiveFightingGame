@@ -78,7 +78,6 @@ namespace HololiveFightingGame
 			Thread thread = new Thread(new ThreadStart(setup.Load));
 			thread.Start();
 
-			// TODO: Move following code to game loader.
 
 			Assets.testStage = ImageLoader.LoadTexture(@".\Content\Assets\TestStage.png", true);
 			language = new Language();
@@ -87,6 +86,11 @@ namespace HololiveFightingGame
 			Assets.editorPlayIcon = ImageLoader.LoadTexture(@".\Content\Assets\EditorPlayIcon.png", true);
 			capsuleRenderShader = Content.Load<Effect>("Capsule");
 			capsuleRenderShader.Parameters["ViewportDimensions"].SetValue(Program.WindowBounds().Size.ToVector2());
+
+
+
+			while (ProfileBinder.profile == null) { }
+
 			LoadGameState(new string[] { "Pekora", "Kiara" });
 		}
 

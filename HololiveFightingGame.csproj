@@ -109,7 +109,7 @@
 		<None Update="Content\Data\Fighters\Pekora\Moves\SideA_0.json">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
-		<None Update="Content\Data\Fighters\Pekora\Moves\UpTilt_0.json">
+		<None Update="Content\Data\Fighters\Pekora\Moves\UpA_0.json">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
 		<None Update="Content\Data\Fighters\Pekora\Pekora.json">
