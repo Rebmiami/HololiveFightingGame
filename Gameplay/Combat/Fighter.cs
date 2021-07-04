@@ -282,28 +282,27 @@ namespace HololiveFightingGame.Gameplay.Combat
 			{
 				string move = "None";
 
-				Vector2 direction = KeybindHandler.ControlDirection(keyboard, ID);
+				Vector2 controlDirection = KeybindHandler.ControlDirection(keyboard, ID);
 				string dir = "N";
 				string type = "None";
 
 				if (KeybindHandler.TapAtkNormal(keyboard, ID))
 				{
-					// if (grounded)
-					// {
-					if (controller.flick != 0)
+					if (grounded)
 					{
-						type = "Finisher";
+						if (controller.flick != 0)
+						{
+							type = "Finisher";
+						}
+						else
+						{
+							type = "Normal";
+						}
 					}
 					else
 					{
-						type = "Normal";
+						type = "Aerial";
 					}
-						// TODO: Add dash and finisher moves
-					// }
-					// else
-					// {
-					// 	type = "Aerial";
-					// }
 				}
 
 				if (KeybindHandler.TapAtkSpecial(keyboard, ID))
@@ -315,14 +314,15 @@ namespace HololiveFightingGame.Gameplay.Combat
 				{
 					controller.direction4.Deconstruct(out float x, out float y);
 					(float, float) dirTuple = (x, y);
+					dirTuple.Item1 *= direction;
 
 					switch (dirTuple)
                     {
 						case (1, 0):
-							dir = "R";
+							dir = "F";
 							break;
 						case (-1, 0):
-							dir = "L";
+							dir = "B";
 							break;
 						case (0, 1):
 							dir = "D";
@@ -350,8 +350,8 @@ namespace HololiveFightingGame.Gameplay.Combat
 									move = "DownA";
 									break;
 
-								case "R":
-								case "L":
+								case "F":
+								case "B":
 									move = "SideA";
 									break;
 							}
@@ -362,29 +362,73 @@ namespace HololiveFightingGame.Gameplay.Combat
 
 							break;
 						case "Aerial":
-							switch (direction)
+							switch (dir)
 							{
+								case "N":
+									move = "NAir";
+									break;
 
+								case "U":
+									move = "UpAir";
+									break;
+
+								case "D":
+									move = "DownAir";
+									break;
+
+								case "F":
+									move = "FAir";
+									break;
+
+								case "B":
+									move = "BackAir";
+									break;
 							}
 
 							break;
 						case "Finisher":
-							switch (direction)
-							{
-
-							}
+							// switch (dir)
+							// {
+							// 	case "U":
+							// 		move = "UFinish";
+							// 		break;
+							// 
+							// 	case "D":
+							// 		move = "DFinish";
+							// 		break;
+							// 
+							// 	case "F":
+							// 	case "B":
+							// 		move = "SFinish";
+							// 		break;
+							// }
 
 							break;
 						case "Special":
 							move = "NeutralB";
-							switch (direction)
-							{
-
-							}
+							// switch (dir)
+							// {
+							// 	case "N":
+							// 		move = "NeutralB";
+							// 		break;
+							// 
+							// 	case "U":
+							// 		move = "UpB";
+							// 		break;
+							// 
+							// 	case "D":
+							// 		move = "DownB";
+							// 		break;
+							// 
+							// 	case "F":
+							// 	case "B":
+							// 		move = "SideB";
+							// 		break;
+							// }
 							break;
 
 						case "Taunt":
-							switch (direction)
+							switch (controlDirection)
 							{
 
 							}
