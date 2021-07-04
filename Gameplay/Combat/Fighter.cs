@@ -242,9 +242,9 @@ namespace HololiveFightingGame.Gameplay.Combat
 				if (moveTimer == 0)
 				{
 					if (!grounded && moveRunner.data.SpecialFall)
-                    {
+					{
 						specialFall = true;
-                    }
+					}
 
 					moveRunner = null;
 				}
@@ -325,7 +325,7 @@ namespace HololiveFightingGame.Gameplay.Combat
 					dirTuple.Item1 *= direction;
 
 					switch (dirTuple)
-                    {
+					{
 						case (1, 0):
 							dir = "F";
 							break;
@@ -342,10 +342,10 @@ namespace HololiveFightingGame.Gameplay.Combat
 
 
 					switch (type)
-                    {
+					{
 						case "Normal":
 							switch (dir)
-                            {
+							{
 								case "N":
 									move = "NeutralA";
 									break;

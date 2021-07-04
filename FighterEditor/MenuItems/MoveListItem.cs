@@ -20,7 +20,7 @@ namespace HololiveFightingGame.FighterEditor.MenuItems
 			List<string> subMoveList = new List<string>();
 			foreach (Move move1 in FighterLoader.moves[Editor.fighter.character].Values)
 			{
-				if (move1.Data.Name.Contains(move))
+				if (move1.Data.Name.Contains(move + "_"))
 				{
 					subMoveList.Add(move1.Data.Name);
 				}
