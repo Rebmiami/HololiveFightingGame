@@ -1,0 +1,58 @@
+{
+	"MoveDuration": 45,
+	"Name": "SideB_0",
+	"Hitboxes": [
+		{
+			"Damage": 194,
+			"Angle": 30,
+			"Launch": 5,
+			"KbScaling": 3.5,
+			"Origin": {
+				"X": 0,
+				"Y": 0
+			},
+			"Length": {
+				"X": 25,
+				"Y": 0
+			},
+			"Radius": 5,
+			"AutoSwipe": false,
+			"Enabled": false,
+			"Priority": 5,
+			"Part": 0,
+			"Grounded": false,
+			"Aerial": false,
+			"Motion": {},
+			"Activation": {
+				"28": true,
+				"34": false
+			}
+		}
+	],
+	"AnimationFrames": {
+		"0": 0,
+		"28": 1
+	},
+	"LeadInto": 0,
+	"Motion": {
+		"1": {
+			"X": -1,
+			"Y": 0
+		},
+		"26": {
+			"X": 6,
+			"Y": 0
+		}
+	},
+	"Sustain": 0.2,
+	"CanTurn": null,
+	"CanCancel": null,
+	"SpecialFall": true,
+	"Animation": {
+		"NextAnim": "neutral",
+		"AnimID": 4,
+		"Frames": 2,
+		"AutoAnimate": false,
+		"Frame": 0
+	}
+}

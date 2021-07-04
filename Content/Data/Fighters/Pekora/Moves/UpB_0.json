@@ -1,0 +1,58 @@
+{
+  "MoveDuration": 20,
+  "Name": "UpB_0",
+  "Hitboxes": [
+    {
+      "Damage": 225,
+      "Angle": 85,
+      "Launch": 6,
+      "KbScaling": 4,
+      "Origin": {
+        "X": 0,
+        "Y": 0
+      },
+      "Length": {
+        "X": 25,
+        "Y": 0
+      },
+      "Radius": 5,
+      "AutoSwipe": false,
+      "Enabled": false,
+      "Priority": 5,
+      "Part": 0,
+      "Grounded": false,
+      "Aerial": false,
+      "Motion": {},
+      "Activation": {
+        "12": true,
+        "15": false
+      }
+    }
+  ],
+  "AnimationFrames": {
+    "0": 0,
+    "12": 1
+  },
+  "LeadInto": 0,
+  "Motion": {
+    "1": {
+      "X": 0,
+      "Y": 1
+    },
+    "8": {
+      "X": 1,
+      "Y": -8
+    }
+  },
+  "Sustain": 0.2,
+  "CanTurn": null,
+  "CanCancel": null,
+  "SpecialFall": true,
+  "Animation": {
+    "NextAnim": "neutral",
+    "AnimID": 4,
+    "Frames": 2,
+    "AutoAnimate": false,
+    "Frame": 0
+  }
+}

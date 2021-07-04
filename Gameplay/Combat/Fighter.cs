@@ -395,25 +395,24 @@ namespace HololiveFightingGame.Gameplay.Combat
 
 							break;
 						case "Finisher":
-							// switch (dir)
-							// {
-							// 	case "U":
-							// 		move = "UFinish";
-							// 		break;
-							// 
-							// 	case "D":
-							// 		move = "DFinish";
-							// 		break;
-							// 
-							// 	case "F":
-							// 	case "B":
-							// 		move = "SFinish";
-							// 		break;
-							// }
+							switch (dir)
+							{
+								case "U":
+									move = "UFinish";
+									break;
+							
+								case "D":
+									move = "DFinish";
+									break;
+							
+								case "F":
+								case "B":
+									move = "SFinish";
+									break;
+							}
 
 							break;
 						case "Special":
-							move = "NeutralB";
 							switch (dir)
 							{
 								case "N":
