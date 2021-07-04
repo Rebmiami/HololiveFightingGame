@@ -47,6 +47,7 @@
   "Sustain": 0.2,
   "CanTurn": null,
   "CanCancel": null,
+  "SpecialFall": true,
   "Animation": {
     "NextAnim": "neutral",
     "AnimID": 4,
