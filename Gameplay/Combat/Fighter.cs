@@ -51,6 +51,8 @@ namespace HololiveFightingGame.Gameplay.Combat
 
 		public FighterController controller;
 
+		public bool specialFall;
+
 		public override void Update()
 		{
 			if (!Game1.gameState.stage.stageBounds.Intersects(Hitbox()) && takeInputs)
@@ -155,6 +157,7 @@ namespace HololiveFightingGame.Gameplay.Combat
 					grounded = false;
 					jumps = 1;
 				}
+				specialFall = false;
 			}
 
 			// Failsafe
@@ -238,6 +241,11 @@ namespace HololiveFightingGame.Gameplay.Combat
 				moveTimer--;
 				if (moveTimer == 0)
 				{
+					if (!grounded && moveRunner.data.SpecialFall)
+                    {
+						specialFall = true;
+                    }
+
 					moveRunner = null;
 				}
 			}
@@ -278,7 +286,7 @@ namespace HololiveFightingGame.Gameplay.Combat
 			// Initialize moves based on inputs
 
 			// TODO: Allow some moves to be interrupted early
-			if (moveTimer == 0)
+			if (moveTimer == 0 && !specialFall)
 			{
 				string move = "None";
 
@@ -406,25 +414,25 @@ namespace HololiveFightingGame.Gameplay.Combat
 							break;
 						case "Special":
 							move = "NeutralB";
-							// switch (dir)
-							// {
-							// 	case "N":
-							// 		move = "NeutralB";
-							// 		break;
-							// 
-							// 	case "U":
-							// 		move = "UpB";
-							// 		break;
-							// 
-							// 	case "D":
-							// 		move = "DownB";
-							// 		break;
-							// 
-							// 	case "F":
-							// 	case "B":
-							// 		move = "SideB";
-							// 		break;
-							// }
+							switch (dir)
+							{
+								case "N":
+									move = "NeutralB";
+									break;
+							
+								case "U":
+									move = "UpB";
+									break;
+							
+								case "D":
+									move = "DownB";
+									break;
+							
+								case "F":
+								case "B":
+									move = "SideB";
+									break;
+							}
 							break;
 
 						case "Taunt":

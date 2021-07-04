@@ -82,6 +82,15 @@
 		<None Update="Content\Data\Fighters\Kiara\Moves\FAir_0.json">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
+		<None Update="Content\Data\Fighters\Kiara\Moves\DownB_0.json">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="Content\Data\Fighters\Kiara\Moves\SideB_0.json">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="Content\Data\Fighters\Kiara\Moves\UpB_0.json">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
 		<None Update="Content\Data\Fighters\Kiara\Moves\SideA_0.json">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>

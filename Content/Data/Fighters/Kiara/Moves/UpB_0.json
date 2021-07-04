@@ -1,10 +1,10 @@
 {
   "MoveDuration": 20,
-  "Name": "NeutralB_0",
+  "Name": "UpB_0",
   "Hitboxes": [
     {
       "Damage": 225,
-      "Angle": 30,
+      "Angle": 85,
       "Launch": 6,
       "KbScaling": 4,
       "Origin": {
@@ -36,12 +36,12 @@
   "LeadInto": 0,
   "Motion": {
     "1": {
-      "X": -1,
-      "Y": 0
+      "X": 0,
+      "Y": 1
     },
     "8": {
-      "X": 6,
-      "Y": 0
+      "X": 1,
+      "Y": -8
     }
   },
   "Sustain": 0.2,

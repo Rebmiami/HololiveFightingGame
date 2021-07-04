@@ -50,6 +50,10 @@ namespace HololiveFightingGame.Loading
 		/// </summary>
 		public bool Aerial { get; set; }
 
+		/// <summary>
+		/// Whether or not the move should end in special fall. Special fall leaves the fighter unable to perform any action other than moving sideways.
+		/// </summary>
+		public bool SpecialFall { get; set; }
 
 		/// <summary>
 		/// Whether or not the player is allowed to turn at this point in the move.
