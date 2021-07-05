@@ -74,7 +74,7 @@ namespace HololiveFightingGame.Input
 				Vector2 currentStick = GamePadHelper.ThumbSticks(fighter.ID, false);
 				float totalDistance = Vector2.Distance(historicStick[1], historicStick[0]) + Vector2.Distance(historicStick[0], currentStick);
 
-				if (totalDistance > 0.5f && currentStick.Length() > 0.9f)
+				if (totalDistance > 0.4f && currentStick.Length() > 0.9f)
                 {
 					flick = 4;
                 }
