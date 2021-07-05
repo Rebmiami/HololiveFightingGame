@@ -187,11 +187,21 @@
 		<None Update="Content\Data\Language.json">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
-		<None Update="Content\Documentation\Editor.html">
+		<None Update="Content\Documentation\Editor\Editor.html">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="Content\Documentation\Gameplay\Gameplay.html">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
 		<None Update="Content\Documentation\Home.html">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
+		<None Update="Content\Documentation\Internals\Internals.html">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Content\Documentation\Gameplay\Basics\" />
+	  <Folder Include="Content\Documentation\Gameplay\Technique\" />
 	</ItemGroup>
 </Project>

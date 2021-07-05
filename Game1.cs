@@ -14,6 +14,7 @@ using System;
 using HololiveFightingGame.FighterEditor;
 using HololiveFightingGame.Graphics.CapsuleShader;
 using HololiveFightingGame.Gameplay;
+using System.IO;
 
 namespace HololiveFightingGame
 {
@@ -125,13 +126,18 @@ namespace HololiveFightingGame
 			if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
 			{
 				Exit();
-				if (KeyHelper.Down(Keys.LeftShift) || KeyHelper.Down(Keys.RightShift))
+				if (KeyHelper.AnyDown(new Keys[] { Keys.LeftShift, Keys.RightShift } ))
 					Process.Start(Process.GetCurrentProcess().MainModule.FileName);
 				// Is there a more direct way to re-launch the program?
 			}
 			if (KeyHelper.Pressed(Keys.F11))
 			{
 				showHitboxes = true;
+			}
+			if (KeyHelper.Pressed(Keys.F10))
+			{
+				// TODO: F10 to open help
+				// Process.Start(@"");
 			}
 
 			switch (gameScreen)
