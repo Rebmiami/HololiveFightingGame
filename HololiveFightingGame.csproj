@@ -190,6 +190,9 @@
 		<None Update="Content\Documentation\Editor\Editor.html">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
+		<None Update="Content\Documentation\Gameplay\Basics\Basics.html">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
 		<None Update="Content\Documentation\Gameplay\Gameplay.html">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
@@ -201,7 +204,6 @@
 		</None>
 	</ItemGroup>
 	<ItemGroup>
-	  <Folder Include="Content\Documentation\Gameplay\Basics\" />
 	  <Folder Include="Content\Documentation\Gameplay\Technique\" />
 	</ItemGroup>
 </Project>
