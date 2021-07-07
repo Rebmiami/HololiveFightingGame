@@ -202,6 +202,18 @@ namespace HololiveFightingGame.Gameplay.Combat
 					for (int j = 0; j < Game1.gameState.fighters.Length; j++)
 					{
 						Fighter target = Game1.gameState.fighters[j];
+
+						// Remember that aerial and grounded mean exclusive to such - an aerial hitbox is defined by its inability to hit grounded opponents and vice versa
+						// If a hitbox should be able to hit any opponent, set both to "false".
+						if (attackHitbox.aerial && target.grounded)
+						{
+							continue;
+						}
+						else if (attackHitbox.grounded && !target.grounded)
+						{
+							continue;
+						}
+
 						if (ID != j && target.invFrames == 0)
 						{
 							Capsule capsule1 = capsule;
