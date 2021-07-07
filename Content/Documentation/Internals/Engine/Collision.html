@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Another Hololive Fighting Game - Documentation</title>
+</head>
+<body>
+    <a href="../Internals.html">Go back</a><br />
+    AHFG's collision detection systems use primarily two shapes: the rectangle and the capsule.<br />
+    <br />
+    Capsules are shaped like a cylinder with hemispheres at each end. The capsules used by AHFG are 2-dimensional, and are like cross-sections of this shape.<br />
+    On the technical level, the capsule is defined as all points of distance <em>r</em> or less to a line segment <em>l</em>.<br />
+    A capsule can also be thought of as a set of all circles of radius <em>r</em> whose center lies on <em>l</em>, which is how the distance between a capsule <em>c</em> and an arbitrary point <em>p</em> is calculated by AHFG.<br />
+    <br />
+    However, capsule-on-capsule collision is often necessary, for example detecting collision between a hitbox and a hurtbox (both of which are capsules).<br />
+    Therefore, a method for detecting whether or not two capsules are touching is necessary.<br />
+    <br />
+    We start by defining two capsules <em>C<sub>1</sub></em> and <em>C<sub>2</sub></em>, their radii <em>r<sub>1</sub></em> and <em>r<sub>2</sub></em>, and the line segments <em>l<sub>1</sub></em> and <em>l<sub>2</sub></em>.<br />
+    <em>C<sub>1</sub></em> and <em>C<sub>2</sub></em> are in contact when the distance between the closest two points on their respective line segments is less than or equal to the sum of their radii.<br />
+    The only non-trivial part of this is finding the closest two points.<br />
+</body>
+</html>

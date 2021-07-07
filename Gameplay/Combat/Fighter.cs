@@ -17,7 +17,7 @@ namespace HololiveFightingGame.Gameplay.Combat
 	public class Fighter : Entity
 	{
 		public bool grounded;
-		// If true, the fighter is grounded, otherwise, they are aerial.
+		// If true, the fighter is grounded, otherwise, they are airborne.
 		public int coyote;
 		// Frames of coyote time.
 		public int damage;
