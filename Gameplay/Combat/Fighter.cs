@@ -53,6 +53,23 @@ namespace HololiveFightingGame.Gameplay.Combat
 
 		public bool specialFall;
 
+		// Stats
+
+		/// <summary>
+		/// The number of extra jumps past the initial jump.
+		/// </summary>
+		public int extraJumps = 2;
+
+		/// <summary>
+		/// The velocity imparted onto the fighter when they leave the ground via a full jump.
+		/// </summary>
+		public float jumpForce = 10f;
+
+		/// <summary>
+		/// The velocity imparted onto the fighter when they jump mid-air.
+		/// </summary>
+		public float extraJumpForce = 8f;
+
 		public override void Update()
 		{
 			if (!Game1.gameState.stage.stageBounds.Intersects(Hitbox()) && takeInputs)
@@ -279,15 +296,15 @@ namespace HololiveFightingGame.Gameplay.Combat
 		{
 			controller.Update();
 
-			if (KeybindHandler.TapJump(keyboard, ID) && jumps < 2)
+			if (KeybindHandler.TapJump(keyboard, ID) && jumps < extraJumps + 1)
 			{
 				if (jumps == 0)
 				{
-					velocity.Y = -10;
+					velocity.Y = -jumpForce;
 				}
 				else
 				{
-					velocity.Y = -8;
+					velocity.Y = -extraJumpForce;
 				}
 				coyote = 0;
 				grounded = false;

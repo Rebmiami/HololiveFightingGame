@@ -12,7 +12,7 @@ namespace HololiveFightingGame.Gameplay.Combat
 	{
 		public Collider collider;
 		// TODO: Support multiple colliders per stage
-		// TODO: Move stages from rectangle to new collider system
+		// TODO: Move stages from rectangle to new collider system (triangles or arbitrary polygons)
 		public Rectangle stageBounds;
 
 		public DrawObject drawObject;
