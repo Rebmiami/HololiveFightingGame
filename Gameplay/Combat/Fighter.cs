@@ -80,6 +80,11 @@ namespace HololiveFightingGame.Gameplay.Combat
 		/// </summary>
 		public float traction = 0.8f;
 
+		/// <summary>
+		/// The amount of horizontal force pulling the fighter down.
+		/// </summary>
+		public float gravity = 0.5f;
+
 		public override void Update()
 		{
 			if (!Game1.gameState.stage.stageBounds.Intersects(Hitbox()) && takeInputs)
@@ -92,7 +97,7 @@ namespace HololiveFightingGame.Gameplay.Combat
 				launchTimer = 0;
 			}
 
-			velocity.Y += 0.5f;
+			velocity.Y += gravity;
 			// TODO: Change the way friction is handled.
 			velocity.X *= grounded ? traction : airResistance;
 			if (launchTimer == 0)
