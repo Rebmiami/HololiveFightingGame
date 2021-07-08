@@ -70,6 +70,16 @@ namespace HololiveFightingGame.Gameplay.Combat
 		/// </summary>
 		public float extraJumpForce = 8f;
 
+		/// <summary>
+		/// The amount of horizontal velocity maintained from the last frame while airborne.
+		/// </summary>
+		public float airResistance = 0.95f;
+
+		/// <summary>
+		/// The amount of horizontal velocity maintained from the last frame while grounded.
+		/// </summary>
+		public float traction = 0.8f;
+
 		public override void Update()
 		{
 			if (!Game1.gameState.stage.stageBounds.Intersects(Hitbox()) && takeInputs)
@@ -83,7 +93,8 @@ namespace HololiveFightingGame.Gameplay.Combat
 			}
 
 			velocity.Y += 0.5f;
-			velocity.X *= grounded ? 0.8f : 0.95f;
+			// TODO: Change the way friction is handled.
+			velocity.X *= grounded ? traction : airResistance;
 			if (launchTimer == 0)
 			{
 				velocity.X += KeybindHandler.ControlDirection(keyboard, ID).X;
