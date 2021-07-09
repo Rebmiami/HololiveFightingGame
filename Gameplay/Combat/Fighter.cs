@@ -91,7 +91,13 @@ namespace HololiveFightingGame.Gameplay.Combat
 		public float fallSpeed = 9;
 		public float fastFallSpeed = 12;
 
+		public float airAcceleration = 1;
+		public float groundAcceleration = 1;
 
+		/// <summary>
+		/// Determines how far fighters are launched - fighters of half the weight take twice the knockback and vice versa.
+		/// </summary>
+		public int weight = 100;
 
 		public override void Update()
 		{
@@ -120,7 +126,7 @@ namespace HololiveFightingGame.Gameplay.Combat
 
 			if (launchTimer == 0)
 			{
-				velocity.X += KeybindHandler.ControlDirection(keyboard, ID).X;
+				velocity.X += KeybindHandler.ControlDirection(keyboard, ID).X * (grounded ? groundAcceleration : airAcceleration);
 			}
 
 
@@ -709,7 +715,7 @@ namespace HololiveFightingGame.Gameplay.Combat
 		public void Damage(Attack attack)
 		{
 			// 1 unit of knockback growth = 1 unit of knockback per 100% damage
-			Vector2 knockback = attack.attackHitbox.LaunchAngle * (1 + damage / 1000f * attack.attackHitbox.kbScaling);
+			Vector2 knockback = attack.attackHitbox.LaunchAngle * (1 + damage / 1000f * attack.attackHitbox.kbScaling) * (1 / (weight / 100f));
 			knockback.X *= attack.attacker.direction;
 			damage = Math.Min(attack.attackHitbox.damage + damage, 9999);
 			launchTimer = (int)(Math.Abs(knockback.Y) * 2.5f);
