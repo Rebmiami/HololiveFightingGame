@@ -223,11 +223,16 @@ namespace HololiveFightingGame.Gameplay.Combat
 				}
 			}
 
-			// Failsafe
+			// Failsafes
 			if (moveRunner != null && moveRunner.move == null)
 			{
 				moveRunner = null;
 			}
+			if (moveRunner == null)
+            {
+				moveTimer = 0;
+            }
+
 
 			if (moveRunner != null && moveRunner.move.Data.Aerial && grounded)
 			{
@@ -733,6 +738,7 @@ namespace HololiveFightingGame.Gameplay.Combat
 			}
 			invFrames = 6;
 			moveRunner = null;
+			moveTimer = 0;
 		}
 	}
 
