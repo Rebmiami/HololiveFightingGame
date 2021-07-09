@@ -51,14 +51,14 @@ namespace HololiveFightingGame.Gameplay.Combat
 
 		public FighterController controller;
 
-		public bool specialFall;
+		public AirState airState;
 
 		// Stats
 
 		/// <summary>
 		/// The number of extra jumps past the initial jump.
 		/// </summary>
-		public int extraJumps = 2;
+		public int extraJumps = 1;
 
 		/// <summary>
 		/// The velocity imparted onto the fighter when they leave the ground via a full jump.
@@ -85,6 +85,8 @@ namespace HololiveFightingGame.Gameplay.Combat
 		/// </summary>
 		public float gravity = 0.5f;
 
+
+
 		public override void Update()
 		{
 			if (!Game1.gameState.stage.stageBounds.Intersects(Hitbox()) && takeInputs)
@@ -95,6 +97,7 @@ namespace HololiveFightingGame.Gameplay.Combat
 				drawObject.frame = "stand";
 				damage = 0;
 				launchTimer = 0;
+				airState = AirState.Grounded;
 			}
 
 			velocity.Y += gravity;
@@ -115,12 +118,18 @@ namespace HololiveFightingGame.Gameplay.Combat
 			{
 				// TODO: Overhaul input handling
 				// It should allow CPU fighters and give the user more options in-editor
+				// Perhaps add a "controller" object?
 				if (takeInputs)
 					Update_Inputs();
 			}
 			else
 			{
 				launchTimer--;
+				if (launchTimer == 0)
+                {
+					// TODO: Allow weaker attacks to cause flinching instead of launch.
+					airState = AirState.Tumble;
+                }
 			}
 
 			if (moveRunner != null)
@@ -146,6 +155,7 @@ namespace HololiveFightingGame.Gameplay.Combat
 
 			base.Update();
 
+			// Aligns fighter's hurtbody to its current position.
 			body.foot = new Vector2(Hitbox().Center.X, Hitbox().Bottom);
 
 			Rectangle stageCollider = Game1.gameState.stage.collider.Rectangle;
@@ -184,13 +194,14 @@ namespace HololiveFightingGame.Gameplay.Combat
 				{
 					coyote--;
 					jumps = 0;
+					airState = AirState.Fall;
 				}
 				else
 				{
 					grounded = false;
 					jumps = 1;
+					airState = AirState.Grounded;
 				}
-				specialFall = false;
 			}
 
 			// Failsafe
@@ -201,6 +212,7 @@ namespace HololiveFightingGame.Gameplay.Combat
 
 			if (moveRunner != null && moveRunner.move.Data.Aerial && grounded)
 			{
+				// TODO: Landing lag
 				moveRunner = null;
 			}
 
@@ -288,7 +300,7 @@ namespace HololiveFightingGame.Gameplay.Combat
 				{
 					if (!grounded && moveRunner.data.SpecialFall)
 					{
-						specialFall = true;
+						airState = AirState.SpecialFall;
 					}
 
 					moveRunner = null;
@@ -312,15 +324,18 @@ namespace HololiveFightingGame.Gameplay.Combat
 		{
 			controller.Update();
 
-			if (KeybindHandler.TapJump(keyboard, ID) && jumps < extraJumps + 1)
+			
+			if (KeybindHandler.TapJump(keyboard, ID) && jumps < extraJumps + 1 && moveTimer == 0 && airState != AirState.SpecialFall)
 			{
 				if (jumps == 0)
 				{
 					velocity.Y = -jumpForce;
+					airState = AirState.Jump;
 				}
 				else
 				{
 					velocity.Y = -extraJumpForce;
+					airState = AirState.EJump;
 				}
 				coyote = 0;
 				grounded = false;
@@ -331,7 +346,7 @@ namespace HololiveFightingGame.Gameplay.Combat
 			// Initialize moves based on inputs
 
 			// TODO: Allow some moves to be interrupted early
-			if (moveTimer == 0 && !specialFall)
+			if (moveTimer == 0 && airState != AirState.SpecialFall)
 			{
 				string move = "None";
 
@@ -480,9 +495,20 @@ namespace HololiveFightingGame.Gameplay.Combat
 							break;
 
 						case "Taunt":
-							switch (controlDirection)
+							switch (dir)
 							{
+								case "U":
+									move = "UTaunt";
+									break;
 
+								case "D":
+									move = "DTaunt";
+									break;
+
+								case "F":
+								case "B":
+									move = "STaunt";
+									break;
 							}
 
 							break;
@@ -682,6 +708,7 @@ namespace HololiveFightingGame.Gameplay.Combat
 			{
 				grounded = false;
 				coyote = 0;
+				airState = AirState.Launch;
 			}
 			invFrames = 6;
 			moveRunner = null;
@@ -714,5 +741,17 @@ namespace HololiveFightingGame.Gameplay.Combat
 		UTaunt,
 		DTaunt,
 		STaunt,
+	}
+
+	public enum AirState
+	{
+		Grounded,
+		Fall,
+		Jump,
+		EJump,
+		SpecialFall,
+		Launch,
+		Tumble,
+		FastFall
 	}
 }
