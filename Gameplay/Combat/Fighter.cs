@@ -45,6 +45,7 @@ namespace HololiveFightingGame.Gameplay.Combat
 		public List<Attack> attacks;
 
 		// This is temporary.
+		// Used by the editor only. NOT related to hitstun.
 		public bool takeInputs = true;
 
 		public HurtBody body;
@@ -85,6 +86,11 @@ namespace HololiveFightingGame.Gameplay.Combat
 		/// </summary>
 		public float gravity = 0.5f;
 
+		public float airSpeed = 6;
+		public float groundSpeed = 6;
+		public float fallSpeed = 9;
+		public float fastFallSpeed = 12;
+
 
 
 		public override void Update()
@@ -102,15 +108,28 @@ namespace HololiveFightingGame.Gameplay.Combat
 
 			velocity.Y += gravity;
 			// TODO: Change the way friction is handled.
-			velocity.X *= grounded ? traction : airResistance;
+			if (controller.direction4.X == 0)
+			{
+				velocity.X *= grounded ? traction : airResistance;
+			}
+
+			if (Math.Abs(velocity.X) < 0.05)
+            {
+				velocity.X = 0;
+            }
+
 			if (launchTimer == 0)
 			{
 				velocity.X += KeybindHandler.ControlDirection(keyboard, ID).X;
 			}
-			Vector2 maxVelocity = new Vector2(6, 10);
+
+
 			if (launchTimer == 0)
 			{
-				velocity = Vector2.Clamp(velocity, -maxVelocity, maxVelocity);
+				
+					Vector2 maxVelocity = new Vector2(grounded ? groundSpeed : airSpeed, airState == AirState.FastFall ? fastFallSpeed : fallSpeed);
+					velocity.X = Math.Clamp(velocity.X, -maxVelocity.X, maxVelocity.X);
+					velocity.Y = Math.Min(velocity.Y, maxVelocity.Y);
 			}
 
 			// Takes player inputs to perform actions
@@ -324,7 +343,6 @@ namespace HololiveFightingGame.Gameplay.Combat
 		{
 			controller.Update();
 
-			
 			if (KeybindHandler.TapJump(keyboard, ID) && jumps < extraJumps + 1 && moveTimer == 0 && airState != AirState.SpecialFall)
 			{
 				if (jumps == 0)
@@ -342,6 +360,11 @@ namespace HololiveFightingGame.Gameplay.Combat
 				jumps++;
 			}
 
+			if (controller.direction4 == new Vector2(0, 1) && controller.flick != 0 && velocity.Y > 0)
+            {
+				airState = AirState.FastFall;
+				velocity.Y = fastFallSpeed;
+            }
 
 			// Initialize moves based on inputs
 
@@ -349,8 +372,6 @@ namespace HololiveFightingGame.Gameplay.Combat
 			if (moveTimer == 0 && airState != AirState.SpecialFall)
 			{
 				string move = "None";
-
-				Vector2 controlDirection = KeybindHandler.ControlDirection(keyboard, ID);
 				string dir = "N";
 				string type = "None";
 
