@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework.Input;
 using HololiveFightingGame.Input;
-using HololiveFightingGame.Loading;
+using HololiveFightingGame.Loading.Serializable;
 
 namespace HololiveFightingGame.Input
 {
-	public class ControlProfile
+    public class ControlProfile
 	{
 		public Keybind Attack;
 		public Keybind AttackB;

@@ -15,6 +15,7 @@ using HololiveFightingGame.FighterEditor;
 using HololiveFightingGame.Graphics.CapsuleShader;
 using HololiveFightingGame.Gameplay;
 using System.IO;
+using HololiveFightingGame.Gameplay.Collision;
 
 namespace HololiveFightingGame
 {
@@ -107,9 +108,9 @@ namespace HololiveFightingGame
 			}
 
 			GraphicsHandler.main = new InGamePreset();
-			gameState = new GameState(fighters);
 
 			FighterLoader.LoadFighterData(fighters);
+			gameState = new GameState(fighters);
 
 			FighterLoader.LoadMoves(fighters);
 			FighterLoader.LoadAnimations(gameState.fighters);
@@ -210,6 +211,12 @@ namespace HololiveFightingGame
 			base.Draw(gameTime);
 			spriteBatch.End();
 
+			// Capsule collision debugging code.
+
+			// Capsule cap1 = new Capsule(Mouse.GetState().Position.ToVector2(), new Vector2(-20, -20), 4);
+			// Capsule cap2 = new Capsule(new Vector2(50, 50), new Vector2(20, -20), 4);
+			// CapsuleRenderer.capsuleShaders.Add(new CapsuleShaderData(cap1, cap1.Intersects(cap2) ? Color.LimeGreen : Color.Red, false));
+			// CapsuleRenderer.capsuleShaders.Add(new CapsuleShaderData(cap2, cap1.Intersects(cap2) ? Color.LimeGreen : Color.Red, false));
 
 			if (gameScreen == GameScreen.Editor)
 				CapsuleRenderer.Draw(spriteBatch, new Transformation(Vector2.Zero, 1), GraphicsDevice);

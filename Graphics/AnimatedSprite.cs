@@ -1,14 +1,14 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
-using static HololiveFightingGame.Loading.AnimationSetData;
+using static HololiveFightingGame.Loading.Serializable.AnimationSetData;
 
 namespace HololiveFightingGame.Graphics
 {
-	/// <summary>
-	///		<see cref="SlicedSprite"/> with additional functionality for animation.
-	/// </summary>
-	public class AnimatedSprite : SlicedSprite
+    /// <summary>
+    ///		<see cref="SlicedSprite"/> with additional functionality for animation.
+    /// </summary>
+    public class AnimatedSprite : SlicedSprite
 	{
 		public static readonly int animFrameLength = 10;
 		// "Frames per frame" rather than FPS - calculate 60 divided by this to get FPS

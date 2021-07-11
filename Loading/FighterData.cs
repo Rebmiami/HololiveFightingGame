@@ -1,16 +1,17 @@
 ﻿using HololiveFightingGame.Gameplay.Combat;
 using HololiveFightingGame.Graphics;
+using HololiveFightingGame.Loading.Serializable;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
-using static HololiveFightingGame.Loading.AnimationSetData;
+using static HololiveFightingGame.Loading.Serializable.AnimationSetData;
 
 namespace HololiveFightingGame.Loading
 {
-	public class FighterData
+    public class FighterData
 	{
 		// Fighter
 		public string name;
@@ -24,6 +25,9 @@ namespace HololiveFightingGame.Loading
 		// Animations
 		public List<AnimationData> animationData;
 		public Dictionary<string, Animation> animations;
+
+		// Stats and hurtboxes
+		public FighterStats stats;
 
 		public FighterData(string name)
 		{
@@ -75,6 +79,11 @@ namespace HololiveFightingGame.Loading
 			{
 				animations.Add(data.Name, data.Animation);
 			}
+
+			// --- LOAD STATS AND HURTBOXES ---
+			Game1.jsonLoaderFilePath = address + @"\Stats.json";
+			json = File.ReadAllText(Game1.jsonLoaderFilePath);
+			stats = JsonSerializer.Deserialize<FighterStats>(json);
 		}
 
 		/// <summary>
@@ -113,6 +122,11 @@ namespace HololiveFightingGame.Loading
 			}
 			string animsJson = JsonSerializer.Serialize(nonMoveAnims, options);
 			File.WriteAllText(address + @"\Animations.json", animsJson);
+
+
+			// --- SAVE STATS AND HURTBOXES --- 
+			string statsJson = JsonSerializer.Serialize(stats, options);
+			File.WriteAllText(address + @"\Stats.json", statsJson);
 		}
 	}
 }

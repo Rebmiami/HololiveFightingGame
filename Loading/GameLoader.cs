@@ -8,10 +8,11 @@ using HololiveFightingGame.Input;
 using HololiveFightingGame.Graphics;
 using HololiveFightingGame.Localization;
 using Microsoft.Xna.Framework.Graphics;
+using HololiveFightingGame.Loading.Serializable;
 
 namespace HololiveFightingGame.Loading
 {
-	public class GameLoader
+    public class GameLoader
 	{
 		private string status = "...";
 		public string Status {

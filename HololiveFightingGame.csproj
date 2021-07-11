@@ -67,6 +67,9 @@
 		<None Update="Content\Data\Fighters\Kiara\Animations.json">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
+		<None Update="Content\Data\Fighters\Kiara\Stats.json">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
 		<None Update="Content\Data\Fighters\Kiara\Kiara.json">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
@@ -129,6 +132,9 @@
 		</None>
 		<None Update="Content\Data\FighterList.json">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="Content\Data\Fighters\Pekora\Stats.json">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
 		<None Update="Content\Data\Fighters\Pekora\Moves\BackAir_0.json">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>

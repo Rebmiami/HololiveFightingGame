@@ -11,10 +11,11 @@ using HololiveFightingGame.Loading;
 using HololiveFightingGame.Graphics.CapsuleShader;
 using HololiveFightingGame.Gameplay;
 using HololiveFightingGame.Gameplay.Collision;
+using HololiveFightingGame.Loading.Serializable;
 
 namespace HololiveFightingGame.Gameplay.Combat
 {
-	public class Fighter : Entity
+    public class Fighter : Entity
 	{
 		public bool grounded;
 		// If true, the fighter is grounded, otherwise, they are airborne.
@@ -59,45 +60,45 @@ namespace HololiveFightingGame.Gameplay.Combat
 		/// <summary>
 		/// The number of extra jumps past the initial jump.
 		/// </summary>
-		public int extraJumps = 1;
+		public int extraJumps;
 
 		/// <summary>
 		/// The velocity imparted onto the fighter when they leave the ground via a full jump.
 		/// </summary>
-		public float jumpForce = 10f;
+		public float jumpForce;
 
 		/// <summary>
 		/// The velocity imparted onto the fighter when they jump mid-air.
 		/// </summary>
-		public float extraJumpForce = 8f;
+		public float extraJumpForce;
 
 		/// <summary>
-		/// The amount of horizontal velocity maintained from the last frame while airborne.
+		/// The amount of horizontal velocity lost per frame while airborne.
 		/// </summary>
-		public float airResistance = 0.95f;
+		public float airResistance;
 
 		/// <summary>
-		/// The amount of horizontal velocity maintained from the last frame while grounded.
+		/// The amount of horizontal velocity lost per frame while grounded.
 		/// </summary>
-		public float traction = 0.8f;
+		public float traction;
 
 		/// <summary>
 		/// The amount of horizontal force pulling the fighter down.
 		/// </summary>
-		public float gravity = 0.5f;
+		public float gravity;
 
-		public float airSpeed = 6;
-		public float groundSpeed = 6;
-		public float fallSpeed = 9;
-		public float fastFallSpeed = 12;
+		public float airSpeed;
+		public float groundSpeed;
+		public float fallSpeed;
+		public float fastFallSpeed;
 
-		public float airAcceleration = 1;
-		public float groundAcceleration = 1;
+		public float airAcceleration;
+		public float groundAcceleration;
 
 		/// <summary>
 		/// Determines how far fighters are launched - fighters of half the weight take twice the knockback and vice versa.
 		/// </summary>
-		public int weight = 100;
+		public int weight;
 
 		public override void Update()
 		{
@@ -116,7 +117,7 @@ namespace HololiveFightingGame.Gameplay.Combat
 			// TODO: Change the way friction is handled.
 			if (controller.direction4.X == 0)
 			{
-				velocity.X *= grounded ? traction : airResistance;
+				velocity.X *= grounded ? 1 - traction : 1 - airResistance;
 			}
 
 			if (Math.Abs(velocity.X) < 0.05)
@@ -710,6 +711,26 @@ namespace HololiveFightingGame.Gameplay.Combat
 			body = new HurtBody();
 			body.body.Add(new Hurtbox(collider.Capsule));
 			controller = new FighterController(this, ProfileBinder.profile);
+
+			// Setup stats
+			FighterStats stats = FighterLoader.fighterData[character].stats;
+
+			extraJumps = stats.EJumps;
+			jumpForce = stats.JumpForce;
+			extraJumpForce = stats.EJumpForce;
+			airResistance = stats.AirResistance;
+			traction = stats.Traction;
+			gravity = stats.Gravity;
+
+			airSpeed = stats.AirSpeed;
+			groundSpeed = stats.GroundSpeed;
+			fallSpeed = stats.FallSpeed;
+			fastFallSpeed = stats.FastFallSpeed;
+
+			airAcceleration = stats.AirAccel;
+			groundAcceleration = stats.GroundAccel;
+
+			weight = stats.Weight;
 		}
 
 		public void Damage(Attack attack)

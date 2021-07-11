@@ -5,10 +5,11 @@ using Microsoft.Xna.Framework;
 using System.Text.Json;
 using HololiveFightingGame.Loading;
 using HololiveFightingGame.Gameplay.Collision;
+using HololiveFightingGame.Loading.Serializable;
 
 namespace HololiveFightingGame.Gameplay.Combat
 {
-	public class Move
+    public class Move
 	{
 		public AttackHitbox[] hitboxes;
 

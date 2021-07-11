@@ -1,4 +1,4 @@
-﻿using HololiveFightingGame.Loading;
+﻿using HololiveFightingGame.Loading.Serializable;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -6,10 +6,10 @@ using System.Text;
 
 namespace HololiveFightingGame.Gameplay.Combat
 {
-	/// <summary>
-	/// Used by the fighter to store information about the currently running move.
-	/// </summary>
-	public class MoveRunner
+    /// <summary>
+    /// Used by the fighter to store information about the currently running move.
+    /// </summary>
+    public class MoveRunner
 	{
 		public bool[] enabled;
 		public Vector2[] pos;

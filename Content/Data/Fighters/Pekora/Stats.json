@@ -1,0 +1,27 @@
+{
+  "EJumps": 1,
+  "JumpForce": 10,
+  "EJumpForce": 8,
+  "AirResistance": 0.05,
+  "Traction": 0.2,
+  "Gravity": 0.5,
+  "AirSpeed": 6,
+  "GroundSpeed": 6,
+  "FallSpeed": 9,
+  "FastFallSpeed": 12,
+  "AirAccel": 1,
+  "GroundAccel": 1,
+  "Weight": 100,
+  "HurtboxRadii": {
+    "Head": 0,
+    "Torso": 0,
+    "Thigh1": 0,
+    "Calf1": 0,
+    "UpperArm1": 0,
+    "ForeArm1": 0,
+    "Thigh2": 0,
+    "Calf2": 0,
+    "UpperArm2": 0,
+    "ForeArm2": 0
+  }
+}
