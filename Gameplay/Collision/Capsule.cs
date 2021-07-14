@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using HololiveFightingGame.Graphics.CapsuleShader;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -36,6 +37,33 @@ namespace HololiveFightingGame.Gameplay.Collision
 
 		public float Distance(Capsule capsule)
 		{
+			float A1 = Tip.Y - Base.Y;
+			float A2 = capsule.Tip.Y - capsule.Base.Y;
+			float B1 = Base.X - Tip.X;
+			float B2 = capsule.Base.X - capsule.Tip.X;
+			float C1 = A1 * Base.X + B1 * Base.Y;
+			float C2 = A2 * capsule.Base.X + B2 * capsule.Base.Y;
+
+			float delta = A1 * B2 - A2 * B1;
+
+			if (delta != 0)
+			{
+				float x = (B2 * C1 - B1 * C2) / delta;
+				float y = (A1 * C2 - A2 * C1) / delta;
+
+				Vector2 intersection = new Vector2(x, y);
+
+				// CapsuleRenderer.QuickPoint(intersection - Program.WindowBounds().Size.ToVector2() / 2, Color.White);
+
+				float intersect = Math.Max(Distance(intersection), capsule.Distance(intersection));
+
+				if (intersect == 0)
+                {
+					return 0;
+                }
+			}
+
+
 			float[] distances = new float[4];
 
 			distances[0] = Distance(capsule.Base);

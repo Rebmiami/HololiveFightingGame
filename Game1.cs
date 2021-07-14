@@ -211,6 +211,7 @@ namespace HololiveFightingGame
 			base.Draw(gameTime);
 			spriteBatch.End();
 
+
 			// Capsule collision debugging code.
 
 			// Capsule cap1 = new Capsule(Mouse.GetState().Position.ToVector2(), new Vector2(-20, -20), 4);
