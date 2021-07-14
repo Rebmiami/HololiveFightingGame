@@ -87,7 +87,7 @@ namespace HololiveFightingGame.FighterEditor.GUI
 			}
 
 			Button.Draw(spriteBatch, stretchedButton, ButtonFlavor.Latent, sides);
-			IconArtist.DrawIcon(spriteBatch, button.Location.ToVector2() + new Vector2(left ? -1 : 1, 0), icon);
+			IconDrawer.DrawIcon(spriteBatch, button.Location.ToVector2() + new Vector2(left ? -1 : 1, 0), icon);
 		}
 
 		public static void Update()

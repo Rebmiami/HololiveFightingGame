@@ -7,7 +7,7 @@ using System.Text;
 
 namespace HololiveFightingGame.FighterEditor.GUI
 {
-	public static class IconArtist
+	public static class IconDrawer
 	{
 		public static Texture2D editorIcons;
 
@@ -17,7 +17,7 @@ namespace HololiveFightingGame.FighterEditor.GUI
 			spriteBatch.Draw(editorIcons, position, new Rectangle(iconPositionOnSheet, new Point(24, 24)), Color.White);
 		}
 
-		static IconArtist()
+		static IconDrawer()
 		{
 			editorIcons = ImageLoader.LoadTexture(@".\Content\Assets\EditorIcons.png", true);
 		}

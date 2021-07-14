@@ -311,7 +311,7 @@ namespace HololiveFightingGame.FighterEditor
 				//TODO: Add overhead text support for projectiles and entities
 				spriteBatch.DrawString(Assets.font, text, new Vector2(262, 8), Color.White);
 				MenuNavTabs.Draw(spriteBatch);
-				IconArtist.DrawIcon(spriteBatch, new Vector2(260, 160), MovePreviewer.Playing ? EditorIcon.PreviewPause : EditorIcon.PreviewPlay);
+				IconDrawer.DrawIcon(spriteBatch, new Vector2(260, 160), MovePreviewer.Playing ? EditorIcon.PreviewPause : EditorIcon.PreviewPlay);
 			}
 		}
 	}

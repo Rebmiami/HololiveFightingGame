@@ -36,6 +36,33 @@ namespace HololiveFightingGame.FighterEditor.GUI
 		HurtboxTypeInvulnerable,
 		HurtboxTypeIntangible,
 
+		PhysicsEJumpCount,
+		PhysicsJumpForce,
+		PhysicsEJumpForce,
+		PhysicsAirResistance,
+		PhysicsTraction,
+		PhysicsGravity,
+		PhysicsAirSpeed,
+		PhysicsGroundSpeed,
+		PhysicsFallSpeed,
+		PhysicsFastFallSpeed,
+		PhysicsAirAcceleration,
+		PhysicsGroundAcceleration,
+
+		FighterWeight,
+
+		NA1,
+		NA2,
+		NA3,
+		NA4,
+		NA5,
+		NA6,
+		NA7,
+		NA8,
+		NA9,
+		NA10,
+		NA11,
+
 		HitboxPosition,
 		HitboxRadius,
 		HitboxKeyframe,
@@ -97,8 +124,8 @@ namespace HololiveFightingGame.FighterEditor.GUI
 		AnimationSoundEffect,
 		AnimationFlash,
 
-		NA2,
-		NA3,
+		NA12,
+		NA13,
 
 		Add,
 		Delete,
@@ -106,7 +133,7 @@ namespace HololiveFightingGame.FighterEditor.GUI
 		MoveBack,
 		MoveForth,
 
-		NA4,
+		NA14,
 
 		DynamicsTrigger,
 		DynamicsScript,
@@ -120,7 +147,7 @@ namespace HololiveFightingGame.FighterEditor.GUI
 		DynamicsTypeFloat,
 		DynamicsTypeEntity,
 
-		NA5,
-		NA6,
+		NA15,
+		NA16,
 	}
 }
